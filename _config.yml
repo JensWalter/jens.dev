@@ -1,0 +1,12 @@
+# Site settings
+title: my personal blog
+email: jens@apimeister.com
+description: >
+  The blog about whatever comes to my mind.
+baseurl: ""
+url: "https://jens.dev"
+twitter_username: jens_walter
+github_username:  JensWalter
+
+# Build settings
+markdown: kramdown
