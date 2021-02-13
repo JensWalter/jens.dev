@@ -1,8 +1,9 @@
 {{ partial "header.html" . }}
-
 <div id="post-index" class="container">
-    {{ partial "intro.html" . }}
-
+    <header class="post-header">
+        <h3 style="margin:0;">tag: {{ .Title }}</h3>
+    </header>
+    
     <ol class="post-list tag-list">
         {{ $pag := .Paginate .Pages }}
         {{ range $pag.Pages }}
