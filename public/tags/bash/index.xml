@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bash on My personal blog</title>
+    <link>/tags/bash/</link>
+    <description>Recent content in bash on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Nov 2016 20:18:54 +0200</lastBuildDate><atom:link href="/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>invoking java gc through bash</title>
+      <link>/2016/11/23/invoking-java-gc-through-bash/</link>
+      <pubDate>Wed, 23 Nov 2016 20:18:54 +0200</pubDate>
+      
+      <guid>/2016/11/23/invoking-java-gc-through-bash/</guid>
+      <description>Sometimes Java processes start accumulating memory over time and do not give them back to the OS. In previous versions of Java, this was a limitation of the JVM. In Java 8 and newer, with the arrival of the G1 garbage collector, the JVM releases memory back to the OS after a GC run.
+Now since this is possible, calling a GC, although there is still free memory available becomes a different meaning.</description>
+    </item>
+    
+    <item>
+      <title>generate a random uuid in bash</title>
+      <link>/2015/08/04/generate-a-random-uuid-in-bash/</link>
+      <pubDate>Tue, 04 Aug 2015 16:21:54 +0200</pubDate>
+      
+      <guid>/2015/08/04/generate-a-random-uuid-in-bash/</guid>
+      <description>To generate a UUIDv4 (random UUID) you can execute the following command.
+cat /proc/sys/kernel/random/uuid a01766f8-c4f5-4506-9262-1b408132f048 using uuidgen leads to the following outputs.
+#getting a time based uuid uuidgen -t 89a25fa8-3ab4-11e5-a414-14dae9ef67fb #getting a random based uuid uuidgen -r 6b81ed73-bd0b-4fc7-9f9a-709e121323b2 </description>
+    </item>
+    
+    <item>
+      <title>get the most visited url from an access log through a single line of bash</title>
+      <link>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash/</link>
+      <pubDate>Wed, 17 Jun 2015 12:25:20 +0200</pubDate>
+      
+      <guid>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash/</guid>
+      <description>If you have an apache access log and want to see the visit count of your site, you can use this one-liner to get some basic visit stats.
+grep &amp;#34;200 &amp;#34; /var/log/apache2/apimeister-access.log \  | grep -v &amp;#39;Googlebot&amp;#39; \  | grep -v &amp;#39;Baiduspider&amp;#39; \  | grep -v &amp;#39;bingbot&amp;#39; \  | grep -v &amp;#39;YandexBot&amp;#39; \  | grep -v &amp;#39;MJ12bot&amp;#39; \  | grep -v &amp;#39;meanpathbot&amp;#39; \  | grep -v &amp;#39;DotBot&amp;#39; \  | grep -v &amp;#39;AhrefsBot&amp;#39; \  | cut -d &amp;#39;&amp;#34;&amp;#39; -f 2 \  | cut -d &amp;#39; &amp;#39; -f 2 \  | sort | uniq -c | sort -rn | less </description>
+    </item>
+    
+  </channel>
+</rss>

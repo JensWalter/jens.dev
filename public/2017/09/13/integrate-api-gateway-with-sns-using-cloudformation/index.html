@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Integrate API Gateway with SNS using CloudFormation &middot; </title>
+        <meta name="description" content="In my last post, I described how an API Gateway can interact with Kinesis Firehose. This time I used the same approach to connect the API Gateway to SNS.
+With this, I could simplify the access pattern for my application by exposing an internal HTTP Endpoint which then routes all requests to a corresponding SNS Topic.
+So here an overview picture of what I am about to build.
+The first part of the CloudFormation template is the definition of the API Gateway.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Integrate API Gateway with SNS using CloudFormation">
+<meta property="og:description" content="In my last post, I described how an API Gateway can interact with Kinesis Firehose. This time I used the same approach to connect the API Gateway to SNS.
+With this, I could simplify the access pattern for my application by exposing an internal HTTP Endpoint which then routes all requests to a corresponding SNS Topic.
+So here an overview picture of what I am about to build.
+The first part of the CloudFormation template is the definition of the API Gateway.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2017/09/13/integrate-api-gateway-with-sns-using-cloudformation/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Integrate API Gateway with SNS using CloudFormation</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2017-09-13" itemprop="datePublished">Wed, Sep 13, 2017</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>In my last post, I described how an API Gateway can interact with Kinesis Firehose. This time I used the same approach to connect the API Gateway to SNS.</p>
+<p>With this, I could simplify the access pattern for my application by exposing an internal HTTP Endpoint which then routes all requests to a corresponding SNS Topic.</p>
+<p>So here an overview picture of what I am about to build.</p>
+<p><img src="/assets/api2sns.png" alt="API Gateway to SNS"></p>
+<p>The first part of the CloudFormation template is the definition of the API Gateway.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ApiGatewayRestApi</span><span style="color:#111">:</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::RestApi</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Name</span><span style="color:#111">:</span> <span style="color:#75715e">#make the name dynamic so I can instantiate this as often as necessary</span>
+      <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
+        - <span style="color:#d88200">&#34;&#34;</span>
+        - - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::StackName</span>
+          - <span style="color:#d88200">&#34;-api&#34;</span>
+</code></pre></div><p>As a prerequisite, I needed a role which would allow the API Gateway to actually write into the SNS Topic.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">GatewayRole</span><span style="color:#111">:</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+      - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
+          <span style="color:#f92672">Service</span><span style="color:#111">:</span>
+          - <span style="color:#ae81ff">apigateway.amazonaws.com</span>
+        <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+        - <span style="color:#ae81ff">sts:AssumeRole</span>
+    <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
+    <span style="color:#f92672">Policies</span><span style="color:#111">:</span>
+      - <span style="color:#f92672">PolicyName</span><span style="color:#111">:</span> <span style="color:#ae81ff">GatewayRolePolicy</span>
+        <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
+          <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+          <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+              - <span style="color:#ae81ff">sns:Publish</span>
+            <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;*&#34;</span> <span style="color:#75715e">#grants access to all topics,</span>
+                          <span style="color:#75715e">#for production use, this should be more specific</span>
+          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span> <span style="color:#75715e">#allow logging (not essential to the solution)</span>
+            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+              - <span style="color:#ae81ff">logs:PutLogEvents</span>
+              - <span style="color:#ae81ff">logs:CreateLogGroup</span>
+              - <span style="color:#ae81ff">logs:CreateLogStream</span>
+            <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;*&#34;</span>
+</code></pre></div><p>Now the difficult part is getting the method definition right. I&rsquo;m using a GET method since it is simpler to call this from any browser/CLI/script environment.</p>
+<p>The parameter mapping for SNS is derived from the <a href="http://docs.aws.amazon.com/sns/latest/api/Welcome.html">AWS API documentation</a>.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ApiGatewayGETMethod</span><span style="color:#111">:</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::Method</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">AuthorizationType</span><span style="color:#111">:</span> <span style="color:#ae81ff">NONE</span>
+    <span style="color:#f92672">HttpMethod</span><span style="color:#111">:</span> <span style="color:#ae81ff">GET</span>
+    <span style="color:#f92672">RequestParameters</span><span style="color:#111">:</span> <span style="color:#75715e">#request parameters need to be defined for the mapping</span>
+      <span style="color:#f92672">method.request.querystring.message</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span> <span style="color:#75715e">#payload of the SNS message</span>
+      <span style="color:#f92672">method.request.querystring.subject</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span> <span style="color:#75715e">#subject of the SNS message</span>
+      <span style="color:#f92672">method.request.querystring.topic</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span> <span style="color:#75715e">#destination topic arn</span>
+    <span style="color:#f92672">Integration</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS</span>
+      <span style="color:#f92672">Credentials</span><span style="color:#111">:</span>
+        <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">GatewayRole, Arn ]</span> <span style="color:#75715e">#use the already defined role</span>
+      <span style="color:#f92672">Uri</span><span style="color:#111">:</span>  <span style="color:#75715e">#required URI for using SNS service</span>
+        <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
+          - <span style="color:#d88200">&#34;&#34;</span>
+          - - <span style="color:#d88200">&#34;arn:aws:apigateway:&#34;</span>
+            - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Region</span>
+            - <span style="color:#d88200">&#34;:sns:action/Publish&#34;</span>
+      <span style="color:#f92672">IntegrationHttpMethod</span><span style="color:#111">:</span> <span style="color:#ae81ff">GET</span> <span style="color:#75715e">#SNS allows GET operations</span>
+      <span style="color:#f92672">RequestParameters</span><span style="color:#111">:</span> <span style="color:#75715e">#parameter mapping defined by the AWS API.</span>
+        <span style="color:#f92672">integration.request.querystring.TopicArn</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;method.request.querystring.topic&#34;</span>
+        <span style="color:#f92672">integration.request.querystring.Subject</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;method.request.querystring.subject&#34;</span>
+        <span style="color:#f92672">integration.request.querystring.Message</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;method.request.querystring.message&#34;</span>
+      <span style="color:#f92672">IntegrationResponses</span><span style="color:#111">:</span> <span style="color:#75715e">#map all responses to a default response.</span>
+        - <span style="color:#f92672">StatusCode</span><span style="color:#111">:</span> <span style="color:#ae81ff">200</span>
+          <span style="color:#f92672">ResponseTemplates</span><span style="color:#111">:</span> <span style="color:#75715e">#default response</span>
+            <span style="color:#f92672">application/json</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;{&#34;status&#34;:&#34;OK&#34;}&#39;</span>
+    <span style="color:#f92672">MethodResponses</span><span style="color:#111">:</span>
+      - <span style="color:#f92672">StatusCode</span><span style="color:#111">:</span> <span style="color:#ae81ff">200</span>
+    <span style="color:#f92672">ResourceId</span><span style="color:#111">:</span> <span style="color:#75715e">#attaching the GET method to the root resource of the API</span>
+      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">ApiGatewayRestApi , RootResourceId ]</span>
+    <span style="color:#f92672">RestApiId</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref ApiGatewayRestApi</span>
+</code></pre></div><p>To also deploy this API within the same CloudFormation operation, I added a deployment instruction.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ApiGatewayDeployment</span><span style="color:#111">:</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::Deployment</span>
+  <span style="color:#f92672">DependsOn</span><span style="color:#111">:</span> <span style="color:#75715e">#without the depends on, the deployment is sometimes done before</span>
+             <span style="color:#75715e">#any operation is defined.</span>
+    - <span style="color:#ae81ff">ApiGatewayGETMethod</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">RestApiId</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref ApiGatewayRestApi</span>
+    <span style="color:#f92672">StageName</span><span style="color:#111">:</span> <span style="color:#ae81ff">prod</span>
+</code></pre></div><p>Now I can send notifications to any registered topic through the following curl command.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl <span style="color:#d88200">&#39;https://uyzf1ids8j.execute-api.eu-west-1.amazonaws.com/prod/
+</span><span style="color:#d88200">    ?topic=arn:aws:sns:eu-west-1:11111111111:test5
+</span><span style="color:#d88200">    &amp;subject=hello
+</span><span style="color:#d88200">    &amp;message=world&#39;</span>
+</code></pre></div><p>Here is the overall CloudFormation template:</p>
+<p>[api-to-sns-cf.yml template][1]</p>
+<p>[1]:{{ site.url }}/assets/api-to-sns-cf.yml</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/cloudformation/">cloudformation</a>, 
+                <a href="/tags/sns/">sns</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>a serverless cron in AWS CloudFormation &middot; </title>
+        <meta name="description" content="Here my scenario I try to cover this time.
+Scenario:
+ Raise an event based on a cron pattern Subscribe to that event with a Lambda  As picture this would look like this:
+I use a CloudFormation template as project definition for this task.
+So here is my YAML explained step-by-step (whole YAML is attached at the bottom).
+I copied the header from an existing template since I have nothing to add here:">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="a serverless cron in AWS CloudFormation">
+<meta property="og:description" content="Here my scenario I try to cover this time.
+Scenario:
+ Raise an event based on a cron pattern Subscribe to that event with a Lambda  As picture this would look like this:
+I use a CloudFormation template as project definition for this task.
+So here is my YAML explained step-by-step (whole YAML is attached at the bottom).
+I copied the header from an existing template since I have nothing to add here:">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2017/02/28/a-serverless-cron-in-aws-cloudformation/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">a serverless cron in AWS CloudFormation</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2017-02-28" itemprop="datePublished">Tue, Feb 28, 2017</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>Here my scenario I try to cover this time.</p>
+<p>Scenario:</p>
+<ul>
+<li>Raise an event based on a cron pattern</li>
+<li>Subscribe to that event with a Lambda</li>
+</ul>
+<p>As picture this would look like this:</p>
+<p><img src="/assets/timerbasedevent.png" alt="timer based event"></p>
+<p>I use a CloudFormation template as project definition for this task.</p>
+<p>So here is my YAML explained step-by-step (whole YAML is attached at the bottom).</p>
+<p>I copied the header from an existing template since I have nothing to add here:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</code></pre></div><p>First I create a role, which is a requirement for a lambda function. Since I only implement a dummy lambda, my role has no policies attached.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">LambdaRole</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+      - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
+          <span style="color:#f92672">Service</span><span style="color:#111">:</span>
+          - <span style="color:#ae81ff">lambda.amazonaws.com</span> <span style="color:#75715e">#allow lambda to assume that role</span>
+        <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+        - <span style="color:#ae81ff">sts:AssumeRole</span>
+    <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
+</code></pre></div><p>After that, I can create the lambda function that I want to run in case of an triggered event.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">CronFunction</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Code</span><span style="color:#111">:</span> <span style="color:#75715e">#locate the code of the function</span>
+      <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#ae81ff">&gt;</span> <span style="color:#75715e">#inline code to simplify the sample</span>
+        <span style="color:#ae81ff">exports.handler = function(event, context) {</span>
+          <span style="color:#ae81ff">console.log(&#34;running code&#34;);</span>
+          <span style="color:#ae81ff">context.succeed(&#34;done&#34;);</span>
+        }<span style="color:#ae81ff">;</span>
+    <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+    <span style="color:#f92672">Role</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">LambdaRole , &#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the already defined role by its Arn</span>
+    <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs4.3</span> <span style="color:#75715e">#runtime is nodejs since my function is implemented in javascript</span>
+    <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">60</span> <span style="color:#75715e">#timeout for the lambda</span>
+</code></pre></div><p>Now I can define the event, that should trigger my function.</p>
+<p>A little heads up regarding the cron pattern. This is not a standard linux cron pattern, Amazon used some variation and it does produce error if you paste in linux cron patterns. So if you can, I would suggest using the rate expression instead.</p>
+<p>e.g. if you want your code to run every 15 minutes, you can implement that either way:</p>
+<ul>
+<li>rate expression: rate(15 minutes)</li>
+<li>cron expression: cron(0/15 * * * ? *)</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">CronEvent</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Events::Rule</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">ScheduleExpression</span><span style="color:#111">:</span> <span style="color:#ae81ff">cron(0/15 * * * ? *)</span> <span style="color:#75715e">#when the event should trigger</span>
+    <span style="color:#f92672">Targets</span><span style="color:#111">:</span>
+      - <span style="color:#f92672">Arn</span><span style="color:#111">:</span>
+          <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronFunction , &#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the lambda function by its arn</span>
+        <span style="color:#f92672">Id</span><span style="color:#111">:</span>
+          <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">CronFunction</span> <span style="color:#75715e">#unique name of the target</span>
+</code></pre></div><p>At last, we need to define a permission, so that the event is actually allowed to invoke the lambda.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">LambdaInvokePermission</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Permission</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">FunctionName</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronFunction ,&#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the lambda function by its arn</span>
+    <span style="color:#f92672">Action</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambda:InvokeFunction</span> <span style="color:#75715e">#allow invoking of lambda functions</span>
+    <span style="color:#f92672">Principal</span><span style="color:#111">:</span> <span style="color:#ae81ff">events.amazonaws.com</span> <span style="color:#75715e">#grant permission to the events system</span>
+    <span style="color:#f92672">SourceArn</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronEvent , &#34;Arn&#34; ]</span> <span style="color:#75715e">#define which event is allowed to trigger lambdas</span>
+</code></pre></div><p>To instantiate this template, just download the file and run the following command:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws cloudformation create-stack --stack-name myteststack --template-body file://cron-sample-cf.yml --capabilities CAPABILITY_IAM
+</code></pre></div><p>Here is the overall CloudFormation template:</p>
+<p>[cron-sample-cf.yml template][1]</p>
+<p>[1]:{{ site.url }}/assets/cron-sample-cf.yml</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/cloudformation/">cloudformation</a>, 
+                <a href="/tags/serverless/">serverless</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

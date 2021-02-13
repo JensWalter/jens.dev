@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TIBCO on My personal blog</title>
+    <link>/tags/tibco/</link>
+    <description>Recent content in TIBCO on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Aug 2020 10:08:54 +0000</lastBuildDate><atom:link href="/tags/tibco/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Containerizing TIBCO BusinessWorks 5</title>
+      <link>/2020/08/09/containerizing-businessworks-5/</link>
+      <pubDate>Sun, 09 Aug 2020 10:08:54 +0000</pubDate>
+      
+      <guid>/2020/08/09/containerizing-businessworks-5/</guid>
+      <description>Preparation To prepare the container build, I downloaded the current versions of TRA/BW/EMS from the TIBCO edelivery platform.
+I downloaded the following artifacts:
+ TIB_TRA_5.11.0_linux_x86_64.zip TIB_BW_5.14.0_linux26gl23_x86_64.zip TIB_rv_8.4.6_linux_x86.zip TIB_ems_8.5.1_linux_x86_64.zip  Now to bring those together into a container I copied all of those into a tibco-businessworks-runtime directory.
+Installation To support a headless installation, the TIBCO universal installer uses silent files. I attached my silent file at the end of this post.</description>
+    </item>
+    
+    <item>
+      <title>connecting nodejs to Tibco EMS</title>
+      <link>/2016/06/26/connecting-nodejs-to-tibco-ems/</link>
+      <pubDate>Sun, 26 Jun 2016 21:57:54 +0200</pubDate>
+      
+      <guid>/2016/06/26/connecting-nodejs-to-tibco-ems/</guid>
+      <description>I recently started a new project to bring Tibco EMS connectivity to nodejs. It is still in a pretty early stage, so it is rather limited in its capabilities. A current version of the feature set will be maintained within github.
+What is working right now?
+ send a text message to queue (request/reply and push) send a text message to topic (request/reply and push)  More is about to come in the future.</description>
+    </item>
+    
+    <item>
+      <title>schemaless schema validation in TIBCO BusinessWorks</title>
+      <link>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks/</link>
+      <pubDate>Fri, 17 Jun 2016 17:06:54 +0200</pubDate>
+      
+      <guid>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks/</guid>
+      <description>Usually, schema validation in BusinessWorks is done pretty straight forward. You get an xml, known the schema and just run a ParseXml activity. The problem becomes more complicated if you have to validate a xml which you have no knowledge of which schema it derived from. In my case, I had a folder full of schemas which I had to validate the incoming xml against.
+To achieve this,I came up with the following solution.</description>
+    </item>
+    
+    <item>
+      <title>getting monthly throughput stats of a TIBCO EMS instance</title>
+      <link>/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance/</link>
+      <pubDate>Thu, 25 Jun 2015 10:22:10 +0200</pubDate>
+      
+      <guid>/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance/</guid>
+      <description>The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
+ get message statistics reset stats to zero  get the stats as csv
+printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &amp;#39;NR&amp;gt;11&amp;#39; | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39; | grep -v &amp;#39;tcp://&amp;#39; | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
+    </item>
+    
+    <item>
+      <title>reset the TIBCO EMS statistics</title>
+      <link>/2015/06/24/reset-the-tibco-ems-statistics/</link>
+      <pubDate>Wed, 24 Jun 2015 20:12:20 +0200</pubDate>
+      
+      <guid>/2015/06/24/reset-the-tibco-ems-statistics/</guid>
+      <description>resetting the TIBCO EMS statistics without restarting the server.
+before
+printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 TIBCO Enterprise Message Service Administration Tool. Copyright 2003-2013 by TIBCO Software Inc. All rights reserved. Version 8.0.0 V9 6/7/2013 Connected to: tcp://localhost:7222 Type &amp;#39;help&amp;#39; for commands help, &amp;#39;exit&amp;#39; to exit: tcp://localhost:7222&amp;gt; In-Total In-Rate Out-Total Out-Rate Queue Name Msgs Size Msgs Size Msgs Size Msgs Size &amp;lt;total&amp;gt; 701858 3.</description>
+    </item>
+    
+    <item>
+      <title>BusinessEvents 4: using Scorecards in a clustered environment</title>
+      <link>/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment/</link>
+      <pubDate>Sat, 23 Oct 2010 20:43:18 +0000</pubDate>
+      
+      <guid>/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment/</guid>
+      <description>Scorecards have a special purpose in TIBCO BE. There are often used for static (as in Java-style static) values which should be globally accessible through the whole engine. As Java statics, TIBCO describes its main purpose in instance dependent Variables which are only valid in the context of one Processing Unit in an Inference engine.
+Here a little citation of the TIBCO documentation on this topic (p.144 – Understanding and Working With Scorecards):</description>
+    </item>
+    
+    <item>
+      <title>handling a few thousand simultaneous connections in TIBCO BusinessWorks</title>
+      <link>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks/</link>
+      <pubDate>Tue, 08 Dec 2009 17:22:16 +0000</pubDate>
+      
+      <guid>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks/</guid>
+      <description>Scaling with TIBCO BusinessWorks can sometimes be a bit tricky. Recently I began testing some scenarios how to scale a Webservice a bit larger. The first source of information was of course the official documentation and to look at the proposed best practice values for such an engine.
+To start small, I tried a HTTP Receiver with a 32bit JVM runtime. I set the heap to the maximum amount possible (something about 1.</description>
+    </item>
+    
+    <item>
+      <title>TIBCO Designer Panel too small</title>
+      <link>/2009/10/13/tibco-designer-panel-too-small/</link>
+      <pubDate>Tue, 13 Oct 2009 18:52:38 +0000</pubDate>
+      
+      <guid>/2009/10/13/tibco-designer-panel-too-small/</guid>
+      <description>Recently I ran into some rather trivial problem which isn’t really addressed by the TIBCO Designer. I had a process which wouldn’t fit into the Design Panel. There was just not enough space on the canvas to fit in the actual flow.
+After asking around I came to the conclusion that every designer (from different colleges I work with) had a different resolution for the Design canvas. Nobody knew any kind of property where you can set this resolution, so I began searching around.</description>
+    </item>
+    
+    <item>
+      <title>init script for the TIBCO Administrator</title>
+      <link>/2009/09/05/init-script-for-the-tibco-administrator/</link>
+      <pubDate>Sat, 05 Sep 2009 19:03:06 +0000</pubDate>
+      
+      <guid>/2009/09/05/init-script-for-the-tibco-administrator/</guid>
+      <description>I recently ran into the situation that I needed to install a TIBCO BusinessWorks with Administrator onto a RedHat Server. Under Windows the installer provides everything you need to run your domain as a Service. In Linux this looks different. I have found no init script templates nor did the installer generate me some stubs. So I had to write them myself. So here is what I came up with (I know it isn’t perfect, but it works – suggestions are always welcome).</description>
+    </item>
+    
+    <item>
+      <title>adding IP-restriction to BusinessWorks processes</title>
+      <link>/2009/08/17/adding-ip-restriction-to-businessworks-processes/</link>
+      <pubDate>Mon, 17 Aug 2009 01:16:07 +0000</pubDate>
+      
+      <guid>/2009/08/17/adding-ip-restriction-to-businessworks-processes/</guid>
+      <description>Recently I got into the situation that somebody used some interface a way it was not designed for and so created an out-of-memory situation which couldn’t be handled by the engine itself. So now I got the case that one client block the complete service due to invalid requests which he shouldn’t do in the first place.
+In the short term there seemed to be only one solution, block the client.</description>
+    </item>
+    
+    <item>
+      <title>writing Unicode characters to Oracle with TIBCO BusinessWorks</title>
+      <link>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks/</link>
+      <pubDate>Thu, 28 May 2009 14:19:33 +0000</pubDate>
+      
+      <guid>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks/</guid>
+      <description>As always, I get the most puzzling mysteries from work requirements. I got the requirement of sending an email with Russian characters through TIBCO BusinessWorks. So far so good. BusinessWorks has full support of Unicode, so it should be not a problem to get this one running. Lucky me the reality looks different.
+For this email system a database template system was used and of course the database was an upgraded Oracle 10g, so all the columns (for historic reasons) were Latin-1 and not Unicode.</description>
+    </item>
+    
+    <item>
+      <title>TIBCO Designer with external memory window</title>
+      <link>/2009/04/24/tibco-designer-with-external-memory-window/</link>
+      <pubDate>Fri, 24 Apr 2009 18:13:10 +0000</pubDate>
+      
+      <guid>/2009/04/24/tibco-designer-with-external-memory-window/</guid>
+      <description>During Research for my last blog post I found an interesting feature of the designer. If the designer uses more than one gigabyte of heap memory, the display of the memory usage gets a bit fuzzy.
+Obviously somebody at TIBCO forgot to round the value, so it would fit into this small section of the status bar.
+Keeping that in mind I found a start parameter which allows you to start the designer with an external window which only displays the current memory load.</description>
+    </item>
+    
+    <item>
+      <title>improve TIBCO Designer tester performance under linux</title>
+      <link>/2009/04/22/improve-tibco-designer-tester-performance-under-linux/</link>
+      <pubDate>Wed, 22 Apr 2009 00:20:25 +0000</pubDate>
+      
+      <guid>/2009/04/22/improve-tibco-designer-tester-performance-under-linux/</guid>
+      <description>I’m using the TIBCO designer for quite a while now. Before using it in a debian environment I developed all TIBCO related stuff in Windows XP. Now with the switch to linux there came quite a shift in user experience. One thing that really annoyed me was the slow performance of the designer debugger.
+So I started some measurements with a simple test process. The test process creates a simple list of all files (2000 items) in one folder and then iterates over every entry.</description>
+    </item>
+    
+    <item>
+      <title>installing TIBCO TRA 5.6 on a debian 64bit</title>
+      <link>/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit/</link>
+      <pubDate>Tue, 24 Feb 2009 00:59:40 +0000</pubDate>
+      
+      <guid>/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit/</guid>
+      <description>Recently I got a hardware upgrade so I could finally switch to a 64-bit environment. To fully use that machine I wanted to install TIBCO in 64-bit mode. After starting the installation I got this message:
+ TIBINS202527: Error: ERROR: You are running a 64-bit product installer on a 32-bit system.
+  This is not supported.
+ The Problem was I was running a 64-bit OS with a 64-bit Kernel:</description>
+    </item>
+    
+    <item>
+      <title>Tibco EMS with database backend (postgresql)</title>
+      <link>/2008/11/16/tibco-ems-with-database-backend-postgresql/</link>
+      <pubDate>Sun, 16 Nov 2008 20:48:11 +0000</pubDate>
+      
+      <guid>/2008/11/16/tibco-ems-with-database-backend-postgresql/</guid>
+      <description>I recently tried to build a JMS Server with database backend. The chosen product was the TIBCO EMS Server. The Server brings its own database support over hibernate.
+Unfortunately TIBCO supports only Oracle,Mysql and DB2 by default. Lucky me, I needed an installation for Postgres but this shouldn’t be a big deal, because hibernate supports postgres as well. You just have to modify the hibernate config.
+First you should install the EMS server and hibernate (version provided by Tibco).</description>
+    </item>
+    
+  </channel>
+</rss>

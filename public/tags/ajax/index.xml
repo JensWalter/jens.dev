@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ajax on My personal blog</title>
+    <link>/tags/ajax/</link>
+    <description>Recent content in ajax on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 Dec 2008 12:23:33 +0000</lastBuildDate><atom:link href="/tags/ajax/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>use yahoo finance streaming api</title>
+      <link>/2008/12/02/use-yahoo-finance-streaming-api/</link>
+      <pubDate>Tue, 02 Dec 2008 12:23:33 +0000</pubDate>
+      
+      <guid>/2008/12/02/use-yahoo-finance-streaming-api/</guid>
+      <description>In the past I used this ruby script to poll for the current stock data and put it into a database to create a little history.
+Recently I saw a new feature on the yahoo finance homepage. Now it is possible to enable a streaming option and then you get a live update on certain values via AJAX. So I thought why not get this feature and let yahoo stream the content to the client instead of polling the server from time to time.</description>
+    </item>
+    
+  </channel>
+</rss>

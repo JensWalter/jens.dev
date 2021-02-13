@@ -1,0 +1,121 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  webUIBucket:
+    Type: AWS::S3::Bucket
+  webUIBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: webUIBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: AddPerm
+            Effect: Allow
+            Principal: "*"
+            Action:
+              - "s3:GetObject"
+            Resource:
+              - Fn::Join:
+                - ""
+                - - "arn:aws:s3:::"
+                  - Ref: webUIBucket
+                  - "/*"
+  ApiGatewayRestApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: hello-api
+  ApiGatewayV1Resource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Fn::GetAtt: [ ApiGatewayRestApi , RootResourceId]
+      PathPart: v1
+      RestApiId: !Ref ApiGatewayRestApi
+  ApiGatewayHelloResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref ApiGatewayV1Resource
+      PathPart: hello
+      RestApiId: !Ref ApiGatewayRestApi
+  ApiGatewayCreateResourceGetMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: GET
+      Integration:
+        Type: MOCK
+        RequestTemplates:
+          application/json: '{"statusCode":200}'
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseTemplates:
+              application/json: '{"message":"hello world"}'
+      MethodResponses:
+        - StatusCode: 200
+      ResourceId: !Ref ApiGatewayHelloResource
+      RestApiId: !Ref ApiGatewayRestApi
+  ApiGatewayDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn:
+      - ApiGatewayCreateResourceGetMethod
+    Properties:
+      RestApiId: !Ref ApiGatewayRestApi
+      StageName: prod
+  WebpageCDN:
+    Type: AWS::CloudFront::Distribution
+    DependsOn:
+      - ApiGatewayDeployment
+      - webUIBucket
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: true
+          TargetOriginId: webpage
+          ViewerProtocolPolicy: redirect-to-https
+        CacheBehaviors:
+          - AllowedMethods:
+              - DELETE
+              - GET
+              - HEAD
+              - OPTIONS
+              - PATCH
+              - POST
+              - PUT
+            CachedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+            ForwardedValues:
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+              QueryString: true
+            PathPattern: "/v1/*"
+            TargetOriginId: api
+            ViewerProtocolPolicy: https-only
+        DefaultRootObject: index.html
+        Enabled: true
+        Origins:
+          - DomainName:
+              Fn::GetAtt: [ webUIBucket , "DomainName" ]
+            Id: webpage
+            S3OriginConfig:
+              OriginAccessIdentity:
+                Ref: AWS::NoValue
+          - DomainName:
+              Fn::Join:
+                - ""
+                - - Ref: ApiGatewayRestApi
+                  - ".execute-api."
+                  - Ref: AWS::Region
+                  - ".amazonaws.com"
+            Id: api
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
+            OriginPath: /prod
+        PriceClass: PriceClass_100

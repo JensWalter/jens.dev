@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dynamodb on My personal blog</title>
+    <link>/tags/dynamodb/</link>
+    <description>Recent content in dynamodb on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Jan 2018 10:08:54 +0200</lastBuildDate><atom:link href="/tags/dynamodb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Implementing DynamoDB triggers (streams) using CloudFormation</title>
+      <link>/2018/01/10/implementing-dynamodb-triggers-streams-using-cloudformation/</link>
+      <pubDate>Wed, 10 Jan 2018 10:08:54 +0200</pubDate>
+      
+      <guid>/2018/01/10/implementing-dynamodb-triggers-streams-using-cloudformation/</guid>
+      <description>In serverless architectures, as much as possible of the implementation should be done event-driven. One driver of this is using triggers whenever possible.
+DynamoDB comes in very handy since it does support triggers through DynamoDB Streams. On the other end of a Stream usually is a Lambda function which processes the changed information asynchronously.
+So I tried building that pattern and recognized, that it is not that straightforward to implement in cloudformation.</description>
+    </item>
+    
+  </channel>
+</rss>

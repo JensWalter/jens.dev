@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>A hello world kubernetes operator in Rust &middot; </title>
+        <meta name="description" content="Introduction I read some samples about how to implement a kubernetes operator in Go which shows the basic priciples, but I was not able to find a similar exercise in rust. So I started looking around, how to do an operator in rust.
+Overview An operator in kubernetes is a service that watches the k8s-API for specific events to happen. Usually the operator also registers some custom resource definitions (CRD) to later watch the lifecycle of those objects.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="A hello world kubernetes operator in Rust">
+<meta property="og:description" content="Introduction I read some samples about how to implement a kubernetes operator in Go which shows the basic priciples, but I was not able to find a similar exercise in rust. So I started looking around, how to do an operator in rust.
+Overview An operator in kubernetes is a service that watches the k8s-API for specific events to happen. Usually the operator also registers some custom resource definitions (CRD) to later watch the lifecycle of those objects.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2020/09/15/a-hello-world-kubernetes-operator-in-rust/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">A hello world kubernetes operator in Rust</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2020-09-15" itemprop="datePublished">Tue, Sep 15, 2020</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <h3 id="introduction">Introduction</h3>
+<p>I read some samples about how to implement a kubernetes operator in Go which shows the basic priciples, but I was not able to find a similar exercise in rust. So I started looking around, how to do an operator in rust.</p>
+<h2 id="overview">Overview</h2>
+<p>An operator in kubernetes is a service that watches the k8s-API for specific events to happen. Usually the operator also registers some custom resource definitions (CRD) to later watch the lifecycle of those objects.</p>
+<p><img src="/assets/k8s-operator.png" alt="K8s Operator Model"></p>
+<h2 id="custom-object-definition">Custom Object Definition</h2>
+<p>To do this in a hello world format, I decided on the following syntax.</p>
+<p>My custom resource is called Member and it only has a single optional property called memberOf.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span><span style="color:#111">:</span> <span style="color:#ae81ff">helloworld.apimeister.com/v1</span>
+<span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">Member</span>
+<span style="color:#f92672">metadata</span><span style="color:#111">:</span>
+  <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">patrick</span>
+<span style="color:#f92672">spec</span><span style="color:#111">:</span>
+  <span style="color:#f92672">memberOf</span><span style="color:#111">:</span> <span style="color:#ae81ff">blue</span>
+</code></pre></div><p>The definition of such a resource would look like this:.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span><span style="color:#111">:</span> <span style="color:#ae81ff">apiextensions.k8s.io/v1beta1</span>
+<span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">CustomResourceDefinition</span>
+<span style="color:#f92672">metadata</span><span style="color:#111">:</span>
+  <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">members.helloworld.apimeister.com</span>
+<span style="color:#f92672">spec</span><span style="color:#111">:</span>
+  <span style="color:#f92672">group</span><span style="color:#111">:</span> <span style="color:#ae81ff">helloworld.apimeister.com</span>
+  <span style="color:#f92672">versions</span><span style="color:#111">:</span>
+    - <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">v1</span>
+      <span style="color:#f92672">served</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span>
+      <span style="color:#f92672">storage</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span>
+  <span style="color:#f92672">scope</span><span style="color:#111">:</span> <span style="color:#ae81ff">Namespaced</span>
+  <span style="color:#f92672">names</span><span style="color:#111">:</span>
+    <span style="color:#f92672">plural</span><span style="color:#111">:</span> <span style="color:#ae81ff">members</span>
+    <span style="color:#f92672">singular</span><span style="color:#111">:</span> <span style="color:#ae81ff">member</span>
+    <span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">Member</span>
+</code></pre></div><h2 id="operators-in-rust">Operators in Rust</h2>
+<p>There already exists a crate in the rust eco-system which has support for event watching.</p>
+<p>The crate I am using here is <a href="https://crates.io/crates/kube">kube</a>.</p>
+<p>The operator is acutally pretty slim from an implementation standpoint.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a8c8">extern</span> <span style="color:#00a8c8">crate</span> <span style="color:#111">serde_derive</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">use</span> <span style="color:#111">kube</span>::<span style="color:#111">{</span><span style="color:#111">api</span>::<span style="color:#111">{</span><span style="color:#111">Api</span><span style="color:#111">,</span> <span style="color:#111">ListParams</span><span style="color:#111">,</span> <span style="color:#111">WatchEvent</span><span style="color:#111">},</span> <span style="color:#111">Client</span><span style="color:#111">};</span>
+<span style="color:#00a8c8">use</span> <span style="color:#111">futures</span>::<span style="color:#111">{</span><span style="color:#111">StreamExt</span><span style="color:#111">,</span> <span style="color:#111">TryStreamExt</span><span style="color:#111">};</span>
+<span style="color:#00a8c8">use</span> <span style="color:#111">serde</span>::<span style="color:#111">{</span><span style="color:#111">Serialize</span><span style="color:#111">,</span> <span style="color:#111">Deserialize</span><span style="color:#111">};</span>
+<span style="color:#00a8c8">use</span> <span style="color:#111">kube_derive</span>::<span style="color:#111">CustomResource</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">use</span> <span style="color:#111">kube</span>::<span style="color:#111">config</span>::<span style="color:#111">Config</span><span style="color:#111">;</span>
+
+<span style="color:#75715e">#[derive(CustomResource, Serialize, Deserialize, Default, Clone, Debug)]</span>
+<span style="color:#75715e">#[kube(group = </span><span style="color:#d88200">&#34;helloworld.apimeister.com&#34;</span><span style="color:#75715e">, version = </span><span style="color:#d88200">&#34;v1&#34;</span><span style="color:#75715e">, kind=</span><span style="color:#d88200">&#34;Member&#34;</span><span style="color:#75715e">, namespaced)]</span>
+<span style="color:#75715e">#[allow(non_snake_case)]</span>
+<span style="color:#00a8c8">pub</span> <span style="color:#00a8c8">struct</span> <span style="color:#75af00">MemberSpec</span> <span style="color:#111">{</span>
+  <span style="color:#00a8c8">pub</span> <span style="color:#111">memberOf</span>: <span style="color:#111">Option</span><span style="color:#f92672">&lt;</span><span style="color:#111">String</span><span style="color:#f92672">&gt;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">#[tokio::main]</span>
+<span style="color:#00a8c8">async</span> <span style="color:#00a8c8">fn</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> -&gt; <span style="color:#111">Result</span><span style="color:#f92672">&lt;</span><span style="color:#111">(),</span> <span style="color:#111">kube</span>::<span style="color:#111">Error</span><span style="color:#f92672">&gt;</span>  <span style="color:#111">{</span>
+    <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;starting hello world operator&#34;</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">let</span> <span style="color:#111">config</span> <span style="color:#f92672">=</span> <span style="color:#111">Config</span>::<span style="color:#111">infer</span><span style="color:#111">().</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">let</span> <span style="color:#111">client</span>: <span style="color:#75af00">kube</span>::<span style="color:#111">Client</span> <span style="color:#f92672">=</span> <span style="color:#111">Client</span>::<span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#111">config</span><span style="color:#111">);</span>
+
+    <span style="color:#00a8c8">let</span> <span style="color:#111">crds</span>: <span style="color:#75af00">Api</span><span style="color:#f92672">&lt;</span><span style="color:#111">Member</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> <span style="color:#111">Api</span>::<span style="color:#111">namespaced</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;default&#34;</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">let</span> <span style="color:#111">lp</span> <span style="color:#f92672">=</span> <span style="color:#111">ListParams</span>::<span style="color:#111">default</span><span style="color:#111">();</span>
+
+    <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;subscribing events of type members.helloworld.apimeister.com/v1&#34;</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">let</span> <span style="color:#00a8c8">mut</span> <span style="color:#111">stream</span> <span style="color:#f92672">=</span> <span style="color:#111">crds</span><span style="color:#111">.</span><span style="color:#111">watch</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">lp</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;0&#34;</span><span style="color:#111">).</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span><span style="color:#111">.</span><span style="color:#111">boxed</span><span style="color:#111">();</span>
+    <span style="color:#00a8c8">while</span> <span style="color:#00a8c8">let</span> <span style="color:#111">Some</span><span style="color:#111">(</span><span style="color:#111">status</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#111">stream</span><span style="color:#111">.</span><span style="color:#111">try_next</span><span style="color:#111">().</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span> <span style="color:#111">{</span>
+        <span style="color:#00a8c8">match</span> <span style="color:#111">status</span> <span style="color:#111">{</span>
+            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Added</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
+              <span style="color:#00a8c8">match</span> <span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">spec</span><span style="color:#111">.</span><span style="color:#111">memberOf</span> <span style="color:#111">{</span>
+                <span style="color:#111">None</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;welcome {}&#34;</span><span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">()),</span>
+                <span style="color:#111">Some</span><span style="color:#111">(</span><span style="color:#111">member_of</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;welcome {} to the team {}&#34;</span>
+                          <span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">()</span>
+                          <span style="color:#111">,</span><span style="color:#111">member_of</span><span style="color:#111">),</span>
+              <span style="color:#111">}</span>
+            <span style="color:#111">},</span>
+            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Modified</span><span style="color:#111">(</span><span style="color:#111">_member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
+            <span style="color:#111">},</span>
+            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Deleted</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
+              <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;sad to see you go {}&#34;</span><span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">());</span>
+            <span style="color:#111">},</span>
+            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Error</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;error: {}&#34;</span><span style="color:#111">,</span> <span style="color:#111">member</span><span style="color:#111">),</span>
+            <span style="color:#111">_</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{}</span>
+        <span style="color:#111">}</span>
+    <span style="color:#111">}</span>
+    <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;done&#34;</span><span style="color:#111">);</span>
+    <span style="color:#111">Ok</span><span style="color:#111">(())</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>The complete source code can be downloaded from the following github repo <a href="https://github.com/JensWalter/hello-world-operator-rs">hello-world-operator-rs</a>.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/kubernetes/">kubernetes</a>, 
+                <a href="/tags/kubernetes-operator/">kubernetes-operator</a>, 
+                <a href="/tags/rust/">rust</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

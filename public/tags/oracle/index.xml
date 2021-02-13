@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oracle on My personal blog</title>
+    <link>/tags/oracle/</link>
+    <description>Recent content in Oracle on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 Jun 2016 19:54:54 +0200</lastBuildDate><atom:link href="/tags/oracle/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>get oracle allocation sizes part 2</title>
+      <link>/2016/06/21/get-oracle-allocation-sizes-part-2/</link>
+      <pubDate>Tue, 21 Jun 2016 19:54:54 +0200</pubDate>
+      
+      <guid>/2016/06/21/get-oracle-allocation-sizes-part-2/</guid>
+      <description>In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.
+SELECT segment_name table_name, sum(bytes) tablesize, (SELECT sum(bytes) FROM user_segments ind WHERE segment_name in (select index_name from user_indexes where table_name=tab.segment_name) ) indexsize, (SELECT sum(bytes) FROM user_segments ls WHERE segment_name in (select segment_name from user_lobs where table_name=tab.</description>
+    </item>
+    
+    <item>
+      <title>calculating percentiles in oracle</title>
+      <link>/2015/09/15/calculating-percentiles-in-oracle/</link>
+      <pubDate>Tue, 15 Sep 2015 16:11:54 +0200</pubDate>
+      
+      <guid>/2015/09/15/calculating-percentiles-in-oracle/</guid>
+      <description>Calculating percentiles in oracle is pretty easy.
+In my case I had logged service response times in a database and now wanted to get response times back as percentiles.
+SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;50percentile&amp;#34;, PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;80percentile&amp;#34;, PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;90percentile&amp;#34;, PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;95percentile&amp;#34;, PERCENTILE_CONT(0.99) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;99percentile&amp;#34;, PERCENTILE_CONT(0.</description>
+    </item>
+    
+    <item>
+      <title>query index usage statistics in oracle</title>
+      <link>/2015/07/11/query-index-usage-stats-in-oracle/</link>
+      <pubDate>Sat, 11 Jul 2015 17:52:54 +0200</pubDate>
+      
+      <guid>/2015/07/11/query-index-usage-stats-in-oracle/</guid>
+      <description>how often an index was used
+select p.object_name &amp;#34;object&amp;#34;, to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;) &amp;#34;Begin|Interval|time&amp;#34;, p.search_columns &amp;#34;Search Columns&amp;#34;, count(*) &amp;#34;Invocation|Count&amp;#34; from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name like &amp;#39;%INDEX_%&amp;#39; group by p.object_name,to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;),search_columns how an index was used
+select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist_sql_plan p, dba_hist_sqlstat s where p.object_owner &amp;lt;&amp;gt; &amp;#39;SYS&amp;#39; and p.operation like &amp;#39;%INDEX%&amp;#39; and p.sql_id = s.sql_id group by p.</description>
+    </item>
+    
+    <item>
+      <title>query clob settings in oracle</title>
+      <link>/2015/06/27/query-clob-settings-in-oracle/</link>
+      <pubDate>Sat, 27 Jun 2015 11:31:54 +0200</pubDate>
+      
+      <guid>/2015/06/27/query-clob-settings-in-oracle/</guid>
+      <description>You can query all clob related settings from the database with the following query.
+SELECT table_name, column_name, securefile AS &amp;#34;isSecureFile&amp;#34;, compression AS &amp;#34;Compressed&amp;#34; , encrypt AS &amp;#34;Encrypted&amp;#34;, DEDUPLICATION as &amp;#34;Deduplicated&amp;#34;, in_row AS &amp;#34;StoredInRow&amp;#34; FROM user_lobs    TABLE_NAME COLUMN_NAME isSecureFile Compressed Encrypted Deduplicated StoredInRow     SAMPLE_DATASET_INTRO XMLDATA YES NO NO NO YES   SAMPLE_DATASET_EVOLVE XMLDATA YES NO NO NO YES   SAMPLE_DATASET_PARTN XMLDATA YES NO NO NO YES   SAMPLE_DATASET_FULLTEXT XMLDATA YES NO NO NO YES   SAMPLE_DATASET_XQUERY XMLDATA YES NO NO NO YES   SAMPLE_DATASET_REPOS IMAGE YES NO NO NO YES    </description>
+    </item>
+    
+    <item>
+      <title>get table and index allocation size in oracle</title>
+      <link>/2015/06/27/get-table-and-index-allocation-size-in-oracle/</link>
+      <pubDate>Sat, 27 Jun 2015 08:13:54 +0200</pubDate>
+      
+      <guid>/2015/06/27/get-table-and-index-allocation-size-in-oracle/</guid>
+      <description>[part 2 -&amp;gt; now with partitioned tables]({% post_url 2016-06-21-get-oracle-allocation-sizes-part-2 %})
+Determining the size of a table can be a bit tricky within oracle. You can size all columns and add the values together. That woul give you an estimate of a row size. If you do that for all rows, you got the net size of data you are storing. This of cause does not account for index and table overhead.</description>
+    </item>
+    
+    <item>
+      <title>detect whether ASSM is managing your tablespace</title>
+      <link>/2015/06/26/detect-whether-assm-is-managing-your-tablespace/</link>
+      <pubDate>Fri, 26 Jun 2015 12:03:54 +0200</pubDate>
+      
+      <guid>/2015/06/26/detect-whether-assm-is-managing-your-tablespace/</guid>
+      <description>I recently had an oracle database where I wanted to compress the clob store for more storage efficiency. To do that, I needed to convert the clob store from basicfiles to securefiles. As a requirement to use compressed securefiles, oracel states, that the tablespace must be managed by ASSM (Automatic Segment Space Management). In order to check this, I found the following sql query.
+select tablespace_name, SEGMENT_SPACE_MANAGEMENT from user_tablespaces; The output looks like:</description>
+    </item>
+    
+    <item>
+      <title>extract the UUIDv1 encapsulated timestamp within an oracle select</title>
+      <link>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select/</link>
+      <pubDate>Sun, 14 Jun 2015 18:34:23 +0200</pubDate>
+      
+      <guid>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select/</guid>
+      <description>When you have a partioned table full of UUIDs but partitioned through timestamp, you need a way to translate the UUID back into a timestamp to match a partition where the key is stored. So here is my way of how to extract the timestamp out of an UUIDv1.
+select ts,to_timestamp(date &amp;#39;1970-01-01&amp;#39;+ (ts/(24*60*60))) from ( select trunc((to_number(substr(uuid,16,3)||&amp;#39;000000000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,10,4)||&amp;#39;00000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,0,8) ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) -122192928000000000)/10000000) ts from ( select &amp;#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&amp;#39; uuid from dual ) ) </description>
+    </item>
+    
+    <item>
+      <title>writing Unicode characters to Oracle with TIBCO BusinessWorks</title>
+      <link>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks/</link>
+      <pubDate>Thu, 28 May 2009 14:19:33 +0000</pubDate>
+      
+      <guid>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks/</guid>
+      <description>As always, I get the most puzzling mysteries from work requirements. I got the requirement of sending an email with Russian characters through TIBCO BusinessWorks. So far so good. BusinessWorks has full support of Unicode, so it should be not a problem to get this one running. Lucky me the reality looks different.
+For this email system a database template system was used and of course the database was an upgraded Oracle 10g, so all the columns (for historic reasons) were Latin-1 and not Unicode.</description>
+    </item>
+    
+  </channel>
+</rss>

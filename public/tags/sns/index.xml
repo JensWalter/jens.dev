@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sns on My personal blog</title>
+    <link>/tags/sns/</link>
+    <description>Recent content in sns on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 Sep 2017 10:08:54 +0200</lastBuildDate><atom:link href="/tags/sns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Integrate API Gateway with SNS using CloudFormation</title>
+      <link>/2017/09/13/integrate-api-gateway-with-sns-using-cloudformation/</link>
+      <pubDate>Wed, 13 Sep 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/2017/09/13/integrate-api-gateway-with-sns-using-cloudformation/</guid>
+      <description>In my last post, I described how an API Gateway can interact with Kinesis Firehose. This time I used the same approach to connect the API Gateway to SNS.
+With this, I could simplify the access pattern for my application by exposing an internal HTTP Endpoint which then routes all requests to a corresponding SNS Topic.
+So here an overview picture of what I am about to build.
+The first part of the CloudFormation template is the definition of the API Gateway.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postgres on My personal blog</title>
+    <link>/tags/postgres/</link>
+    <description>Recent content in postgres on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2009 15:54:14 +0000</lastBuildDate><atom:link href="/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>searching for hash strings in postgres</title>
+      <link>/2009/09/23/searching-for-hash-strings-in-postgres/</link>
+      <pubDate>Wed, 23 Sep 2009 15:54:14 +0000</pubDate>
+      
+      <guid>/2009/09/23/searching-for-hash-strings-in-postgres/</guid>
+      <description>For one of my projects a have a database which has a rather large table consisting of just an url and a corresponding id. For performance reasons I added a md5 column which hashes the url. With this column it should be a lot faster to look up an url.
+CREATE TABLE pages ( id bigint NOT NULL, url character varying(255), md5 character(32), CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).</description>
+    </item>
+    
+    <item>
+      <title>why sub-selects can be faster than inner joins</title>
+      <link>/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins/</link>
+      <pubDate>Thu, 25 Jun 2009 14:28:26 +0000</pubDate>
+      
+      <guid>/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins/</guid>
+      <description>So here is my situation. I have 2 tables with the following DDL.
+CREATE TABLE tags ( id bigint NOT NULL, &amp;#34;value&amp;#34; character varying(150), CONSTRAINT tags_pkey PRIMARY KEY (id), CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags ( sites_id bigint NOT NULL, pages_id bigint NOT NULL, tags_id bigint NOT NULL, count integer, updated timestamp without time zone, CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.</description>
+    </item>
+    
+    <item>
+      <title>get hostname from url as stored procedure in plpgsql</title>
+      <link>/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql/</link>
+      <pubDate>Tue, 09 Jun 2009 00:38:35 +0000</pubDate>
+      
+      <guid>/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql/</guid>
+      <description>I just needed a simple stored procedure to extract the hostname from any given URL. So here is what I came up with.
+CREATE OR REPLACE FUNCTION getHostFromUrl(p_url character varying) RETURNS character varying AS $BODY$ declare begin return substring(p_url from &amp;#39;http.?://(.*?)/(.*)&amp;#39;); end; $BODY$ LANGUAGE &amp;#39;plpgsql&amp;#39; VOLATILE COST 100; </description>
+    </item>
+    
+    <item>
+      <title>copy a table across databases via dblink</title>
+      <link>/2009/02/06/copy-a-table-across-databases-via-dblink/</link>
+      <pubDate>Fri, 06 Feb 2009 15:32:40 +0000</pubDate>
+      
+      <guid>/2009/02/06/copy-a-table-across-databases-via-dblink/</guid>
+      <description>Recently I ran into the situation that I needed to copy a large subset of data from one database to another. Normally I would say, make a dump and then re-import the data into the new schema. But this solution has some serious drawbacks. First you have to copy the complete database. Second you have to maintain the structure of the data. A third problem could be that you have to copy the complete dump to the target location (in case it is not the same machine and your database is a bit larger e.</description>
+    </item>
+    
+    <item>
+      <title>Tibco EMS with database backend (postgresql)</title>
+      <link>/2008/11/16/tibco-ems-with-database-backend-postgresql/</link>
+      <pubDate>Sun, 16 Nov 2008 20:48:11 +0000</pubDate>
+      
+      <guid>/2008/11/16/tibco-ems-with-database-backend-postgresql/</guid>
+      <description>I recently tried to build a JMS Server with database backend. The chosen product was the TIBCO EMS Server. The Server brings its own database support over hibernate.
+Unfortunately TIBCO supports only Oracle,Mysql and DB2 by default. Lucky me, I needed an installation for Postgres but this shouldn’t be a big deal, because hibernate supports postgres as well. You just have to modify the hibernate config.
+First you should install the EMS server and hibernate (version provided by Tibco).</description>
+    </item>
+    
+  </channel>
+</rss>

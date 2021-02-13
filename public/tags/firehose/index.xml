@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>firehose on My personal blog</title>
+    <link>/tags/firehose/</link>
+    <description>Recent content in firehose on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 24 Aug 2017 10:08:54 +0200</lastBuildDate><atom:link href="/tags/firehose/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Integrate API Gateway with Kinesis Firehose using CloudFormation</title>
+      <link>/2017/08/24/integrate-api-gateway-with-kinesis-firehose-using-cloudformation/</link>
+      <pubDate>Thu, 24 Aug 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/2017/08/24/integrate-api-gateway-with-kinesis-firehose-using-cloudformation/</guid>
+      <description>Integrating API Gateway with other AWS Services can be pretty important to increase the scope of an API into other services.
+What I wanted to achieve was a cheaper upload mechanism for S3. The easiest way to allow upload through API gateway is to call a Lambda for every API call and then upload the payload into an S3 bucket. But this is rather costly if you increase the throughput from a few single call to a few hundred calls a second.</description>
+    </item>
+    
+  </channel>
+</rss>

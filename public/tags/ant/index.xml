@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ant on My personal blog</title>
+    <link>/tags/ant/</link>
+    <description>Recent content in ant on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Oct 2015 18:50:54 +0200</lastBuildDate><atom:link href="/tags/ant/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ant task to show content of a jar file</title>
+      <link>/2015/10/04/ant-task-to-show-content-of-a-jar-file/</link>
+      <pubDate>Sun, 04 Oct 2015 18:50:54 +0200</pubDate>
+      
+      <guid>/2015/10/04/ant-task-to-show-content-of-a-jar-file/</guid>
+      <description>A short while ago I started using travis-ci as my continuous build environment. After running some tests I suspected that some files are missing from my ant created jar file. Sadly travis does not support a trivial way to upload the produced jar to a remote location. So I decided to take the console output (which they provide for every build job), to inspect what files are actually packaged in the jar file.</description>
+    </item>
+    
+  </channel>
+</rss>

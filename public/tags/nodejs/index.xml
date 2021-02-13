@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nodejs on My personal blog</title>
+    <link>/tags/nodejs/</link>
+    <description>Recent content in nodejs on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 18 Jun 2017 10:08:54 +0200</lastBuildDate><atom:link href="/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>extending cloudformation with custom resources</title>
+      <link>/2017/06/18/extending-cloudformation-with-custom-resources/</link>
+      <pubDate>Sun, 18 Jun 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/2017/06/18/extending-cloudformation-with-custom-resources/</guid>
+      <description>CloudFormation is a pretty capable tool which provides templating functionality for most of the Amazon web services. But still, keeping up with the release cadence of all the AWS services isn&amp;rsquo;t that easy. So there always is a little gap of what features the console offers and what CloudFormation offers.
+So for this use case (and some others like initial data load), AWS introduced custom resources. This Resource basically represents an AWS lambda invocation which is called whenever your template gets instantiated, removed or update.</description>
+    </item>
+    
+    <item>
+      <title>connecting nodejs to Tibco EMS</title>
+      <link>/2016/06/26/connecting-nodejs-to-tibco-ems/</link>
+      <pubDate>Sun, 26 Jun 2016 21:57:54 +0200</pubDate>
+      
+      <guid>/2016/06/26/connecting-nodejs-to-tibco-ems/</guid>
+      <description>I recently started a new project to bring Tibco EMS connectivity to nodejs. It is still in a pretty early stage, so it is rather limited in its capabilities. A current version of the feature set will be maintained within github.
+What is working right now?
+ send a text message to queue (request/reply and push) send a text message to topic (request/reply and push)  More is about to come in the future.</description>
+    </item>
+    
+  </channel>
+</rss>

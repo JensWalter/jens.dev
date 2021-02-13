@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>oauth on My personal blog</title>
+    <link>/tags/oauth/</link>
+    <description>Recent content in oauth on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Mar 2016 13:38:54 +0200</lastBuildDate><atom:link href="/tags/oauth/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>authenticate with the bondora API manually</title>
+      <link>/2016/03/08/authenticate-with-bondora-api-manually/</link>
+      <pubDate>Tue, 08 Mar 2016 13:38:54 +0200</pubDate>
+      
+      <guid>/2016/03/08/authenticate-with-bondora-api-manually/</guid>
+      <description>Bondora uses OAuth for its API authentication, while this is great for external service providers owning their own domain/app, it is also relatively cumbersome for stand alone applications/scripts.
+So here are the steps I did to acquire a refresh token for using the API with curl.
+First follow the link of the documentation to the &amp;ldquo;google OAuth playground&amp;rdquo;.
+Most of the configuration should be preset by the link used. If you need it, you can add additional rights to the request (in my case reports where not part of the url): &amp;ldquo;BidsRead BidsEdit Investments SmBuy SmSell ReportRead ReportCreate&amp;rdquo;</description>
+    </item>
+    
+  </channel>
+</rss>

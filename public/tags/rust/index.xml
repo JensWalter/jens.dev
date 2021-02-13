@@ -17,5 +17,15 @@
 Cargo.toml [package] name = &amp;#34;keyvault-sample&amp;#34; version = &amp;#34;0.1.0&amp;#34; edition = &amp;#34;2018&amp;#34; [dependencies] azure_key_vault = { git = &amp;#34;https://github.com/Azure/azure-sdk-for-rust.git&amp;#34; } azure_identity = { git = &amp;#34;https://github.com/Azure/azure-sdk-for-rust.git&amp;#34; } tokio = { version = &amp;#34;1&amp;#34;, features = [&amp;#34;full&amp;#34;] } main.rs use azure_identity::token_credentials::ClientSecretCredential; use azure_identity::token_credentials::TokenCredentialOptions; use azure_key_vault::KeyVaultClient; #[tokio::main] async fn main() -&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt; { //azure credentials  let client_id = &amp;#34;11111111-1111-1111-1111-111111111111&amp;#34;.</description>
     </item>
     
+    <item>
+      <title>A hello world kubernetes operator in Rust</title>
+      <link>/2020/09/15/a-hello-world-kubernetes-operator-in-rust/</link>
+      <pubDate>Tue, 15 Sep 2020 10:08:54 +0200</pubDate>
+      
+      <guid>/2020/09/15/a-hello-world-kubernetes-operator-in-rust/</guid>
+      <description>Introduction I read some samples about how to implement a kubernetes operator in Go which shows the basic priciples, but I was not able to find a similar exercise in rust. So I started looking around, how to do an operator in rust.
+Overview An operator in kubernetes is a service that watches the k8s-API for specific events to happen. Usually the operator also registers some custom resource definitions (CRD) to later watch the lifecycle of those objects.</description>
+    </item>
+    
   </channel>
 </rss>

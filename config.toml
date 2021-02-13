@@ -2,7 +2,9 @@ baseurl = "/"
 title = "My personal blog"
 theme = "ghostwriter"
 languageCode = "en-us"
-googleAnalytics = "XXX"
+googleAnalytics = "UA-5676095-8"
+
+Paginate=999 
 
 [privacy.googleAnalytics]
 anonymizeIP = true
@@ -13,16 +15,16 @@ useSessionStorage = false
 tag = "tags"
 
 [Params]
-    mainSections = ["post"]
-    intro = true
-    headline = ""
-    description = ""
-    github = "https://github.com/JensWalter"
-    twitter = "https://twitter.com/jens_walter"
-    stackoverflow = "https://stackoverflow.com/users/220219/jens-walter"
-    email = "jens@apimeister.com"
-    opengraph = true
-    rss = true
+  mainSections = ["post"]
+  intro = true
+  headline = ""
+  description = ""
+  github = "https://github.com/JensWalter"
+  twitter = "https://twitter.com/jens_walter"
+  stackoverflow = "https://stackoverflow.com/users/story/220219"
+  email = "jens@apimeister.com"
+  opengraph = true
+  rss = true
 
 [Permalinks]
   post = "/:year/:month/:day/:filename/"

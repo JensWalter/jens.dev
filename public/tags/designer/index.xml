@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>designer on My personal blog</title>
+    <link>/tags/designer/</link>
+    <description>Recent content in designer on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Oct 2009 18:52:38 +0000</lastBuildDate><atom:link href="/tags/designer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TIBCO Designer Panel too small</title>
+      <link>/2009/10/13/tibco-designer-panel-too-small/</link>
+      <pubDate>Tue, 13 Oct 2009 18:52:38 +0000</pubDate>
+      
+      <guid>/2009/10/13/tibco-designer-panel-too-small/</guid>
+      <description>Recently I ran into some rather trivial problem which isn’t really addressed by the TIBCO Designer. I had a process which wouldn’t fit into the Design Panel. There was just not enough space on the canvas to fit in the actual flow.
+After asking around I came to the conclusion that every designer (from different colleges I work with) had a different resolution for the Design canvas. Nobody knew any kind of property where you can set this resolution, so I began searching around.</description>
+    </item>
+    
+    <item>
+      <title>TIBCO Designer with external memory window</title>
+      <link>/2009/04/24/tibco-designer-with-external-memory-window/</link>
+      <pubDate>Fri, 24 Apr 2009 18:13:10 +0000</pubDate>
+      
+      <guid>/2009/04/24/tibco-designer-with-external-memory-window/</guid>
+      <description>During Research for my last blog post I found an interesting feature of the designer. If the designer uses more than one gigabyte of heap memory, the display of the memory usage gets a bit fuzzy.
+Obviously somebody at TIBCO forgot to round the value, so it would fit into this small section of the status bar.
+Keeping that in mind I found a start parameter which allows you to start the designer with an external window which only displays the current memory load.</description>
+    </item>
+    
+    <item>
+      <title>improve TIBCO Designer tester performance under linux</title>
+      <link>/2009/04/22/improve-tibco-designer-tester-performance-under-linux/</link>
+      <pubDate>Wed, 22 Apr 2009 00:20:25 +0000</pubDate>
+      
+      <guid>/2009/04/22/improve-tibco-designer-tester-performance-under-linux/</guid>
+      <description>I’m using the TIBCO designer for quite a while now. Before using it in a debian environment I developed all TIBCO related stuff in Windows XP. Now with the switch to linux there came quite a shift in user experience. One thing that really annoyed me was the slow performance of the designer debugger.
+So I started some measurements with a simple test process. The test process creates a simple list of all files (2000 items) in one folder and then iterates over every entry.</description>
+    </item>
+    
+  </channel>
+</rss>

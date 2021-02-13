@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dblink on My personal blog</title>
+    <link>/tags/dblink/</link>
+    <description>Recent content in dblink on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Feb 2009 15:32:40 +0000</lastBuildDate><atom:link href="/tags/dblink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>copy a table across databases via dblink</title>
+      <link>/2009/02/06/copy-a-table-across-databases-via-dblink/</link>
+      <pubDate>Fri, 06 Feb 2009 15:32:40 +0000</pubDate>
+      
+      <guid>/2009/02/06/copy-a-table-across-databases-via-dblink/</guid>
+      <description>Recently I ran into the situation that I needed to copy a large subset of data from one database to another. Normally I would say, make a dump and then re-import the data into the new schema. But this solution has some serious drawbacks. First you have to copy the complete database. Second you have to maintain the structure of the data. A third problem could be that you have to copy the complete dump to the target location (in case it is not the same machine and your database is a bit larger e.</description>
+    </item>
+    
+  </channel>
+</rss>

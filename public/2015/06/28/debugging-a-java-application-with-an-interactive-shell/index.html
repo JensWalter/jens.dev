@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>debugging a java application with an interactive shell &middot; </title>
+        <meta name="description" content="Since a while ago, the JVM has an embedded Javascript engine within. Since Java 8 (I think) this engine got extended through an interactive shell. So now you can start an interactive Javascript shell within your JVM. Knowing that, I wondered why nobody tried to use this feature, to do some debugging. So I tried.
+First I had to find the coresponding class of the jjs tool. I&rsquo;m not sure I found the right one, but I did find a Shell class within the nashorn.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="debugging a java application with an interactive shell">
+<meta property="og:description" content="Since a while ago, the JVM has an embedded Javascript engine within. Since Java 8 (I think) this engine got extended through an interactive shell. So now you can start an interactive Javascript shell within your JVM. Knowing that, I wondered why nobody tried to use this feature, to do some debugging. So I tried.
+First I had to find the coresponding class of the jjs tool. I&rsquo;m not sure I found the right one, but I did find a Shell class within the nashorn.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2015/06/28/debugging-a-java-application-with-an-interactive-shell/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">debugging a java application with an interactive shell</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2015-06-28" itemprop="datePublished">Sun, Jun 28, 2015</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>Since a while ago, the JVM has an embedded Javascript engine within. Since Java 8 (I think) this engine got extended through an interactive shell. So now you can start an interactive Javascript shell within your JVM.
+Knowing that, I wondered why nobody tried to use this feature, to do some debugging.
+So I tried.</p>
+<p>First I had to find the coresponding class of the jjs tool. I&rsquo;m not sure I found the right one, but I did find a Shell class within the nashorn.jar file.
+Starting that class within intelliJ provided me a shell which was called jjs (so it cannot be that wrong).
+Sadly, not all the command line parameters that jjs has, worked on this class. Especially the &ldquo;-e&rdquo; was missing. That parameter is used to evaluate whatever inline script given through this parameter.
+Instead I had to fallback to files, to provide the launcher code for my actual application.
+This is what the launch configuration in intelliJ looks like.</p>
+<p><img src="/assets/shell-launch-config.png" alt="intelliJ launch configuration"></p>
+<p>After that, the debugger starts an empty shell. What I needed from that point onwards, was to start the real application. For that, I wrote the following Javascript and put it into the project directory.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">var</span> <span style="color:#75af00">args</span> <span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#34;-cq&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-cs&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-ll&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;debug&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-p&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;/Users/jens/tmp/store&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-t&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;1m&#34;</span><span style="color:#111">];</span>
+<span style="color:#75af00">Java</span><span style="color:#111">.</span><span style="color:#75af00">type</span><span style="color:#111">(</span><span style="color:#d88200">&#34;io.trivium.Start&#34;</span><span style="color:#111">).</span><span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#75af00">args</span><span style="color:#111">);</span>
+</code></pre></div><p>Including this script, the launch configuration had to be adjusted with the correct script filename.</p>
+<p><img src="/assets/shell-launch-configuration-with-script.png" alt="intelliJ launch configuration"></p>
+<p>So now I could start my application through the launch configuration and in effect have a shell to interact with my code base at run-time.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/java/">java</a>, 
+                <a href="/tags/nashorn/">nashorn</a>, 
+                <a href="/tags/jjs/">jjs</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

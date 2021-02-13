@@ -33,63 +33,793 @@
   </url>
   
   <url>
-    <loc>/2015/09/28/creating-a-new-theme/</loc>
-    <lastmod>2015-09-28T02:13:50+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/my-awesome-project/</loc>
-    <lastmod>2014-11-18T02:13:50+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/project/</loc>
-    <lastmod>2014-11-18T02:13:50+00:00</lastmod>
+    <lastmod>2020-11-18T02:13:50+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2014/04/02/goisforlovers/</loc>
-    <lastmod>2014-04-02T02:13:50+00:00</lastmod>
+    <loc>/project/tibco-ems-operator-copy/</loc>
+    <lastmod>2020-11-18T02:13:50+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/development/</loc>
-    <lastmod>2014-04-02T02:13:50+00:00</lastmod>
+    <loc>/project/tibco-ems-operator/</loc>
+    <lastmod>2020-11-18T02:13:50+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/go/</loc>
-    <lastmod>2014-04-02T02:13:50+00:00</lastmod>
+    <loc>/2020/09/15/a-hello-world-kubernetes-operator-in-rust/</loc>
+    <lastmod>2020-09-15T10:08:54+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/golang/</loc>
-    <lastmod>2014-04-02T02:13:50+00:00</lastmod>
+    <loc>/tags/kubernetes/</loc>
+    <lastmod>2020-09-15T10:08:54+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/2014/04/02/migrate-from-jekyll/</loc>
-    <lastmod>2014-04-02T02:13:50+00:00</lastmod>
+    <loc>/tags/kubernetes-operator/</loc>
+    <lastmod>2020-09-15T10:08:54+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/templates/</loc>
-    <lastmod>2014-04-02T02:13:50+00:00</lastmod>
+    <loc>/tags/businessworks/</loc>
+    <lastmod>2020-08-09T10:08:54+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/themes/</loc>
-    <lastmod>2014-04-02T02:13:50+00:00</lastmod>
+    <loc>/tags/container/</loc>
+    <lastmod>2020-08-09T10:08:54+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2014/04/02/hugoisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>/2020/08/09/containerizing-businessworks-5/</loc>
+    <lastmod>2020-08-09T10:08:54+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/hugo/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>/tags/docker/</loc>
+    <lastmod>2020-08-09T10:08:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tibco/</loc>
+    <lastmod>2020-08-09T10:08:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/apigateway/</loc>
+    <lastmod>2019-04-12T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lambda/</loc>
+    <lastmod>2019-04-12T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2019/04/12/retrieve-the-api-keyname-in-aws-api-gateway/</loc>
+    <lastmod>2019-04-12T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/cloudformation/</loc>
+    <lastmod>2018-01-10T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/dynamodb/</loc>
+    <lastmod>2018-01-10T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/01/10/implementing-dynamodb-triggers-streams-using-cloudformation/</loc>
+    <lastmod>2018-01-10T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/12/10/using-parameters-through-multiple-nested-cloudformation-stacks/</loc>
+    <lastmod>2017-12-10T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/09/13/integrate-api-gateway-with-sns-using-cloudformation/</loc>
+    <lastmod>2017-09-13T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sns/</loc>
+    <lastmod>2017-09-13T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/firehose/</loc>
+    <lastmod>2017-08-24T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/08/24/integrate-api-gateway-with-kinesis-firehose-using-cloudformation/</loc>
+    <lastmod>2017-08-24T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/06/24/visualizing-a-cloudformation-template/</loc>
+    <lastmod>2017-06-24T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/06/18/extending-cloudformation-with-custom-resources/</loc>
+    <lastmod>2017-06-18T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/nodejs/</loc>
+    <lastmod>2017-06-18T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/06/15/how-the-web-component-slot-system-works/</loc>
+    <lastmod>2017-06-15T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/html/</loc>
+    <lastmod>2017-06-15T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/javascript/</loc>
+    <lastmod>2017-06-15T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/webcomponents/</loc>
+    <lastmod>2017-06-15T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/06/14/how-web-component-attributes-work/</loc>
+    <lastmod>2017-06-14T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/06/03/writing-a-hello-world-web-component/</loc>
+    <lastmod>2017-06-03T10:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/cloudfront/</loc>
+    <lastmod>2017-05-09T13:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/05/09/hosting-a-cloudfront-site-with-s3-and-api-gateway/</loc>
+    <lastmod>2017-05-09T13:08:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/athena/</loc>
+    <lastmod>2017-03-27T12:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/03/27/migrating-a-mongodb-to-aws-athena/</loc>
+    <lastmod>2017-03-27T12:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/mongodb/</loc>
+    <lastmod>2017-03-27T12:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/02/28/a-serverless-cron-in-aws-cloudformation/</loc>
+    <lastmod>2017-02-28T16:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/serverless/</loc>
+    <lastmod>2017-02-28T16:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/02/19/publish-an-s3-event-to-lambda-through-sns/</loc>
+    <lastmod>2017-02-19T14:00:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/01/05/generate-a-self-signed-certificate-with-aws-lambda/</loc>
+    <lastmod>2017-01-05T19:58:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/12/16/converting-csv-to-orc-with-apache-nifi/</loc>
+    <lastmod>2016-12-16T14:36:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/nifi/</loc>
+    <lastmod>2016-12-16T14:36:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bash/</loc>
+    <lastmod>2016-11-23T20:18:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/11/23/invoking-java-gc-through-bash/</loc>
+    <lastmod>2016-11-23T20:18:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/java/</loc>
+    <lastmod>2016-11-23T20:18:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/11/11/auto-confirming-a-newly-created-cognito-user/</loc>
+    <lastmod>2016-11-11T19:49:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/cognito/</loc>
+    <lastmod>2016-11-11T19:49:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system/</loc>
+    <lastmod>2016-10-16T15:49:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/nginx/</loc>
+    <lastmod>2016-10-16T15:49:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/07/21/njams-find-engines-with-replay-recording-disabled/</loc>
+    <lastmod>2016-07-21T11:15:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/njams/</loc>
+    <lastmod>2016-07-21T11:15:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/07/14/java-spi-a-simple-hello-world-service/</loc>
+    <lastmod>2016-07-14T15:13:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/06/26/connecting-nodejs-to-tibco-ems/</loc>
+    <lastmod>2016-06-26T21:57:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ems/</loc>
+    <lastmod>2016-06-26T21:57:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/06/21/get-oracle-allocation-sizes-part-2/</loc>
+    <lastmod>2016-06-21T19:54:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/oracle/</loc>
+    <lastmod>2016-06-21T19:54:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks/</loc>
+    <lastmod>2016-06-17T17:06:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/api/</loc>
+    <lastmod>2016-03-10T20:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/03/10/embed-a-github-commit-log-into-markdown/</loc>
+    <lastmod>2016-03-10T20:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/github/</loc>
+    <lastmod>2016-03-10T20:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/03/08/authenticate-with-bondora-api-manually/</loc>
+    <lastmod>2016-03-08T13:38:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bondoraapi/</loc>
+    <lastmod>2016-03-08T13:38:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/oauth/</loc>
+    <lastmod>2016-03-08T13:38:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/api101/</loc>
+    <lastmod>2015-12-21T15:02:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/12/21/building-an-api-on-top-of-another-page/</loc>
+    <lastmod>2015-12-21T15:02:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/mintosapi/</loc>
+    <lastmod>2015-12-21T15:02:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/amazon/</loc>
+    <lastmod>2015-12-16T11:53:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/api-gateway/</loc>
+    <lastmod>2015-12-16T11:53:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/aws/</loc>
+    <lastmod>2015-12-16T11:53:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/12/16/the-serverless-api/</loc>
+    <lastmod>2015-12-16T11:53:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/10/10/formdatahandler-implements-com-sun-net-httpserver-httphandler/</loc>
+    <lastmod>2015-10-10T21:04:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ant/</loc>
+    <lastmod>2015-10-04T18:50:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/10/04/ant-task-to-show-content-of-a-jar-file/</loc>
+    <lastmod>2015-10-04T18:50:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/09/26/njams-getting-the-client-version-of-all-engines/</loc>
+    <lastmod>2015-09-26T15:41:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/09/17/njams-getting-a-daily-success-error-rate-per-deployed-service/</loc>
+    <lastmod>2015-09-17T09:11:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/09/16/njams-how-the-njams_t_monitor_main-status-works/</loc>
+    <lastmod>2015-09-16T09:11:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/09/15/calculating-percentiles-in-oracle/</loc>
+    <lastmod>2015-09-15T16:11:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/09/04/mule-flowvars-not-visible-in-parent-flow/</loc>
+    <lastmod>2015-09-04T14:34:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/mule/</loc>
+    <lastmod>2015-09-04T14:34:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/08/04/generate-a-random-uuid-in-bash/</loc>
+    <lastmod>2015-08-04T16:21:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/uuid/</loc>
+    <lastmod>2015-08-04T16:21:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/07/16/add-a-network-delay-in-linux/</loc>
+    <lastmod>2015-07-16T16:34:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/linux/</loc>
+    <lastmod>2015-07-16T16:34:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/07/11/query-index-usage-stats-in-oracle/</loc>
+    <lastmod>2015-07-11T17:52:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/28/debugging-a-java-application-with-an-interactive-shell/</loc>
+    <lastmod>2015-06-28T15:48:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/jjs/</loc>
+    <lastmod>2015-06-28T15:48:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/nashorn/</loc>
+    <lastmod>2015-06-28T15:48:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs/</loc>
+    <lastmod>2015-06-27T14:22:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/27/query-clob-settings-in-oracle/</loc>
+    <lastmod>2015-06-27T11:31:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/27/get-table-and-index-allocation-size-in-oracle/</loc>
+    <lastmod>2015-06-27T08:13:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/26/detect-whether-assm-is-managing-your-tablespace/</loc>
+    <lastmod>2015-06-26T12:03:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance/</loc>
+    <lastmod>2015-06-25T10:22:10+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/24/reset-the-tibco-ems-statistics/</loc>
+    <lastmod>2015-06-24T20:12:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/apache/</loc>
+    <lastmod>2015-06-17T12:25:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash/</loc>
+    <lastmod>2015-06-17T12:25:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select/</loc>
+    <lastmod>2015-06-14T18:34:23+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sql/</loc>
+    <lastmod>2015-06-14T18:34:23+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/13/doing-objects-in-jjs/</loc>
+    <lastmod>2015-06-13T08:12:55+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs/</loc>
+    <lastmod>2015-06-12T12:32:25+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/11/print-something-to-the-console-in-jjs/</loc>
+    <lastmod>2015-06-11T11:12:45+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/06/jjs-under-osx/</loc>
+    <lastmod>2015-06-06T18:22:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/celero.io/</loc>
+    <lastmod>2014-01-03T23:31:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/01/03/new-project-celero-io/</loc>
+    <lastmod>2014-01-03T23:31:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/businessevents/</loc>
+    <lastmod>2010-10-23T20:43:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment/</loc>
+    <lastmod>2010-10-23T20:43:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/02/26/url-encode-decode-in-javascript-2/</loc>
+    <lastmod>2010-02-26T21:57:13+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/cloudtheweb.com/</loc>
+    <lastmod>2010-01-04T19:57:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/google-analytics/</loc>
+    <lastmod>2010-01-04T19:57:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/01/04/tracking-virtual-links-with-google-analytics/</loc>
+    <lastmod>2010-01-04T19:57:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks/</loc>
+    <lastmod>2009-12-08T17:22:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tomcat/</loc>
+    <lastmod>2009-12-08T17:22:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/designer/</loc>
+    <lastmod>2009-10-13T18:52:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/10/13/tibco-designer-panel-too-small/</loc>
+    <lastmod>2009-10-13T18:52:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/performance/</loc>
+    <lastmod>2009-09-23T15:54:14+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/postgres/</loc>
+    <lastmod>2009-09-23T15:54:14+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/09/23/searching-for-hash-strings-in-postgres/</loc>
+    <lastmod>2009-09-23T15:54:14+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/09/05/init-script-for-the-tibco-administrator/</loc>
+    <lastmod>2009-09-05T19:03:06+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/shell/</loc>
+    <lastmod>2009-09-05T19:03:06+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/08/17/adding-ip-restriction-to-businessworks-processes/</loc>
+    <lastmod>2009-08-17T01:16:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/08/08/cloud-the-web-my-new-web-project/</loc>
+    <lastmod>2009-08-08T12:28:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/shell-tools.net/</loc>
+    <lastmod>2009-07-31T23:10:27+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/07/31/shell-tools-net-version2/</loc>
+    <lastmod>2009-07-31T23:10:27+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/64-bit/</loc>
+    <lastmod>2009-07-15T16:06:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/07/15/installing-gluescript-on-debian-squeeze-64bit/</loc>
+    <lastmod>2009-07-15T16:06:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins/</loc>
+    <lastmod>2009-06-25T14:28:26+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql/</loc>
+    <lastmod>2009-06-09T00:38:35+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/06/05/extracting-information-from-websites-through-xslt/</loc>
+    <lastmod>2009-06-05T19:05:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/xslt/</loc>
+    <lastmod>2009-06-05T19:05:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks/</loc>
+    <lastmod>2009-05-28T14:19:33+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/gnome-3.0/</loc>
+    <lastmod>2009-05-08T14:10:59+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/05/08/gnome-30-just-my-two-cents/</loc>
+    <lastmod>2009-05-08T14:10:59+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/gnomeshell/</loc>
+    <lastmod>2009-05-08T14:10:59+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/gtk/</loc>
+    <lastmod>2009-05-08T14:10:59+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/04/24/tibco-designer-with-external-memory-window/</loc>
+    <lastmod>2009-04-24T18:13:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/04/22/improve-tibco-designer-tester-performance-under-linux/</loc>
+    <lastmod>2009-04-22T00:20:25+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/streaming-api/</loc>
+    <lastmod>2009-04-09T00:26:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/04/09/whats-the-sitch/</loc>
+    <lastmod>2009-04-09T00:26:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/yahoo-finance/</loc>
+    <lastmod>2009-04-09T00:26:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit/</loc>
+    <lastmod>2009-02-24T00:59:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tra/</loc>
+    <lastmod>2009-02-24T00:59:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/06/copy-a-table-across-databases-via-dblink/</loc>
+    <lastmod>2009-02-06T15:32:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/dblink/</loc>
+    <lastmod>2009-02-06T15:32:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell/</loc>
+    <lastmod>2009-02-03T16:17:06+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/csharp/</loc>
+    <lastmod>2009-02-01T02:02:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/01/moving-windows-part2/</loc>
+    <lastmod>2009-02-01T02:02:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/01/14/streaming-editor-improved/</loc>
+    <lastmod>2009-01-14T15:51:03+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/12/10/moving-windows-remotely-with-net/</loc>
+    <lastmod>2008-12-10T19:34:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ajax/</loc>
+    <lastmod>2008-12-02T12:23:33+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/12/02/use-yahoo-finance-streaming-api/</loc>
+    <lastmod>2008-12-02T12:23:33+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/wget/</loc>
+    <lastmod>2008-12-02T12:23:33+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/11/16/tibco-ems-with-database-backend-postgresql/</loc>
+    <lastmod>2008-11-16T20:48:11+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/10/03/generate-random-timestamps-in-mysql/</loc>
+    <lastmod>2008-10-03T12:13:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/mysql/</loc>
+    <lastmod>2008-10-03T12:13:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/random-timestamp/</loc>
+    <lastmod>2008-10-03T12:13:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/imap/</loc>
+    <lastmod>2008-09-22T21:06:12+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ssh/</loc>
+    <lastmod>2008-09-22T21:06:12+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/09/22/tunnel-your-imap-over-ssh/</loc>
+    <lastmod>2008-09-22T21:06:12+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/09/21/hello-world/</loc>
+    <lastmod>2008-09-21T12:38:37+00:00</lastmod>
   </url>
   
 </urlset>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>why sub-selects can be faster than inner joins &middot; </title>
+        <meta name="description" content="So here is my situation. I have 2 tables with the following DDL.
+CREATE TABLE tags ( id bigint NOT NULL, &#34;value&#34; character varying(150), CONSTRAINT tags_pkey PRIMARY KEY (id), CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags ( sites_id bigint NOT NULL, pages_id bigint NOT NULL, tags_id bigint NOT NULL, count integer, updated timestamp without time zone, CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="why sub-selects can be faster than inner joins">
+<meta property="og:description" content="So here is my situation. I have 2 tables with the following DDL.
+CREATE TABLE tags ( id bigint NOT NULL, &#34;value&#34; character varying(150), CONSTRAINT tags_pkey PRIMARY KEY (id), CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags ( sites_id bigint NOT NULL, pages_id bigint NOT NULL, tags_id bigint NOT NULL, count integer, updated timestamp without time zone, CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">why sub-selects can be faster than inner joins</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2009-06-25" itemprop="datePublished">Thu, Jun 25, 2009</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>So here is my situation. I have 2 tables with the following DDL.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TABLE</span> <span style="color:#111">tags</span>
+<span style="color:#111">(</span>
+  <span style="color:#111">id</span> <span style="color:#111">bigint</span> <span style="color:#00a8c8">NOT</span> <span style="color:#00a8c8">NULL</span><span style="color:#111">,</span>
+  <span style="color:#d88200">&#34;value&#34;</span> <span style="color:#111">character</span> <span style="color:#111">varying</span><span style="color:#111">(</span><span style="color:#ae81ff">150</span><span style="color:#111">),</span>
+  <span style="color:#00a8c8">CONSTRAINT</span> <span style="color:#111">tags_pkey</span> <span style="color:#00a8c8">PRIMARY</span> <span style="color:#00a8c8">KEY</span> <span style="color:#111">(</span><span style="color:#111">id</span><span style="color:#111">),</span>
+  <span style="color:#00a8c8">CONSTRAINT</span> <span style="color:#111">tags_value_key</span> <span style="color:#00a8c8">UNIQUE</span> <span style="color:#111">(</span><span style="color:#111">value</span><span style="color:#111">)</span>
+<span style="color:#111">)</span>
+</code></pre></div><p> </p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TABLE</span> <span style="color:#111">sites_tags</span>
+<span style="color:#111">(</span>
+  <span style="color:#111">sites_id</span> <span style="color:#111">bigint</span> <span style="color:#00a8c8">NOT</span> <span style="color:#00a8c8">NULL</span><span style="color:#111">,</span>
+  <span style="color:#111">pages_id</span> <span style="color:#111">bigint</span> <span style="color:#00a8c8">NOT</span> <span style="color:#00a8c8">NULL</span><span style="color:#111">,</span>
+  <span style="color:#111">tags_id</span> <span style="color:#111">bigint</span> <span style="color:#00a8c8">NOT</span> <span style="color:#00a8c8">NULL</span><span style="color:#111">,</span>
+  <span style="color:#00a8c8">count</span> <span style="color:#111">integer</span><span style="color:#111">,</span>
+  <span style="color:#111">updated</span> <span style="color:#00a8c8">timestamp</span> <span style="color:#00a8c8">without</span> <span style="color:#111">time</span> <span style="color:#00a8c8">zone</span><span style="color:#111">,</span>
+  <span style="color:#00a8c8">CONSTRAINT</span> <span style="color:#111">sites_tags_pkey</span> <span style="color:#00a8c8">PRIMARY</span> <span style="color:#00a8c8">KEY</span> <span style="color:#111">(</span><span style="color:#111">sites_id</span><span style="color:#111">,</span> <span style="color:#111">pages_id</span><span style="color:#111">,</span> <span style="color:#111">tags_id</span><span style="color:#111">)</span>
+<span style="color:#111">)</span>
+</code></pre></div><p>As you can see, the tags table is a simple value-id-table. The second table represents a join table between pages and tags.</p>
+<p>The goal of my Query should be to get the most used tag from the join table. Only the first x-Rows are of interest to me. To get there I used a simple limit command. So just for comparison here a simple query of the join table without the actual values.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">select</span> <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#00a8c8">count</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">anzahl</span> <span style="color:#00a8c8">from</span> <span style="color:#111">sites_tags</span> <span style="color:#111">st</span> <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">tags_id</span> <span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span> <span style="color:#111">anzahl</span> <span style="color:#00a8c8">desc</span> <span style="color:#00a8c8">limit</span> <span style="color:#ae81ff">50</span><span style="color:#111">;</span>
+                                                                <span style="color:#111">QUERY</span> <span style="color:#111">PLAN</span>                                                                
+<span style="color:#75715e">------------------------------------------------------------------------------------------------------------------------------------------
+</span><span style="color:#75715e"></span> <span style="color:#00a8c8">Limit</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">13185</span><span style="color:#111">.</span><span style="color:#ae81ff">22</span><span style="color:#111">..</span><span style="color:#ae81ff">13185</span><span style="color:#111">.</span><span style="color:#ae81ff">35</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1974</span><span style="color:#111">.</span><span style="color:#ae81ff">893</span><span style="color:#111">..</span><span style="color:#ae81ff">1975</span><span style="color:#111">.</span><span style="color:#ae81ff">033</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+   <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Sort</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">13185</span><span style="color:#111">.</span><span style="color:#ae81ff">22</span><span style="color:#111">..</span><span style="color:#ae81ff">13192</span><span style="color:#111">.</span><span style="color:#ae81ff">27</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2819</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1974</span><span style="color:#111">.</span><span style="color:#ae81ff">888</span><span style="color:#111">..</span><span style="color:#ae81ff">1974</span><span style="color:#111">.</span><span style="color:#ae81ff">941</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+         <span style="color:#111">Sort</span> <span style="color:#00a8c8">Key</span><span style="color:#111">:</span> <span style="color:#111">(</span><span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#00a8c8">count</span><span style="color:#111">))</span>
+         <span style="color:#111">Sort</span> <span style="color:#00a8c8">Method</span><span style="color:#111">:</span>  <span style="color:#111">top</span><span style="color:#f92672">-</span><span style="color:#111">N</span> <span style="color:#111">heapsort</span>  <span style="color:#111">Memory</span><span style="color:#111">:</span> <span style="color:#ae81ff">18</span><span style="color:#111">kB</span>
+         <span style="color:#f92672">-&gt;</span>  <span style="color:#111">HashAggregate</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">13056</span><span style="color:#111">.</span><span style="color:#ae81ff">34</span><span style="color:#111">..</span><span style="color:#ae81ff">13091</span><span style="color:#111">.</span><span style="color:#ae81ff">58</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2819</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1766</span><span style="color:#111">.</span><span style="color:#ae81ff">681</span><span style="color:#111">..</span><span style="color:#ae81ff">1876</span><span style="color:#111">.</span><span style="color:#ae81ff">092</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">66136</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+               <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Seq</span> <span style="color:#111">Scan</span> <span style="color:#00a8c8">on</span> <span style="color:#111">sites_tags</span> <span style="color:#111">st</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">00</span><span style="color:#111">..</span><span style="color:#ae81ff">10202</span><span style="color:#111">.</span><span style="color:#ae81ff">56</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">120</span><span style="color:#111">..</span><span style="color:#ae81ff">690</span><span style="color:#111">.</span><span style="color:#ae81ff">719</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+ <span style="color:#111">Total</span> <span style="color:#111">runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">1975</span><span style="color:#111">.</span><span style="color:#ae81ff">669</span> <span style="color:#111">ms</span>
+<span style="color:#111">(</span><span style="color:#ae81ff">7</span> <span style="color:#00a8c8">rows</span><span style="color:#111">)</span>
+</code></pre></div><p>This is just a statement to get you the picture of cost for a simple query (without fetching any actual values).</p>
+<p>To make this query useful I needed to add the values. All the values will be joined through the tags table.</p>
+<p>Here the first implementation I came up with.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">select</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">value</span><span style="color:#111">,</span><span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#00a8c8">count</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">anzahl</span> <span style="color:#00a8c8">from</span> <span style="color:#111">sites_tags</span> <span style="color:#111">st</span> <span style="color:#00a8c8">inner</span> <span style="color:#00a8c8">join</span> <span style="color:#111">tags</span> <span style="color:#111">t</span> <span style="color:#00a8c8">on</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span><span style="color:#f92672">=</span><span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">tags_id</span> <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">tags_id</span><span style="color:#111">,</span><span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">value</span> <span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span> <span style="color:#111">anzahl</span> <span style="color:#00a8c8">desc</span> <span style="color:#00a8c8">limit</span> <span style="color:#ae81ff">50</span><span style="color:#111">;</span>
+                                                                      <span style="color:#111">QUERY</span> <span style="color:#111">PLAN</span>                                                                      
+<span style="color:#75715e">------------------------------------------------------------------------------------------------------------------------------------------------------
+</span><span style="color:#75715e"></span> <span style="color:#00a8c8">Limit</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">123002</span><span style="color:#111">.</span><span style="color:#ae81ff">69</span><span style="color:#111">..</span><span style="color:#ae81ff">123002</span><span style="color:#111">.</span><span style="color:#ae81ff">82</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">22</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12640</span><span style="color:#111">.</span><span style="color:#ae81ff">100</span><span style="color:#111">..</span><span style="color:#ae81ff">12640</span><span style="color:#111">.</span><span style="color:#ae81ff">239</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+   <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Sort</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">123002</span><span style="color:#111">.</span><span style="color:#ae81ff">69</span><span style="color:#111">..</span><span style="color:#ae81ff">124429</span><span style="color:#111">.</span><span style="color:#ae81ff">58</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">22</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12640</span><span style="color:#111">.</span><span style="color:#ae81ff">095</span><span style="color:#111">..</span><span style="color:#ae81ff">12640</span><span style="color:#111">.</span><span style="color:#ae81ff">153</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+         <span style="color:#111">Sort</span> <span style="color:#00a8c8">Key</span><span style="color:#111">:</span> <span style="color:#111">(</span><span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#00a8c8">count</span><span style="color:#111">))</span>
+         <span style="color:#111">Sort</span> <span style="color:#00a8c8">Method</span><span style="color:#111">:</span>  <span style="color:#111">top</span><span style="color:#f92672">-</span><span style="color:#111">N</span> <span style="color:#111">heapsort</span>  <span style="color:#111">Memory</span><span style="color:#111">:</span> <span style="color:#ae81ff">20</span><span style="color:#111">kB</span>
+         <span style="color:#f92672">-&gt;</span>  <span style="color:#111">GroupAggregate</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">91200</span><span style="color:#111">.</span><span style="color:#ae81ff">58</span><span style="color:#111">..</span><span style="color:#ae81ff">104042</span><span style="color:#111">.</span><span style="color:#ae81ff">59</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">22</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10165</span><span style="color:#111">.</span><span style="color:#ae81ff">002</span><span style="color:#111">..</span><span style="color:#ae81ff">12537</span><span style="color:#111">.</span><span style="color:#ae81ff">121</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">66136</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+               <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Sort</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">91200</span><span style="color:#111">.</span><span style="color:#ae81ff">58</span><span style="color:#111">..</span><span style="color:#ae81ff">92627</span><span style="color:#111">.</span><span style="color:#ae81ff">47</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">22</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10162</span><span style="color:#111">.</span><span style="color:#ae81ff">562</span><span style="color:#111">..</span><span style="color:#ae81ff">11564</span><span style="color:#111">.</span><span style="color:#ae81ff">604</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+                     <span style="color:#111">Sort</span> <span style="color:#00a8c8">Key</span><span style="color:#111">:</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">tags_id</span><span style="color:#111">,</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">value</span>
+                     <span style="color:#111">Sort</span> <span style="color:#00a8c8">Method</span><span style="color:#111">:</span>  <span style="color:#00a8c8">external</span> <span style="color:#111">merge</span>  <span style="color:#111">Disk</span><span style="color:#111">:</span> <span style="color:#ae81ff">18808</span><span style="color:#111">kB</span>
+                     <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Hash</span> <span style="color:#00a8c8">Join</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1877</span><span style="color:#111">.</span><span style="color:#ae81ff">06</span><span style="color:#111">..</span><span style="color:#ae81ff">24921</span><span style="color:#111">.</span><span style="color:#ae81ff">63</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">22</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">259</span><span style="color:#111">.</span><span style="color:#ae81ff">674</span><span style="color:#111">..</span><span style="color:#ae81ff">3080</span><span style="color:#111">.</span><span style="color:#ae81ff">093</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+                           <span style="color:#111">Hash</span> <span style="color:#111">Cond</span><span style="color:#111">:</span> <span style="color:#111">(</span><span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">tags_id</span> <span style="color:#f92672">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span><span style="color:#111">)</span>
+                           <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Seq</span> <span style="color:#111">Scan</span> <span style="color:#00a8c8">on</span> <span style="color:#111">sites_tags</span> <span style="color:#111">st</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">00</span><span style="color:#111">..</span><span style="color:#ae81ff">10202</span><span style="color:#111">.</span><span style="color:#ae81ff">56</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">070</span><span style="color:#111">..</span><span style="color:#ae81ff">781</span><span style="color:#111">.</span><span style="color:#ae81ff">449</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+                           <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Hash</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1050</span><span style="color:#111">.</span><span style="color:#ae81ff">36</span><span style="color:#111">..</span><span style="color:#ae81ff">1050</span><span style="color:#111">.</span><span style="color:#ae81ff">36</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">66136</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">18</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">259</span><span style="color:#111">.</span><span style="color:#ae81ff">518</span><span style="color:#111">..</span><span style="color:#ae81ff">259</span><span style="color:#111">.</span><span style="color:#ae81ff">518</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">66136</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+                                 <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Seq</span> <span style="color:#111">Scan</span> <span style="color:#00a8c8">on</span> <span style="color:#111">tags</span> <span style="color:#111">t</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">00</span><span style="color:#111">..</span><span style="color:#ae81ff">1050</span><span style="color:#111">.</span><span style="color:#ae81ff">36</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">66136</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">18</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">027</span><span style="color:#111">..</span><span style="color:#ae81ff">115</span><span style="color:#111">.</span><span style="color:#ae81ff">197</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">66136</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+ <span style="color:#111">Total</span> <span style="color:#111">runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">12647</span><span style="color:#111">.</span><span style="color:#ae81ff">403</span> <span style="color:#111">ms</span>
+<span style="color:#111">(</span><span style="color:#ae81ff">14</span> <span style="color:#00a8c8">rows</span><span style="color:#111">)</span>
+</code></pre></div><p>As you can see, simply joining the table makes this query quite complex. The part which consumes most of the cost is the more complicated group by clause. Now the execution engine has to join these tables and then sort all values by id and string (mostly the value is the important part).</p>
+<p>To avoid this there only could be one solution – remove the join. With removing the join there comes the question how to get the values from the second table. One way to do this would be to use the program (in my case a php web application) to query again for every line of the result set.</p>
+<p>Another way to approach this would be to do a sub-select in the select section. This way you don’t have the additional round trip of doing it in the application. Another advantage would be that the database would only do these sub-selects for the actually returning rows (with respect of the limit).</p>
+<p>So here the query I came up with (with the query execution plan)</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">select</span> <span style="color:#111">(</span><span style="color:#00a8c8">select</span> <span style="color:#111">value</span> <span style="color:#00a8c8">from</span> <span style="color:#111">tags</span> <span style="color:#111">t</span> <span style="color:#00a8c8">where</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span><span style="color:#f92672">=</span><span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">tags_id</span><span style="color:#111">),</span><span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#00a8c8">count</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">anzahl</span> <span style="color:#00a8c8">from</span> <span style="color:#111">sites_tags</span> <span style="color:#111">st</span> <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">tags_id</span> <span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span> <span style="color:#111">anzahl</span> <span style="color:#00a8c8">desc</span> <span style="color:#00a8c8">limit</span> <span style="color:#ae81ff">50</span><span style="color:#111">;</span>
+                                                                <span style="color:#111">QUERY</span> <span style="color:#111">PLAN</span>                                                                 
+<span style="color:#75715e">-------------------------------------------------------------------------------------------------------------------------------------------
+</span><span style="color:#75715e"></span> <span style="color:#00a8c8">Limit</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">36511</span><span style="color:#111">.</span><span style="color:#ae81ff">94</span><span style="color:#111">..</span><span style="color:#ae81ff">36512</span><span style="color:#111">.</span><span style="color:#ae81ff">07</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2682</span><span style="color:#111">.</span><span style="color:#ae81ff">650</span><span style="color:#111">..</span><span style="color:#ae81ff">2682</span><span style="color:#111">.</span><span style="color:#ae81ff">790</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+   <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Sort</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">36511</span><span style="color:#111">.</span><span style="color:#ae81ff">94</span><span style="color:#111">..</span><span style="color:#ae81ff">36518</span><span style="color:#111">.</span><span style="color:#ae81ff">99</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2819</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2682</span><span style="color:#111">.</span><span style="color:#ae81ff">645</span><span style="color:#111">..</span><span style="color:#ae81ff">2682</span><span style="color:#111">.</span><span style="color:#ae81ff">705</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+         <span style="color:#111">Sort</span> <span style="color:#00a8c8">Key</span><span style="color:#111">:</span> <span style="color:#111">(</span><span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#00a8c8">count</span><span style="color:#111">))</span>
+         <span style="color:#111">Sort</span> <span style="color:#00a8c8">Method</span><span style="color:#111">:</span>  <span style="color:#111">top</span><span style="color:#f92672">-</span><span style="color:#111">N</span> <span style="color:#111">heapsort</span>  <span style="color:#111">Memory</span><span style="color:#111">:</span> <span style="color:#ae81ff">20</span><span style="color:#111">kB</span>
+         <span style="color:#f92672">-&gt;</span>  <span style="color:#111">HashAggregate</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">13056</span><span style="color:#111">.</span><span style="color:#ae81ff">34</span><span style="color:#111">..</span><span style="color:#ae81ff">36418</span><span style="color:#111">.</span><span style="color:#ae81ff">30</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2819</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1752</span><span style="color:#111">.</span><span style="color:#ae81ff">934</span><span style="color:#111">..</span><span style="color:#ae81ff">2570</span><span style="color:#111">.</span><span style="color:#ae81ff">690</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">66136</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+               <span style="color:#f92672">-&gt;</span>  <span style="color:#111">Seq</span> <span style="color:#111">Scan</span> <span style="color:#00a8c8">on</span> <span style="color:#111">sites_tags</span> <span style="color:#111">st</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">00</span><span style="color:#111">..</span><span style="color:#ae81ff">10202</span><span style="color:#111">.</span><span style="color:#ae81ff">56</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">109</span><span style="color:#111">..</span><span style="color:#ae81ff">713</span><span style="color:#111">.</span><span style="color:#ae81ff">541</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">570756</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+               <span style="color:#111">SubPlan</span>
+                 <span style="color:#f92672">-&gt;</span>  <span style="color:#00a8c8">Index</span> <span style="color:#111">Scan</span> <span style="color:#00a8c8">using</span> <span style="color:#111">tags_pkey</span> <span style="color:#00a8c8">on</span> <span style="color:#111">tags</span> <span style="color:#111">t</span>  <span style="color:#111">(</span><span style="color:#111">cost</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">00</span><span style="color:#111">..</span><span style="color:#ae81ff">8</span><span style="color:#111">.</span><span style="color:#ae81ff">27</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#111">width</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#111">actual</span> <span style="color:#111">time</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">006</span><span style="color:#111">..</span><span style="color:#ae81ff">0</span><span style="color:#111">.</span><span style="color:#ae81ff">007</span> <span style="color:#00a8c8">rows</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#111">loops</span><span style="color:#f92672">=</span><span style="color:#ae81ff">66136</span><span style="color:#111">)</span>
+                       <span style="color:#00a8c8">Index</span> <span style="color:#111">Cond</span><span style="color:#111">:</span> <span style="color:#111">(</span><span style="color:#111">id</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+ <span style="color:#111">Total</span> <span style="color:#111">runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">2683</span><span style="color:#111">.</span><span style="color:#ae81ff">478</span> <span style="color:#111">ms</span>
+<span style="color:#111">(</span><span style="color:#ae81ff">10</span> <span style="color:#00a8c8">rows</span><span style="color:#111">)</span>
+</code></pre></div><p>As you can see i still costs a lot. It is still 3 times more expensive then doing it without the values. On the other hand the cost is only a fourth of the cost of the join. This is mostly owed to the limit clause. The join has no way of knowing that it would be enough to run the limit without the join and later join the values. So far I found no way to tell postgres to do this more efficient.</p>
+<p>So the simplest solution for that would be to do sub-queries. With that, the limit clause will be honored.</p>
+<p>So as this example shows, it is always a good idea to try different approaches to one and the same query. Often you can see lots of differences in the execution plan which can have a major impact on performance.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/performance/">performance</a>, 
+                <a href="/tags/postgres/">postgres</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

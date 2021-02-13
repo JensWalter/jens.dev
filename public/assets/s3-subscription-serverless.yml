@@ -1,0 +1,53 @@
+service: bucket-subscription-sample
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  hello:
+    handler: handler.hello
+
+resources:
+  Resources:
+    MySourceBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        NotificationConfiguration:
+          TopicConfigurations:
+            - Event: s3:ObjectCreated:*
+              Topic:
+                Ref: ChangeTopic
+    ChangeTopic:
+      Type: AWS::SNS::Topic
+    ChangeTopicSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint:
+          Fn::GetAtt: [ HelloLambdaFunction , "Arn" ]
+        Protocol: lambda
+        TopicArn:
+          Ref: ChangeTopic
+    ChangeTopicPolicy:
+      Type: AWS::SNS::TopicPolicy
+      Properties:
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Sid: AllowBucketToPushNotificationEffect
+            Effect: Allow
+            Principal:
+              Service: s3.amazonaws.com
+            Action: sns:Publish
+            Resource: "*"
+        Topics:
+        - Ref: ChangeTopic
+    HelloLambdaFunctionPermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        Action: lambda:InvokeFunction
+        Principal: sns.amazonaws.com
+        SourceArn:
+          Ref: ChangeTopic
+        FunctionName:
+          Fn::GetAtt: [ HelloLambdaFunction, "Arn" ]

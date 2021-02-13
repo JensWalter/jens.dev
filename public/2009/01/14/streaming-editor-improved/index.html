@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Streaming editor improved &middot; </title>
+        <meta name="description" content="I recently ran into the situation that I needed a streaming editor which does not work line-wise. I was receiving an html stream and wanted to remove all the html tags.
+Although I tried different existing editors like sed or replace, non of it got it right for me. All implementations waited for a newline to work with the data. I also tried disabling every possible buffer but the problem still persists.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Streaming editor improved">
+<meta property="og:description" content="I recently ran into the situation that I needed a streaming editor which does not work line-wise. I was receiving an html stream and wanted to remove all the html tags.
+Although I tried different existing editors like sed or replace, non of it got it right for me. All implementations waited for a newline to work with the data. I also tried disabling every possible buffer but the problem still persists.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2009/01/14/streaming-editor-improved/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Streaming editor improved</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2009-01-14" itemprop="datePublished">Wed, Jan 14, 2009</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>I recently ran into the situation that I needed a streaming editor which does not work line-wise. I was receiving an html stream and wanted to remove all the html tags.</p>
+<p>Although I tried different existing editors like sed or replace, non of it got it right for me. All implementations waited for a newline to work with the data. I also tried disabling every possible buffer but the problem still persists.</p>
+<p>So after quite some trial and error I started writing my own little program which could do the job. So here is the code:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&amp;lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&amp;lt;string.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">argv</span><span style="color:#111">[])</span>
+<span style="color:#111">{</span>
+  <span style="color:#111">setbuf</span><span style="color:#111">(</span><span style="color:#111">stdin</span><span style="color:#111">,</span><span style="color:#111">NULL</span><span style="color:#111">);</span>
+  <span style="color:#00a8c8">char</span> <span style="color:#111">c</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">tag</span> <span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">do</span> <span style="color:#111">{</span>
+    <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#111">getchar</span><span style="color:#111">();</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">c</span> <span style="color:#f92672">==</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">&amp;</span><span style="color:#111">lt</span><span style="color:#111">;</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">tag</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#f92672">++</span><span style="color:#111">tag</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">c</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#39;&gt;&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">tag</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#f92672">--</span><span style="color:#111">tag</span><span style="color:#111">;</span> <span style="color:#111">c</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;\n&#39;</span><span style="color:#111">;}</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">tag</span> <span style="color:#f92672">==</span><span style="color:#ae81ff">0</span> <span style="color:#111">){</span>
+      <span style="color:#111">putchar</span><span style="color:#111">(</span><span style="color:#111">c</span><span style="color:#111">);</span>
+      <span style="color:#111">fflush</span><span style="color:#111">(</span><span style="color:#111">stdout</span><span style="color:#111">);</span>
+    <span style="color:#111">}</span>
+  <span style="color:#111">}</span> <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">c</span> <span style="color:#f92672">!=</span> <span style="color:#111">EOF</span><span style="color:#111">);</span>
+  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Just compile it with the following statement and it will filter everything which comes from stdin.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcc -fPIC -Wall -otransform transform.c
+</code></pre></div><p>Here is a sample statement of how to use it:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -N -s google.com <span style="color:#111">|</span> ./transform
+</code></pre></div>
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/yahoo-finance/">yahoo finance</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

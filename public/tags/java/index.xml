@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on My personal blog</title>
+    <link>/tags/java/</link>
+    <description>Recent content in java on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Nov 2016 20:18:54 +0200</lastBuildDate><atom:link href="/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>invoking java gc through bash</title>
+      <link>/2016/11/23/invoking-java-gc-through-bash/</link>
+      <pubDate>Wed, 23 Nov 2016 20:18:54 +0200</pubDate>
+      
+      <guid>/2016/11/23/invoking-java-gc-through-bash/</guid>
+      <description>Sometimes Java processes start accumulating memory over time and do not give them back to the OS. In previous versions of Java, this was a limitation of the JVM. In Java 8 and newer, with the arrival of the G1 garbage collector, the JVM releases memory back to the OS after a GC run.
+Now since this is possible, calling a GC, although there is still free memory available becomes a different meaning.</description>
+    </item>
+    
+    <item>
+      <title>Java SPI - a simple hello world service</title>
+      <link>/2016/07/14/java-spi-a-simple-hello-world-service/</link>
+      <pubDate>Thu, 14 Jul 2016 15:13:54 +0200</pubDate>
+      
+      <guid>/2016/07/14/java-spi-a-simple-hello-world-service/</guid>
+      <description>I recently needed a simple example of an SPI implementation I could send around as copy and paste template. After some looking around I found some tutorials, but most of them were rather heavy in the implementation and are thereby loosing the point of being a simple extension system within the JDK. If you&amp;rsquo;re looking for a more complete introduction into SPI, just go for the oracle tutorial.
+So what I wanted to build was a simple service (HelloService), which defines an interface but looks for its implementation in the classpath at runtime (something SPI was built for).</description>
+    </item>
+    
+    <item>
+      <title>FormDataHandler implements com.sun.net.httpserver.HttpHandler</title>
+      <link>/2015/10/10/formdatahandler-implements-com-sun-net-httpserver-httphandler/</link>
+      <pubDate>Sat, 10 Oct 2015 21:04:54 +0200</pubDate>
+      
+      <guid>/2015/10/10/formdatahandler-implements-com-sun-net-httpserver-httphandler/</guid>
+      <description>I just needed a dependency free version of a FormData Parser. Since all libraries I found were rather heavy weight I decided to start on my own implementation and share this one.
+To use this one, you can just extends the class below.
+public class FileUpload extends FormDataHandler{ @Override public void handle(HttpExchange httpExchange, List&amp;lt;MultiPart&amp;gt; parts){} } </description>
+    </item>
+    
+    <item>
+      <title>ant task to show content of a jar file</title>
+      <link>/2015/10/04/ant-task-to-show-content-of-a-jar-file/</link>
+      <pubDate>Sun, 04 Oct 2015 18:50:54 +0200</pubDate>
+      
+      <guid>/2015/10/04/ant-task-to-show-content-of-a-jar-file/</guid>
+      <description>A short while ago I started using travis-ci as my continuous build environment. After running some tests I suspected that some files are missing from my ant created jar file. Sadly travis does not support a trivial way to upload the produced jar to a remote location. So I decided to take the console output (which they provide for every build job), to inspect what files are actually packaged in the jar file.</description>
+    </item>
+    
+    <item>
+      <title>debugging a java application with an interactive shell</title>
+      <link>/2015/06/28/debugging-a-java-application-with-an-interactive-shell/</link>
+      <pubDate>Sun, 28 Jun 2015 15:48:54 +0200</pubDate>
+      
+      <guid>/2015/06/28/debugging-a-java-application-with-an-interactive-shell/</guid>
+      <description>Since a while ago, the JVM has an embedded Javascript engine within. Since Java 8 (I think) this engine got extended through an interactive shell. So now you can start an interactive Javascript shell within your JVM. Knowing that, I wondered why nobody tried to use this feature, to do some debugging. So I tried.
+First I had to find the coresponding class of the jjs tool. I&amp;rsquo;m not sure I found the right one, but I did find a Shell class within the nashorn.</description>
+    </item>
+    
+    <item>
+      <title>add jar to the classpath at runtime in jjs (the hacky way)</title>
+      <link>/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs/</link>
+      <pubDate>Sat, 27 Jun 2015 14:22:54 +0200</pubDate>
+      
+      <guid>/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs/</guid>
+      <description>Normally, the JVM does not allow extending the classpath during runtime. But due to the demand, people found ways around that restriction. To bring one of the work-around to jjs I wrote the following javascript function.
+function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader(); var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class; var ClassArray = Java.type(&amp;#34;java.lang.Class[]&amp;#34;); var parameters = new ClassArray(1); parameters[0]= java.net.URL.class; var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&amp;#34;addURL&amp;#34;, parameters); method.setAccessible(true); var ObjectArray = Java.type(&amp;#34;java.lang.Object[]&amp;#34;); var array = new ObjectArray(1); var/*java.</description>
+    </item>
+    
+    <item>
+      <title>doing objects in jjs</title>
+      <link>/2015/06/13/doing-objects-in-jjs/</link>
+      <pubDate>Sat, 13 Jun 2015 08:12:55 +0200</pubDate>
+      
+      <guid>/2015/06/13/doing-objects-in-jjs/</guid>
+      <description>Instantiating a Java Object in jjs is pretty straight forward, at least it can be.
+var string = new java.lang.String(&amp;#34;hello world&amp;#34;); //alternative var stringClass = Java.type(&amp;#34;java.lang.String&amp;#34;); var string = new stringClass(&amp;#34;hello world&amp;#34;); This was so easy that I instantly continued trying Arrays.
+//doing it javascript style var arr=[]; arr[0]=&amp;#34;hello&amp;#34;; arr[1]=&amp;#34;world&amp;#34;; java.lang.String.join(&amp;#34; &amp;#34;,arr); //doing it java style var stringClass=java.lang.String.class; var arr2==java.lang.reflect.Array.newInstance(StringClass,2); You could argue that using the java style initialization doesn&amp;rsquo;t add anything and complicates stuff overly.</description>
+    </item>
+    
+    <item>
+      <title>read the content of a file in one line in jjs</title>
+      <link>/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs/</link>
+      <pubDate>Fri, 12 Jun 2015 12:32:25 +0200</pubDate>
+      
+      <guid>/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs/</guid>
+      <description>The task is pretty simple, read the content of text file as one-liner. Here is what I came up with.
+var filename = &amp;#34;engine.log&amp;#34;; var content = new java.lang.String( java.nio.file.Files.readAllBytes( java.nio.file.Paths.get(filename) ) ); </description>
+    </item>
+    
+    <item>
+      <title>print something to the console in jjs</title>
+      <link>/2015/06/11/print-something-to-the-console-in-jjs/</link>
+      <pubDate>Thu, 11 Jun 2015 11:12:45 +0200</pubDate>
+      
+      <guid>/2015/06/11/print-something-to-the-console-in-jjs/</guid>
+      <description>Once I got jjs running I started with some pretty simple stuff. To print something to the console I found the following ways.
+//javascript style print(&amp;#34;hello world&amp;#34;); // don&amp;#39;t forget the parentheses here, otherwise jjs wont like you //java style var System = Java.type(&amp;#39;java.lang.System&amp;#39;); System.out.println(&amp;#34;hello world&amp;#34;); //of course there is an error out too System.err.println(&amp;#34;hello world&amp;#34;); Don&amp;rsquo;t forget to declare System as Variable, otherwise it will fail.
+nashorn&amp;gt; System.out.println(&amp;#34;hello world&amp;#34;); script error: ReferenceError: &amp;#34;System&amp;#34; is not defined in &amp;lt;STDIN&amp;gt; at line number 1 </description>
+    </item>
+    
+    <item>
+      <title>using jjs under osx</title>
+      <link>/2015/06/06/jjs-under-osx/</link>
+      <pubDate>Sat, 06 Jun 2015 18:22:03 +0200</pubDate>
+      
+      <guid>/2015/06/06/jjs-under-osx/</guid>
+      <description>Recently I wanted to try the new java8 integration javascipt shell. So I installed the Oracle JDK on my mac, opened a terminal and got the following result:
+localhost:~ jens$ jjs -bash: jjs: command not found After some googling around I found that the jjs execution is part of the packaged jdk but not really there. After some time I found that it is installed under the name jrunscript. So now I only had to alias jjs to jrunscript and I could start.</description>
+    </item>
+    
+    <item>
+      <title>improve TIBCO Designer tester performance under linux</title>
+      <link>/2009/04/22/improve-tibco-designer-tester-performance-under-linux/</link>
+      <pubDate>Wed, 22 Apr 2009 00:20:25 +0000</pubDate>
+      
+      <guid>/2009/04/22/improve-tibco-designer-tester-performance-under-linux/</guid>
+      <description>I’m using the TIBCO designer for quite a while now. Before using it in a debian environment I developed all TIBCO related stuff in Windows XP. Now with the switch to linux there came quite a shift in user experience. One thing that really annoyed me was the slow performance of the designer debugger.
+So I started some measurements with a simple test process. The test process creates a simple list of all files (2000 items) in one folder and then iterates over every entry.</description>
+    </item>
+    
+  </channel>
+</rss>

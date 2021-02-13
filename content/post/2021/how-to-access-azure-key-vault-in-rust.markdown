@@ -1,8 +1,10 @@
-+++
-title = "How to access Azure Key Vault in Rust"
-date = 2021-02-13T10:13:50Z
-tags = ["azure","rust"]
-+++
+---
+title: "How to access Azure Key Vault in Rust"
+date: 2021-02-13T10:13:50Z
+tags:
+  - azure
+  - rust
+---
 
 ## Introduction
 

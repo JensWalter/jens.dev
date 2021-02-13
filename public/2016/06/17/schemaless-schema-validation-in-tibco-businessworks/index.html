@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>schemaless schema validation in TIBCO BusinessWorks &middot; </title>
+        <meta name="description" content="Usually, schema validation in BusinessWorks is done pretty straight forward. You get an xml, known the schema and just run a ParseXml activity. The problem becomes more complicated if you have to validate a xml which you have no knowledge of which schema it derived from. In my case, I had a folder full of schemas which I had to validate the incoming xml against.
+To achieve this,I came up with the following solution.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="schemaless schema validation in TIBCO BusinessWorks">
+<meta property="og:description" content="Usually, schema validation in BusinessWorks is done pretty straight forward. You get an xml, known the schema and just run a ParseXml activity. The problem becomes more complicated if you have to validate a xml which you have no knowledge of which schema it derived from. In my case, I had a folder full of schemas which I had to validate the incoming xml against.
+To achieve this,I came up with the following solution.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2016/06/17/schemaless-schema-validation-in-tibco-businessworks/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">schemaless schema validation in TIBCO BusinessWorks</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2016-06-17" itemprop="datePublished">Fri, Jun 17, 2016</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>Usually, schema validation in BusinessWorks is done pretty straight forward. You get an xml, known the schema and just run a ParseXml activity. The problem becomes more complicated if you have to validate a xml which you have no knowledge of which schema it derived from. In my case, I had a folder full of schemas which I had to validate the incoming xml against.</p>
+<p>To achieve this,I came up with the following solution. This way, the java activity validates against any in the project registered schema.
+<img src="/assets/validateXsd.png" alt="xsd validation process"></p>
+<p>content of the java code activity:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//get the default tibco parser
+</span><span style="color:#75715e"></span><span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">datamodel</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">.</span><span style="color:#75af00">DefaultXiParser</span> <span style="color:#111">parser</span> <span style="color:#f92672">=</span>
+    <span style="color:#00a8c8">new</span> <span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">datamodel</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">.</span><span style="color:#75af00">DefaultXiParser</span><span style="color:#f92672">();</span>
+<span style="color:#75715e">//transform string into a xml inputsource
+</span><span style="color:#75715e"></span><span style="color:#111">org</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">sax</span><span style="color:#f92672">.</span><span style="color:#75af00">InputSource</span> <span style="color:#111">inputsource</span> <span style="color:#f92672">=</span>
+    <span style="color:#00a8c8">new</span> <span style="color:#111">org</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">sax</span><span style="color:#f92672">.</span><span style="color:#75af00">InputSource</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">StringReader</span><span style="color:#f92672">(</span><span style="color:#111">xml</span><span style="color:#f92672">));</span>
+<span style="color:#75715e">//parse the xml with the Tibco RepoAgent as schema provider
+</span><span style="color:#75715e">//valide against any matching schema that exists within the project
+</span><span style="color:#75715e"></span><span style="color:#111">parser</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">(</span> <span style="color:#111">inputsource</span><span style="color:#f92672">,</span>
+  <span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">pe</span><span style="color:#f92672">.</span><span style="color:#75af00">core</span><span style="color:#f92672">.</span><span style="color:#75af00">Engine</span><span style="color:#f92672">.</span><span style="color:#75af00">getRepoAgent</span><span style="color:#f92672">().</span><span style="color:#75af00">getSmNamespaceProvider</span><span style="color:#f92672">());</span>
+</code></pre></div>
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/tibco/">tibco</a>, 
+                <a href="/tags/businessworks/">businessworks</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

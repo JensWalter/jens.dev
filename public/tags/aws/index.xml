@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aws on My personal blog</title>
+    <link>/tags/aws/</link>
+    <description>Recent content in aws on My personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 16 Dec 2015 11:53:54 +0200</lastBuildDate><atom:link href="/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>the serverless API</title>
+      <link>/2015/12/16/the-serverless-api/</link>
+      <pubDate>Wed, 16 Dec 2015 11:53:54 +0200</pubDate>
+      
+      <guid>/2015/12/16/the-serverless-api/</guid>
+      <description>Building an API does come with a lot of different facets to consider. One of the greater ones is, how to run all this. Building an API implementation is a rather easy Task, most developers today have some experience with connecting with API and already had their point of contact with various technologies to fulfill this task.
+A much greater pain point comes in if you start to think about, how to host this implementation and make it secure.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>handling a few thousand simultaneous connections in TIBCO BusinessWorks &middot; </title>
+        <meta name="description" content="Scaling with TIBCO BusinessWorks can sometimes be a bit tricky. Recently I began testing some scenarios how to scale a Webservice a bit larger. The first source of information was of course the official documentation and to look at the proposed best practice values for such an engine.
+To start small, I tried a HTTP Receiver with a 32bit JVM runtime. I set the heap to the maximum amount possible (something about 1.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="handling a few thousand simultaneous connections in TIBCO BusinessWorks">
+<meta property="og:description" content="Scaling with TIBCO BusinessWorks can sometimes be a bit tricky. Recently I began testing some scenarios how to scale a Webservice a bit larger. The first source of information was of course the official documentation and to look at the proposed best practice values for such an engine.
+To start small, I tried a HTTP Receiver with a 32bit JVM runtime. I set the heap to the maximum amount possible (something about 1.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">handling a few thousand simultaneous connections in TIBCO BusinessWorks</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2009-12-08" itemprop="datePublished">Tue, Dec 8, 2009</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>Scaling with TIBCO BusinessWorks can sometimes be a bit tricky. Recently I began testing some scenarios how to scale a Webservice a bit larger. The first source of information was of course the official documentation and to look at the proposed best practice values for such an engine.</p>
+<p>To start small, I tried a HTTP Receiver with a 32bit JVM runtime. I set the heap to the maximum amount possible (something about 1.7gig) and tried how many connections I could handle with that. After a few hundred (300-400) the engine always ran into an Out-Of-Memory Exception. From that point the engine was often not recoverable and had to be killed.</p>
+<p>After that I tried my luck with an 64bit JVM. Theoretically, with more RAM more connections should be possible, so lets go for it.</p>
+<p>I increased the heap size to about 4gig. With that value, the engine actually consumed something about 6gig of memory (I only had 8gig on my test machine). Running the same test as before the connection count increased linearly. That was something I didn’t expect. First of I expected the Memory consumption should lower on the amount of connections (because of the more reusable objects) and an increase in CPU load because of the more and more complicated handling of the larger heap on the JVM end.</p>
+<p>Despite that I came close to handle about one thousand connections. This seems pretty good but was not enough for what I had in mind. The only possibility I saw at that point was to increase the Memory further and further to get more connections running. A second concern which came to my mind was the thread handling. In a default Tomcat installation ever connection gets its own thread. This does consume a lot of memory but also increases the thread count of the server engine dramatically.</p>
+<p>With that in mind I remembered something I read about Tomcat 6 a while ago. For the purpose of handling a lot of simultaneous and enduring Javascript requests Tomcat introduced a new kind of connector engine which uses the Java NIO Framework. To explain this a little, Sun introduced this framework in Java 1.4 to handle IO over a single thread mechanism and use mostly OS provided functions for memory allocation and interaction. So in theory this could be the ideal framework for handling a lot of network IO. Tomcat introduced this feature with the c10k problem specifically in mind. So I began searching around how I could get a similar behavior out of BusinessWorks.</p>
+<p>What I didn’t know at that point was, that TIBCO already introduced this feature into BusinessWorks with version 5.7. You can switch the HTTP connector engine with some parameter in the HTTP Connection resource.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>So I changed the connector engine and restarted the test. This time I started small. I set the heap to 512MB and limited the maxProcessor to 500. What I then saw was unexpected. The engine filled up right to the ten thousand requests I send. There occurred no Out-Of-Memory at all. What was also interesting was, that the engine held 10k connections despite the maxprocessors was set to 500.</p>
+<p>So to conclude the result, the new connector is quite impressive when you need to handle a lot of simultaneous connection and have not a lot of memory to spare. On the other hand, when you use it, you loose some of the TIBCO integrated features to limit your load. Further to that, the TIBCO documentation states that due to the single thread architecture you increase latency. So as always there is a tradeoff.</p>
+<p>One final side note. I had some issues with the BusinessWorks 5.7.1 engine so I upgraded it to 5.7.2. Than it ran without a glitch.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/businessworks/">BusinessWorks</a>, 
+                <a href="/tags/tibco/">TIBCO</a>, 
+                <a href="/tags/tomcat/">tomcat</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

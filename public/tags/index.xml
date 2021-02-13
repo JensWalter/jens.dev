@@ -26,56 +26,641 @@
     </item>
     
     <item>
-      <title>development</title>
-      <link>/tags/development/</link>
-      <pubDate>Wed, 02 Apr 2014 02:13:50 +0000</pubDate>
+      <title>kubernetes</title>
+      <link>/tags/kubernetes/</link>
+      <pubDate>Tue, 15 Sep 2020 10:08:54 +0200</pubDate>
       
-      <guid>/tags/development/</guid>
+      <guid>/tags/kubernetes/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>go</title>
-      <link>/tags/go/</link>
-      <pubDate>Wed, 02 Apr 2014 02:13:50 +0000</pubDate>
+      <title>kubernetes-operator</title>
+      <link>/tags/kubernetes-operator/</link>
+      <pubDate>Tue, 15 Sep 2020 10:08:54 +0200</pubDate>
       
-      <guid>/tags/go/</guid>
+      <guid>/tags/kubernetes-operator/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>golang</title>
-      <link>/tags/golang/</link>
-      <pubDate>Wed, 02 Apr 2014 02:13:50 +0000</pubDate>
+      <title>BusinessWorks</title>
+      <link>/tags/businessworks/</link>
+      <pubDate>Sun, 09 Aug 2020 10:08:54 +0000</pubDate>
       
-      <guid>/tags/golang/</guid>
+      <guid>/tags/businessworks/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>templates</title>
-      <link>/tags/templates/</link>
-      <pubDate>Wed, 02 Apr 2014 02:13:50 +0000</pubDate>
+      <title>container</title>
+      <link>/tags/container/</link>
+      <pubDate>Sun, 09 Aug 2020 10:08:54 +0000</pubDate>
       
-      <guid>/tags/templates/</guid>
+      <guid>/tags/container/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>themes</title>
-      <link>/tags/themes/</link>
-      <pubDate>Wed, 02 Apr 2014 02:13:50 +0000</pubDate>
+      <title>docker</title>
+      <link>/tags/docker/</link>
+      <pubDate>Sun, 09 Aug 2020 10:08:54 +0000</pubDate>
       
-      <guid>/tags/themes/</guid>
+      <guid>/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>TIBCO</title>
+      <link>/tags/tibco/</link>
+      <pubDate>Sun, 09 Aug 2020 10:08:54 +0000</pubDate>
       
-      <guid>/tags/hugo/</guid>
+      <guid>/tags/tibco/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apigateway</title>
+      <link>/tags/apigateway/</link>
+      <pubDate>Fri, 12 Apr 2019 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/apigateway/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lambda</title>
+      <link>/tags/lambda/</link>
+      <pubDate>Fri, 12 Apr 2019 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/lambda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloudformation</title>
+      <link>/tags/cloudformation/</link>
+      <pubDate>Wed, 10 Jan 2018 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/cloudformation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dynamodb</title>
+      <link>/tags/dynamodb/</link>
+      <pubDate>Wed, 10 Jan 2018 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/dynamodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sns</title>
+      <link>/tags/sns/</link>
+      <pubDate>Wed, 13 Sep 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/sns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>firehose</title>
+      <link>/tags/firehose/</link>
+      <pubDate>Thu, 24 Aug 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/firehose/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nodejs</title>
+      <link>/tags/nodejs/</link>
+      <pubDate>Sun, 18 Jun 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/nodejs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTML</title>
+      <link>/tags/html/</link>
+      <pubDate>Thu, 15 Jun 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/html/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javascript</title>
+      <link>/tags/javascript/</link>
+      <pubDate>Thu, 15 Jun 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webcomponents</title>
+      <link>/tags/webcomponents/</link>
+      <pubDate>Thu, 15 Jun 2017 10:08:54 +0200</pubDate>
+      
+      <guid>/tags/webcomponents/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloudfront</title>
+      <link>/tags/cloudfront/</link>
+      <pubDate>Tue, 09 May 2017 13:08:54 +0200</pubDate>
+      
+      <guid>/tags/cloudfront/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>athena</title>
+      <link>/tags/athena/</link>
+      <pubDate>Mon, 27 Mar 2017 12:52:54 +0200</pubDate>
+      
+      <guid>/tags/athena/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongodb</title>
+      <link>/tags/mongodb/</link>
+      <pubDate>Mon, 27 Mar 2017 12:52:54 +0200</pubDate>
+      
+      <guid>/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>serverless</title>
+      <link>/tags/serverless/</link>
+      <pubDate>Tue, 28 Feb 2017 16:52:54 +0200</pubDate>
+      
+      <guid>/tags/serverless/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nifi</title>
+      <link>/tags/nifi/</link>
+      <pubDate>Fri, 16 Dec 2016 14:36:54 +0200</pubDate>
+      
+      <guid>/tags/nifi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bash</title>
+      <link>/tags/bash/</link>
+      <pubDate>Wed, 23 Nov 2016 20:18:54 +0200</pubDate>
+      
+      <guid>/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>/tags/java/</link>
+      <pubDate>Wed, 23 Nov 2016 20:18:54 +0200</pubDate>
+      
+      <guid>/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cognito</title>
+      <link>/tags/cognito/</link>
+      <pubDate>Fri, 11 Nov 2016 19:49:54 +0200</pubDate>
+      
+      <guid>/tags/cognito/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>/tags/nginx/</link>
+      <pubDate>Sun, 16 Oct 2016 15:49:54 +0200</pubDate>
+      
+      <guid>/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>njams</title>
+      <link>/tags/njams/</link>
+      <pubDate>Thu, 21 Jul 2016 11:15:54 +0200</pubDate>
+      
+      <guid>/tags/njams/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EMS</title>
+      <link>/tags/ems/</link>
+      <pubDate>Sun, 26 Jun 2016 21:57:54 +0200</pubDate>
+      
+      <guid>/tags/ems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Oracle</title>
+      <link>/tags/oracle/</link>
+      <pubDate>Tue, 21 Jun 2016 19:54:54 +0200</pubDate>
+      
+      <guid>/tags/oracle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>api</title>
+      <link>/tags/api/</link>
+      <pubDate>Thu, 10 Mar 2016 20:52:54 +0200</pubDate>
+      
+      <guid>/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>/tags/github/</link>
+      <pubDate>Thu, 10 Mar 2016 20:52:54 +0200</pubDate>
+      
+      <guid>/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bondoraAPI</title>
+      <link>/tags/bondoraapi/</link>
+      <pubDate>Tue, 08 Mar 2016 13:38:54 +0200</pubDate>
+      
+      <guid>/tags/bondoraapi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>oauth</title>
+      <link>/tags/oauth/</link>
+      <pubDate>Tue, 08 Mar 2016 13:38:54 +0200</pubDate>
+      
+      <guid>/tags/oauth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>api101</title>
+      <link>/tags/api101/</link>
+      <pubDate>Mon, 21 Dec 2015 15:02:54 +0200</pubDate>
+      
+      <guid>/tags/api101/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mintosAPI</title>
+      <link>/tags/mintosapi/</link>
+      <pubDate>Mon, 21 Dec 2015 15:02:54 +0200</pubDate>
+      
+      <guid>/tags/mintosapi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>amazon</title>
+      <link>/tags/amazon/</link>
+      <pubDate>Wed, 16 Dec 2015 11:53:54 +0200</pubDate>
+      
+      <guid>/tags/amazon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>api-gateway</title>
+      <link>/tags/api-gateway/</link>
+      <pubDate>Wed, 16 Dec 2015 11:53:54 +0200</pubDate>
+      
+      <guid>/tags/api-gateway/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws</title>
+      <link>/tags/aws/</link>
+      <pubDate>Wed, 16 Dec 2015 11:53:54 +0200</pubDate>
+      
+      <guid>/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ant</title>
+      <link>/tags/ant/</link>
+      <pubDate>Sun, 04 Oct 2015 18:50:54 +0200</pubDate>
+      
+      <guid>/tags/ant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mule</title>
+      <link>/tags/mule/</link>
+      <pubDate>Fri, 04 Sep 2015 14:34:54 +0000</pubDate>
+      
+      <guid>/tags/mule/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>uuid</title>
+      <link>/tags/uuid/</link>
+      <pubDate>Tue, 04 Aug 2015 16:21:54 +0200</pubDate>
+      
+      <guid>/tags/uuid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Thu, 16 Jul 2015 16:34:54 +0000</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jjs</title>
+      <link>/tags/jjs/</link>
+      <pubDate>Sun, 28 Jun 2015 15:48:54 +0200</pubDate>
+      
+      <guid>/tags/jjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nashorn</title>
+      <link>/tags/nashorn/</link>
+      <pubDate>Sun, 28 Jun 2015 15:48:54 +0200</pubDate>
+      
+      <guid>/tags/nashorn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apache</title>
+      <link>/tags/apache/</link>
+      <pubDate>Wed, 17 Jun 2015 12:25:20 +0200</pubDate>
+      
+      <guid>/tags/apache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sql</title>
+      <link>/tags/sql/</link>
+      <pubDate>Sun, 14 Jun 2015 18:34:23 +0200</pubDate>
+      
+      <guid>/tags/sql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>celero.io</title>
+      <link>/tags/celero.io/</link>
+      <pubDate>Fri, 03 Jan 2014 23:31:49 +0000</pubDate>
+      
+      <guid>/tags/celero.io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BusinessEvents</title>
+      <link>/tags/businessevents/</link>
+      <pubDate>Sat, 23 Oct 2010 20:43:18 +0000</pubDate>
+      
+      <guid>/tags/businessevents/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloudtheweb.com</title>
+      <link>/tags/cloudtheweb.com/</link>
+      <pubDate>Mon, 04 Jan 2010 19:57:00 +0000</pubDate>
+      
+      <guid>/tags/cloudtheweb.com/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>google analytics</title>
+      <link>/tags/google-analytics/</link>
+      <pubDate>Mon, 04 Jan 2010 19:57:00 +0000</pubDate>
+      
+      <guid>/tags/google-analytics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tomcat</title>
+      <link>/tags/tomcat/</link>
+      <pubDate>Tue, 08 Dec 2009 17:22:16 +0000</pubDate>
+      
+      <guid>/tags/tomcat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>designer</title>
+      <link>/tags/designer/</link>
+      <pubDate>Tue, 13 Oct 2009 18:52:38 +0000</pubDate>
+      
+      <guid>/tags/designer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>performance</title>
+      <link>/tags/performance/</link>
+      <pubDate>Wed, 23 Sep 2009 15:54:14 +0000</pubDate>
+      
+      <guid>/tags/performance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>/tags/postgres/</link>
+      <pubDate>Wed, 23 Sep 2009 15:54:14 +0000</pubDate>
+      
+      <guid>/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shell</title>
+      <link>/tags/shell/</link>
+      <pubDate>Sat, 05 Sep 2009 19:03:06 +0000</pubDate>
+      
+      <guid>/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shell-tools.net</title>
+      <link>/tags/shell-tools.net/</link>
+      <pubDate>Fri, 31 Jul 2009 23:10:27 +0000</pubDate>
+      
+      <guid>/tags/shell-tools.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>64-bit</title>
+      <link>/tags/64-bit/</link>
+      <pubDate>Wed, 15 Jul 2009 16:06:15 +0000</pubDate>
+      
+      <guid>/tags/64-bit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>XSLT</title>
+      <link>/tags/xslt/</link>
+      <pubDate>Fri, 05 Jun 2009 19:05:40 +0000</pubDate>
+      
+      <guid>/tags/xslt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gnome 3.0</title>
+      <link>/tags/gnome-3.0/</link>
+      <pubDate>Fri, 08 May 2009 14:10:59 +0000</pubDate>
+      
+      <guid>/tags/gnome-3.0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gnomeshell</title>
+      <link>/tags/gnomeshell/</link>
+      <pubDate>Fri, 08 May 2009 14:10:59 +0000</pubDate>
+      
+      <guid>/tags/gnomeshell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gtk</title>
+      <link>/tags/gtk/</link>
+      <pubDate>Fri, 08 May 2009 14:10:59 +0000</pubDate>
+      
+      <guid>/tags/gtk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>streaming api</title>
+      <link>/tags/streaming-api/</link>
+      <pubDate>Thu, 09 Apr 2009 00:26:32 +0000</pubDate>
+      
+      <guid>/tags/streaming-api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yahoo finance</title>
+      <link>/tags/yahoo-finance/</link>
+      <pubDate>Thu, 09 Apr 2009 00:26:32 +0000</pubDate>
+      
+      <guid>/tags/yahoo-finance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TRA</title>
+      <link>/tags/tra/</link>
+      <pubDate>Tue, 24 Feb 2009 00:59:40 +0000</pubDate>
+      
+      <guid>/tags/tra/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dblink</title>
+      <link>/tags/dblink/</link>
+      <pubDate>Fri, 06 Feb 2009 15:32:40 +0000</pubDate>
+      
+      <guid>/tags/dblink/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>csharp</title>
+      <link>/tags/csharp/</link>
+      <pubDate>Sun, 01 Feb 2009 02:02:22 +0000</pubDate>
+      
+      <guid>/tags/csharp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ajax</title>
+      <link>/tags/ajax/</link>
+      <pubDate>Tue, 02 Dec 2008 12:23:33 +0000</pubDate>
+      
+      <guid>/tags/ajax/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wget</title>
+      <link>/tags/wget/</link>
+      <pubDate>Tue, 02 Dec 2008 12:23:33 +0000</pubDate>
+      
+      <guid>/tags/wget/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>/tags/mysql/</link>
+      <pubDate>Fri, 03 Oct 2008 12:13:15 +0000</pubDate>
+      
+      <guid>/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>random timestamp</title>
+      <link>/tags/random-timestamp/</link>
+      <pubDate>Fri, 03 Oct 2008 12:13:15 +0000</pubDate>
+      
+      <guid>/tags/random-timestamp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>imap</title>
+      <link>/tags/imap/</link>
+      <pubDate>Mon, 22 Sep 2008 21:06:12 +0000</pubDate>
+      
+      <guid>/tags/imap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>/tags/ssh/</link>
+      <pubDate>Mon, 22 Sep 2008 21:06:12 +0000</pubDate>
+      
+      <guid>/tags/ssh/</guid>
       <description></description>
     </item>
     
