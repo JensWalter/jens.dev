@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>How to access Azure Key Vault in Rust &middot; </title>
+        <meta name="description" content="Introduction Since the Azure SDK for Rust is still not published on crates.io, here is an example how to use the current git repo for accessing an Azure Key Vault.
+Cargo.toml [package] name = &#34;keyvault-sample&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; [dependencies] azure_key_vault = { git = &#34;https://github.com/Azure/azure-sdk-for-rust.git&#34; } azure_identity = { git = &#34;https://github.com/Azure/azure-sdk-for-rust.git&#34; } tokio = { version = &#34;1&#34;, features = [&#34;full&#34;] } main.rs use azure_identity::token_credentials::ClientSecretCredential; use azure_identity::token_credentials::TokenCredentialOptions; use azure_key_vault::KeyVaultClient; #[tokio::main] async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; { //azure credentials  let client_id = &#34;11111111-1111-1111-1111-111111111111&#34;.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="How to access Azure Key Vault in Rust">
+<meta property="og:description" content="Introduction Since the Azure SDK for Rust is still not published on crates.io, here is an example how to use the current git repo for accessing an Azure Key Vault.
+Cargo.toml [package] name = &#34;keyvault-sample&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; [dependencies] azure_key_vault = { git = &#34;https://github.com/Azure/azure-sdk-for-rust.git&#34; } azure_identity = { git = &#34;https://github.com/Azure/azure-sdk-for-rust.git&#34; } tokio = { version = &#34;1&#34;, features = [&#34;full&#34;] } main.rs use azure_identity::token_credentials::ClientSecretCredential; use azure_identity::token_credentials::TokenCredentialOptions; use azure_key_vault::KeyVaultClient; #[tokio::main] async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; { //azure credentials  let client_id = &#34;11111111-1111-1111-1111-111111111111&#34;.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2021/02/13/how-to-access-azure-key-vault-in-rust/">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'XXX', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/220219/jens-walter" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">How to access Azure Key Vault in Rust</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2021-02-13" itemprop="datePublished">02 Feb 130</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <h2 id="introduction">Introduction</h2>
+<p>Since the Azure SDK for Rust is still not published on <a href="https://crates.io/">crates.io</a>, here is an example how to use the current git repo for accessing an Azure Key Vault.</p>
+<h2 id="cargotoml">Cargo.toml</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#111">[</span><span style="color:#75af00">package</span><span style="color:#111">]</span>
+<span style="color:#75af00">name</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;keyvault-sample&#34;</span>
+<span style="color:#75af00">version</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;0.1.0&#34;</span>
+<span style="color:#75af00">edition</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;2018&#34;</span>
+
+<span style="color:#111">[</span><span style="color:#75af00">dependencies</span><span style="color:#111">]</span>
+<span style="color:#75af00">azure_key_vault</span> <span style="color:#111">=</span> <span style="color:#111">{</span> <span style="color:#75af00">git</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;https://github.com/Azure/azure-sdk-for-rust.git&#34;</span> <span style="color:#111">}</span>
+<span style="color:#75af00">azure_identity</span> <span style="color:#111">=</span> <span style="color:#111">{</span> <span style="color:#75af00">git</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;https://github.com/Azure/azure-sdk-for-rust.git&#34;</span> <span style="color:#111">}</span>
+<span style="color:#75af00">tokio</span> <span style="color:#111">=</span> <span style="color:#111">{</span> <span style="color:#75af00">version</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;1&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">features</span> <span style="color:#111">=</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;full&#34;</span><span style="color:#111">]</span> <span style="color:#111">}</span>
+</code></pre></div><h2 id="mainrs">main.rs</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a8c8">use</span> <span style="color:#111">azure_identity</span>::<span style="color:#111">token_credentials</span>::<span style="color:#111">ClientSecretCredential</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">use</span> <span style="color:#111">azure_identity</span>::<span style="color:#111">token_credentials</span>::<span style="color:#111">TokenCredentialOptions</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">use</span> <span style="color:#111">azure_key_vault</span>::<span style="color:#111">KeyVaultClient</span><span style="color:#111">;</span>
+
+<span style="color:#75715e">#[tokio::main]</span>
+<span style="color:#00a8c8">async</span> <span style="color:#00a8c8">fn</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> -&gt; <span style="color:#111">Result</span><span style="color:#f92672">&lt;</span><span style="color:#111">(),</span> <span style="color:#111">Box</span><span style="color:#f92672">&lt;</span><span style="color:#111">dyn</span> <span style="color:#111">std</span>::<span style="color:#111">error</span>::<span style="color:#111">Error</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#111">{</span>
+  <span style="color:#75715e">//azure credentials
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">let</span> <span style="color:#111">client_id</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;11111111-1111-1111-1111-111111111111&#34;</span><span style="color:#111">.</span><span style="color:#111">to_string</span><span style="color:#111">();</span>
+  <span style="color:#00a8c8">let</span> <span style="color:#111">client_secret</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;super_secret_key&#34;</span><span style="color:#111">.</span><span style="color:#111">to_string</span><span style="color:#111">();</span>
+  <span style="color:#00a8c8">let</span> <span style="color:#111">tenant_id</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;11111111-1111-1111-1111-111111111111&#34;</span><span style="color:#111">.</span><span style="color:#111">to_string</span><span style="color:#111">();</span>
+  <span style="color:#75715e">//keyvault data
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">let</span> <span style="color:#111">keyvault_name</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;my-personal-key-vault&#34;</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">let</span> <span style="color:#111">secret_name</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;sb-connection-string&#34;</span><span style="color:#111">;</span>
+
+  <span style="color:#00a8c8">let</span> <span style="color:#111">creds</span> <span style="color:#f92672">=</span> <span style="color:#111">ClientSecretCredential</span>::<span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#111">tenant_id</span><span style="color:#111">,</span><span style="color:#111">client_id</span><span style="color:#111">,</span><span style="color:#111">client_secret</span><span style="color:#111">,</span>
+    <span style="color:#111">TokenCredentialOptions</span>::<span style="color:#111">default</span><span style="color:#111">(),</span>
+  <span style="color:#111">);</span>
+  <span style="color:#00a8c8">let</span> <span style="color:#00a8c8">mut</span> <span style="color:#111">client</span> <span style="color:#f92672">=</span> <span style="color:#111">KeyVaultClient</span>::<span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">creds</span><span style="color:#111">,</span> <span style="color:#111">keyvault_name</span><span style="color:#111">);</span>
+
+  <span style="color:#00a8c8">let</span> <span style="color:#111">secret</span> <span style="color:#f92672">=</span> <span style="color:#111">client</span><span style="color:#111">.</span><span style="color:#111">get_secret</span><span style="color:#111">(</span><span style="color:#111">secret_name</span><span style="color:#111">).</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span><span style="color:#111">;</span>
+  <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;{}&#34;</span><span style="color:#111">,</span><span style="color:#111">secret</span><span style="color:#111">.</span><span style="color:#111">value</span><span style="color:#111">());</span>
+  <span style="color:#111">Ok</span><span style="color:#111">(())</span>
+<span style="color:#111">}</span>
+</code></pre></div>
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/azure/">azure</a>, 
+                <a href="/tags/rust/">rust</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,38 @@
+baseurl = "/"
+title = "My personal blog"
+theme = "ghostwriter"
+languageCode = "en-us"
+googleAnalytics = "XXX"
+
+[privacy.googleAnalytics]
+anonymizeIP = true
+respectDoNotTrack = true
+useSessionStorage = false
+
+[taxonomies]
+tag = "tags"
+
+[Params]
+    mainSections = ["post"]
+    intro = true
+    headline = ""
+    description = ""
+    github = "https://github.com/JensWalter"
+    twitter = "https://twitter.com/jens_walter"
+    stackoverflow = "https://stackoverflow.com/users/220219/jens-walter"
+    email = "jens@apimeister.com"
+    opengraph = true
+    rss = true
+    dateFormat = "01 Feb 20"
+
+[Permalinks]
+  post = "/:year/:month/:day/:filename/"
+
+[markup.highlight]
+  style = "monokailight"
+
+[menu]
+main = [ 
+{ name= "Blog",url= "/", weight= 1},
+{ name= "Projects", url= "/project/", weight= 2}
+]
