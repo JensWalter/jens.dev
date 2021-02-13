@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://jens.dev/"
 title = "My personal blog"
 theme = "ghostwriter"
 languageCode = "en-us"

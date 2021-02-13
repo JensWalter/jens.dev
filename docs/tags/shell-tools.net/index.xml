@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>shell-tools.net on My personal blog</title>
-    <link>/tags/shell-tools.net.html</link>
+    <link>https://jens.dev/tags/shell-tools.net.html</link>
     <description>Recent content in shell-tools.net on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Jul 2009 23:10:27 +0000</lastBuildDate><atom:link href="/tags/shell-tools.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 31 Jul 2009 23:10:27 +0000</lastBuildDate><atom:link href="https://jens.dev/tags/shell-tools.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>shell-tools.net version2</title>
-      <link>/2009/07/31/shell-tools-net-version2.html</link>
+      <link>https://jens.dev/2009/07/31/shell-tools-net-version2.html</link>
       <pubDate>Fri, 31 Jul 2009 23:10:27 +0000</pubDate>
       
-      <guid>/2009/07/31/shell-tools-net-version2.html</guid>
+      <guid>https://jens.dev/2009/07/31/shell-tools-net-version2.html</guid>
       <description>After nearly a full year, I finally got the time to rework my existing shell-tools.net site. The changes are rather small, because I think the site already works well, so why destroy a working site. So here is what I have done.
 I have added some new features like evaluating XPaths, pretty print JSON and transform XML files into JSON. Further to that I modified the css slightly so that from now on the current location will be highlighted in the navigation.</description>
     </item>

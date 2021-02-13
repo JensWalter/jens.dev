@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>cognito on My personal blog</title>
-    <link>/tags/cognito.html</link>
+    <link>https://jens.dev/tags/cognito.html</link>
     <description>Recent content in cognito on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Nov 2016 19:49:54 +0200</lastBuildDate><atom:link href="/tags/cognito/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Nov 2016 19:49:54 +0200</lastBuildDate><atom:link href="https://jens.dev/tags/cognito/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>auto-confirming a newly created Cognito user</title>
-      <link>/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</link>
+      <link>https://jens.dev/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</link>
       <pubDate>Fri, 11 Nov 2016 19:49:54 +0200</pubDate>
       
-      <guid>/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</guid>
+      <guid>https://jens.dev/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</guid>
       <description>In Cognito all registered users need to be confirmed before they can interact with other services.
 Out-of-the-box Amazon supports confirmation by
  email SMS web UI lambda  To automate this process, confirming with a Lambda function is the only way to trigger the confirmation process. So I created the following lambda to confirm all created users.

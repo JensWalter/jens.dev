@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nifi on My personal blog</title>
-    <link>/tags/nifi.html</link>
+    <link>https://jens.dev/tags/nifi.html</link>
     <description>Recent content in nifi on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Dec 2016 14:36:54 +0200</lastBuildDate><atom:link href="/tags/nifi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Dec 2016 14:36:54 +0200</lastBuildDate><atom:link href="https://jens.dev/tags/nifi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>converting CSV to ORC with Apache NiFi</title>
-      <link>/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</link>
+      <link>https://jens.dev/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</link>
       <pubDate>Fri, 16 Dec 2016 14:36:54 +0200</pubDate>
       
-      <guid>/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</guid>
+      <guid>https://jens.dev/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</guid>
       <description>Converting a CSV to ORC files usually takes a Hadoop cluster to perform the task. Since I only wanted to convert files for later uploading into an existing cluster, I tried some different approach. Searching for some tool to do the task, I arrived at Apache NiFi.
 Here is the flow I used to transform my data.  step 1 - list all exiting CSV files step 2 - read each file into memory step 3 - convert content into AVRO  sadly AVRO needs a schema of you data to do the actual conversion.</description>
     </item>

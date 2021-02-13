@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mintosAPI on My personal blog</title>
-    <link>/tags/mintosapi.html</link>
+    <link>https://jens.dev/tags/mintosapi.html</link>
     <description>Recent content in mintosAPI on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Dec 2015 15:02:54 +0200</lastBuildDate><atom:link href="/tags/mintosapi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Dec 2015 15:02:54 +0200</lastBuildDate><atom:link href="https://jens.dev/tags/mintosapi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>building an API on top of another page</title>
-      <link>/2015/12/21/building-an-api-on-top-of-another-page.html</link>
+      <link>https://jens.dev/2015/12/21/building-an-api-on-top-of-another-page.html</link>
       <pubDate>Mon, 21 Dec 2015 15:02:54 +0200</pubDate>
       
-      <guid>/2015/12/21/building-an-api-on-top-of-another-page.html</guid>
+      <guid>https://jens.dev/2015/12/21/building-an-api-on-top-of-another-page.html</guid>
       <description>In my last post &amp;ldquo;the serverless API&amp;rdquo; I explained how an API could be build without any infrastructure to begin with. To prove my point I started building an API on top of an existing homepage.
 Mintos is a service I use for investing into p2p loans. If you want further information about Mintos head over to their FAQ section.
 overview

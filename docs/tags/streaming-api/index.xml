@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>streaming api on My personal blog</title>
-    <link>/tags/streaming-api.html</link>
+    <link>https://jens.dev/tags/streaming-api.html</link>
     <description>Recent content in streaming api on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Apr 2009 00:26:32 +0000</lastBuildDate><atom:link href="/tags/streaming-api/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Apr 2009 00:26:32 +0000</lastBuildDate><atom:link href="https://jens.dev/tags/streaming-api/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>what&amp;#8217;s the sitch</title>
-      <link>/2009/04/09/whats-the-sitch.html</link>
+      <link>https://jens.dev/2009/04/09/whats-the-sitch.html</link>
       <pubDate>Thu, 09 Apr 2009 00:26:32 +0000</pubDate>
       
-      <guid>/2009/04/09/whats-the-sitch.html</guid>
+      <guid>https://jens.dev/2009/04/09/whats-the-sitch.html</guid>
       <description>As I have a lot to do right am not really coming closer to my goal to write a general purpose app which can pull data from the yahoo streaming server. So I decided to post a few facts about the yahoo api. I hope this helps someone developing his app. So lets see what we have. First an explanation of these cryptic symbols:
  a00: ask price
   b00: bid price</description>
@@ -20,10 +20,10 @@
     
     <item>
       <title>bringing the yahoo finance stream to the shell</title>
-      <link>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</link>
+      <link>https://jens.dev/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</link>
       <pubDate>Tue, 03 Feb 2009 16:17:06 +0000</pubDate>
       
-      <guid>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</guid>
+      <guid>https://jens.dev/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</guid>
       <description>A little while ago a posted a primitive way to get to yahoo finance streaming data. As you can guess this was just the beginning. To raise the bar I tried to parse the received data and bring it to the shell. To get this done I needed several tools.
   curl – to send and receive the http request
   transform – a primitive tool to do streaming operations within one line</description>
@@ -31,10 +31,10 @@
     
     <item>
       <title>use yahoo finance streaming api</title>
-      <link>/2008/12/02/use-yahoo-finance-streaming-api.html</link>
+      <link>https://jens.dev/2008/12/02/use-yahoo-finance-streaming-api.html</link>
       <pubDate>Tue, 02 Dec 2008 12:23:33 +0000</pubDate>
       
-      <guid>/2008/12/02/use-yahoo-finance-streaming-api.html</guid>
+      <guid>https://jens.dev/2008/12/02/use-yahoo-finance-streaming-api.html</guid>
       <description>In the past I used this ruby script to poll for the current stock data and put it into a database to create a little history.
 Recently I saw a new feature on the yahoo finance homepage. Now it is possible to enable a streaming option and then you get a live update on certain values via AJAX. So I thought why not get this feature and let yahoo stream the content to the client instead of polling the server from time to time.</description>
     </item>

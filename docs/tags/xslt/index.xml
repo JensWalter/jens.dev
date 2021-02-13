@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>XSLT on My personal blog</title>
-    <link>/tags/xslt.html</link>
+    <link>https://jens.dev/tags/xslt.html</link>
     <description>Recent content in XSLT on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Jun 2009 19:05:40 +0000</lastBuildDate><atom:link href="/tags/xslt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Jun 2009 19:05:40 +0000</lastBuildDate><atom:link href="https://jens.dev/tags/xslt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>extracting information from websites through xslt</title>
-      <link>/2009/06/05/extracting-information-from-websites-through-xslt.html</link>
+      <link>https://jens.dev/2009/06/05/extracting-information-from-websites-through-xslt.html</link>
       <pubDate>Fri, 05 Jun 2009 19:05:40 +0000</pubDate>
       
-      <guid>/2009/06/05/extracting-information-from-websites-through-xslt.html</guid>
+      <guid>https://jens.dev/2009/06/05/extracting-information-from-websites-through-xslt.html</guid>
       <description>Today, most websites feature some kind of feed, so every user who wants to stay in touch, can follow new publications very easily. Some sites support RSS-feeds or mail notification. Although this is pretty common, there are still sites out there who doesn’t. For that purpose I tried to find some easy solution.
 First problem here is, how to get the information into some format usable. HTML is not meant for complex data mining operations.</description>
     </item>

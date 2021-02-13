@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>EMS on My personal blog</title>
-    <link>/tags/ems.html</link>
+    <link>https://jens.dev/tags/ems.html</link>
     <description>Recent content in EMS on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Jun 2016 21:57:54 +0200</lastBuildDate><atom:link href="/tags/ems/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Jun 2016 21:57:54 +0200</lastBuildDate><atom:link href="https://jens.dev/tags/ems/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>connecting nodejs to Tibco EMS</title>
-      <link>/2016/06/26/connecting-nodejs-to-tibco-ems.html</link>
+      <link>https://jens.dev/2016/06/26/connecting-nodejs-to-tibco-ems.html</link>
       <pubDate>Sun, 26 Jun 2016 21:57:54 +0200</pubDate>
       
-      <guid>/2016/06/26/connecting-nodejs-to-tibco-ems.html</guid>
+      <guid>https://jens.dev/2016/06/26/connecting-nodejs-to-tibco-ems.html</guid>
       <description>I recently started a new project to bring Tibco EMS connectivity to nodejs. It is still in a pretty early stage, so it is rather limited in its capabilities. A current version of the feature set will be maintained within github.
 What is working right now?
  send a text message to queue (request/reply and push) send a text message to topic (request/reply and push)  More is about to come in the future.</description>
@@ -20,10 +20,10 @@ What is working right now?
     
     <item>
       <title>getting monthly throughput stats of a TIBCO EMS instance</title>
-      <link>/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</link>
+      <link>https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</link>
       <pubDate>Thu, 25 Jun 2015 10:22:10 +0200</pubDate>
       
-      <guid>/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</guid>
+      <guid>https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</guid>
       <description>The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
  get message statistics reset stats to zero  get the stats as csv
 printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &amp;#39;NR&amp;gt;11&amp;#39; | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39; | grep -v &amp;#39;tcp://&amp;#39; | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
@@ -31,10 +31,10 @@ printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&a
     
     <item>
       <title>reset the TIBCO EMS statistics</title>
-      <link>/2015/06/24/reset-the-tibco-ems-statistics.html</link>
+      <link>https://jens.dev/2015/06/24/reset-the-tibco-ems-statistics.html</link>
       <pubDate>Wed, 24 Jun 2015 20:12:20 +0200</pubDate>
       
-      <guid>/2015/06/24/reset-the-tibco-ems-statistics.html</guid>
+      <guid>https://jens.dev/2015/06/24/reset-the-tibco-ems-statistics.html</guid>
       <description>resetting the TIBCO EMS statistics without restarting the server.
 before
 printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 TIBCO Enterprise Message Service Administration Tool. Copyright 2003-2013 by TIBCO Software Inc. All rights reserved. Version 8.0.0 V9 6/7/2013 Connected to: tcp://localhost:7222 Type &amp;#39;help&amp;#39; for commands help, &amp;#39;exit&amp;#39; to exit: tcp://localhost:7222&amp;gt; In-Total In-Rate Out-Total Out-Rate Queue Name Msgs Size Msgs Size Msgs Size Msgs Size &amp;lt;total&amp;gt; 701858 3.</description>
@@ -42,10 +42,10 @@ printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \  | ./tibemsadmin64 -ser
     
     <item>
       <title>Tibco EMS with database backend (postgresql)</title>
-      <link>/2008/11/16/tibco-ems-with-database-backend-postgresql.html</link>
+      <link>https://jens.dev/2008/11/16/tibco-ems-with-database-backend-postgresql.html</link>
       <pubDate>Sun, 16 Nov 2008 20:48:11 +0000</pubDate>
       
-      <guid>/2008/11/16/tibco-ems-with-database-backend-postgresql.html</guid>
+      <guid>https://jens.dev/2008/11/16/tibco-ems-with-database-backend-postgresql.html</guid>
       <description>I recently tried to build a JMS Server with database backend. The chosen product was the TIBCO EMS Server. The Server brings its own database support over hibernate.
 Unfortunately TIBCO supports only Oracle,Mysql and DB2 by default. Lucky me, I needed an installation for Postgres but this shouldn’t be a big deal, because hibernate supports postgres as well. You just have to modify the hibernate config.
 First you should install the EMS server and hibernate (version provided by Tibco).</description>

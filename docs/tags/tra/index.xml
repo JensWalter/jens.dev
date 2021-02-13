@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TRA on My personal blog</title>
-    <link>/tags/tra.html</link>
+    <link>https://jens.dev/tags/tra.html</link>
     <description>Recent content in TRA on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Feb 2009 00:59:40 +0000</lastBuildDate><atom:link href="/tags/tra/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Feb 2009 00:59:40 +0000</lastBuildDate><atom:link href="https://jens.dev/tags/tra/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>installing TIBCO TRA 5.6 on a debian 64bit</title>
-      <link>/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</link>
+      <link>https://jens.dev/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</link>
       <pubDate>Tue, 24 Feb 2009 00:59:40 +0000</pubDate>
       
-      <guid>/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</guid>
+      <guid>https://jens.dev/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</guid>
       <description>Recently I got a hardware upgrade so I could finally switch to a 64-bit environment. To fully use that machine I wanted to install TIBCO in 64-bit mode. After starting the installation I got this message:
  TIBINS202527: Error: ERROR: You are running a 64-bit product installer on a 32-bit system.
   This is not supported.

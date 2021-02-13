@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>sql on My personal blog</title>
-    <link>/tags/sql.html</link>
+    <link>https://jens.dev/tags/sql.html</link>
     <description>Recent content in sql on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Jun 2015 18:34:23 +0200</lastBuildDate><atom:link href="/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Jun 2015 18:34:23 +0200</lastBuildDate><atom:link href="https://jens.dev/tags/sql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>extract the UUIDv1 encapsulated timestamp within an oracle select</title>
-      <link>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</link>
+      <link>https://jens.dev/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</link>
       <pubDate>Sun, 14 Jun 2015 18:34:23 +0200</pubDate>
       
-      <guid>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</guid>
+      <guid>https://jens.dev/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</guid>
       <description>When you have a partioned table full of UUIDs but partitioned through timestamp, you need a way to translate the UUID back into a timestamp to match a partition where the key is stored. So here is my way of how to extract the timestamp out of an UUIDv1.
 select ts,to_timestamp(date &amp;#39;1970-01-01&amp;#39;+ (ts/(24*60*60))) from ( select trunc((to_number(substr(uuid,16,3)||&amp;#39;000000000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,10,4)||&amp;#39;00000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,0,8) ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) -122192928000000000)/10000000) ts from ( select &amp;#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&amp;#39; uuid from dual ) ) </description>
     </item>

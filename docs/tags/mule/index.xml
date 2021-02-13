@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mule on My personal blog</title>
-    <link>/tags/mule.html</link>
+    <link>https://jens.dev/tags/mule.html</link>
     <description>Recent content in mule on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Sep 2015 14:34:54 +0000</lastBuildDate><atom:link href="/tags/mule/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Sep 2015 14:34:54 +0000</lastBuildDate><atom:link href="https://jens.dev/tags/mule/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[mule] flowVars not visible in parent flow</title>
-      <link>/2015/09/04/mule-flowvars-not-visible-in-parent-flow.html</link>
+      <link>https://jens.dev/2015/09/04/mule-flowvars-not-visible-in-parent-flow.html</link>
       <pubDate>Fri, 04 Sep 2015 14:34:54 +0000</pubDate>
       
-      <guid>/2015/09/04/mule-flowvars-not-visible-in-parent-flow.html</guid>
+      <guid>https://jens.dev/2015/09/04/mule-flowvars-not-visible-in-parent-flow.html</guid>
       <description>Doing some integration in Mule Anypoint Studio a stumbled upon something I didn&amp;rsquo;t expect. I wanted to have a parent flow which orchestrates several subFlows. The first subFlow was to ensure authentication and generate a security token. So I needed that token in all subsequent flows to embed it in all requests. To my surprise, this didn&amp;rsquo;t work out-of-box with mule 3.7.
 Here the basic process a wanted to build. Obviously I missed something pretty basic here.</description>
     </item>

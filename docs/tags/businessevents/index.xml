@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BusinessEvents on My personal blog</title>
-    <link>/tags/businessevents.html</link>
+    <link>https://jens.dev/tags/businessevents.html</link>
     <description>Recent content in BusinessEvents on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Oct 2010 20:43:18 +0000</lastBuildDate><atom:link href="/tags/businessevents/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Oct 2010 20:43:18 +0000</lastBuildDate><atom:link href="https://jens.dev/tags/businessevents/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>BusinessEvents 4: using Scorecards in a clustered environment</title>
-      <link>/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment.html</link>
+      <link>https://jens.dev/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment.html</link>
       <pubDate>Sat, 23 Oct 2010 20:43:18 +0000</pubDate>
       
-      <guid>/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment.html</guid>
+      <guid>https://jens.dev/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment.html</guid>
       <description>Scorecards have a special purpose in TIBCO BE. There are often used for static (as in Java-style static) values which should be globally accessible through the whole engine. As Java statics, TIBCO describes its main purpose in instance dependent Variables which are only valid in the context of one Processing Unit in an Inference engine.
 Here a little citation of the TIBCO documentation on this topic (p.144 – Understanding and Working With Scorecards):</description>
     </item>

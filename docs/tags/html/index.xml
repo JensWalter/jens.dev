@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>HTML on My personal blog</title>
-    <link>/tags/html.html</link>
+    <link>https://jens.dev/tags/html.html</link>
     <description>Recent content in HTML on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Jun 2017 10:08:54 +0200</lastBuildDate><atom:link href="/tags/html/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Jun 2017 10:08:54 +0200</lastBuildDate><atom:link href="https://jens.dev/tags/html/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>how the web component slot system works</title>
-      <link>/2017/06/15/how-the-web-component-slot-system-works.html</link>
+      <link>https://jens.dev/2017/06/15/how-the-web-component-slot-system-works.html</link>
       <pubDate>Thu, 15 Jun 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/06/15/how-the-web-component-slot-system-works.html</guid>
+      <guid>https://jens.dev/2017/06/15/how-the-web-component-slot-system-works.html</guid>
       <description>In my previous post I described how to send data in form of attributes to a web component. Since this mechanism is only applicable for simple values, there also is a separate mechanism for inserting complex values.
 Let me explain the goal first. If I have a web component which consists of the following internal structure.
 &amp;lt;hello-card&amp;gt; #shadow-root &amp;lt;div id=&amp;#34;header&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/hello-card&amp;gt; To use this component, you have to insert it into the DOM and it will render a visual representation.</description>
@@ -20,10 +20,10 @@ Let me explain the goal first. If I have a web component which consists of the f
     
     <item>
       <title>how web component attributes work</title>
-      <link>/2017/06/14/how-web-component-attributes-work.html</link>
+      <link>https://jens.dev/2017/06/14/how-web-component-attributes-work.html</link>
       <pubDate>Wed, 14 Jun 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/06/14/how-web-component-attributes-work.html</guid>
+      <guid>https://jens.dev/2017/06/14/how-web-component-attributes-work.html</guid>
       <description>My last post described how to build a web component. Any form of data handling was intentionally left out.
 So here comes part 2 in my web component series on how to handle data in form of attributes. In HTML it would look like this.
 &amp;lt;hello-world name=&amp;#34;jens&amp;#34;&amp;gt;&amp;lt;/hello-world&amp;gt; Since the whole web component exists within one javascript class, the data handling has to be done within that class. The first thing that came to my mind was to extend the constructor to read all attributes on creation.</description>
@@ -31,10 +31,10 @@ So here comes part 2 in my web component series on how to handle data in form of
     
     <item>
       <title>writing a hello world web component</title>
-      <link>/2017/06/03/writing-a-hello-world-web-component.html</link>
+      <link>https://jens.dev/2017/06/03/writing-a-hello-world-web-component.html</link>
       <pubDate>Sat, 03 Jun 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/06/03/writing-a-hello-world-web-component.html</guid>
+      <guid>https://jens.dev/2017/06/03/writing-a-hello-world-web-component.html</guid>
       <description>Web components are the shiny new thing on the horizon for web development. Sadly browser support is not just there, but it seems to be growing pretty quickly.
 For an up-to-date overview, you can head over to caniuse.com for a summary.
 Starting small.
@@ -44,20 +44,20 @@ So the most basic web component would look like this.</description>
     
     <item>
       <title>cloud-the-web - my new web project</title>
-      <link>/2009/08/08/cloud-the-web-my-new-web-project.html</link>
+      <link>https://jens.dev/2009/08/08/cloud-the-web-my-new-web-project.html</link>
       <pubDate>Sat, 08 Aug 2009 12:28:01 +0000</pubDate>
       
-      <guid>/2009/08/08/cloud-the-web-my-new-web-project.html</guid>
+      <guid>https://jens.dev/2009/08/08/cloud-the-web-my-new-web-project.html</guid>
       <description>A little time ago I started experimenting with some of the new HTML 5 features. Some seam pretty impressive although some a rather unnecessary in my opinion. But one thing got me really hooked – the HTML canvas.
 The possibilities of this control are only limited by the performance of javascript and the missing 3d feature (hopefully this comes pretty soon). With that technology I finally got some way to implement something I wanted to try for some time now.</description>
     </item>
     
     <item>
       <title>extracting information from websites through xslt</title>
-      <link>/2009/06/05/extracting-information-from-websites-through-xslt.html</link>
+      <link>https://jens.dev/2009/06/05/extracting-information-from-websites-through-xslt.html</link>
       <pubDate>Fri, 05 Jun 2009 19:05:40 +0000</pubDate>
       
-      <guid>/2009/06/05/extracting-information-from-websites-through-xslt.html</guid>
+      <guid>https://jens.dev/2009/06/05/extracting-information-from-websites-through-xslt.html</guid>
       <description>Today, most websites feature some kind of feed, so every user who wants to stay in touch, can follow new publications very easily. Some sites support RSS-feeds or mail notification. Although this is pretty common, there are still sites out there who doesn’t. For that purpose I tried to find some easy solution.
 First problem here is, how to get the information into some format usable. HTML is not meant for complex data mining operations.</description>
     </item>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>google analytics on My personal blog</title>
-    <link>/tags/google-analytics.html</link>
+    <link>https://jens.dev/tags/google-analytics.html</link>
     <description>Recent content in google analytics on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Jan 2010 19:57:00 +0000</lastBuildDate><atom:link href="/tags/google-analytics/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Jan 2010 19:57:00 +0000</lastBuildDate><atom:link href="https://jens.dev/tags/google-analytics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>tracking virtual links with google analytics</title>
-      <link>/2010/01/04/tracking-virtual-links-with-google-analytics.html</link>
+      <link>https://jens.dev/2010/01/04/tracking-virtual-links-with-google-analytics.html</link>
       <pubDate>Mon, 04 Jan 2010 19:57:00 +0000</pubDate>
       
-      <guid>/2010/01/04/tracking-virtual-links-with-google-analytics.html</guid>
+      <guid>https://jens.dev/2010/01/04/tracking-virtual-links-with-google-analytics.html</guid>
       <description>Tracking dynamic sites is sometimes a bit tricky. Typically tracking systems are specialized in tracking page views. More sophisticated system have there own way of tracking custom event (like shown here).
 Unfortunately I needed to track clicks on a HTML canvas. To make these clicks visible to a tracking system, I wanted to transform each click to virtual URL. That way I could use Google analytics not only for tracking but also for popularity statistics of certain content.</description>
     </item>

@@ -2,55 +2,55 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>My personal blog</title>
-    <link>/</link>
+    <link>https://jens.dev/</link>
     <description>Recent content on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Feb 2021 10:13:50 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 Feb 2021 10:13:50 +0000</lastBuildDate><atom:link href="https://jens.dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to access Azure Key Vault in Rust</title>
-      <link>/2021/02/13/how-to-access-azure-key-vault-in-rust.html</link>
+      <link>https://jens.dev/2021/02/13/how-to-access-azure-key-vault-in-rust.html</link>
       <pubDate>Sat, 13 Feb 2021 10:13:50 +0000</pubDate>
       
-      <guid>/2021/02/13/how-to-access-azure-key-vault-in-rust.html</guid>
+      <guid>https://jens.dev/2021/02/13/how-to-access-azure-key-vault-in-rust.html</guid>
       <description>Introduction Since the Azure SDK for Rust is still not published on crates.io, here is an example how to use the current git repo for accessing an Azure Key Vault.
 Cargo.toml [package] name = &amp;#34;keyvault-sample&amp;#34; version = &amp;#34;0.1.0&amp;#34; edition = &amp;#34;2018&amp;#34; [dependencies] azure_key_vault = { git = &amp;#34;https://github.com/Azure/azure-sdk-for-rust.git&amp;#34; } azure_identity = { git = &amp;#34;https://github.com/Azure/azure-sdk-for-rust.git&amp;#34; } tokio = { version = &amp;#34;1&amp;#34;, features = [&amp;#34;full&amp;#34;] } main.rs use azure_identity::token_credentials::ClientSecretCredential; use azure_identity::token_credentials::TokenCredentialOptions; use azure_key_vault::KeyVaultClient; #[tokio::main] async fn main() -&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt; { //azure credentials  let client_id = &amp;#34;11111111-1111-1111-1111-111111111111&amp;#34;.</description>
     </item>
     
     <item>
       <title>Tibco EMS Bindings for Rust</title>
-      <link>/project/tibco-ems-rust-bindings.html</link>
+      <link>https://jens.dev/project/tibco-ems-rust-bindings.html</link>
       <pubDate>Wed, 18 Nov 2020 02:13:50 +0000</pubDate>
       
-      <guid>/project/tibco-ems-rust-bindings.html</guid>
+      <guid>https://jens.dev/project/tibco-ems-rust-bindings.html</guid>
       <description>https://crates.io/crates/tibco_ems</description>
     </item>
     
     <item>
       <title>Tibco EMS Operator for Kubernetes</title>
-      <link>/project/tibco-ems-operator.html</link>
+      <link>https://jens.dev/project/tibco-ems-operator.html</link>
       <pubDate>Wed, 18 Nov 2020 02:13:50 +0000</pubDate>
       
-      <guid>/project/tibco-ems-operator.html</guid>
+      <guid>https://jens.dev/project/tibco-ems-operator.html</guid>
       <description>https://github.com/apimeister/tibco-ems-operator</description>
     </item>
     
     <item>
       <title>A hello world kubernetes operator in Rust</title>
-      <link>/2020/09/15/a-hello-world-kubernetes-operator-in-rust.html</link>
+      <link>https://jens.dev/2020/09/15/a-hello-world-kubernetes-operator-in-rust.html</link>
       <pubDate>Tue, 15 Sep 2020 10:08:54 +0200</pubDate>
       
-      <guid>/2020/09/15/a-hello-world-kubernetes-operator-in-rust.html</guid>
+      <guid>https://jens.dev/2020/09/15/a-hello-world-kubernetes-operator-in-rust.html</guid>
       <description>Introduction I read some samples about how to implement a kubernetes operator in Go which shows the basic priciples, but I was not able to find a similar exercise in rust. So I started looking around, how to do an operator in rust.
 Overview An operator in kubernetes is a service that watches the k8s-API for specific events to happen. Usually the operator also registers some custom resource definitions (CRD) to later watch the lifecycle of those objects.</description>
     </item>
     
     <item>
       <title>Containerizing TIBCO BusinessWorks 5</title>
-      <link>/2020/08/09/containerizing-businessworks-5.html</link>
+      <link>https://jens.dev/2020/08/09/containerizing-businessworks-5.html</link>
       <pubDate>Sun, 09 Aug 2020 10:08:54 +0000</pubDate>
       
-      <guid>/2020/08/09/containerizing-businessworks-5.html</guid>
+      <guid>https://jens.dev/2020/08/09/containerizing-businessworks-5.html</guid>
       <description>Preparation To prepare the container build, I downloaded the current versions of TRA/BW/EMS from the TIBCO edelivery platform.
 I downloaded the following artifacts:
  TIB_TRA_5.11.0_linux_x86_64.zip TIB_BW_5.14.0_linux26gl23_x86_64.zip TIB_rv_8.4.6_linux_x86.zip TIB_ems_8.5.1_linux_x86_64.zip  Now to bring those together into a container I copied all of those into a tibco-businessworks-runtime directory.
@@ -59,10 +59,10 @@ Installation To support a headless installation, the TIBCO universal installer u
     
     <item>
       <title>Retrieve the API key name in AWS API Gateway</title>
-      <link>/2019/04/12/retrieve-the-api-keyname-in-aws-api-gateway.html</link>
+      <link>https://jens.dev/2019/04/12/retrieve-the-api-keyname-in-aws-api-gateway.html</link>
       <pubDate>Fri, 12 Apr 2019 10:08:54 +0200</pubDate>
       
-      <guid>/2019/04/12/retrieve-the-api-keyname-in-aws-api-gateway.html</guid>
+      <guid>https://jens.dev/2019/04/12/retrieve-the-api-keyname-in-aws-api-gateway.html</guid>
       <description>The AWS API-Gateway does support authentication through API Key. It is a very convenient feature to have, especially since other functionality such a throttling and request quotas also come through that feature.
 That is all good, as long as all your required functionality is provided by AWS. But what I needed was business-like Dashboard which provides insight into how my API was used by different clients.
 Since all clients are identified by API Key, I hoped for some mechanism within API-Gateway to provide information such as key name to my Lambda implementation.</description>
@@ -70,10 +70,10 @@ Since all clients are identified by API Key, I hoped for some mechanism within A
     
     <item>
       <title>Implementing DynamoDB triggers (streams) using CloudFormation</title>
-      <link>/2018/01/10/implementing-dynamodb-triggers-streams-using-cloudformation.html</link>
+      <link>https://jens.dev/2018/01/10/implementing-dynamodb-triggers-streams-using-cloudformation.html</link>
       <pubDate>Wed, 10 Jan 2018 10:08:54 +0200</pubDate>
       
-      <guid>/2018/01/10/implementing-dynamodb-triggers-streams-using-cloudformation.html</guid>
+      <guid>https://jens.dev/2018/01/10/implementing-dynamodb-triggers-streams-using-cloudformation.html</guid>
       <description>In serverless architectures, as much as possible of the implementation should be done event-driven. One driver of this is using triggers whenever possible.
 DynamoDB comes in very handy since it does support triggers through DynamoDB Streams. On the other end of a Stream usually is a Lambda function which processes the changed information asynchronously.
 So I tried building that pattern and recognized, that it is not that straightforward to implement in cloudformation.</description>
@@ -81,20 +81,20 @@ So I tried building that pattern and recognized, that it is not that straightfor
     
     <item>
       <title>Using parameters through multiple nested CloudFormation stacks</title>
-      <link>/2017/12/10/using-parameters-through-multiple-nested-cloudformation-stacks.html</link>
+      <link>https://jens.dev/2017/12/10/using-parameters-through-multiple-nested-cloudformation-stacks.html</link>
       <pubDate>Sun, 10 Dec 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/12/10/using-parameters-through-multiple-nested-cloudformation-stacks.html</guid>
+      <guid>https://jens.dev/2017/12/10/using-parameters-through-multiple-nested-cloudformation-stacks.html</guid>
       <description>As stacks grow, it is not always advisable to have all resources managed in one single stack. So to split up resources by their usage leads to the question on how can CloudFormation reference data from a different stack.
 AWS has a simple answer for that, &amp;ldquo;use import/export&amp;rdquo;. The drawback of this approach is, the exports are globally visible. So If you only want to share data between nested stacks you can use normal output values.</description>
     </item>
     
     <item>
       <title>Integrate API Gateway with SNS using CloudFormation</title>
-      <link>/2017/09/13/integrate-api-gateway-with-sns-using-cloudformation.html</link>
+      <link>https://jens.dev/2017/09/13/integrate-api-gateway-with-sns-using-cloudformation.html</link>
       <pubDate>Wed, 13 Sep 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/09/13/integrate-api-gateway-with-sns-using-cloudformation.html</guid>
+      <guid>https://jens.dev/2017/09/13/integrate-api-gateway-with-sns-using-cloudformation.html</guid>
       <description>In my last post, I described how an API Gateway can interact with Kinesis Firehose. This time I used the same approach to connect the API Gateway to SNS.
 With this, I could simplify the access pattern for my application by exposing an internal HTTP Endpoint which then routes all requests to a corresponding SNS Topic.
 So here an overview picture of what I am about to build.
@@ -103,40 +103,40 @@ The first part of the CloudFormation template is the definition of the API Gatew
     
     <item>
       <title>Integrate API Gateway with Kinesis Firehose using CloudFormation</title>
-      <link>/2017/08/24/integrate-api-gateway-with-kinesis-firehose-using-cloudformation.html</link>
+      <link>https://jens.dev/2017/08/24/integrate-api-gateway-with-kinesis-firehose-using-cloudformation.html</link>
       <pubDate>Thu, 24 Aug 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/08/24/integrate-api-gateway-with-kinesis-firehose-using-cloudformation.html</guid>
+      <guid>https://jens.dev/2017/08/24/integrate-api-gateway-with-kinesis-firehose-using-cloudformation.html</guid>
       <description>Integrating API Gateway with other AWS Services can be pretty important to increase the scope of an API into other services.
 What I wanted to achieve was a cheaper upload mechanism for S3. The easiest way to allow upload through API gateway is to call a Lambda for every API call and then upload the payload into an S3 bucket. But this is rather costly if you increase the throughput from a few single call to a few hundred calls a second.</description>
     </item>
     
     <item>
       <title>visualizing a cloudformation template</title>
-      <link>/2017/06/24/visualizing-a-cloudformation-template.html</link>
+      <link>https://jens.dev/2017/06/24/visualizing-a-cloudformation-template.html</link>
       <pubDate>Sat, 24 Jun 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/06/24/visualizing-a-cloudformation-template.html</guid>
+      <guid>https://jens.dev/2017/06/24/visualizing-a-cloudformation-template.html</guid>
       <description>CloudFormation templates grow pretty fast over the period of a project. To not loose the overview of how stuff works and how resources interact with each other, it is very helpful to have a graphical representation of your template at hand.
 In the past, I usually build an overview on draw.io and then started coding the actual template. The problem with this approach was, that all changes had to be done simultaneously in both systems.</description>
     </item>
     
     <item>
       <title>extending cloudformation with custom resources</title>
-      <link>/2017/06/18/extending-cloudformation-with-custom-resources.html</link>
+      <link>https://jens.dev/2017/06/18/extending-cloudformation-with-custom-resources.html</link>
       <pubDate>Sun, 18 Jun 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/06/18/extending-cloudformation-with-custom-resources.html</guid>
+      <guid>https://jens.dev/2017/06/18/extending-cloudformation-with-custom-resources.html</guid>
       <description>CloudFormation is a pretty capable tool which provides templating functionality for most of the Amazon web services. But still, keeping up with the release cadence of all the AWS services isn&amp;rsquo;t that easy. So there always is a little gap of what features the console offers and what CloudFormation offers.
 So for this use case (and some others like initial data load), AWS introduced custom resources. This Resource basically represents an AWS lambda invocation which is called whenever your template gets instantiated, removed or update.</description>
     </item>
     
     <item>
       <title>how the web component slot system works</title>
-      <link>/2017/06/15/how-the-web-component-slot-system-works.html</link>
+      <link>https://jens.dev/2017/06/15/how-the-web-component-slot-system-works.html</link>
       <pubDate>Thu, 15 Jun 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/06/15/how-the-web-component-slot-system-works.html</guid>
+      <guid>https://jens.dev/2017/06/15/how-the-web-component-slot-system-works.html</guid>
       <description>In my previous post I described how to send data in form of attributes to a web component. Since this mechanism is only applicable for simple values, there also is a separate mechanism for inserting complex values.
 Let me explain the goal first. If I have a web component which consists of the following internal structure.
 &amp;lt;hello-card&amp;gt; #shadow-root &amp;lt;div id=&amp;#34;header&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/hello-card&amp;gt; To use this component, you have to insert it into the DOM and it will render a visual representation.</description>
@@ -144,10 +144,10 @@ Let me explain the goal first. If I have a web component which consists of the f
     
     <item>
       <title>how web component attributes work</title>
-      <link>/2017/06/14/how-web-component-attributes-work.html</link>
+      <link>https://jens.dev/2017/06/14/how-web-component-attributes-work.html</link>
       <pubDate>Wed, 14 Jun 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/06/14/how-web-component-attributes-work.html</guid>
+      <guid>https://jens.dev/2017/06/14/how-web-component-attributes-work.html</guid>
       <description>My last post described how to build a web component. Any form of data handling was intentionally left out.
 So here comes part 2 in my web component series on how to handle data in form of attributes. In HTML it would look like this.
 &amp;lt;hello-world name=&amp;#34;jens&amp;#34;&amp;gt;&amp;lt;/hello-world&amp;gt; Since the whole web component exists within one javascript class, the data handling has to be done within that class. The first thing that came to my mind was to extend the constructor to read all attributes on creation.</description>
@@ -155,10 +155,10 @@ So here comes part 2 in my web component series on how to handle data in form of
     
     <item>
       <title>writing a hello world web component</title>
-      <link>/2017/06/03/writing-a-hello-world-web-component.html</link>
+      <link>https://jens.dev/2017/06/03/writing-a-hello-world-web-component.html</link>
       <pubDate>Sat, 03 Jun 2017 10:08:54 +0200</pubDate>
       
-      <guid>/2017/06/03/writing-a-hello-world-web-component.html</guid>
+      <guid>https://jens.dev/2017/06/03/writing-a-hello-world-web-component.html</guid>
       <description>Web components are the shiny new thing on the horizon for web development. Sadly browser support is not just there, but it seems to be growing pretty quickly.
 For an up-to-date overview, you can head over to caniuse.com for a summary.
 Starting small.
@@ -168,10 +168,10 @@ So the most basic web component would look like this.</description>
     
     <item>
       <title>hosting a Cloudfront site with S3 and API Gateway</title>
-      <link>/2017/05/09/hosting-a-cloudfront-site-with-s3-and-api-gateway.html</link>
+      <link>https://jens.dev/2017/05/09/hosting-a-cloudfront-site-with-s3-and-api-gateway.html</link>
       <pubDate>Tue, 09 May 2017 13:08:54 +0200</pubDate>
       
-      <guid>/2017/05/09/hosting-a-cloudfront-site-with-s3-and-api-gateway.html</guid>
+      <guid>https://jens.dev/2017/05/09/hosting-a-cloudfront-site-with-s3-and-api-gateway.html</guid>
       <description>Here my scenario I try to cover this time.
 Scenario:
  host a webpage through S3 with Cloudfront as CDN host an API through ApiGateway with Cloudfront in front  As picture this would look like this:
@@ -181,20 +181,20 @@ I use a CloudFormation template as project definition for this task.</descriptio
     
     <item>
       <title>migrating a mongodb to AWS Athena</title>
-      <link>/2017/03/27/migrating-a-mongodb-to-aws-athena.html</link>
+      <link>https://jens.dev/2017/03/27/migrating-a-mongodb-to-aws-athena.html</link>
       <pubDate>Mon, 27 Mar 2017 12:52:54 +0200</pubDate>
       
-      <guid>/2017/03/27/migrating-a-mongodb-to-aws-athena.html</guid>
+      <guid>https://jens.dev/2017/03/27/migrating-a-mongodb-to-aws-athena.html</guid>
       <description>I have an existing application that uses a mongodb to store metadata on files to make them searchable. Since searching in those records is not very time sensitive for me, I thought about migrating the whole database to S3/Athena. The advantage here would be, that there would be no longer a database to maintain, since Athena runs serverless on AWS.
 I started with a JSON-export of mongodb, to have a look at the document structure.</description>
     </item>
     
     <item>
       <title>a serverless cron in AWS CloudFormation</title>
-      <link>/2017/02/28/a-serverless-cron-in-aws-cloudformation.html</link>
+      <link>https://jens.dev/2017/02/28/a-serverless-cron-in-aws-cloudformation.html</link>
       <pubDate>Tue, 28 Feb 2017 16:52:54 +0200</pubDate>
       
-      <guid>/2017/02/28/a-serverless-cron-in-aws-cloudformation.html</guid>
+      <guid>https://jens.dev/2017/02/28/a-serverless-cron-in-aws-cloudformation.html</guid>
       <description>Here my scenario I try to cover this time.
 Scenario:
  Raise an event based on a cron pattern Subscribe to that event with a Lambda  As picture this would look like this:
@@ -205,10 +205,10 @@ I copied the header from an existing template since I have nothing to add here:<
     
     <item>
       <title>Publish an S3 Event to Lambda through SNS</title>
-      <link>/2017/02/19/publish-an-s3-event-to-lambda-through-sns.html</link>
+      <link>https://jens.dev/2017/02/19/publish-an-s3-event-to-lambda-through-sns.html</link>
       <pubDate>Sun, 19 Feb 2017 14:00:54 +0200</pubDate>
       
-      <guid>/2017/02/19/publish-an-s3-event-to-lambda-through-sns.html</guid>
+      <guid>https://jens.dev/2017/02/19/publish-an-s3-event-to-lambda-through-sns.html</guid>
       <description>My path through starting with AWS CloudFormation was a somewhat rocky path. Often I wished for simple CF Templates which would only show one pattern at a time. So I&amp;rsquo;m starting a short series where I will try to describe some patterns I experienced and hopefully lower the entry barrier for CloudFormation since it is great tool.
 Scenario:
  Raise an S3-Object-Create event Publish that event to SNS Subscribe to that event with a Lambda  As picture this would look like this:</description>
@@ -216,10 +216,10 @@ Scenario:
     
     <item>
       <title>generate a self signed certificate with AWS Lambda</title>
-      <link>/2017/01/05/generate-a-self-signed-certificate-with-aws-lambda.html</link>
+      <link>https://jens.dev/2017/01/05/generate-a-self-signed-certificate-with-aws-lambda.html</link>
       <pubDate>Thu, 05 Jan 2017 19:58:54 +0200</pubDate>
       
-      <guid>/2017/01/05/generate-a-self-signed-certificate-with-aws-lambda.html</guid>
+      <guid>https://jens.dev/2017/01/05/generate-a-self-signed-certificate-with-aws-lambda.html</guid>
       <description>For testing purposes I needed a service which would generate a self signed certificate. To reduce my dependency on locally installed tools, I implemented this service as AWS Lambda function (or microservice if you want to call it that).
 Here is what I came up with:
 The generated output looks like this:
@@ -228,30 +228,30 @@ The generated output looks like this:
     
     <item>
       <title>converting CSV to ORC with Apache NiFi</title>
-      <link>/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</link>
+      <link>https://jens.dev/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</link>
       <pubDate>Fri, 16 Dec 2016 14:36:54 +0200</pubDate>
       
-      <guid>/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</guid>
+      <guid>https://jens.dev/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</guid>
       <description>Converting a CSV to ORC files usually takes a Hadoop cluster to perform the task. Since I only wanted to convert files for later uploading into an existing cluster, I tried some different approach. Searching for some tool to do the task, I arrived at Apache NiFi.
 Here is the flow I used to transform my data.  step 1 - list all exiting CSV files step 2 - read each file into memory step 3 - convert content into AVRO  sadly AVRO needs a schema of you data to do the actual conversion.</description>
     </item>
     
     <item>
       <title>invoking java gc through bash</title>
-      <link>/2016/11/23/invoking-java-gc-through-bash.html</link>
+      <link>https://jens.dev/2016/11/23/invoking-java-gc-through-bash.html</link>
       <pubDate>Wed, 23 Nov 2016 20:18:54 +0200</pubDate>
       
-      <guid>/2016/11/23/invoking-java-gc-through-bash.html</guid>
+      <guid>https://jens.dev/2016/11/23/invoking-java-gc-through-bash.html</guid>
       <description>Sometimes Java processes start accumulating memory over time and do not give them back to the OS. In previous versions of Java, this was a limitation of the JVM. In Java 8 and newer, with the arrival of the G1 garbage collector, the JVM releases memory back to the OS after a GC run.
 Now since this is possible, calling a GC, although there is still free memory available becomes a different meaning.</description>
     </item>
     
     <item>
       <title>auto-confirming a newly created Cognito user</title>
-      <link>/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</link>
+      <link>https://jens.dev/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</link>
       <pubDate>Fri, 11 Nov 2016 19:49:54 +0200</pubDate>
       
-      <guid>/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</guid>
+      <guid>https://jens.dev/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</guid>
       <description>In Cognito all registered users need to be confirmed before they can interact with other services.
 Out-of-the-box Amazon supports confirmation by
  email SMS web UI lambda  To automate this process, confirming with a Lambda function is the only way to trigger the confirmation process. So I created the following lambda to confirm all created users.
@@ -260,40 +260,40 @@ exports.handler = (event, context, callback) =&amp;gt; { event.response.autoConf
     
     <item>
       <title>installing the nchan module for nginx on a gentoo based system</title>
-      <link>/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system.html</link>
+      <link>https://jens.dev/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system.html</link>
       <pubDate>Sun, 16 Oct 2016 15:49:54 +0200</pubDate>
       
-      <guid>/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system.html</guid>
+      <guid>https://jens.dev/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system.html</guid>
       <description>I recently encountered a requirement that could be fulfilled by the nchan module for nginx. nchan does provide prebuilt packages for Archlinux, Debian, Ubuntu and Fedora. Sadly, there is nothing there for gentoo users. So I directly skipped ahead to the &amp;ldquo;build from source&amp;rdquo; section. The instructions where pretty basic:
  clone the github repo configure nginx with ./configure &amp;ndash;add-module=path/to/nchan build  For me this lead to the following result:</description>
     </item>
     
     <item>
       <title>[njams] find engines with replay recording disabled</title>
-      <link>/2016/07/21/njams-find-engines-with-replay-recording-disabled.html</link>
+      <link>https://jens.dev/2016/07/21/njams-find-engines-with-replay-recording-disabled.html</link>
       <pubDate>Thu, 21 Jul 2016 11:15:54 +0200</pubDate>
       
-      <guid>/2016/07/21/njams-find-engines-with-replay-recording-disabled.html</guid>
+      <guid>https://jens.dev/2016/07/21/njams-find-engines-with-replay-recording-disabled.html</guid>
       <description>From time to time it happens that somebody disables njams replay recording on some engine for whatever reason and forgets about it. So later on when you need an overview on what engine recording is actually disabled, you can run the following select to gather that insight.
 The select checks if there are messages, which have/had no recorded information for replay. As a safeguard, the query checks if later jobs of the affected engine report recorded data (recording was re-enabled afterwards).</description>
     </item>
     
     <item>
       <title>Java SPI - a simple hello world service</title>
-      <link>/2016/07/14/java-spi-a-simple-hello-world-service.html</link>
+      <link>https://jens.dev/2016/07/14/java-spi-a-simple-hello-world-service.html</link>
       <pubDate>Thu, 14 Jul 2016 15:13:54 +0200</pubDate>
       
-      <guid>/2016/07/14/java-spi-a-simple-hello-world-service.html</guid>
+      <guid>https://jens.dev/2016/07/14/java-spi-a-simple-hello-world-service.html</guid>
       <description>I recently needed a simple example of an SPI implementation I could send around as copy and paste template. After some looking around I found some tutorials, but most of them were rather heavy in the implementation and are thereby loosing the point of being a simple extension system within the JDK. If you&amp;rsquo;re looking for a more complete introduction into SPI, just go for the oracle tutorial.
 So what I wanted to build was a simple service (HelloService), which defines an interface but looks for its implementation in the classpath at runtime (something SPI was built for).</description>
     </item>
     
     <item>
       <title>connecting nodejs to Tibco EMS</title>
-      <link>/2016/06/26/connecting-nodejs-to-tibco-ems.html</link>
+      <link>https://jens.dev/2016/06/26/connecting-nodejs-to-tibco-ems.html</link>
       <pubDate>Sun, 26 Jun 2016 21:57:54 +0200</pubDate>
       
-      <guid>/2016/06/26/connecting-nodejs-to-tibco-ems.html</guid>
+      <guid>https://jens.dev/2016/06/26/connecting-nodejs-to-tibco-ems.html</guid>
       <description>I recently started a new project to bring Tibco EMS connectivity to nodejs. It is still in a pretty early stage, so it is rather limited in its capabilities. A current version of the feature set will be maintained within github.
 What is working right now?
  send a text message to queue (request/reply and push) send a text message to topic (request/reply and push)  More is about to come in the future.</description>
@@ -301,30 +301,30 @@ What is working right now?
     
     <item>
       <title>get oracle allocation sizes part 2</title>
-      <link>/2016/06/21/get-oracle-allocation-sizes-part-2.html</link>
+      <link>https://jens.dev/2016/06/21/get-oracle-allocation-sizes-part-2.html</link>
       <pubDate>Tue, 21 Jun 2016 19:54:54 +0200</pubDate>
       
-      <guid>/2016/06/21/get-oracle-allocation-sizes-part-2.html</guid>
+      <guid>https://jens.dev/2016/06/21/get-oracle-allocation-sizes-part-2.html</guid>
       <description>In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.
 SELECT segment_name table_name, sum(bytes) tablesize, (SELECT sum(bytes) FROM user_segments ind WHERE segment_name in (select index_name from user_indexes where table_name=tab.segment_name) ) indexsize, (SELECT sum(bytes) FROM user_segments ls WHERE segment_name in (select segment_name from user_lobs where table_name=tab.</description>
     </item>
     
     <item>
       <title>schemaless schema validation in TIBCO BusinessWorks</title>
-      <link>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks.html</link>
+      <link>https://jens.dev/2016/06/17/schemaless-schema-validation-in-tibco-businessworks.html</link>
       <pubDate>Fri, 17 Jun 2016 17:06:54 +0200</pubDate>
       
-      <guid>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks.html</guid>
+      <guid>https://jens.dev/2016/06/17/schemaless-schema-validation-in-tibco-businessworks.html</guid>
       <description>Usually, schema validation in BusinessWorks is done pretty straight forward. You get an xml, known the schema and just run a ParseXml activity. The problem becomes more complicated if you have to validate a xml which you have no knowledge of which schema it derived from. In my case, I had a folder full of schemas which I had to validate the incoming xml against.
 To achieve this,I came up with the following solution.</description>
     </item>
     
     <item>
       <title>embed a github commit log into markdown</title>
-      <link>/2016/03/10/embed-a-github-commit-log-into-markdown.html</link>
+      <link>https://jens.dev/2016/03/10/embed-a-github-commit-log-into-markdown.html</link>
       <pubDate>Thu, 10 Mar 2016 20:52:54 +0200</pubDate>
       
-      <guid>/2016/03/10/embed-a-github-commit-log-into-markdown.html</guid>
+      <guid>https://jens.dev/2016/03/10/embed-a-github-commit-log-into-markdown.html</guid>
       <description>I started to write some documentation for a project of mine and I wanted to embed a change log on certain elements in the documentation. Since my documentation format is mkDocs, all documents are written in markdown.
 So here is what I came up with:
 **last commits** &amp;lt;div id=&amp;#39;commits&amp;#39; data-path=&amp;#39;src/io/trivium/extension/&amp;#39;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;script src=&amp;#39;https://code.jquery.com/jquery-2.2.1.min.js&amp;#39;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var path = $(&amp;#39;#commits&amp;#39;).data(&amp;#39;path&amp;#39;); var url = &amp;#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&amp;#39;+path; $.ajax({type:&amp;#39;GET&amp;#39;, url:url, success: function(data){ var str=&amp;#34;&amp;lt;table class=&amp;#39;docutils&amp;#39;&amp;gt;&amp;lt;thead&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;message&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;date&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;author&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;link&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/thead&amp;gt;&amp;lt;tbody&amp;gt;&amp;#34;; for(var idx=0;idx&amp;lt;data.length &amp;amp;&amp;amp; idx&amp;lt;10;idx++){ var one = data[idx]; var d = one.</description>
@@ -332,10 +332,10 @@ So here is what I came up with:
     
     <item>
       <title>authenticate with the bondora API manually</title>
-      <link>/2016/03/08/authenticate-with-bondora-api-manually.html</link>
+      <link>https://jens.dev/2016/03/08/authenticate-with-bondora-api-manually.html</link>
       <pubDate>Tue, 08 Mar 2016 13:38:54 +0200</pubDate>
       
-      <guid>/2016/03/08/authenticate-with-bondora-api-manually.html</guid>
+      <guid>https://jens.dev/2016/03/08/authenticate-with-bondora-api-manually.html</guid>
       <description>Bondora uses OAuth for its API authentication, while this is great for external service providers owning their own domain/app, it is also relatively cumbersome for stand alone applications/scripts.
 So here are the steps I did to acquire a refresh token for using the API with curl.
 First follow the link of the documentation to the &amp;ldquo;google OAuth playground&amp;rdquo;.
@@ -344,10 +344,10 @@ Most of the configuration should be preset by the link used. If you need it, you
     
     <item>
       <title>building an API on top of another page</title>
-      <link>/2015/12/21/building-an-api-on-top-of-another-page.html</link>
+      <link>https://jens.dev/2015/12/21/building-an-api-on-top-of-another-page.html</link>
       <pubDate>Mon, 21 Dec 2015 15:02:54 +0200</pubDate>
       
-      <guid>/2015/12/21/building-an-api-on-top-of-another-page.html</guid>
+      <guid>https://jens.dev/2015/12/21/building-an-api-on-top-of-another-page.html</guid>
       <description>In my last post &amp;ldquo;the serverless API&amp;rdquo; I explained how an API could be build without any infrastructure to begin with. To prove my point I started building an API on top of an existing homepage.
 Mintos is a service I use for investing into p2p loans. If you want further information about Mintos head over to their FAQ section.
 overview
@@ -357,20 +357,20 @@ Since the export of data from Mintos is somewhat limited, I settled for what I c
     
     <item>
       <title>the serverless API</title>
-      <link>/2015/12/16/the-serverless-api.html</link>
+      <link>https://jens.dev/2015/12/16/the-serverless-api.html</link>
       <pubDate>Wed, 16 Dec 2015 11:53:54 +0200</pubDate>
       
-      <guid>/2015/12/16/the-serverless-api.html</guid>
+      <guid>https://jens.dev/2015/12/16/the-serverless-api.html</guid>
       <description>Building an API does come with a lot of different facets to consider. One of the greater ones is, how to run all this. Building an API implementation is a rather easy Task, most developers today have some experience with connecting with API and already had their point of contact with various technologies to fulfill this task.
 A much greater pain point comes in if you start to think about, how to host this implementation and make it secure.</description>
     </item>
     
     <item>
       <title>FormDataHandler implements com.sun.net.httpserver.HttpHandler</title>
-      <link>/2015/10/10/formdatahandler-implements-com-sun-net-httpserver-httphandler.html</link>
+      <link>https://jens.dev/2015/10/10/formdatahandler-implements-com-sun-net-httpserver-httphandler.html</link>
       <pubDate>Sat, 10 Oct 2015 21:04:54 +0200</pubDate>
       
-      <guid>/2015/10/10/formdatahandler-implements-com-sun-net-httpserver-httphandler.html</guid>
+      <guid>https://jens.dev/2015/10/10/formdatahandler-implements-com-sun-net-httpserver-httphandler.html</guid>
       <description>I just needed a dependency free version of a FormData Parser. Since all libraries I found were rather heavy weight I decided to start on my own implementation and share this one.
 To use this one, you can just extends the class below.
 public class FileUpload extends FormDataHandler{ @Override public void handle(HttpExchange httpExchange, List&amp;lt;MultiPart&amp;gt; parts){} } </description>
@@ -378,19 +378,19 @@ public class FileUpload extends FormDataHandler{ @Override public void handle(Ht
     
     <item>
       <title>ant task to show content of a jar file</title>
-      <link>/2015/10/04/ant-task-to-show-content-of-a-jar-file.html</link>
+      <link>https://jens.dev/2015/10/04/ant-task-to-show-content-of-a-jar-file.html</link>
       <pubDate>Sun, 04 Oct 2015 18:50:54 +0200</pubDate>
       
-      <guid>/2015/10/04/ant-task-to-show-content-of-a-jar-file.html</guid>
+      <guid>https://jens.dev/2015/10/04/ant-task-to-show-content-of-a-jar-file.html</guid>
       <description>A short while ago I started using travis-ci as my continuous build environment. After running some tests I suspected that some files are missing from my ant created jar file. Sadly travis does not support a trivial way to upload the produced jar to a remote location. So I decided to take the console output (which they provide for every build job), to inspect what files are actually packaged in the jar file.</description>
     </item>
     
     <item>
       <title>[njams] getting the client version of all engines</title>
-      <link>/2015/09/26/njams-getting-the-client-version-of-all-engines.html</link>
+      <link>https://jens.dev/2015/09/26/njams-getting-the-client-version-of-all-engines.html</link>
       <pubDate>Sat, 26 Sep 2015 15:41:54 +0000</pubDate>
       
-      <guid>/2015/09/26/njams-getting-the-client-version-of-all-engines.html</guid>
+      <guid>https://jens.dev/2015/09/26/njams-getting-the-client-version-of-all-engines.html</guid>
       <description>After migrating a nJAMS on a large BusinessWorks environment, you need to check, whether all engines are actually using the updated version of the client. To check this, you can either check every engine log file or you can just go directly to the database.
 SELECT o.DOMAIN_NAME domain, o.OBJECTNAME engine, o.CLIENT_VERSION, o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
    domain engine client_version last_update     fs_dev C1_Services-C1_Services-1 3.</description>
@@ -398,10 +398,10 @@ SELECT o.DOMAIN_NAME domain, o.OBJECTNAME engine, o.CLIENT_VERSION, o.LAST_UPDAT
     
     <item>
       <title>[njams] getting a daily success/error rate per deployed service</title>
-      <link>/2015/09/17/njams-getting-a-daily-success-error-rate-per-deployed-service.html</link>
+      <link>https://jens.dev/2015/09/17/njams-getting-a-daily-success-error-rate-per-deployed-service.html</link>
       <pubDate>Thu, 17 Sep 2015 09:11:54 +0000</pubDate>
       
-      <guid>/2015/09/17/njams-getting-a-daily-success-error-rate-per-deployed-service.html</guid>
+      <guid>https://jens.dev/2015/09/17/njams-getting-a-daily-success-error-rate-per-deployed-service.html</guid>
       <description>Often people ask for various reports which can be generated out of the nJAMS/BWPM data pool.
 To start with a simple one, here the select for getting a success/error/warning rate of all deployed engines over time aggregated on daily basis.
 select trunc(jobstart) datum, deployment_name, count(*) execution_count, sum(case when LASTEVENTSTATUS=&amp;#39;1&amp;#39; then 1 else 0 end) success_count, sum(case when LASTEVENTSTATUS=&amp;#39;2&amp;#39; then 1 else 0 end) warning_count, sum(case when LASTEVENTSTATUS=&amp;#39;3&amp;#39; then 1 else 0 end) error_count, sum(case when LASTEVENTSTATUS=&amp;#39;0&amp;#39; then 1 else 0 end) running_count from ( SELECT m.</description>
@@ -409,20 +409,20 @@ select trunc(jobstart) datum, deployment_name, count(*) execution_count, sum(cas
     
     <item>
       <title>[njams] how the njams_t_monitor_main status works</title>
-      <link>/2015/09/16/njams-how-the-njams_t_monitor_main-status-works.html</link>
+      <link>https://jens.dev/2015/09/16/njams-how-the-njams_t_monitor_main-status-works.html</link>
       <pubDate>Wed, 16 Sep 2015 09:11:54 +0200</pubDate>
       
-      <guid>/2015/09/16/njams-how-the-njams_t_monitor_main-status-works.html</guid>
+      <guid>https://jens.dev/2015/09/16/njams-how-the-njams_t_monitor_main-status-works.html</guid>
       <description>nJAMS/BWPM has a rather complex system for determining the status of a process. Although all of this is easily accessible through the GUI, you sometimes need to go directly to the database for some further reporting. So here the select to get the calculated state of the GUI.
 SELECT m.jobstart,o.deployment_name,o.objectname, CASE WHEN m.LASTEVENTSTATUS=&amp;#39;3&amp;#39; THEN &amp;#39;error&amp;#39; WHEN m.LASTEVENTSTATUS=&amp;#39;2&amp;#39; THEN &amp;#39;warning&amp;#39; WHEN m.LASTEVENTSTATUS=&amp;#39;1&amp;#39; THEN CASE WHEN m.status=&amp;#39;3&amp;#39; THEN &amp;#39;success with error&amp;#39; WHEN m.</description>
     </item>
     
     <item>
       <title>calculating percentiles in oracle</title>
-      <link>/2015/09/15/calculating-percentiles-in-oracle.html</link>
+      <link>https://jens.dev/2015/09/15/calculating-percentiles-in-oracle.html</link>
       <pubDate>Tue, 15 Sep 2015 16:11:54 +0200</pubDate>
       
-      <guid>/2015/09/15/calculating-percentiles-in-oracle.html</guid>
+      <guid>https://jens.dev/2015/09/15/calculating-percentiles-in-oracle.html</guid>
       <description>Calculating percentiles in oracle is pretty easy.
 In my case I had logged service response times in a database and now wanted to get response times back as percentiles.
 SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;50percentile&amp;#34;, PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;80percentile&amp;#34;, PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;90percentile&amp;#34;, PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;95percentile&amp;#34;, PERCENTILE_CONT(0.99) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;99percentile&amp;#34;, PERCENTILE_CONT(0.</description>
@@ -430,20 +430,20 @@ SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;50p
     
     <item>
       <title>[mule] flowVars not visible in parent flow</title>
-      <link>/2015/09/04/mule-flowvars-not-visible-in-parent-flow.html</link>
+      <link>https://jens.dev/2015/09/04/mule-flowvars-not-visible-in-parent-flow.html</link>
       <pubDate>Fri, 04 Sep 2015 14:34:54 +0000</pubDate>
       
-      <guid>/2015/09/04/mule-flowvars-not-visible-in-parent-flow.html</guid>
+      <guid>https://jens.dev/2015/09/04/mule-flowvars-not-visible-in-parent-flow.html</guid>
       <description>Doing some integration in Mule Anypoint Studio a stumbled upon something I didn&amp;rsquo;t expect. I wanted to have a parent flow which orchestrates several subFlows. The first subFlow was to ensure authentication and generate a security token. So I needed that token in all subsequent flows to embed it in all requests. To my surprise, this didn&amp;rsquo;t work out-of-box with mule 3.7.
 Here the basic process a wanted to build. Obviously I missed something pretty basic here.</description>
     </item>
     
     <item>
       <title>generate a random uuid in bash</title>
-      <link>/2015/08/04/generate-a-random-uuid-in-bash.html</link>
+      <link>https://jens.dev/2015/08/04/generate-a-random-uuid-in-bash.html</link>
       <pubDate>Tue, 04 Aug 2015 16:21:54 +0200</pubDate>
       
-      <guid>/2015/08/04/generate-a-random-uuid-in-bash.html</guid>
+      <guid>https://jens.dev/2015/08/04/generate-a-random-uuid-in-bash.html</guid>
       <description>To generate a UUIDv4 (random UUID) you can execute the following command.
 cat /proc/sys/kernel/random/uuid a01766f8-c4f5-4506-9262-1b408132f048 using uuidgen leads to the following outputs.
 #getting a time based uuid uuidgen -t 89a25fa8-3ab4-11e5-a414-14dae9ef67fb #getting a random based uuid uuidgen -r 6b81ed73-bd0b-4fc7-9f9a-709e121323b2 </description>
@@ -451,10 +451,10 @@ cat /proc/sys/kernel/random/uuid a01766f8-c4f5-4506-9262-1b408132f048 using uuid
     
     <item>
       <title>add a network delay in linux</title>
-      <link>/2015/07/16/add-a-network-delay-in-linux.html</link>
+      <link>https://jens.dev/2015/07/16/add-a-network-delay-in-linux.html</link>
       <pubDate>Thu, 16 Jul 2015 16:34:54 +0000</pubDate>
       
-      <guid>/2015/07/16/add-a-network-delay-in-linux.html</guid>
+      <guid>https://jens.dev/2015/07/16/add-a-network-delay-in-linux.html</guid>
       <description>Adding a delay to all network traffic is pretty easy and can be done through the following command.
 adding a delay
 #for device enp0s3 tc qdisc add dev enp0s3 root netem delay 100ms query the current delay
@@ -464,10 +464,10 @@ tc qdisc del dev enp0s3 root netem </description>
     
     <item>
       <title>query index usage statistics in oracle</title>
-      <link>/2015/07/11/query-index-usage-stats-in-oracle.html</link>
+      <link>https://jens.dev/2015/07/11/query-index-usage-stats-in-oracle.html</link>
       <pubDate>Sat, 11 Jul 2015 17:52:54 +0200</pubDate>
       
-      <guid>/2015/07/11/query-index-usage-stats-in-oracle.html</guid>
+      <guid>https://jens.dev/2015/07/11/query-index-usage-stats-in-oracle.html</guid>
       <description>how often an index was used
 select p.object_name &amp;#34;object&amp;#34;, to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;) &amp;#34;Begin|Interval|time&amp;#34;, p.search_columns &amp;#34;Search Columns&amp;#34;, count(*) &amp;#34;Invocation|Count&amp;#34; from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name like &amp;#39;%INDEX_%&amp;#39; group by p.object_name,to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;),search_columns how an index was used
 select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist_sql_plan p, dba_hist_sqlstat s where p.object_owner &amp;lt;&amp;gt; &amp;#39;SYS&amp;#39; and p.operation like &amp;#39;%INDEX%&amp;#39; and p.sql_id = s.sql_id group by p.</description>
@@ -475,60 +475,60 @@ select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist
     
     <item>
       <title>debugging a java application with an interactive shell</title>
-      <link>/2015/06/28/debugging-a-java-application-with-an-interactive-shell.html</link>
+      <link>https://jens.dev/2015/06/28/debugging-a-java-application-with-an-interactive-shell.html</link>
       <pubDate>Sun, 28 Jun 2015 15:48:54 +0200</pubDate>
       
-      <guid>/2015/06/28/debugging-a-java-application-with-an-interactive-shell.html</guid>
+      <guid>https://jens.dev/2015/06/28/debugging-a-java-application-with-an-interactive-shell.html</guid>
       <description>Since a while ago, the JVM has an embedded Javascript engine within. Since Java 8 (I think) this engine got extended through an interactive shell. So now you can start an interactive Javascript shell within your JVM. Knowing that, I wondered why nobody tried to use this feature, to do some debugging. So I tried.
 First I had to find the coresponding class of the jjs tool. I&amp;rsquo;m not sure I found the right one, but I did find a Shell class within the nashorn.</description>
     </item>
     
     <item>
       <title>add jar to the classpath at runtime in jjs (the hacky way)</title>
-      <link>/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html</link>
+      <link>https://jens.dev/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html</link>
       <pubDate>Sat, 27 Jun 2015 14:22:54 +0200</pubDate>
       
-      <guid>/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html</guid>
+      <guid>https://jens.dev/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html</guid>
       <description>Normally, the JVM does not allow extending the classpath during runtime. But due to the demand, people found ways around that restriction. To bring one of the work-around to jjs I wrote the following javascript function.
 function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader(); var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class; var ClassArray = Java.type(&amp;#34;java.lang.Class[]&amp;#34;); var parameters = new ClassArray(1); parameters[0]= java.net.URL.class; var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&amp;#34;addURL&amp;#34;, parameters); method.setAccessible(true); var ObjectArray = Java.type(&amp;#34;java.lang.Object[]&amp;#34;); var array = new ObjectArray(1); var/*java.</description>
     </item>
     
     <item>
       <title>query clob settings in oracle</title>
-      <link>/2015/06/27/query-clob-settings-in-oracle.html</link>
+      <link>https://jens.dev/2015/06/27/query-clob-settings-in-oracle.html</link>
       <pubDate>Sat, 27 Jun 2015 11:31:54 +0200</pubDate>
       
-      <guid>/2015/06/27/query-clob-settings-in-oracle.html</guid>
+      <guid>https://jens.dev/2015/06/27/query-clob-settings-in-oracle.html</guid>
       <description>You can query all clob related settings from the database with the following query.
 SELECT table_name, column_name, securefile AS &amp;#34;isSecureFile&amp;#34;, compression AS &amp;#34;Compressed&amp;#34; , encrypt AS &amp;#34;Encrypted&amp;#34;, DEDUPLICATION as &amp;#34;Deduplicated&amp;#34;, in_row AS &amp;#34;StoredInRow&amp;#34; FROM user_lobs    TABLE_NAME COLUMN_NAME isSecureFile Compressed Encrypted Deduplicated StoredInRow     SAMPLE_DATASET_INTRO XMLDATA YES NO NO NO YES   SAMPLE_DATASET_EVOLVE XMLDATA YES NO NO NO YES   SAMPLE_DATASET_PARTN XMLDATA YES NO NO NO YES   SAMPLE_DATASET_FULLTEXT XMLDATA YES NO NO NO YES   SAMPLE_DATASET_XQUERY XMLDATA YES NO NO NO YES   SAMPLE_DATASET_REPOS IMAGE YES NO NO NO YES    </description>
     </item>
     
     <item>
       <title>get table and index allocation size in oracle</title>
-      <link>/2015/06/27/get-table-and-index-allocation-size-in-oracle.html</link>
+      <link>https://jens.dev/2015/06/27/get-table-and-index-allocation-size-in-oracle.html</link>
       <pubDate>Sat, 27 Jun 2015 08:13:54 +0200</pubDate>
       
-      <guid>/2015/06/27/get-table-and-index-allocation-size-in-oracle.html</guid>
+      <guid>https://jens.dev/2015/06/27/get-table-and-index-allocation-size-in-oracle.html</guid>
       <description>[part 2 -&amp;gt; now with partitioned tables]({% post_url 2016-06-21-get-oracle-allocation-sizes-part-2 %})
 Determining the size of a table can be a bit tricky within oracle. You can size all columns and add the values together. That woul give you an estimate of a row size. If you do that for all rows, you got the net size of data you are storing. This of cause does not account for index and table overhead.</description>
     </item>
     
     <item>
       <title>detect whether ASSM is managing your tablespace</title>
-      <link>/2015/06/26/detect-whether-assm-is-managing-your-tablespace.html</link>
+      <link>https://jens.dev/2015/06/26/detect-whether-assm-is-managing-your-tablespace.html</link>
       <pubDate>Fri, 26 Jun 2015 12:03:54 +0200</pubDate>
       
-      <guid>/2015/06/26/detect-whether-assm-is-managing-your-tablespace.html</guid>
+      <guid>https://jens.dev/2015/06/26/detect-whether-assm-is-managing-your-tablespace.html</guid>
       <description>I recently had an oracle database where I wanted to compress the clob store for more storage efficiency. To do that, I needed to convert the clob store from basicfiles to securefiles. As a requirement to use compressed securefiles, oracel states, that the tablespace must be managed by ASSM (Automatic Segment Space Management). In order to check this, I found the following sql query.
 select tablespace_name, SEGMENT_SPACE_MANAGEMENT from user_tablespaces; The output looks like:</description>
     </item>
     
     <item>
       <title>getting monthly throughput stats of a TIBCO EMS instance</title>
-      <link>/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</link>
+      <link>https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</link>
       <pubDate>Thu, 25 Jun 2015 10:22:10 +0200</pubDate>
       
-      <guid>/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</guid>
+      <guid>https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</guid>
       <description>The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
  get message statistics reset stats to zero  get the stats as csv
 printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &amp;#39;NR&amp;gt;11&amp;#39; | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39; | grep -v &amp;#39;tcp://&amp;#39; | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
@@ -536,10 +536,10 @@ printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&a
     
     <item>
       <title>reset the TIBCO EMS statistics</title>
-      <link>/2015/06/24/reset-the-tibco-ems-statistics.html</link>
+      <link>https://jens.dev/2015/06/24/reset-the-tibco-ems-statistics.html</link>
       <pubDate>Wed, 24 Jun 2015 20:12:20 +0200</pubDate>
       
-      <guid>/2015/06/24/reset-the-tibco-ems-statistics.html</guid>
+      <guid>https://jens.dev/2015/06/24/reset-the-tibco-ems-statistics.html</guid>
       <description>resetting the TIBCO EMS statistics without restarting the server.
 before
 printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 TIBCO Enterprise Message Service Administration Tool. Copyright 2003-2013 by TIBCO Software Inc. All rights reserved. Version 8.0.0 V9 6/7/2013 Connected to: tcp://localhost:7222 Type &amp;#39;help&amp;#39; for commands help, &amp;#39;exit&amp;#39; to exit: tcp://localhost:7222&amp;gt; In-Total In-Rate Out-Total Out-Rate Queue Name Msgs Size Msgs Size Msgs Size Msgs Size &amp;lt;total&amp;gt; 701858 3.</description>
@@ -547,30 +547,30 @@ printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \  | ./tibemsadmin64 -ser
     
     <item>
       <title>get the most visited url from an access log through a single line of bash</title>
-      <link>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash.html</link>
+      <link>https://jens.dev/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash.html</link>
       <pubDate>Wed, 17 Jun 2015 12:25:20 +0200</pubDate>
       
-      <guid>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash.html</guid>
+      <guid>https://jens.dev/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash.html</guid>
       <description>If you have an apache access log and want to see the visit count of your site, you can use this one-liner to get some basic visit stats.
 grep &amp;#34;200 &amp;#34; /var/log/apache2/apimeister-access.log \  | grep -v &amp;#39;Googlebot&amp;#39; \  | grep -v &amp;#39;Baiduspider&amp;#39; \  | grep -v &amp;#39;bingbot&amp;#39; \  | grep -v &amp;#39;YandexBot&amp;#39; \  | grep -v &amp;#39;MJ12bot&amp;#39; \  | grep -v &amp;#39;meanpathbot&amp;#39; \  | grep -v &amp;#39;DotBot&amp;#39; \  | grep -v &amp;#39;AhrefsBot&amp;#39; \  | cut -d &amp;#39;&amp;#34;&amp;#39; -f 2 \  | cut -d &amp;#39; &amp;#39; -f 2 \  | sort | uniq -c | sort -rn | less </description>
     </item>
     
     <item>
       <title>extract the UUIDv1 encapsulated timestamp within an oracle select</title>
-      <link>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</link>
+      <link>https://jens.dev/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</link>
       <pubDate>Sun, 14 Jun 2015 18:34:23 +0200</pubDate>
       
-      <guid>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</guid>
+      <guid>https://jens.dev/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</guid>
       <description>When you have a partioned table full of UUIDs but partitioned through timestamp, you need a way to translate the UUID back into a timestamp to match a partition where the key is stored. So here is my way of how to extract the timestamp out of an UUIDv1.
 select ts,to_timestamp(date &amp;#39;1970-01-01&amp;#39;+ (ts/(24*60*60))) from ( select trunc((to_number(substr(uuid,16,3)||&amp;#39;000000000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,10,4)||&amp;#39;00000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,0,8) ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) -122192928000000000)/10000000) ts from ( select &amp;#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&amp;#39; uuid from dual ) ) </description>
     </item>
     
     <item>
       <title>doing objects in jjs</title>
-      <link>/2015/06/13/doing-objects-in-jjs.html</link>
+      <link>https://jens.dev/2015/06/13/doing-objects-in-jjs.html</link>
       <pubDate>Sat, 13 Jun 2015 08:12:55 +0200</pubDate>
       
-      <guid>/2015/06/13/doing-objects-in-jjs.html</guid>
+      <guid>https://jens.dev/2015/06/13/doing-objects-in-jjs.html</guid>
       <description>Instantiating a Java Object in jjs is pretty straight forward, at least it can be.
 var string = new java.lang.String(&amp;#34;hello world&amp;#34;); //alternative var stringClass = Java.type(&amp;#34;java.lang.String&amp;#34;); var string = new stringClass(&amp;#34;hello world&amp;#34;); This was so easy that I instantly continued trying Arrays.
 //doing it javascript style var arr=[]; arr[0]=&amp;#34;hello&amp;#34;; arr[1]=&amp;#34;world&amp;#34;; java.lang.String.join(&amp;#34; &amp;#34;,arr); //doing it java style var stringClass=java.lang.String.class; var arr2==java.lang.reflect.Array.newInstance(StringClass,2); You could argue that using the java style initialization doesn&amp;rsquo;t add anything and complicates stuff overly.</description>
@@ -578,20 +578,20 @@ var string = new java.lang.String(&amp;#34;hello world&amp;#34;); //alternative 
     
     <item>
       <title>read the content of a file in one line in jjs</title>
-      <link>/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs.html</link>
+      <link>https://jens.dev/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs.html</link>
       <pubDate>Fri, 12 Jun 2015 12:32:25 +0200</pubDate>
       
-      <guid>/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs.html</guid>
+      <guid>https://jens.dev/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs.html</guid>
       <description>The task is pretty simple, read the content of text file as one-liner. Here is what I came up with.
 var filename = &amp;#34;engine.log&amp;#34;; var content = new java.lang.String( java.nio.file.Files.readAllBytes( java.nio.file.Paths.get(filename) ) ); </description>
     </item>
     
     <item>
       <title>print something to the console in jjs</title>
-      <link>/2015/06/11/print-something-to-the-console-in-jjs.html</link>
+      <link>https://jens.dev/2015/06/11/print-something-to-the-console-in-jjs.html</link>
       <pubDate>Thu, 11 Jun 2015 11:12:45 +0200</pubDate>
       
-      <guid>/2015/06/11/print-something-to-the-console-in-jjs.html</guid>
+      <guid>https://jens.dev/2015/06/11/print-something-to-the-console-in-jjs.html</guid>
       <description>Once I got jjs running I started with some pretty simple stuff. To print something to the console I found the following ways.
 //javascript style print(&amp;#34;hello world&amp;#34;); // don&amp;#39;t forget the parentheses here, otherwise jjs wont like you //java style var System = Java.type(&amp;#39;java.lang.System&amp;#39;); System.out.println(&amp;#34;hello world&amp;#34;); //of course there is an error out too System.err.println(&amp;#34;hello world&amp;#34;); Don&amp;rsquo;t forget to declare System as Variable, otherwise it will fail.
 nashorn&amp;gt; System.out.println(&amp;#34;hello world&amp;#34;); script error: ReferenceError: &amp;#34;System&amp;#34; is not defined in &amp;lt;STDIN&amp;gt; at line number 1 </description>
@@ -599,189 +599,189 @@ nashorn&amp;gt; System.out.println(&amp;#34;hello world&amp;#34;); script error:
     
     <item>
       <title>using jjs under osx</title>
-      <link>/2015/06/06/jjs-under-osx.html</link>
+      <link>https://jens.dev/2015/06/06/jjs-under-osx.html</link>
       <pubDate>Sat, 06 Jun 2015 18:22:03 +0200</pubDate>
       
-      <guid>/2015/06/06/jjs-under-osx.html</guid>
+      <guid>https://jens.dev/2015/06/06/jjs-under-osx.html</guid>
       <description>Recently I wanted to try the new java8 integration javascipt shell. So I installed the Oracle JDK on my mac, opened a terminal and got the following result:
 localhost:~ jens$ jjs -bash: jjs: command not found After some googling around I found that the jjs execution is part of the packaged jdk but not really there. After some time I found that it is installed under the name jrunscript. So now I only had to alias jjs to jrunscript and I could start.</description>
     </item>
     
     <item>
       <title>new project - celero.io</title>
-      <link>/2014/01/03/new-project-celero-io.html</link>
+      <link>https://jens.dev/2014/01/03/new-project-celero-io.html</link>
       <pubDate>Fri, 03 Jan 2014 23:31:49 +0000</pubDate>
       
-      <guid>/2014/01/03/new-project-celero-io.html</guid>
+      <guid>https://jens.dev/2014/01/03/new-project-celero-io.html</guid>
       <description>Finally a new project going live. Here a short intro on what it is all about.
 I read a lot of blogs to keep up to date with all the different technologies I need for my work. Further to that, I used a lot of open source projects, which I need to follow, to keep up with new releases. For all that information gathering I just cycle through all kinds of blogs, github and freecode sites to gather the necessary info.</description>
     </item>
     
     <item>
       <title>BusinessEvents 4: using Scorecards in a clustered environment</title>
-      <link>/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment.html</link>
+      <link>https://jens.dev/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment.html</link>
       <pubDate>Sat, 23 Oct 2010 20:43:18 +0000</pubDate>
       
-      <guid>/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment.html</guid>
+      <guid>https://jens.dev/2010/10/23/businessevents-4-using-scorecards-in-a-clustered-environment.html</guid>
       <description>Scorecards have a special purpose in TIBCO BE. There are often used for static (as in Java-style static) values which should be globally accessible through the whole engine. As Java statics, TIBCO describes its main purpose in instance dependent Variables which are only valid in the context of one Processing Unit in an Inference engine.
 Here a little citation of the TIBCO documentation on this topic (p.144 – Understanding and Working With Scorecards):</description>
     </item>
     
     <item>
       <title>URL encode / decode in JavaScript</title>
-      <link>/2010/02/26/url-encode-decode-in-javascript-2.html</link>
+      <link>https://jens.dev/2010/02/26/url-encode-decode-in-javascript-2.html</link>
       <pubDate>Fri, 26 Feb 2010 21:57:13 +0000</pubDate>
       
-      <guid>/2010/02/26/url-encode-decode-in-javascript-2.html</guid>
+      <guid>https://jens.dev/2010/02/26/url-encode-decode-in-javascript-2.html</guid>
       <description>Decoding and Encoding URLs in JavaScript should be a pretty easy thing to do especially since all browsers still have the functionality built-in. Interestingly no browser allows the JavaScript runtime to use this feature. So I had to write it for myself.
 The code I came up with is far from perfect but it worked for me. To decode an URL use url_decode(url) and to reverse it just call the utf16to8 function.</description>
     </item>
     
     <item>
       <title>tracking virtual links with google analytics</title>
-      <link>/2010/01/04/tracking-virtual-links-with-google-analytics.html</link>
+      <link>https://jens.dev/2010/01/04/tracking-virtual-links-with-google-analytics.html</link>
       <pubDate>Mon, 04 Jan 2010 19:57:00 +0000</pubDate>
       
-      <guid>/2010/01/04/tracking-virtual-links-with-google-analytics.html</guid>
+      <guid>https://jens.dev/2010/01/04/tracking-virtual-links-with-google-analytics.html</guid>
       <description>Tracking dynamic sites is sometimes a bit tricky. Typically tracking systems are specialized in tracking page views. More sophisticated system have there own way of tracking custom event (like shown here).
 Unfortunately I needed to track clicks on a HTML canvas. To make these clicks visible to a tracking system, I wanted to transform each click to virtual URL. That way I could use Google analytics not only for tracking but also for popularity statistics of certain content.</description>
     </item>
     
     <item>
       <title>handling a few thousand simultaneous connections in TIBCO BusinessWorks</title>
-      <link>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks.html</link>
+      <link>https://jens.dev/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks.html</link>
       <pubDate>Tue, 08 Dec 2009 17:22:16 +0000</pubDate>
       
-      <guid>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks.html</guid>
+      <guid>https://jens.dev/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks.html</guid>
       <description>Scaling with TIBCO BusinessWorks can sometimes be a bit tricky. Recently I began testing some scenarios how to scale a Webservice a bit larger. The first source of information was of course the official documentation and to look at the proposed best practice values for such an engine.
 To start small, I tried a HTTP Receiver with a 32bit JVM runtime. I set the heap to the maximum amount possible (something about 1.</description>
     </item>
     
     <item>
       <title>TIBCO Designer Panel too small</title>
-      <link>/2009/10/13/tibco-designer-panel-too-small.html</link>
+      <link>https://jens.dev/2009/10/13/tibco-designer-panel-too-small.html</link>
       <pubDate>Tue, 13 Oct 2009 18:52:38 +0000</pubDate>
       
-      <guid>/2009/10/13/tibco-designer-panel-too-small.html</guid>
+      <guid>https://jens.dev/2009/10/13/tibco-designer-panel-too-small.html</guid>
       <description>Recently I ran into some rather trivial problem which isn’t really addressed by the TIBCO Designer. I had a process which wouldn’t fit into the Design Panel. There was just not enough space on the canvas to fit in the actual flow.
 After asking around I came to the conclusion that every designer (from different colleges I work with) had a different resolution for the Design canvas. Nobody knew any kind of property where you can set this resolution, so I began searching around.</description>
     </item>
     
     <item>
       <title>searching for hash strings in postgres</title>
-      <link>/2009/09/23/searching-for-hash-strings-in-postgres.html</link>
+      <link>https://jens.dev/2009/09/23/searching-for-hash-strings-in-postgres.html</link>
       <pubDate>Wed, 23 Sep 2009 15:54:14 +0000</pubDate>
       
-      <guid>/2009/09/23/searching-for-hash-strings-in-postgres.html</guid>
+      <guid>https://jens.dev/2009/09/23/searching-for-hash-strings-in-postgres.html</guid>
       <description>For one of my projects a have a database which has a rather large table consisting of just an url and a corresponding id. For performance reasons I added a md5 column which hashes the url. With this column it should be a lot faster to look up an url.
 CREATE TABLE pages ( id bigint NOT NULL, url character varying(255), md5 character(32), CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).</description>
     </item>
     
     <item>
       <title>init script for the TIBCO Administrator</title>
-      <link>/2009/09/05/init-script-for-the-tibco-administrator.html</link>
+      <link>https://jens.dev/2009/09/05/init-script-for-the-tibco-administrator.html</link>
       <pubDate>Sat, 05 Sep 2009 19:03:06 +0000</pubDate>
       
-      <guid>/2009/09/05/init-script-for-the-tibco-administrator.html</guid>
+      <guid>https://jens.dev/2009/09/05/init-script-for-the-tibco-administrator.html</guid>
       <description>I recently ran into the situation that I needed to install a TIBCO BusinessWorks with Administrator onto a RedHat Server. Under Windows the installer provides everything you need to run your domain as a Service. In Linux this looks different. I have found no init script templates nor did the installer generate me some stubs. So I had to write them myself. So here is what I came up with (I know it isn’t perfect, but it works – suggestions are always welcome).</description>
     </item>
     
     <item>
       <title>adding IP-restriction to BusinessWorks processes</title>
-      <link>/2009/08/17/adding-ip-restriction-to-businessworks-processes.html</link>
+      <link>https://jens.dev/2009/08/17/adding-ip-restriction-to-businessworks-processes.html</link>
       <pubDate>Mon, 17 Aug 2009 01:16:07 +0000</pubDate>
       
-      <guid>/2009/08/17/adding-ip-restriction-to-businessworks-processes.html</guid>
+      <guid>https://jens.dev/2009/08/17/adding-ip-restriction-to-businessworks-processes.html</guid>
       <description>Recently I got into the situation that somebody used some interface a way it was not designed for and so created an out-of-memory situation which couldn’t be handled by the engine itself. So now I got the case that one client block the complete service due to invalid requests which he shouldn’t do in the first place.
 In the short term there seemed to be only one solution, block the client.</description>
     </item>
     
     <item>
       <title>cloud-the-web - my new web project</title>
-      <link>/2009/08/08/cloud-the-web-my-new-web-project.html</link>
+      <link>https://jens.dev/2009/08/08/cloud-the-web-my-new-web-project.html</link>
       <pubDate>Sat, 08 Aug 2009 12:28:01 +0000</pubDate>
       
-      <guid>/2009/08/08/cloud-the-web-my-new-web-project.html</guid>
+      <guid>https://jens.dev/2009/08/08/cloud-the-web-my-new-web-project.html</guid>
       <description>A little time ago I started experimenting with some of the new HTML 5 features. Some seam pretty impressive although some a rather unnecessary in my opinion. But one thing got me really hooked – the HTML canvas.
 The possibilities of this control are only limited by the performance of javascript and the missing 3d feature (hopefully this comes pretty soon). With that technology I finally got some way to implement something I wanted to try for some time now.</description>
     </item>
     
     <item>
       <title>shell-tools.net version2</title>
-      <link>/2009/07/31/shell-tools-net-version2.html</link>
+      <link>https://jens.dev/2009/07/31/shell-tools-net-version2.html</link>
       <pubDate>Fri, 31 Jul 2009 23:10:27 +0000</pubDate>
       
-      <guid>/2009/07/31/shell-tools-net-version2.html</guid>
+      <guid>https://jens.dev/2009/07/31/shell-tools-net-version2.html</guid>
       <description>After nearly a full year, I finally got the time to rework my existing shell-tools.net site. The changes are rather small, because I think the site already works well, so why destroy a working site. So here is what I have done.
 I have added some new features like evaluating XPaths, pretty print JSON and transform XML files into JSON. Further to that I modified the css slightly so that from now on the current location will be highlighted in the navigation.</description>
     </item>
     
     <item>
       <title>installing GLUEscript on debian squeeze 64bit</title>
-      <link>/2009/07/15/installing-gluescript-on-debian-squeeze-64bit.html</link>
+      <link>https://jens.dev/2009/07/15/installing-gluescript-on-debian-squeeze-64bit.html</link>
       <pubDate>Wed, 15 Jul 2009 16:06:15 +0000</pubDate>
       
-      <guid>/2009/07/15/installing-gluescript-on-debian-squeeze-64bit.html</guid>
+      <guid>https://jens.dev/2009/07/15/installing-gluescript-on-debian-squeeze-64bit.html</guid>
       <description>The GLUEscript runtime is still in an pretty early development stage. Basically they use the Firefox spidermonkey javascript engine and build some useful libraries on top of that (like curl, mysql, filesystem support).
 They also provide a little help in form of a little text file, but with this, it still took me half a day for my first installation. Most issues I got were based on version mismatches, because debian and also ubuntu use older versions of the required libraries.</description>
     </item>
     
     <item>
       <title>why sub-selects can be faster than inner joins</title>
-      <link>/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins.html</link>
+      <link>https://jens.dev/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins.html</link>
       <pubDate>Thu, 25 Jun 2009 14:28:26 +0000</pubDate>
       
-      <guid>/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins.html</guid>
+      <guid>https://jens.dev/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins.html</guid>
       <description>So here is my situation. I have 2 tables with the following DDL.
 CREATE TABLE tags ( id bigint NOT NULL, &amp;#34;value&amp;#34; character varying(150), CONSTRAINT tags_pkey PRIMARY KEY (id), CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags ( sites_id bigint NOT NULL, pages_id bigint NOT NULL, tags_id bigint NOT NULL, count integer, updated timestamp without time zone, CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.</description>
     </item>
     
     <item>
       <title>get hostname from url as stored procedure in plpgsql</title>
-      <link>/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql.html</link>
+      <link>https://jens.dev/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql.html</link>
       <pubDate>Tue, 09 Jun 2009 00:38:35 +0000</pubDate>
       
-      <guid>/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql.html</guid>
+      <guid>https://jens.dev/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql.html</guid>
       <description>I just needed a simple stored procedure to extract the hostname from any given URL. So here is what I came up with.
 CREATE OR REPLACE FUNCTION getHostFromUrl(p_url character varying) RETURNS character varying AS $BODY$ declare begin return substring(p_url from &amp;#39;http.?://(.*?)/(.*)&amp;#39;); end; $BODY$ LANGUAGE &amp;#39;plpgsql&amp;#39; VOLATILE COST 100; </description>
     </item>
     
     <item>
       <title>extracting information from websites through xslt</title>
-      <link>/2009/06/05/extracting-information-from-websites-through-xslt.html</link>
+      <link>https://jens.dev/2009/06/05/extracting-information-from-websites-through-xslt.html</link>
       <pubDate>Fri, 05 Jun 2009 19:05:40 +0000</pubDate>
       
-      <guid>/2009/06/05/extracting-information-from-websites-through-xslt.html</guid>
+      <guid>https://jens.dev/2009/06/05/extracting-information-from-websites-through-xslt.html</guid>
       <description>Today, most websites feature some kind of feed, so every user who wants to stay in touch, can follow new publications very easily. Some sites support RSS-feeds or mail notification. Although this is pretty common, there are still sites out there who doesn’t. For that purpose I tried to find some easy solution.
 First problem here is, how to get the information into some format usable. HTML is not meant for complex data mining operations.</description>
     </item>
     
     <item>
       <title>writing Unicode characters to Oracle with TIBCO BusinessWorks</title>
-      <link>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks.html</link>
+      <link>https://jens.dev/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks.html</link>
       <pubDate>Thu, 28 May 2009 14:19:33 +0000</pubDate>
       
-      <guid>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks.html</guid>
+      <guid>https://jens.dev/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks.html</guid>
       <description>As always, I get the most puzzling mysteries from work requirements. I got the requirement of sending an email with Russian characters through TIBCO BusinessWorks. So far so good. BusinessWorks has full support of Unicode, so it should be not a problem to get this one running. Lucky me the reality looks different.
 For this email system a database template system was used and of course the database was an upgraded Oracle 10g, so all the columns (for historic reasons) were Latin-1 and not Unicode.</description>
     </item>
     
     <item>
       <title>gnome 3.0, just my two cents</title>
-      <link>/2009/05/08/gnome-30-just-my-two-cents.html</link>
+      <link>https://jens.dev/2009/05/08/gnome-30-just-my-two-cents.html</link>
       <pubDate>Fri, 08 May 2009 14:10:59 +0000</pubDate>
       
-      <guid>/2009/05/08/gnome-30-just-my-two-cents.html</guid>
+      <guid>https://jens.dev/2009/05/08/gnome-30-just-my-two-cents.html</guid>
       <description>Over the last weeks there were several discussions how to handle the gnome 3.0 release. There are a lot of different points of view out there what has to be done in gnome to deserve a 3.0 release.
 One fact that often seems to be forgotten is the fact that the timeframe for all this is something about a year. So some of the suggestions like switching the core language of the gtk seem like a bit overkill to me.</description>
     </item>
     
     <item>
       <title>TIBCO Designer with external memory window</title>
-      <link>/2009/04/24/tibco-designer-with-external-memory-window.html</link>
+      <link>https://jens.dev/2009/04/24/tibco-designer-with-external-memory-window.html</link>
       <pubDate>Fri, 24 Apr 2009 18:13:10 +0000</pubDate>
       
-      <guid>/2009/04/24/tibco-designer-with-external-memory-window.html</guid>
+      <guid>https://jens.dev/2009/04/24/tibco-designer-with-external-memory-window.html</guid>
       <description>During Research for my last blog post I found an interesting feature of the designer. If the designer uses more than one gigabyte of heap memory, the display of the memory usage gets a bit fuzzy.
 Obviously somebody at TIBCO forgot to round the value, so it would fit into this small section of the status bar.
 Keeping that in mind I found a start parameter which allows you to start the designer with an external window which only displays the current memory load.</description>
@@ -789,20 +789,20 @@ Keeping that in mind I found a start parameter which allows you to start the des
     
     <item>
       <title>improve TIBCO Designer tester performance under linux</title>
-      <link>/2009/04/22/improve-tibco-designer-tester-performance-under-linux.html</link>
+      <link>https://jens.dev/2009/04/22/improve-tibco-designer-tester-performance-under-linux.html</link>
       <pubDate>Wed, 22 Apr 2009 00:20:25 +0000</pubDate>
       
-      <guid>/2009/04/22/improve-tibco-designer-tester-performance-under-linux.html</guid>
+      <guid>https://jens.dev/2009/04/22/improve-tibco-designer-tester-performance-under-linux.html</guid>
       <description>I’m using the TIBCO designer for quite a while now. Before using it in a debian environment I developed all TIBCO related stuff in Windows XP. Now with the switch to linux there came quite a shift in user experience. One thing that really annoyed me was the slow performance of the designer debugger.
 So I started some measurements with a simple test process. The test process creates a simple list of all files (2000 items) in one folder and then iterates over every entry.</description>
     </item>
     
     <item>
       <title>what&amp;#8217;s the sitch</title>
-      <link>/2009/04/09/whats-the-sitch.html</link>
+      <link>https://jens.dev/2009/04/09/whats-the-sitch.html</link>
       <pubDate>Thu, 09 Apr 2009 00:26:32 +0000</pubDate>
       
-      <guid>/2009/04/09/whats-the-sitch.html</guid>
+      <guid>https://jens.dev/2009/04/09/whats-the-sitch.html</guid>
       <description>As I have a lot to do right am not really coming closer to my goal to write a general purpose app which can pull data from the yahoo streaming server. So I decided to post a few facts about the yahoo api. I hope this helps someone developing his app. So lets see what we have. First an explanation of these cryptic symbols:
  a00: ask price
   b00: bid price</description>
@@ -810,10 +810,10 @@ So I started some measurements with a simple test process. The test process crea
     
     <item>
       <title>installing TIBCO TRA 5.6 on a debian 64bit</title>
-      <link>/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</link>
+      <link>https://jens.dev/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</link>
       <pubDate>Tue, 24 Feb 2009 00:59:40 +0000</pubDate>
       
-      <guid>/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</guid>
+      <guid>https://jens.dev/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</guid>
       <description>Recently I got a hardware upgrade so I could finally switch to a 64-bit environment. To fully use that machine I wanted to install TIBCO in 64-bit mode. After starting the installation I got this message:
  TIBINS202527: Error: ERROR: You are running a 64-bit product installer on a 32-bit system.
   This is not supported.
@@ -822,19 +822,19 @@ So I started some measurements with a simple test process. The test process crea
     
     <item>
       <title>copy a table across databases via dblink</title>
-      <link>/2009/02/06/copy-a-table-across-databases-via-dblink.html</link>
+      <link>https://jens.dev/2009/02/06/copy-a-table-across-databases-via-dblink.html</link>
       <pubDate>Fri, 06 Feb 2009 15:32:40 +0000</pubDate>
       
-      <guid>/2009/02/06/copy-a-table-across-databases-via-dblink.html</guid>
+      <guid>https://jens.dev/2009/02/06/copy-a-table-across-databases-via-dblink.html</guid>
       <description>Recently I ran into the situation that I needed to copy a large subset of data from one database to another. Normally I would say, make a dump and then re-import the data into the new schema. But this solution has some serious drawbacks. First you have to copy the complete database. Second you have to maintain the structure of the data. A third problem could be that you have to copy the complete dump to the target location (in case it is not the same machine and your database is a bit larger e.</description>
     </item>
     
     <item>
       <title>bringing the yahoo finance stream to the shell</title>
-      <link>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</link>
+      <link>https://jens.dev/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</link>
       <pubDate>Tue, 03 Feb 2009 16:17:06 +0000</pubDate>
       
-      <guid>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</guid>
+      <guid>https://jens.dev/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</guid>
       <description>A little while ago a posted a primitive way to get to yahoo finance streaming data. As you can guess this was just the beginning. To raise the bar I tried to parse the received data and bring it to the shell. To get this done I needed several tools.
   curl – to send and receive the http request
   transform – a primitive tool to do streaming operations within one line</description>
@@ -842,10 +842,10 @@ So I started some measurements with a simple test process. The test process crea
     
     <item>
       <title>Moving Windows Part2</title>
-      <link>/2009/02/01/moving-windows-part2.html</link>
+      <link>https://jens.dev/2009/02/01/moving-windows-part2.html</link>
       <pubDate>Sun, 01 Feb 2009 02:02:22 +0000</pubDate>
       
-      <guid>/2009/02/01/moving-windows-part2.html</guid>
+      <guid>https://jens.dev/2009/02/01/moving-windows-part2.html</guid>
       <description>A little while ago a posted an application which was able to move windows remotely. After receiving some feedback from users who actually use this application (originally only made as proof of concept) I decided to work on it a little more.
 So here’s a little Explanation how to use it:
  download the application directly from this blog run the executable (.NET 1.1 is needed) activate the window you want to move (use ALT+Tab or what ever you want) the label should change and displays the actual position of your window you can move the window via left, right, up and down-buttons  I think this should cover it.</description>
@@ -853,20 +853,20 @@ So here’s a little Explanation how to use it:
     
     <item>
       <title>Streaming editor improved</title>
-      <link>/2009/01/14/streaming-editor-improved.html</link>
+      <link>https://jens.dev/2009/01/14/streaming-editor-improved.html</link>
       <pubDate>Wed, 14 Jan 2009 15:51:03 +0000</pubDate>
       
-      <guid>/2009/01/14/streaming-editor-improved.html</guid>
+      <guid>https://jens.dev/2009/01/14/streaming-editor-improved.html</guid>
       <description>I recently ran into the situation that I needed a streaming editor which does not work line-wise. I was receiving an html stream and wanted to remove all the html tags.
 Although I tried different existing editors like sed or replace, non of it got it right for me. All implementations waited for a newline to work with the data. I also tried disabling every possible buffer but the problem still persists.</description>
     </item>
     
     <item>
       <title>Moving Windows remotely with .NET</title>
-      <link>/2008/12/10/moving-windows-remotely-with-net.html</link>
+      <link>https://jens.dev/2008/12/10/moving-windows-remotely-with-net.html</link>
       <pubDate>Wed, 10 Dec 2008 19:34:16 +0000</pubDate>
       
-      <guid>/2008/12/10/moving-windows-remotely-with-net.html</guid>
+      <guid>https://jens.dev/2008/12/10/moving-windows-remotely-with-net.html</guid>
       <description>A colleague of mine has a dual-monitor windows system.
 Unfortunately he has a different monitor setup for home and work (work – 2nd monitor on the left; home – 2nd monitor on the right). Now when you work with certain Java applications which save their position on their own you come to the point where an window pops up out of the viewing range.
 Now you have nearly now way to move that window, because you can’t click it.</description>
@@ -874,20 +874,20 @@ Now you have nearly now way to move that window, because you can’t click it.</
     
     <item>
       <title>use yahoo finance streaming api</title>
-      <link>/2008/12/02/use-yahoo-finance-streaming-api.html</link>
+      <link>https://jens.dev/2008/12/02/use-yahoo-finance-streaming-api.html</link>
       <pubDate>Tue, 02 Dec 2008 12:23:33 +0000</pubDate>
       
-      <guid>/2008/12/02/use-yahoo-finance-streaming-api.html</guid>
+      <guid>https://jens.dev/2008/12/02/use-yahoo-finance-streaming-api.html</guid>
       <description>In the past I used this ruby script to poll for the current stock data and put it into a database to create a little history.
 Recently I saw a new feature on the yahoo finance homepage. Now it is possible to enable a streaming option and then you get a live update on certain values via AJAX. So I thought why not get this feature and let yahoo stream the content to the client instead of polling the server from time to time.</description>
     </item>
     
     <item>
       <title>Tibco EMS with database backend (postgresql)</title>
-      <link>/2008/11/16/tibco-ems-with-database-backend-postgresql.html</link>
+      <link>https://jens.dev/2008/11/16/tibco-ems-with-database-backend-postgresql.html</link>
       <pubDate>Sun, 16 Nov 2008 20:48:11 +0000</pubDate>
       
-      <guid>/2008/11/16/tibco-ems-with-database-backend-postgresql.html</guid>
+      <guid>https://jens.dev/2008/11/16/tibco-ems-with-database-backend-postgresql.html</guid>
       <description>I recently tried to build a JMS Server with database backend. The chosen product was the TIBCO EMS Server. The Server brings its own database support over hibernate.
 Unfortunately TIBCO supports only Oracle,Mysql and DB2 by default. Lucky me, I needed an installation for Postgres but this shouldn’t be a big deal, because hibernate supports postgres as well. You just have to modify the hibernate config.
 First you should install the EMS server and hibernate (version provided by Tibco).</description>
@@ -895,10 +895,10 @@ First you should install the EMS server and hibernate (version provided by Tibco
     
     <item>
       <title>generate random timestamps in mysql</title>
-      <link>/2008/10/03/generate-random-timestamps-in-mysql.html</link>
+      <link>https://jens.dev/2008/10/03/generate-random-timestamps-in-mysql.html</link>
       <pubDate>Fri, 03 Oct 2008 12:13:15 +0000</pubDate>
       
-      <guid>/2008/10/03/generate-random-timestamps-in-mysql.html</guid>
+      <guid>https://jens.dev/2008/10/03/generate-random-timestamps-in-mysql.html</guid>
       <description>I’m now try to prepare a mysql performance comparison between hdd and flash. So to create a lot of test data I needed a function to create random timestamps in a certain range.
 After trying google I gave up and started with the mysql documentation and came up with the following statement:
 select from_unixtime( unix_timestamp(&amp;#39;2008-01-01 01:00:00&amp;#39;)+floor(rand()*31536000) ); So lets break it it down a bit:
@@ -907,20 +907,20 @@ first I set a start date (minimum for the random)</description>
     
     <item>
       <title>tunnel your imap over ssh</title>
-      <link>/2008/09/22/tunnel-your-imap-over-ssh.html</link>
+      <link>https://jens.dev/2008/09/22/tunnel-your-imap-over-ssh.html</link>
       <pubDate>Mon, 22 Sep 2008 21:06:12 +0000</pubDate>
       
-      <guid>/2008/09/22/tunnel-your-imap-over-ssh.html</guid>
+      <guid>https://jens.dev/2008/09/22/tunnel-your-imap-over-ssh.html</guid>
       <description>I recently had the situation that I needed access to my private email accounts at work. Lucky me, my employee prohibits imap connections to the outer world (security risk). So I had to find a way around that proxy to the mail server.
 I stumbled upon an article how to use a persistent ssh connection as tunnel through different networks. So starting at that point and checking the ssh man page I came to the following statement (works only with public key authentication):</description>
     </item>
     
     <item>
       <title>Hello World!</title>
-      <link>/2008/09/21/hello-world.html</link>
+      <link>https://jens.dev/2008/09/21/hello-world.html</link>
       <pubDate>Sun, 21 Sep 2008 12:38:37 +0000</pubDate>
       
-      <guid>/2008/09/21/hello-world.html</guid>
+      <guid>https://jens.dev/2008/09/21/hello-world.html</guid>
       <description>So, this is my my first entry. So lets start with some facts about me.
 I work for a major german company as a Software Engineer (according to me – according to my employer my job title changes every 6month or so and I don’t keep track of it). At work I’m part of a team which develops an ESB for the whole company. Our base technology is TIBCO BusinessWorks.</description>
     </item>

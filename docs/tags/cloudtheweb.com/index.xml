@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>cloudtheweb.com on My personal blog</title>
-    <link>/tags/cloudtheweb.com.html</link>
+    <link>https://jens.dev/tags/cloudtheweb.com.html</link>
     <description>Recent content in cloudtheweb.com on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Jan 2010 19:57:00 +0000</lastBuildDate><atom:link href="/tags/cloudtheweb.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Jan 2010 19:57:00 +0000</lastBuildDate><atom:link href="https://jens.dev/tags/cloudtheweb.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>tracking virtual links with google analytics</title>
-      <link>/2010/01/04/tracking-virtual-links-with-google-analytics.html</link>
+      <link>https://jens.dev/2010/01/04/tracking-virtual-links-with-google-analytics.html</link>
       <pubDate>Mon, 04 Jan 2010 19:57:00 +0000</pubDate>
       
-      <guid>/2010/01/04/tracking-virtual-links-with-google-analytics.html</guid>
+      <guid>https://jens.dev/2010/01/04/tracking-virtual-links-with-google-analytics.html</guid>
       <description>Tracking dynamic sites is sometimes a bit tricky. Typically tracking systems are specialized in tracking page views. More sophisticated system have there own way of tracking custom event (like shown here).
 Unfortunately I needed to track clicks on a HTML canvas. To make these clicks visible to a tracking system, I wanted to transform each click to virtual URL. That way I could use Google analytics not only for tracking but also for popularity statistics of certain content.</description>
     </item>
     
     <item>
       <title>cloud-the-web - my new web project</title>
-      <link>/2009/08/08/cloud-the-web-my-new-web-project.html</link>
+      <link>https://jens.dev/2009/08/08/cloud-the-web-my-new-web-project.html</link>
       <pubDate>Sat, 08 Aug 2009 12:28:01 +0000</pubDate>
       
-      <guid>/2009/08/08/cloud-the-web-my-new-web-project.html</guid>
+      <guid>https://jens.dev/2009/08/08/cloud-the-web-my-new-web-project.html</guid>
       <description>A little time ago I started experimenting with some of the new HTML 5 features. Some seam pretty impressive although some a rather unnecessary in my opinion. But one thing got me really hooked – the HTML canvas.
 The possibilities of this control are only limited by the performance of javascript and the missing 3d feature (hopefully this comes pretty soon). With that technology I finally got some way to implement something I wanted to try for some time now.</description>
     </item>

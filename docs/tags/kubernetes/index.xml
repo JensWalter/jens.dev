@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>kubernetes on My personal blog</title>
-    <link>/tags/kubernetes.html</link>
+    <link>https://jens.dev/tags/kubernetes.html</link>
     <description>Recent content in kubernetes on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Sep 2020 10:08:54 +0200</lastBuildDate><atom:link href="/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Sep 2020 10:08:54 +0200</lastBuildDate><atom:link href="https://jens.dev/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A hello world kubernetes operator in Rust</title>
-      <link>/2020/09/15/a-hello-world-kubernetes-operator-in-rust.html</link>
+      <link>https://jens.dev/2020/09/15/a-hello-world-kubernetes-operator-in-rust.html</link>
       <pubDate>Tue, 15 Sep 2020 10:08:54 +0200</pubDate>
       
-      <guid>/2020/09/15/a-hello-world-kubernetes-operator-in-rust.html</guid>
+      <guid>https://jens.dev/2020/09/15/a-hello-world-kubernetes-operator-in-rust.html</guid>
       <description>Introduction I read some samples about how to implement a kubernetes operator in Go which shows the basic priciples, but I was not able to find a similar exercise in rust. So I started looking around, how to do an operator in rust.
 Overview An operator in kubernetes is a service that watches the k8s-API for specific events to happen. Usually the operator also registers some custom resource definitions (CRD) to later watch the lifecycle of those objects.</description>
     </item>

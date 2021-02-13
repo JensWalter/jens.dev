@@ -15,9 +15,9 @@ function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader =
 <meta property="og:description" content="Normally, the JVM does not allow extending the classpath during runtime. But due to the demand, people found ways around that restriction. To bring one of the work-around to jjs I wrote the following javascript function.
 function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader(); var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class; var ClassArray = Java.type(&#34;java.lang.Class[]&#34;); var parameters = new ClassArray(1); parameters[0]= java.net.URL.class; var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&#34;addURL&#34;, parameters); method.setAccessible(true); var ObjectArray = Java.type(&#34;java.lang.Object[]&#34;); var array = new ObjectArray(1); var/*java.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html">
-        <link rel="stylesheet" href="/dist/site.css">
-        <link rel="stylesheet" href="/dist/syntax.css">
+<meta property="og:url" content="https://jens.dev/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html">
+        <link rel="stylesheet" href="https://jens.dev/dist/site.css">
+        <link rel="stylesheet" href="https://jens.dev/dist/syntax.css">
         <link rel="icon" type="image/png" href="/favicon.png">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -51,11 +51,11 @@ if (!doNotTrack) {
                     <div class="site-title-wrapper">
                         
                             <h1 class="site-title">
-                                <a href="/">My personal blog</a>
+                                <a href="https://jens.dev/">My personal blog</a>
                             </h1>
                         
                         
-                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                            <a class="button-square" href="https://jens.dev/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
                         
                         
                             <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
@@ -181,7 +181,7 @@ To bring one of the work-around to jjs I wrote the following javascript function
             <div class="container">
                 <div class="site-title-wrapper">
                     <h1 class="site-title">
-                        <a href="/">My personal blog</a>
+                        <a href="https://jens.dev/">My personal blog</a>
                     </h1>
                     <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
                         <i class="fa fa-angle-up" aria-hidden="true"></i>
@@ -198,9 +198,9 @@ To bring one of the work-around to jjs I wrote the following javascript function
             </div>
         </footer>
 
-        <script src="/js/jquery-1.11.3.min.js"></script>
-        <script src="/js/jquery.fitvids.js"></script>
-        <script src="/js/scripts.js"></script>
+        <script src="https://jens.dev/js/jquery-1.11.3.min.js"></script>
+        <script src="https://jens.dev/js/jquery.fitvids.js"></script>
+        <script src="https://jens.dev/js/scripts.js"></script>
     </body>
 </html>
 
