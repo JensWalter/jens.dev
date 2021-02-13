@@ -19,10 +19,10 @@ Cargo.toml [package] name = &amp;#34;keyvault-sample&amp;#34; version = &amp;#34
     
     <item>
       <title>Tibco EMS Bindings for Rust</title>
-      <link>/project/tibco-ems-operator-copy.html</link>
+      <link>/project/tibco-ems-rust-bindings.html</link>
       <pubDate>Wed, 18 Nov 2020 02:13:50 +0000</pubDate>
       
-      <guid>/project/tibco-ems-operator-copy.html</guid>
+      <guid>/project/tibco-ems-rust-bindings.html</guid>
       <description>https://crates.io/crates/tibco_ems</description>
     </item>
     
