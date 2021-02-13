@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>gnomeshell on My personal blog</title>
-    <link>/tags/gnomeshell/</link>
+    <link>/tags/gnomeshell.html</link>
     <description>Recent content in gnomeshell on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 08 May 2009 14:10:59 +0000</lastBuildDate><atom:link href="/tags/gnomeshell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>gnome 3.0, just my two cents</title>
-      <link>/2009/05/08/gnome-30-just-my-two-cents/</link>
+      <link>/2009/05/08/gnome-30-just-my-two-cents.html</link>
       <pubDate>Fri, 08 May 2009 14:10:59 +0000</pubDate>
       
-      <guid>/2009/05/08/gnome-30-just-my-two-cents/</guid>
+      <guid>/2009/05/08/gnome-30-just-my-two-cents.html</guid>
       <description>Over the last weeks there were several discussions how to handle the gnome 3.0 release. There are a lot of different points of view out there what has to be done in gnome to deserve a 3.0 release.
 One fact that often seems to be forgotten is the fact that the timeframe for all this is something about a year. So some of the suggestions like switching the core language of the gtk seem like a bit overkill to me.</description>
     </item>

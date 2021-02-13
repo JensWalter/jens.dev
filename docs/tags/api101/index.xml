@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>api101 on My personal blog</title>
-    <link>/tags/api101/</link>
+    <link>/tags/api101.html</link>
     <description>Recent content in api101 on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 21 Dec 2015 15:02:54 +0200</lastBuildDate><atom:link href="/tags/api101/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>building an API on top of another page</title>
-      <link>/2015/12/21/building-an-api-on-top-of-another-page/</link>
+      <link>/2015/12/21/building-an-api-on-top-of-another-page.html</link>
       <pubDate>Mon, 21 Dec 2015 15:02:54 +0200</pubDate>
       
-      <guid>/2015/12/21/building-an-api-on-top-of-another-page/</guid>
+      <guid>/2015/12/21/building-an-api-on-top-of-another-page.html</guid>
       <description>In my last post &amp;ldquo;the serverless API&amp;rdquo; I explained how an API could be build without any infrastructure to begin with. To prove my point I started building an API on top of an existing homepage.
 Mintos is a service I use for investing into p2p loans. If you want further information about Mintos head over to their FAQ section.
 overview
@@ -22,10 +22,10 @@ Since the export of data from Mintos is somewhat limited, I settled for what I c
     
     <item>
       <title>the serverless API</title>
-      <link>/2015/12/16/the-serverless-api/</link>
+      <link>/2015/12/16/the-serverless-api.html</link>
       <pubDate>Wed, 16 Dec 2015 11:53:54 +0200</pubDate>
       
-      <guid>/2015/12/16/the-serverless-api/</guid>
+      <guid>/2015/12/16/the-serverless-api.html</guid>
       <description>Building an API does come with a lot of different facets to consider. One of the greater ones is, how to run all this. Building an API implementation is a rather easy Task, most developers today have some experience with connecting with API and already had their point of contact with various technologies to fulfill this task.
 A much greater pain point comes in if you start to think about, how to host this implementation and make it secure.</description>
     </item>

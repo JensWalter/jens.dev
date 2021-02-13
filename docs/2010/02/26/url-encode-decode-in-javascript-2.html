@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>URL encode / decode in JavaScript &middot; </title>
+        <meta name="description" content="Decoding and Encoding URLs in JavaScript should be a pretty easy thing to do especially since all browsers still have the functionality built-in. Interestingly no browser allows the JavaScript runtime to use this feature. So I had to write it for myself.
+The code I came up with is far from perfect but it worked for me. To decode an URL use url_decode(url) and to reverse it just call the utf16to8 function.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="URL encode / decode in JavaScript">
+<meta property="og:description" content="Decoding and Encoding URLs in JavaScript should be a pretty easy thing to do especially since all browsers still have the functionality built-in. Interestingly no browser allows the JavaScript runtime to use this feature. So I had to write it for myself.
+The code I came up with is far from perfect but it worked for me. To decode an URL use url_decode(url) and to reverse it just call the utf16to8 function.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2010/02/26/url-encode-decode-in-javascript-2.html">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">URL encode / decode in JavaScript</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2010-02-26" itemprop="datePublished">Fri, Feb 26, 2010</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>Decoding and Encoding URLs in JavaScript should be a pretty easy thing to do especially since all browsers still have the functionality built-in. Interestingly no browser allows the JavaScript runtime to use this feature. So I had to write it for myself.</p>
+<p>The code I came up with is far from perfect but it worked for me. To decode an URL use url_decode(url) and to reverse it just call the utf16to8 function. The rest does your browser for you.</p>
+<pre><code class="language-javascriptfunction" data-lang="javascriptfunction">var hex = /^[0-9a-fA-F]{2}/;
+var out='';
+var arr = str.split('%');
+if(arr.length&amp;lt;2) return str;
+for(var i=0;i&amp;lt;arr.length;i++)
+{
+  /*look for hex values */
+  if(hex.exec(arr[i])) {
+    out += String.fromCharCode(parseInt(arr[i].substring(0,2),16))+arr[i].substring(2,arr[i].length);
+  } else { if(i==0) out+=arr[i]; else out+='%'+arr[i];
+  }
+}
+return utf8to16(out);
+}
+
+function utf16to8(str) {
+    var out, i, len, c;
+
+    out = &quot;&quot;;
+    len = str.length;
+    for(i = 0; i &amp;lt; len; i++) {
+	c = str.charCodeAt(i);
+	if ((c &gt;= 0x0001) &amp;&amp; (c &amp;lt;= 0x007F)) {
+	    out += str.charAt(i);
+	} else if (c &gt; 0x07FF) {
+	    out += String.fromCharCode(0xE0 | ((c &gt;&gt; 12) &amp; 0x0F));
+	    out += String.fromCharCode(0x80 | ((c &gt;&gt;  6) &amp; 0x3F));
+	    out += String.fromCharCode(0x80 | ((c &gt;&gt;  0) &amp; 0x3F));
+	} else {
+	    out += String.fromCharCode(0xC0 | ((c &gt;&gt;  6) &amp; 0x1F));
+	    out += String.fromCharCode(0x80 | ((c &gt;&gt;  0) &amp; 0x3F));
+	}
+    }
+    return out;
+}
+
+function utf8to16(str) {
+    var out, i, len, c;
+    var char2, char3;
+
+    out = &quot;&quot;;
+    len = str.length;
+    i = 0;
+    while(i &amp;lt; len) {
+	c = str.charCodeAt(i++);
+	switch(c &gt;&gt; 4)
+	{
+	  case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+	    // 0xxxxxxx
+	    out += str.charAt(i-1);
+	    break;
+	  case 12: case 13:
+	    // 110x xxxx   10xx xxxx
+	    char2 = str.charCodeAt(i++);
+	    out += String.fromCharCode(((c &amp; 0x1F) &amp;lt;&amp;lt; 6) | (char2 &amp; 0x3F));
+	    break;
+	  case 14:
+	    // 1110 xxxx  10xx xxxx  10xx xxxx
+	    char2 = str.charCodeAt(i++);
+	    char3 = str.charCodeAt(i++);
+	    out += String.fromCharCode(((c &amp; 0x0F) &amp;lt;&amp;lt; 12) |
+					   ((char2 &amp; 0x3F) &amp;lt;&amp;lt; 6) |
+					   ((char3 &amp; 0x3F) &amp;lt;&amp;lt; 0));
+	    break;
+	}
+    }
+    return out;
+}
+</code></pre>
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/javascript/">javascript</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

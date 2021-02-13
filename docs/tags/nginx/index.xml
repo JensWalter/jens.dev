@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nginx on My personal blog</title>
-    <link>/tags/nginx/</link>
+    <link>/tags/nginx.html</link>
     <description>Recent content in nginx on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 16 Oct 2016 15:49:54 +0200</lastBuildDate><atom:link href="/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>installing the nchan module for nginx on a gentoo based system</title>
-      <link>/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system/</link>
+      <link>/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system.html</link>
       <pubDate>Sun, 16 Oct 2016 15:49:54 +0200</pubDate>
       
-      <guid>/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system/</guid>
+      <guid>/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system.html</guid>
       <description>I recently encountered a requirement that could be fulfilled by the nchan module for nginx. nchan does provide prebuilt packages for Archlinux, Debian, Ubuntu and Fedora. Sadly, there is nothing there for gentoo users. So I directly skipped ahead to the &amp;ldquo;build from source&amp;rdquo; section. The instructions where pretty basic:
  clone the github repo configure nginx with ./configure &amp;ndash;add-module=path/to/nchan build  For me this lead to the following result:</description>
     </item>

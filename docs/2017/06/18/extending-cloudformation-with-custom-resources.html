@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>extending cloudformation with custom resources &middot; </title>
+        <meta name="description" content="CloudFormation is a pretty capable tool which provides templating functionality for most of the Amazon web services. But still, keeping up with the release cadence of all the AWS services isn&rsquo;t that easy. So there always is a little gap of what features the console offers and what CloudFormation offers.
+So for this use case (and some others like initial data load), AWS introduced custom resources. This Resource basically represents an AWS lambda invocation which is called whenever your template gets instantiated, removed or update.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="extending cloudformation with custom resources">
+<meta property="og:description" content="CloudFormation is a pretty capable tool which provides templating functionality for most of the Amazon web services. But still, keeping up with the release cadence of all the AWS services isn&rsquo;t that easy. So there always is a little gap of what features the console offers and what CloudFormation offers.
+So for this use case (and some others like initial data load), AWS introduced custom resources. This Resource basically represents an AWS lambda invocation which is called whenever your template gets instantiated, removed or update.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2017/06/18/extending-cloudformation-with-custom-resources.html">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">extending cloudformation with custom resources</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2017-06-18" itemprop="datePublished">Sun, Jun 18, 2017</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>CloudFormation is a pretty capable tool which provides templating functionality for most of the Amazon web services. But still, keeping up with the release cadence of all the AWS services isn&rsquo;t that easy. So there always is a little gap of what features the console offers and what CloudFormation offers.</p>
+<p>So for this use case (and some others like initial data load), AWS introduced custom resources. This Resource basically represents an AWS lambda invocation which is called whenever your template gets instantiated, removed or update.</p>
+<p>The states that AWS supports are:</p>
+<ul>
+<li><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/crpg-ref-requesttypes-create.html">Create</a></li>
+<li><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/crpg-ref-requesttypes-delete.html">Delete</a></li>
+<li><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/crpg-ref-requesttypes-update.html">Update</a></li>
+</ul>
+<p>Since some of the AWS API calls take a rather long time, the invocation model of this lambda is asynchronous. I linked the AWS docs for a more detailed explanation of the input structure on the various operations.</p>
+<p>What is important here is, that all input structures carry a callback URL which has to be called, so CloudFormation knows it can continue creating/deleting the stack.</p>
+<p>If you forget to call the callback or your code doesn&rsquo;t exit correctly (e.g. uncaught exceptions), then CloudFormation wait a very long time (about 1 hour) until it actually times out.</p>
+<p>To make things easier, AWS provides a <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html#cfn-lambda-function-code-cfnresponsemodule">node module</a>, where all the callback stuff is handled correctly. And even better, it is already pre-installed if the Lambda function is inlined in the CloudFormation template, so no extra bundling is necessary here.</p>
+<p>So first I have to create a Lambda function inside my template (it can also be an externally defined lambda, but this makes it easier to demonstrate).</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
+        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
+</span><span style="color:#d88200">            var response = require(&#39;cfn-response&#39;);
+</span><span style="color:#d88200">            exports.handler = function(event, context) {
+</span><span style="color:#d88200">              console.log(&#34;event&#34;);
+</span><span style="color:#d88200">              console.log(event);
+</span><span style="color:#d88200">              console.log(&#34;context&#34;);
+</span><span style="color:#d88200">              console.log(context);
+</span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
+</span><span style="color:#d88200">            };</span>            
+      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
+      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
+      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
+</code></pre></div><p>This is the most basic function, which only logs the event and context and then confirms its execution back to CloudFormation.</p>
+<p>Now I enhanced my very basic version to at least differentiate between those CloudFormation operations.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
+        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
+</span><span style="color:#d88200">            const response = require(&#39;cfn-response&#39;);
+</span><span style="color:#d88200">            exports.handler = function(event, context) {
+</span><span style="color:#d88200">              if(event.RequestType == &#34;Create&#34;){
+</span><span style="color:#d88200">                console.log(&#34;creating something&#34;);
+</span><span style="color:#d88200">              }else if(event.RequestType == &#34;Update&#34;){
+</span><span style="color:#d88200">                console.log(&#34;updating something&#34;);
+</span><span style="color:#d88200">              }else {
+</span><span style="color:#d88200">                console.log(&#34;deleting something&#34;);
+</span><span style="color:#d88200">              }
+</span><span style="color:#d88200">              //and in any case confirm the transaction
+</span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
+</span><span style="color:#d88200">            };</span>            
+      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
+      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
+      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
+</code></pre></div><p>Now I have to make this Lambda accessible as CustomResource.</p>
+<p>CustomResources look like this.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">CustomResource1</span><span style="color:#111">:</span>
+  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">Custom::CustomResourceFunction</span>
+  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+    <span style="color:#f92672">ServiceToken</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt CustomResourceFunction.Arn</span>
+    <span style="color:#f92672">StackName</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;AWS::StackName&#34;</span>
+</code></pre></div><p>To bring all this together, this would be the concluding CloudFormation template with all resources.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
+        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
+</span><span style="color:#d88200">            const response = require(&#39;cfn-response&#39;);
+</span><span style="color:#d88200">            exports.handler = function(event, context) {
+</span><span style="color:#d88200">              if(event.RequestType == &#34;Create&#34;){
+</span><span style="color:#d88200">                console.log(&#34;creating something&#34;);
+</span><span style="color:#d88200">              }else if(event.RequestType == &#34;Update&#34;){
+</span><span style="color:#d88200">                console.log(&#34;updating something&#34;);
+</span><span style="color:#d88200">              }else {
+</span><span style="color:#d88200">                console.log(&#34;deleting something&#34;);
+</span><span style="color:#d88200">              }
+</span><span style="color:#d88200">              //and in any case confirm the transaction
+</span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
+</span><span style="color:#d88200">            };</span>            
+      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
+      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
+      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
+  <span style="color:#f92672">LambdaExecutionRole</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
+    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+      <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
+        <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+        <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+        - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+          <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
+            <span style="color:#f92672">Service</span><span style="color:#111">:</span>
+            - <span style="color:#ae81ff">lambda.amazonaws.com</span>
+          <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+          - <span style="color:#ae81ff">sts:AssumeRole</span>
+      <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
+      <span style="color:#f92672">Policies</span><span style="color:#111">:</span>
+      - <span style="color:#f92672">PolicyName</span><span style="color:#111">:</span> <span style="color:#ae81ff">LogPolicy</span>
+        <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
+          <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+          <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+            - <span style="color:#ae81ff">logs:CreateLogGroup</span>
+            - <span style="color:#ae81ff">logs:CreateLogStream</span>
+            - <span style="color:#ae81ff">logs:PutLogEvents</span>
+            <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#ae81ff">arn:aws:logs:*:*:*</span>
+  <span style="color:#f92672">CustomResource1</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">Custom::CustomResourceFunction</span>
+    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+      <span style="color:#f92672">ServiceToken</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt CustomResourceFunction.Arn</span>
+      <span style="color:#f92672">StackName</span><span style="color:#111">:</span>
+        <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;AWS::StackName&#34;</span>
+</code></pre></div>
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/cloudformation/">cloudformation</a>, 
+                <a href="/tags/nodejs/">nodejs</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

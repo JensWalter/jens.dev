@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mongodb on My personal blog</title>
-    <link>/tags/mongodb/</link>
+    <link>/tags/mongodb.html</link>
     <description>Recent content in mongodb on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Mar 2017 12:52:54 +0200</lastBuildDate><atom:link href="/tags/mongodb/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>migrating a mongodb to AWS Athena</title>
-      <link>/2017/03/27/migrating-a-mongodb-to-aws-athena/</link>
+      <link>/2017/03/27/migrating-a-mongodb-to-aws-athena.html</link>
       <pubDate>Mon, 27 Mar 2017 12:52:54 +0200</pubDate>
       
-      <guid>/2017/03/27/migrating-a-mongodb-to-aws-athena/</guid>
+      <guid>/2017/03/27/migrating-a-mongodb-to-aws-athena.html</guid>
       <description>I have an existing application that uses a mongodb to store metadata on files to make them searchable. Since searching in those records is not very time sensitive for me, I thought about migrating the whole database to S3/Athena. The advantage here would be, that there would be no longer a database to maintain, since Athena runs serverless on AWS.
 I started with a JSON-export of mongodb, to have a look at the document structure.</description>
     </item>

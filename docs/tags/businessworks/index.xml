@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BusinessWorks on My personal blog</title>
-    <link>/tags/businessworks/</link>
+    <link>/tags/businessworks.html</link>
     <description>Recent content in BusinessWorks on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 09 Aug 2020 10:08:54 +0000</lastBuildDate><atom:link href="/tags/businessworks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Containerizing TIBCO BusinessWorks 5</title>
-      <link>/2020/08/09/containerizing-businessworks-5/</link>
+      <link>/2020/08/09/containerizing-businessworks-5.html</link>
       <pubDate>Sun, 09 Aug 2020 10:08:54 +0000</pubDate>
       
-      <guid>/2020/08/09/containerizing-businessworks-5/</guid>
+      <guid>/2020/08/09/containerizing-businessworks-5.html</guid>
       <description>Preparation To prepare the container build, I downloaded the current versions of TRA/BW/EMS from the TIBCO edelivery platform.
 I downloaded the following artifacts:
  TIB_TRA_5.11.0_linux_x86_64.zip TIB_BW_5.14.0_linux26gl23_x86_64.zip TIB_rv_8.4.6_linux_x86.zip TIB_ems_8.5.1_linux_x86_64.zip  Now to bring those together into a container I copied all of those into a tibco-businessworks-runtime directory.
@@ -21,59 +21,59 @@ Installation To support a headless installation, the TIBCO universal installer u
     
     <item>
       <title>schemaless schema validation in TIBCO BusinessWorks</title>
-      <link>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks/</link>
+      <link>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks.html</link>
       <pubDate>Fri, 17 Jun 2016 17:06:54 +0200</pubDate>
       
-      <guid>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks/</guid>
+      <guid>/2016/06/17/schemaless-schema-validation-in-tibco-businessworks.html</guid>
       <description>Usually, schema validation in BusinessWorks is done pretty straight forward. You get an xml, known the schema and just run a ParseXml activity. The problem becomes more complicated if you have to validate a xml which you have no knowledge of which schema it derived from. In my case, I had a folder full of schemas which I had to validate the incoming xml against.
 To achieve this,I came up with the following solution.</description>
     </item>
     
     <item>
       <title>handling a few thousand simultaneous connections in TIBCO BusinessWorks</title>
-      <link>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks/</link>
+      <link>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks.html</link>
       <pubDate>Tue, 08 Dec 2009 17:22:16 +0000</pubDate>
       
-      <guid>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks/</guid>
+      <guid>/2009/12/08/handling-a-few-thousand-simultaneous-connections-in-tibco-businessworks.html</guid>
       <description>Scaling with TIBCO BusinessWorks can sometimes be a bit tricky. Recently I began testing some scenarios how to scale a Webservice a bit larger. The first source of information was of course the official documentation and to look at the proposed best practice values for such an engine.
 To start small, I tried a HTTP Receiver with a 32bit JVM runtime. I set the heap to the maximum amount possible (something about 1.</description>
     </item>
     
     <item>
       <title>TIBCO Designer Panel too small</title>
-      <link>/2009/10/13/tibco-designer-panel-too-small/</link>
+      <link>/2009/10/13/tibco-designer-panel-too-small.html</link>
       <pubDate>Tue, 13 Oct 2009 18:52:38 +0000</pubDate>
       
-      <guid>/2009/10/13/tibco-designer-panel-too-small/</guid>
+      <guid>/2009/10/13/tibco-designer-panel-too-small.html</guid>
       <description>Recently I ran into some rather trivial problem which isn’t really addressed by the TIBCO Designer. I had a process which wouldn’t fit into the Design Panel. There was just not enough space on the canvas to fit in the actual flow.
 After asking around I came to the conclusion that every designer (from different colleges I work with) had a different resolution for the Design canvas. Nobody knew any kind of property where you can set this resolution, so I began searching around.</description>
     </item>
     
     <item>
       <title>init script for the TIBCO Administrator</title>
-      <link>/2009/09/05/init-script-for-the-tibco-administrator/</link>
+      <link>/2009/09/05/init-script-for-the-tibco-administrator.html</link>
       <pubDate>Sat, 05 Sep 2009 19:03:06 +0000</pubDate>
       
-      <guid>/2009/09/05/init-script-for-the-tibco-administrator/</guid>
+      <guid>/2009/09/05/init-script-for-the-tibco-administrator.html</guid>
       <description>I recently ran into the situation that I needed to install a TIBCO BusinessWorks with Administrator onto a RedHat Server. Under Windows the installer provides everything you need to run your domain as a Service. In Linux this looks different. I have found no init script templates nor did the installer generate me some stubs. So I had to write them myself. So here is what I came up with (I know it isn’t perfect, but it works – suggestions are always welcome).</description>
     </item>
     
     <item>
       <title>adding IP-restriction to BusinessWorks processes</title>
-      <link>/2009/08/17/adding-ip-restriction-to-businessworks-processes/</link>
+      <link>/2009/08/17/adding-ip-restriction-to-businessworks-processes.html</link>
       <pubDate>Mon, 17 Aug 2009 01:16:07 +0000</pubDate>
       
-      <guid>/2009/08/17/adding-ip-restriction-to-businessworks-processes/</guid>
+      <guid>/2009/08/17/adding-ip-restriction-to-businessworks-processes.html</guid>
       <description>Recently I got into the situation that somebody used some interface a way it was not designed for and so created an out-of-memory situation which couldn’t be handled by the engine itself. So now I got the case that one client block the complete service due to invalid requests which he shouldn’t do in the first place.
 In the short term there seemed to be only one solution, block the client.</description>
     </item>
     
     <item>
       <title>writing Unicode characters to Oracle with TIBCO BusinessWorks</title>
-      <link>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks/</link>
+      <link>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks.html</link>
       <pubDate>Thu, 28 May 2009 14:19:33 +0000</pubDate>
       
-      <guid>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks/</guid>
+      <guid>/2009/05/28/writing-unicode-characters-to-oracle-with-tibco-businessworks.html</guid>
       <description>As always, I get the most puzzling mysteries from work requirements. I got the requirement of sending an email with Russian characters through TIBCO BusinessWorks. So far so good. BusinessWorks has full support of Unicode, so it should be not a problem to get this one running. Lucky me the reality looks different.
 For this email system a database template system was used and of course the database was an upgraded Oracle 10g, so all the columns (for historic reasons) were Latin-1 and not Unicode.</description>
     </item>

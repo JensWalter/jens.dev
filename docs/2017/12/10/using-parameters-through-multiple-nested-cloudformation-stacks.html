@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Using parameters through multiple nested CloudFormation stacks &middot; </title>
+        <meta name="description" content="As stacks grow, it is not always advisable to have all resources managed in one single stack. So to split up resources by their usage leads to the question on how can CloudFormation reference data from a different stack.
+AWS has a simple answer for that, &ldquo;use import/export&rdquo;. The drawback of this approach is, the exports are globally visible. So If you only want to share data between nested stacks you can use normal output values.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Using parameters through multiple nested CloudFormation stacks">
+<meta property="og:description" content="As stacks grow, it is not always advisable to have all resources managed in one single stack. So to split up resources by their usage leads to the question on how can CloudFormation reference data from a different stack.
+AWS has a simple answer for that, &ldquo;use import/export&rdquo;. The drawback of this approach is, the exports are globally visible. So If you only want to share data between nested stacks you can use normal output values.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2017/12/10/using-parameters-through-multiple-nested-cloudformation-stacks.html">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Using parameters through multiple nested CloudFormation stacks</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2017-12-10" itemprop="datePublished">Sun, Dec 10, 2017</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>As stacks grow, it is not always advisable to have all resources managed in one single stack. So to split up resources by their usage leads to the question on how can CloudFormation reference data from a different stack.</p>
+<p>AWS has a simple answer for that, &ldquo;use import/export&rdquo;. The drawback of this approach is, the exports are globally visible. So If you only want to share data between nested stacks you can use normal output values.</p>
+<p>In my case, I had a root stack which holds 2 nested stacks. Those two nested stack had some shared dependencies, so there is the need for exchanging data. Here a short architectural overview.</p>
+<p><img src="/assets/nestedoutput.png" alt="nested stack hierarchy"></p>
+<p>So the root stack only contains of two separate sub-stacks with no information on its own.</p>
+<p>The first stack (stack A) defines a S3 bucket. The second stack (stack B) defines a lambda which will do some operations on the objects of this bucket.</p>
+<p>Here is the definition of stack A.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+  <span style="color:#f92672">bucket</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::S3::Bucket</span>
+<span style="color:#f92672">Outputs</span><span style="color:#111">:</span>
+  <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Value</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref bucket</span>
+</code></pre></div><p>Here the definition of stack B, with the lambda and a parameter definition for the required bucket name.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+<span style="color:#f92672">Parameters</span><span style="color:#111">:</span>
+  <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">String</span>
+    <span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">name of the bucket.</span>
+<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+  <span style="color:#f92672">BucketFunction</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+      <span style="color:#f92672">Code</span><span style="color:#111">:</span> <span style="color:#ae81ff">...</span>
+      <span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">performs some operation on the given bucket.</span>
+      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+      <span style="color:#f92672">Role</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambdarole</span>
+      <span style="color:#f92672">Environment</span><span style="color:#111">:</span>
+        <span style="color:#f92672">Variables</span><span style="color:#111">:</span>
+          <span style="color:#f92672">bucket</span><span style="color:#111">:</span>
+            <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">BucketName</span>
+</code></pre></div><p>Now, the wiring is pretty straight forward. I had to connect the output of the first stack into the parameters section of the second stack. All this has to be done on the root level stack.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+<span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">root level stack</span>
+<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+  <span style="color:#f92672">stackA</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::CloudFormation::Stack</span>
+    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+      <span style="color:#f92672">TemplateURL</span><span style="color:#111">:</span> <span style="color:#ae81ff">stackA.yml</span>
+  <span style="color:#f92672">stackB</span><span style="color:#111">:</span>
+    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::CloudFormation::Stack</span>
+    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+      <span style="color:#f92672">TemplateURL</span><span style="color:#111">:</span> <span style="color:#ae81ff">stackB.yml</span>
+      <span style="color:#f92672">Parameters</span><span style="color:#111">:</span>
+        <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
+          <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">stackA , Outputs.BucketName ]</span>
+</code></pre></div><p>This way I could share private information within my CloudFormation templates without the need to expose them publicly.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/cloudformation/">cloudformation</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

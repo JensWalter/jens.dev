@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>serverless on My personal blog</title>
-    <link>/tags/serverless/</link>
+    <link>/tags/serverless.html</link>
     <description>Recent content in serverless on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 28 Feb 2017 16:52:54 +0200</lastBuildDate><atom:link href="/tags/serverless/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>a serverless cron in AWS CloudFormation</title>
-      <link>/2017/02/28/a-serverless-cron-in-aws-cloudformation/</link>
+      <link>/2017/02/28/a-serverless-cron-in-aws-cloudformation.html</link>
       <pubDate>Tue, 28 Feb 2017 16:52:54 +0200</pubDate>
       
-      <guid>/2017/02/28/a-serverless-cron-in-aws-cloudformation/</guid>
+      <guid>/2017/02/28/a-serverless-cron-in-aws-cloudformation.html</guid>
       <description>Here my scenario I try to cover this time.
 Scenario:
  Raise an event based on a cron pattern Subscribe to that event with a Lambda  As picture this would look like this:
@@ -23,10 +23,10 @@ I copied the header from an existing template since I have nothing to add here:<
     
     <item>
       <title>Publish an S3 Event to Lambda through SNS</title>
-      <link>/2017/02/19/publish-an-s3-event-to-lambda-through-sns/</link>
+      <link>/2017/02/19/publish-an-s3-event-to-lambda-through-sns.html</link>
       <pubDate>Sun, 19 Feb 2017 14:00:54 +0200</pubDate>
       
-      <guid>/2017/02/19/publish-an-s3-event-to-lambda-through-sns/</guid>
+      <guid>/2017/02/19/publish-an-s3-event-to-lambda-through-sns.html</guid>
       <description>My path through starting with AWS CloudFormation was a somewhat rocky path. Often I wished for simple CF Templates which would only show one pattern at a time. So I&amp;rsquo;m starting a short series where I will try to describe some patterns I experienced and hopefully lower the entry barrier for CloudFormation since it is great tool.
 Scenario:
  Raise an S3-Object-Create event Publish that event to SNS Subscribe to that event with a Lambda  As picture this would look like this:</description>

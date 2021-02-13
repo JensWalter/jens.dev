@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>embed a github commit log into markdown &middot; </title>
+        <meta name="description" content="I started to write some documentation for a project of mine and I wanted to embed a change log on certain elements in the documentation. Since my documentation format is mkDocs, all documents are written in markdown.
+So here is what I came up with:
+**last commits** &lt;div id=&#39;commits&#39; data-path=&#39;src/io/trivium/extension/&#39;&gt;&lt;/div&gt; &lt;script src=&#39;https://code.jquery.com/jquery-2.2.1.min.js&#39;&gt;&lt;/script&gt; &lt;script&gt; var path = $(&#39;#commits&#39;).data(&#39;path&#39;); var url = &#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&#39;&#43;path; $.ajax({type:&#39;GET&#39;, url:url, success: function(data){ var str=&#34;&lt;table class=&#39;docutils&#39;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;message&lt;/th&gt;&lt;th&gt;date&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;th&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#34;; for(var idx=0;idx&lt;data.length &amp;&amp; idx&lt;10;idx&#43;&#43;){ var one = data[idx]; var d = one.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="embed a github commit log into markdown">
+<meta property="og:description" content="I started to write some documentation for a project of mine and I wanted to embed a change log on certain elements in the documentation. Since my documentation format is mkDocs, all documents are written in markdown.
+So here is what I came up with:
+**last commits** &lt;div id=&#39;commits&#39; data-path=&#39;src/io/trivium/extension/&#39;&gt;&lt;/div&gt; &lt;script src=&#39;https://code.jquery.com/jquery-2.2.1.min.js&#39;&gt;&lt;/script&gt; &lt;script&gt; var path = $(&#39;#commits&#39;).data(&#39;path&#39;); var url = &#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&#39;&#43;path; $.ajax({type:&#39;GET&#39;, url:url, success: function(data){ var str=&#34;&lt;table class=&#39;docutils&#39;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;message&lt;/th&gt;&lt;th&gt;date&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;th&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#34;; for(var idx=0;idx&lt;data.length &amp;&amp; idx&lt;10;idx&#43;&#43;){ var one = data[idx]; var d = one.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2016/03/10/embed-a-github-commit-log-into-markdown.html">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">embed a github commit log into markdown</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2016-03-10" itemprop="datePublished">Thu, Mar 10, 2016</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p>I started to write some documentation for a project of mine and I wanted to embed a change log on certain elements in the documentation.
+Since my documentation format is mkDocs, all documents are written in markdown.</p>
+<p>So here is what I came up with:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">**last commits**
+
+<span style="color:#111">&lt;</span><span style="color:#f92672">div</span> <span style="color:#75af00">id</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;commits&#39;</span> <span style="color:#75af00">data-path</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;src/io/trivium/extension/&#39;</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">div</span><span style="color:#111">&gt;</span>
+<span style="color:#111">&lt;</span><span style="color:#f92672">script</span> <span style="color:#75af00">src</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;https://code.jquery.com/jquery-2.2.1.min.js&#39;</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">script</span><span style="color:#111">&gt;</span>
+<span style="color:#111">&lt;</span><span style="color:#f92672">script</span><span style="color:#111">&gt;</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">path</span> <span style="color:#f92672">=</span> <span style="color:#75af00">$</span><span style="color:#111">(</span><span style="color:#d88200">&#39;#commits&#39;</span><span style="color:#111">).</span><span style="color:#75af00">data</span><span style="color:#111">(</span><span style="color:#d88200">&#39;path&#39;</span><span style="color:#111">);</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&#39;</span><span style="color:#f92672">+</span><span style="color:#75af00">path</span><span style="color:#111">;</span>
+<span style="color:#75af00">$</span><span style="color:#111">.</span><span style="color:#75af00">ajax</span><span style="color:#111">({</span><span style="color:#75af00">type</span><span style="color:#f92672">:</span><span style="color:#d88200">&#39;GET&#39;</span><span style="color:#111">,</span>
+        <span style="color:#75af00">url</span><span style="color:#f92672">:</span><span style="color:#75af00">url</span><span style="color:#111">,</span>
+        <span style="color:#75af00">success</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">function</span><span style="color:#111">(</span><span style="color:#75af00">data</span><span style="color:#111">){</span>
+    <span style="color:#00a8c8">var</span> <span style="color:#75af00">str</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;&lt;table class=&#39;docutils&#39;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;message&lt;/th&gt;&lt;th&gt;date&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;th&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#34;</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#00a8c8">var</span> <span style="color:#75af00">idx</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#75af00">idx</span><span style="color:#f92672">&lt;</span><span style="color:#75af00">data</span><span style="color:#111">.</span><span style="color:#75af00">length</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#75af00">idx</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span><span style="color:#111">;</span><span style="color:#75af00">idx</span><span style="color:#f92672">++</span><span style="color:#111">){</span>
+      <span style="color:#00a8c8">var</span> <span style="color:#75af00">one</span> <span style="color:#f92672">=</span> <span style="color:#75af00">data</span><span style="color:#111">[</span><span style="color:#75af00">idx</span><span style="color:#111">];</span>
+      <span style="color:#00a8c8">var</span> <span style="color:#75af00">d</span> <span style="color:#f92672">=</span> <span style="color:#75af00">one</span><span style="color:#111">.</span><span style="color:#75af00">commit</span><span style="color:#111">.</span><span style="color:#75af00">author</span><span style="color:#111">.</span><span style="color:#75af00">date</span><span style="color:#111">.</span><span style="color:#75af00">substr</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span><span style="color:#ae81ff">10</span><span style="color:#111">);</span>
+      <span style="color:#00a8c8">var</span> <span style="color:#75af00">t</span> <span style="color:#f92672">=</span> <span style="color:#75af00">one</span><span style="color:#111">.</span><span style="color:#75af00">commit</span><span style="color:#111">.</span><span style="color:#75af00">author</span><span style="color:#111">.</span><span style="color:#75af00">date</span><span style="color:#111">.</span><span style="color:#75af00">substr</span><span style="color:#111">(</span><span style="color:#ae81ff">11</span><span style="color:#111">,</span><span style="color:#ae81ff">10</span><span style="color:#111">);</span>
+      <span style="color:#75af00">str</span><span style="color:#f92672">+=</span><span style="color:#d88200">&#34;&lt;tr&gt;&lt;td&gt;&#34;</span><span style="color:#f92672">+</span><span style="color:#75af00">one</span><span style="color:#111">.</span><span style="color:#75af00">commit</span><span style="color:#111">.</span><span style="color:#75af00">message</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34;&lt;/td&gt;&lt;td&gt;&#34;</span>
+          <span style="color:#f92672">+</span><span style="color:#75af00">d</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34; &#34;</span><span style="color:#f92672">+</span><span style="color:#75af00">t</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34;&lt;/td&gt;&lt;td&gt;&#34;</span>
+          <span style="color:#f92672">+</span><span style="color:#75af00">one</span><span style="color:#111">.</span><span style="color:#75af00">commit</span><span style="color:#111">.</span><span style="color:#75af00">author</span><span style="color:#111">.</span><span style="color:#75af00">name</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34;&lt;/td&gt;&lt;td&gt;&#34;</span>
+          <span style="color:#f92672">+</span><span style="color:#d88200">&#34;&lt;a href=&#39;&#34;</span><span style="color:#f92672">+</span><span style="color:#75af00">one</span><span style="color:#111">.</span><span style="color:#75af00">html_url</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34;&#39;&gt;&#34;</span><span style="color:#f92672">+</span><span style="color:#75af00">one</span><span style="color:#111">.</span><span style="color:#75af00">sha</span><span style="color:#111">.</span><span style="color:#75af00">substr</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span><span style="color:#ae81ff">7</span><span style="color:#111">)</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&#34;</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+    <span style="color:#75af00">str</span><span style="color:#f92672">+=</span><span style="color:#d88200">&#34;&lt;/tbody&gt;&lt;/table&gt;&#34;</span><span style="color:#111">;</span>
+    <span style="color:#75af00">$</span><span style="color:#111">(</span><span style="color:#d88200">&#39;#commits&#39;</span><span style="color:#111">).</span><span style="color:#75af00">html</span><span style="color:#111">(</span><span style="color:#75af00">str</span><span style="color:#111">);</span>
+<span style="color:#111">}});</span>
+<span style="color:#111">&lt;/</span><span style="color:#f92672">script</span><span style="color:#111">&gt;</span>
+</code></pre></div><p>So the script queries the github api for the commit log of a certain resource. With that response, the script build a HTML table with all the relevant content.</p>
+<p>In real life this snippet evaluated looks like this:</p>
+<!-- raw HTML omitted -->
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/api/">api</a>, 
+                <a href="/tags/javascript/">javascript</a>, 
+                <a href="/tags/github/">github</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

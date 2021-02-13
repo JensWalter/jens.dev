@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>apache on My personal blog</title>
-    <link>/tags/apache/</link>
+    <link>/tags/apache.html</link>
     <description>Recent content in apache on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 17 Jun 2015 12:25:20 +0200</lastBuildDate><atom:link href="/tags/apache/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>get the most visited url from an access log through a single line of bash</title>
-      <link>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash/</link>
+      <link>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash.html</link>
       <pubDate>Wed, 17 Jun 2015 12:25:20 +0200</pubDate>
       
-      <guid>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash/</guid>
+      <guid>/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash.html</guid>
       <description>If you have an apache access log and want to see the visit count of your site, you can use this one-liner to get some basic visit stats.
 grep &amp;#34;200 &amp;#34; /var/log/apache2/apimeister-access.log \  | grep -v &amp;#39;Googlebot&amp;#39; \  | grep -v &amp;#39;Baiduspider&amp;#39; \  | grep -v &amp;#39;bingbot&amp;#39; \  | grep -v &amp;#39;YandexBot&amp;#39; \  | grep -v &amp;#39;MJ12bot&amp;#39; \  | grep -v &amp;#39;meanpathbot&amp;#39; \  | grep -v &amp;#39;DotBot&amp;#39; \  | grep -v &amp;#39;AhrefsBot&amp;#39; \  | cut -d &amp;#39;&amp;#34;&amp;#39; -f 2 \  | cut -d &amp;#39; &amp;#39; -f 2 \  | sort | uniq -c | sort -rn | less </description>
     </item>

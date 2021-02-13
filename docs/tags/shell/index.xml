@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>shell on My personal blog</title>
-    <link>/tags/shell/</link>
+    <link>/tags/shell.html</link>
     <description>Recent content in shell on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 Sep 2009 19:03:06 +0000</lastBuildDate><atom:link href="/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>init script for the TIBCO Administrator</title>
-      <link>/2009/09/05/init-script-for-the-tibco-administrator/</link>
+      <link>/2009/09/05/init-script-for-the-tibco-administrator.html</link>
       <pubDate>Sat, 05 Sep 2009 19:03:06 +0000</pubDate>
       
-      <guid>/2009/09/05/init-script-for-the-tibco-administrator/</guid>
+      <guid>/2009/09/05/init-script-for-the-tibco-administrator.html</guid>
       <description>I recently ran into the situation that I needed to install a TIBCO BusinessWorks with Administrator onto a RedHat Server. Under Windows the installer provides everything you need to run your domain as a Service. In Linux this looks different. I have found no init script templates nor did the installer generate me some stubs. So I had to write them myself. So here is what I came up with (I know it isn’t perfect, but it works – suggestions are always welcome).</description>
     </item>
     
     <item>
       <title>bringing the yahoo finance stream to the shell</title>
-      <link>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell/</link>
+      <link>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</link>
       <pubDate>Tue, 03 Feb 2009 16:17:06 +0000</pubDate>
       
-      <guid>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell/</guid>
+      <guid>/2009/02/03/bringing-the-yahoo-finance-stream-to-the-shell.html</guid>
       <description>A little while ago a posted a primitive way to get to yahoo finance streaming data. As you can guess this was just the beginning. To raise the bar I tried to parse the received data and bring it to the shell. To get this done I needed several tools.
   curl – to send and receive the http request
   transform – a primitive tool to do streaming operations within one line</description>

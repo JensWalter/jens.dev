@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Containerizing TIBCO BusinessWorks 5 &middot; </title>
+        <meta name="description" content="Preparation To prepare the container build, I downloaded the current versions of TRA/BW/EMS from the TIBCO edelivery platform.
+I downloaded the following artifacts:
+ TIB_TRA_5.11.0_linux_x86_64.zip TIB_BW_5.14.0_linux26gl23_x86_64.zip TIB_rv_8.4.6_linux_x86.zip TIB_ems_8.5.1_linux_x86_64.zip  Now to bring those together into a container I copied all of those into a tibco-businessworks-runtime directory.
+Installation To support a headless installation, the TIBCO universal installer uses silent files. I attached my silent file at the end of this post.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Containerizing TIBCO BusinessWorks 5">
+<meta property="og:description" content="Preparation To prepare the container build, I downloaded the current versions of TRA/BW/EMS from the TIBCO edelivery platform.
+I downloaded the following artifacts:
+ TIB_TRA_5.11.0_linux_x86_64.zip TIB_BW_5.14.0_linux26gl23_x86_64.zip TIB_rv_8.4.6_linux_x86.zip TIB_ems_8.5.1_linux_x86_64.zip  Now to bring those together into a container I copied all of those into a tibco-businessworks-runtime directory.
+Installation To support a headless installation, the TIBCO universal installer uses silent files. I attached my silent file at the end of this post.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/2020/08/09/containerizing-businessworks-5.html">
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+        
+
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-5676095-8', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a href="/">My personal blog</a>
+                            </h1>
+                        
+                        
+                            <a class="button-square" href="/index.xml" aria-label="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" aria-label="Twitter" href="https://twitter.com/jens_walter" rel="me" >
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" aria-label="Github" href="https://github.com/JensWalter" rel="me">
+                                <i class="fa fa-github-alt" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" aria-label="Stack Overflow" href="https://stackoverflow.com/users/story/220219" rel="me">
+                                <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" aria-label="Send an Email" href="mailto:jens@apimeister.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a href="/project/">Projects</a>
+    </li>
+
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Containerizing TIBCO BusinessWorks 5</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2020-08-09" itemprop="datePublished">Sun, Aug 9, 2020</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author"></a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <h3 id="preparation">Preparation</h3>
+<p>To prepare the container build, I downloaded the current versions of TRA/BW/EMS from the TIBCO <a href="https://edelivery.tibco.com/">edelivery platform</a>.</p>
+<p>I downloaded the following artifacts:</p>
+<ul>
+<li>TIB_TRA_5.11.0_linux_x86_64.zip</li>
+<li>TIB_BW_5.14.0_linux26gl23_x86_64.zip</li>
+<li>TIB_rv_8.4.6_linux_x86.zip</li>
+<li>TIB_ems_8.5.1_linux_x86_64.zip</li>
+</ul>
+<p>Now to bring those together into a container I copied all of those into a <code>tibco-businessworks-runtime</code> directory.</p>
+<h3 id="installation">Installation</h3>
+<p>To support a headless installation, the TIBCO universal installer uses silent files. I attached my silent file at the end of this post.</p>
+<p>The Dockerfile is also attached.</p>
+<h3 id="running-the-engine">Running the engine</h3>
+<p>Now that the container is built, I can start the engine inside. To get the actual code inside, I opted for a volume mount, which only contains the source as a TIBCO Designer project.</p>
+<p>The project on my local disk is located on <code>/Users/jens/tmp/tibco-ide/sample</code>. This is mapped to the <code>/tmp/engine</code> directory.</p>
+<p>Now I can start the engine through docker run.</p>
+<pre><code>docker run \
+  -v /Users/jens/tmp/tibco-ide/sample:/tmp/engine \
+  businessworks-runtime ./bwengine -p bwengine.tra /tmp/engine
+</code></pre><h3 id="attachments">Attachments</h3>
+<!-- raw HTML omitted -->
+
+</div>
+
+        <footer class="post-footer clearfix">
+        <p class="post-tags">
+            <span>Tagged:</span>
+                <a href="/tags/tibco/">tibco</a>, 
+                <a href="/tags/businessworks/">businessworks</a>, 
+                <a href="/tags/container/">container</a>, 
+                <a href="/tags/docker/">docker</a>
+        </p>
+    <div class="share">
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a href="/">My personal blog</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

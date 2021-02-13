@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on My personal blog</title>
-    <link>/project/</link>
+    <link>/project.html</link>
     <description>Recent content in Projects on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 18 Nov 2020 02:13:50 +0000</lastBuildDate><atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tibco EMS Bindings for Rust</title>
-      <link>/project/tibco-ems-operator-copy/</link>
+      <link>/project/tibco-ems-operator-copy.html</link>
       <pubDate>Wed, 18 Nov 2020 02:13:50 +0000</pubDate>
       
-      <guid>/project/tibco-ems-operator-copy/</guid>
+      <guid>/project/tibco-ems-operator-copy.html</guid>
       <description>https://crates.io/crates/tibco_ems</description>
     </item>
     
     <item>
       <title>Tibco EMS Operator for Kubernetes</title>
-      <link>/project/tibco-ems-operator/</link>
+      <link>/project/tibco-ems-operator.html</link>
       <pubDate>Wed, 18 Nov 2020 02:13:50 +0000</pubDate>
       
-      <guid>/project/tibco-ems-operator/</guid>
+      <guid>/project/tibco-ems-operator.html</guid>
       <description>https://github.com/apimeister/tibco-ems-operator</description>
     </item>
     

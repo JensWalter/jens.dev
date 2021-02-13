@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>uuid on My personal blog</title>
-    <link>/tags/uuid/</link>
+    <link>/tags/uuid.html</link>
     <description>Recent content in uuid on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 04 Aug 2015 16:21:54 +0200</lastBuildDate><atom:link href="/tags/uuid/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>generate a random uuid in bash</title>
-      <link>/2015/08/04/generate-a-random-uuid-in-bash/</link>
+      <link>/2015/08/04/generate-a-random-uuid-in-bash.html</link>
       <pubDate>Tue, 04 Aug 2015 16:21:54 +0200</pubDate>
       
-      <guid>/2015/08/04/generate-a-random-uuid-in-bash/</guid>
+      <guid>/2015/08/04/generate-a-random-uuid-in-bash.html</guid>
       <description>To generate a UUIDv4 (random UUID) you can execute the following command.
 cat /proc/sys/kernel/random/uuid a01766f8-c4f5-4506-9262-1b408132f048 using uuidgen leads to the following outputs.
 #getting a time based uuid uuidgen -t 89a25fa8-3ab4-11e5-a414-14dae9ef67fb #getting a random based uuid uuidgen -r 6b81ed73-bd0b-4fc7-9f9a-709e121323b2 </description>
@@ -20,10 +20,10 @@ cat /proc/sys/kernel/random/uuid a01766f8-c4f5-4506-9262-1b408132f048 using uuid
     
     <item>
       <title>extract the UUIDv1 encapsulated timestamp within an oracle select</title>
-      <link>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select/</link>
+      <link>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</link>
       <pubDate>Sun, 14 Jun 2015 18:34:23 +0200</pubDate>
       
-      <guid>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select/</guid>
+      <guid>/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</guid>
       <description>When you have a partioned table full of UUIDs but partitioned through timestamp, you need a way to translate the UUID back into a timestamp to match a partition where the key is stored. So here is my way of how to extract the timestamp out of an UUIDv1.
 select ts,to_timestamp(date &amp;#39;1970-01-01&amp;#39;+ (ts/(24*60*60))) from ( select trunc((to_number(substr(uuid,16,3)||&amp;#39;000000000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,10,4)||&amp;#39;00000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,0,8) ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) -122192928000000000)/10000000) ts from ( select &amp;#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&amp;#39; uuid from dual ) ) </description>
     </item>
