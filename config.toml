@@ -23,7 +23,6 @@ tag = "tags"
     email = "jens@apimeister.com"
     opengraph = true
     rss = true
-    dateFormat = "01 Feb 20"
 
 [Permalinks]
   post = "/:year/:month/:day/:filename/"
