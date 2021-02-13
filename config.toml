@@ -6,6 +6,8 @@ googleAnalytics = "UA-5676095-8"
 
 Paginate=999 
 
+publishDir = "docs"
+
 [privacy.googleAnalytics]
 anonymizeIP = true
 respectDoNotTrack = true
