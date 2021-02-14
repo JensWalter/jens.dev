@@ -23,8 +23,6 @@ tag = "tags"
   description = ""
   github = "https://github.com/JensWalter"
   twitter = "https://twitter.com/jens_walter"
-  stackoverflow = "https://stackoverflow.com/users/story/220219"
-  email = "jens@apimeister.com"
   opengraph = true
   rss = true
 
