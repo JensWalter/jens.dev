@@ -7,7 +7,7 @@
     <ol class="post-list tag-list">
         {{ $pag := .Paginate .Pages }}
         {{ range $pag.Pages }}
-            {{ partial "page-stub.html" . }}
+            {{ partial "post-stub.html" . }}
         {{ end }}
     </ol>
 
