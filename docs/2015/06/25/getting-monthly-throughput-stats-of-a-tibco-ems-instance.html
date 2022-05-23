@@ -9,7 +9,7 @@
 printf &#39;show stat queue &gt; wide\nshow stat topic &gt; wide\n&#39;  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1  | awk &#39;NR&gt;11&#39;  | awk &#39;{ printf $1&#34;;&#34;$2&#34;;&#34;$8&#34;\n&#34;; }&#39;  | grep -v &#39;tcp://&#39;  | grep -v &#39;&lt;total&gt;&#39; The output looks like:">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.97.3" />
+        <meta name="generator" content="Hugo 0.99.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="getting monthly throughput stats of a TIBCO EMS instance">
@@ -178,7 +178,7 @@ The process would look like the following.</p>
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2022 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>

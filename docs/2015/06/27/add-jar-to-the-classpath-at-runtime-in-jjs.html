@@ -8,7 +8,7 @@
 function addUrlToClasspath(pathName){ 	var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader();  var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class;  var ClassArray = Java.type(&#34;java.lang.Class[]&#34;);  var parameters = new ClassArray(1);  parameters[0]= java.net.URL.class;  var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&#34;addURL&#34;, parameters);  method.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.97.3" />
+        <meta name="generator" content="Hugo 0.99.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="add jar to the classpath at runtime in jjs (the hacky way)">
@@ -180,7 +180,7 @@ To bring one of the work-around to jjs I wrote the following javascript function
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2022 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>

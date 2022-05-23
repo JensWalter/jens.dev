@@ -1,6 +1,6 @@
 ---
 title: "Write a KEDA external Scaler for Oracle in Rust"
-date: 2022-05-23T10:13:50Z
+date:  2022-05-22T10:13:50Z
 tags:
   - kubernetes
   - rust

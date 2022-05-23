@@ -9,7 +9,7 @@ So here is what I came up with:
 **last commits**  &lt;div id=&#39;commits&#39; data-path=&#39;src/io/trivium/extension/&#39;&gt;&lt;/div&gt; &lt;script src=&#39;https://code.jquery.com/jquery-2.2.1.min.js&#39;&gt;&lt;/script&gt; &lt;script&gt; var path = $(&#39;#commits&#39;).data(&#39;path&#39;); var url = &#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&#39;&#43;path; $.ajax({type:&#39;GET&#39;,  url:url,  success: function(data){  var str=&#34;&lt;table class=&#39;docutils&#39;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;message&lt;/th&gt;&lt;th&gt;date&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;th&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#34;;  for(var idx=0;idx&lt;data.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.97.3" />
+        <meta name="generator" content="Hugo 0.99.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="embed a github commit log into markdown">
@@ -176,7 +176,7 @@ Since my documentation format is mkDocs, all documents are written in markdown.<
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2022 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>

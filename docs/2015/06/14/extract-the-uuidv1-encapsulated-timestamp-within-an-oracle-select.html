@@ -8,7 +8,7 @@
 select ts,to_timestamp(date &#39;1970-01-01&#39;&#43; (ts/(24*60*60))) from (  select  trunc((to_number(substr(uuid,16,3)||&#39;000000000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;)  &#43;to_number(substr(uuid,10,4)||&#39;00000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;)  &#43;to_number(substr(uuid,0,8) ,&#39;xxxxxxxxxxxxxxxx&#39;)  -122192928000000000)/10000000) ts  from (  select &#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&#39; uuid from dual  ) ) ">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.97.3" />
+        <meta name="generator" content="Hugo 0.99.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="extract the UUIDv1 encapsulated timestamp within an oracle select">
@@ -156,7 +156,7 @@ if (!doNotTrack) {
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2021 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2022 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
