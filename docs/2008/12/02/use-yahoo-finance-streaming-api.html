@@ -8,7 +8,7 @@
 Recently I saw a new feature on the yahoo finance homepage. Now it is possible to enable a streaming option and then you get a live update on certain values via AJAX. So I thought why not get this feature and let yahoo stream the content to the client instead of polling the server from time to time.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="use yahoo finance streaming api">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -134,19 +133,19 @@ if (!doNotTrack) {
 <p>a00 -&gt; ask</p>
 <p>b00 -&gt; bid</p>
 <p>With that data you can build a Push-Client with your own custom data. Here is a sample Request for what I needed.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget -Obla <span style="color:#d88200">&#39;http://streamerapi.finance.yahoo.com/streamer/1.0?s=^GDAXI,USD=X&amp;o=BEI.F,SIE.F,PRA.F&amp;k=l10,a00,b00,g00,h00&amp;j=l10,a00,b00,g00,h00&amp;r=0&amp;marketid=us_market&amp;callback=parent.yfs_u1f&amp;mktmcb=parent.yfs_mktmcb&amp;gencallback=parent.yfs_gencb&#39;</span>
-</code></pre></div><p>(Streaming the current ‘ask’, ‘bid’ and ‘price’ values for the stocks ‘BEI.F’,’SIE.F’ and ‘PRA.F’.)</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -Obla <span style="color:#d88200">&#39;http://streamerapi.finance.yahoo.com/streamer/1.0?s=^GDAXI,USD=X&amp;o=BEI.F,SIE.F,PRA.F&amp;k=l10,a00,b00,g00,h00&amp;j=l10,a00,b00,g00,h00&amp;r=0&amp;marketid=us_market&amp;callback=parent.yfs_u1f&amp;mktmcb=parent.yfs_mktmcb&amp;gencallback=parent.yfs_gencb&#39;</span>
+</span></span></code></pre></div><p>(Streaming the current ‘ask’, ‘bid’ and ‘price’ values for the stocks ‘BEI.F’,’SIE.F’ and ‘PRA.F’.)</p>
 <p>The response for that looks like that:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#111">&amp;lt;</span>html&gt;
-<span style="color:#111">&amp;lt;</span>head&gt;
-<span style="color:#111">&amp;lt;</span>script type=&#39;text/javascript&#39;&gt; document.domain=&#39;finance.yahoo.com&#39;;<span style="color:#111">&amp;lt;</span>/script&gt;
-<span style="color:#111">&amp;lt;</span>/head&gt;
-<span style="color:#111">&amp;lt;</span>body&gt;<span style="color:#111">&amp;lt;</span>/body&gt;
-<span style="color:#111">&amp;lt;</span>script&gt;try{parent.yfs_mktmcb({&#34;unixtime&#34;:1228213139,&#34;open&#34;:1228228200,&#34;close&#34;:1228251600});}catch(e){}<span style="color:#111">&amp;lt;</span>/script&gt;
-<span style="color:#111">&amp;lt;</span>script&gt;try{parent.yfs_u1f({&#34;USD=X&#34;:{l10:&#34;1.00&#34;,a00:&#34;1.00&#34;,b00:&#34;1.00&#34;,g00:&#34;0.00&#34;,h00:&#34;0.00&#34;}});}catch(e){}<span style="color:#111">&amp;lt;</span>/script&gt;
-<span style="color:#111">&amp;lt;</span>script&gt;try{parent.yfs_u1f({&#34;BEI.F&#34;:{l10:&#34;42.31&#34;,a00:&#34;41.70&#34;,b00:&#34;41.53&#34;,g00:&#34;42.31&#34;,h00:&#34;43.95&#34;}});}catch(e){}<span style="color:#111">&amp;lt;</span>/script&gt;
-<span style="color:#111">&amp;lt;</span>script&gt;try{parent.yfs_u1f({&#34;SIE.F&#34;:{l10:&#34;44.46&#34;,a00:&#34;44.26&#34;,b00:&#34;44.20&#34;,g00:&#34;44.40&#34;,h00:&#34;47.55&#34;}});}catch(e){}<span style="color:#111">&amp;lt;</span>/script&gt;
-</code></pre></div><!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>html&gt;
+</span></span><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>head&gt;
+</span></span><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>script type=&#39;text/javascript&#39;&gt; document.domain=&#39;finance.yahoo.com&#39;;<span style="color:#111">&amp;lt;</span>/script&gt;
+</span></span><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>/head&gt;
+</span></span><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>body&gt;<span style="color:#111">&amp;lt;</span>/body&gt;
+</span></span><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>script&gt;try{parent.yfs_mktmcb({&#34;unixtime&#34;:1228213139,&#34;open&#34;:1228228200,&#34;close&#34;:1228251600});}catch(e){}<span style="color:#111">&amp;lt;</span>/script&gt;
+</span></span><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>script&gt;try{parent.yfs_u1f({&#34;USD=X&#34;:{l10:&#34;1.00&#34;,a00:&#34;1.00&#34;,b00:&#34;1.00&#34;,g00:&#34;0.00&#34;,h00:&#34;0.00&#34;}});}catch(e){}<span style="color:#111">&amp;lt;</span>/script&gt;
+</span></span><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>script&gt;try{parent.yfs_u1f({&#34;BEI.F&#34;:{l10:&#34;42.31&#34;,a00:&#34;41.70&#34;,b00:&#34;41.53&#34;,g00:&#34;42.31&#34;,h00:&#34;43.95&#34;}});}catch(e){}<span style="color:#111">&amp;lt;</span>/script&gt;
+</span></span><span style="display:flex;"><span><span style="color:#111">&amp;lt;</span>script&gt;try{parent.yfs_u1f({&#34;SIE.F&#34;:{l10:&#34;44.46&#34;,a00:&#34;44.26&#34;,b00:&#34;44.20&#34;,g00:&#34;44.40&#34;,h00:&#34;47.55&#34;}});}catch(e){}<span style="color:#111">&amp;lt;</span>/script&gt;
+</span></span></code></pre></div><!-- raw HTML omitted -->
 
 </div>
 

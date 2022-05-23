@@ -9,7 +9,7 @@ So here comes part 2 in my web component series on how to handle data in form of
 &lt;hello-world name=&#34;jens&#34;&gt;&lt;/hello-world&gt; Since the whole web component exists within one javascript class, the data handling has to be done within that class. The first thing that came to my mind was to extend the constructor to read all attributes on creation.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="how web component attributes work">
@@ -45,7 +45,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -117,18 +116,18 @@ if (!doNotTrack) {
     <p>My <a href="https://apimeister.com/2017/06/03/writing-a-hello-world-web-component.html">last post</a> described how to build a web component. Any form of data handling was intentionally left out.</p>
 <p>So here comes part 2 in my web component series on how to handle data in form of attributes.
 In HTML it would look like this.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#111">&lt;</span><span style="color:#f92672">hello-world</span> <span style="color:#75af00">name</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;jens&#34;</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;</span>
-</code></pre></div><p>Since the whole web component exists within one javascript class, the data handling has to be done within that class. The first thing that came to my mind was to extend the constructor to read all attributes on creation.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
-  <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
-    <span style="color:#75715e">// Attach a shadow root to the element.
-</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">let</span> <span style="color:#75af00">shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
-    <span style="color:#00a8c8">let</span> <span style="color:#75af00">name</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">getAttribute</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">);</span>
-    <span style="color:#75af00">shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">name</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><p>Sadly this is discouraged through the <a href="https://w3c.github.io/webcomponents/spec/custom/#custom-element-conformance">specification</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#111">&lt;</span><span style="color:#f92672">hello-world</span> <span style="color:#75af00">name</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;jens&#34;</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;</span>
+</span></span></code></pre></div><p>Since the whole web component exists within one javascript class, the data handling has to be done within that class. The first thing that came to my mind was to extend the constructor to read all attributes on creation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Attach a shadow root to the element.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#00a8c8">let</span> <span style="color:#75af00">shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">let</span> <span style="color:#75af00">name</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">getAttribute</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">name</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>Sadly this is discouraged through the <a href="https://w3c.github.io/webcomponents/spec/custom/#custom-element-conformance">specification</a>.</p>
 <blockquote>
 <p>2.2 Requirements for custom element constructors</p>
 <p>The element&rsquo;s attributes and children must not be inspected, as in the non-upgrade case none will be present, and relying on upgrades makes the element less usable.</p>
@@ -138,51 +137,51 @@ In HTML it would look like this.</p>
 <p>In general, work should be deferred to connectedCallback as much as possible—especially work involving fetching resources or rendering. However, note that connectedCallback can be called more than once, so any initialization work that is truly one-time will need a guard to prevent it from running twice.</p>
 </blockquote>
 <p>So let&rsquo;s try putting the logic for reading state information into the connectedCallback.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
-  <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
-    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
-  <span style="color:#111">}</span>
-  <span style="color:#75af00">connectedCallback</span><span style="color:#111">(){</span>
-    <span style="color:#00a8c8">let</span> <span style="color:#75af00">name</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">getAttribute</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">);</span>
-    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">name</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><p>This way, all newly constructed elements will read their values the moment they get attached to the DOM.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">connectedCallback</span><span style="color:#111">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">let</span> <span style="color:#75af00">name</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">getAttribute</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">name</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>This way, all newly constructed elements will read their values the moment they get attached to the DOM.</p>
 <p>This is fine so far, but this solution only reads the data once. So to update this component it has to be destroyed and recreated, which is a rather wasteful operation. To make this component more useful, I needed some in-place update mechanism.</p>
 <p>For that case, the spec introduces a separate mechanism.</p>
 <p>First I had to define what attributes are monitored in an &ldquo;observedAttributes&rdquo; callback. For all defined attributes a second callback named &ldquo;attributeChangedCallback&rdquo; is invoked with the changed attribute given as parameter. All other attributes (not included in the array) will not trigger any action. This comes in handy since you don&rsquo;t want to be notified if, for example, a CSS attribute changes.</p>
 <p>In my case, this would lead to the following addition.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">static</span> <span style="color:#75af00">get</span> <span style="color:#75af00">observedAttributes</span><span style="color:#111">(){</span>
-  <span style="color:#00a8c8">return</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">];</span>
-<span style="color:#111">}</span>
-<span style="color:#75af00">attributeChangedCallback</span><span style="color:#111">(</span><span style="color:#75af00">name</span><span style="color:#111">,</span> <span style="color:#75af00">oldValue</span><span style="color:#111">,</span> <span style="color:#75af00">newValue</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">newValue</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><p>Now, every time the attribute is changed, the content gets updated.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#00a8c8">static</span> <span style="color:#75af00">get</span> <span style="color:#75af00">observedAttributes</span><span style="color:#111">(){</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">attributeChangedCallback</span><span style="color:#111">(</span><span style="color:#75af00">name</span><span style="color:#111">,</span> <span style="color:#75af00">oldValue</span><span style="color:#111">,</span> <span style="color:#75af00">newValue</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">newValue</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>Now, every time the attribute is changed, the content gets updated.</p>
 <p>So here the complete copy/paste sample to try it out.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
-  <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
-    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
-  <span style="color:#111">}</span>
-  <span style="color:#00a8c8">static</span> <span style="color:#75af00">get</span> <span style="color:#75af00">observedAttributes</span><span style="color:#111">(){</span>
-    <span style="color:#00a8c8">return</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">];</span>
-  <span style="color:#111">}</span>
-  <span style="color:#75af00">attributeChangedCallback</span><span style="color:#111">(</span><span style="color:#75af00">name</span><span style="color:#111">,</span> <span style="color:#75af00">oldValue</span><span style="color:#111">,</span> <span style="color:#75af00">newValue</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">newValue</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span>
-  <span style="color:#75af00">connectedCallback</span><span style="color:#111">(){</span>
-    <span style="color:#00a8c8">let</span> <span style="color:#75af00">name</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">getAttribute</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">);</span>
-    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">name</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-<span style="color:#75af00">customElements</span><span style="color:#111">.</span><span style="color:#75af00">define</span><span style="color:#111">(</span><span style="color:#d88200">&#39;hello-world&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">HelloWorld</span><span style="color:#111">);</span>
-</code></pre></div><p>Now you can use this control with the following code.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#111">&lt;</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
-  <span style="color:#111">&lt;</span><span style="color:#f92672">hello-world</span> <span style="color:#75af00">name</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;jens&#34;</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;</span>
-<span style="color:#111">&lt;/</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">static</span> <span style="color:#75af00">get</span> <span style="color:#75af00">observedAttributes</span><span style="color:#111">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">return</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">attributeChangedCallback</span><span style="color:#111">(</span><span style="color:#75af00">name</span><span style="color:#111">,</span> <span style="color:#75af00">oldValue</span><span style="color:#111">,</span> <span style="color:#75af00">newValue</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">newValue</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">connectedCallback</span><span style="color:#111">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">let</span> <span style="color:#75af00">name</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">getAttribute</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">_shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello </span><span style="color:#d88200">${</span><span style="color:#75af00">name</span><span style="color:#d88200">}</span><span style="color:#d88200">&lt;/p&gt;`</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">customElements</span><span style="color:#111">.</span><span style="color:#75af00">define</span><span style="color:#111">(</span><span style="color:#d88200">&#39;hello-world&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">HelloWorld</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>Now you can use this control with the following code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#111">&lt;</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">&lt;</span><span style="color:#f92672">hello-world</span> <span style="color:#75af00">name</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;jens&#34;</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">&lt;/</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

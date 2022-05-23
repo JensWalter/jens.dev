@@ -9,7 +9,7 @@ Unfortunately he has a different monitor setup for home and work (work – 2nd m
 Now you have nearly now way to move that window, because you can’t click it.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="Moving Windows remotely with .NET">
@@ -45,7 +45,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -118,43 +117,43 @@ if (!doNotTrack) {
 <p>Unfortunately he has a different monitor setup for home and work (work – 2nd monitor on the left; home – 2nd monitor on the right). Now when you work with certain Java applications which save their position on their own you come to the point where an window pops up out of the viewing range.</p>
 <p>Now you have nearly now way to move that window, because you can’t click it. Moving over the task bar doesn’t work either. So I wrote a simple Application which can move the lost window back into the viewing range.</p>
 <p>Here a bit out of the c# code:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75af00">[ DllImport(&#34;user32.dll&#34;) ]</span>
-<span style="color:#00a8c8">static</span> <span style="color:#00a8c8">extern</span> <span style="color:#111">IntPtr</span> <span style="color:#111">GetForegroundWindow</span><span style="color:#111">();</span>
-<span style="color:#75af00">
-</span><span style="color:#75af00">[DllImportAttribute(&#34;user32.dll&#34;)]</span>
-<span style="color:#75af00">[return: MarshalAs(UnmanagedType.Bool)]</span>
-<span style="color:#00a8c8">static</span> <span style="color:#00a8c8">extern</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">GetWindowRect</span><span style="color:#111">(</span><span style="color:#111">IntPtr</span> <span style="color:#111">hWnd</span><span style="color:#111">,</span> <span style="color:#00a8c8">out</span> <span style="color:#111">RECT</span> <span style="color:#111">lpRect</span><span style="color:#111">);</span>
-<span style="color:#75af00">
-</span><span style="color:#75af00">[DllImport(&#34;user32.dll&#34;, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]</span>
-<span style="color:#00a8c8">private</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">extern</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">MoveWindow</span><span style="color:#111">(</span><span style="color:#111">IntPtr</span> <span style="color:#111">hWnd</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">y</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">cx</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">cy</span><span style="color:#111">,</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">repaint</span><span style="color:#111">);</span>
-
-<span style="color:#111">...</span>
-<span style="color:#00a8c8">private</span> <span style="color:#00a8c8">void</span> <span style="color:#111">timer1_Tick</span><span style="color:#111">(</span><span style="color:#00a8c8">object</span> <span style="color:#111">sender</span><span style="color:#111">,</span> <span style="color:#111">System</span><span style="color:#111">.</span><span style="color:#111">EventArgs</span> <span style="color:#111">e</span><span style="color:#111">)</span>
-<span style="color:#111">{</span>
-	<span style="color:#111">IntPtr</span> <span style="color:#111">temp</span>  <span style="color:#111">=</span> <span style="color:#111">GetForegroundWindow</span><span style="color:#111">();</span>
-	<span style="color:#00a8c8">if</span><span style="color:#111">(</span> <span style="color:#111">me</span> <span style="color:#111">!=</span> <span style="color:#111">temp</span><span style="color:#111">)</span>
-	<span style="color:#111">{</span>
-		<span style="color:#111">window</span> <span style="color:#111">=</span> <span style="color:#111">temp</span><span style="color:#111">;</span>
-		<span style="color:#111">label1</span><span style="color:#111">.</span><span style="color:#111">Text</span> <span style="color:#111">=</span> <span style="color:#111">window</span><span style="color:#111">.</span><span style="color:#111">ToString</span><span style="color:#111">();</span>
-			<span style="color:#111">RECT</span> <span style="color:#111">t</span> <span style="color:#111">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">RECT</span><span style="color:#111">();</span>
-		<span style="color:#00a8c8">bool</span> <span style="color:#111">r</span> <span style="color:#111">=</span> <span style="color:#111">GetWindowRect</span><span style="color:#111">(</span><span style="color:#111">window</span><span style="color:#111">,</span> <span style="color:#00a8c8">out</span> <span style="color:#111">t</span><span style="color:#111">);</span>
-
-		<span style="color:#111">posx</span> <span style="color:#111">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Location</span><span style="color:#111">.</span><span style="color:#111">X</span><span style="color:#111">;</span>
-		<span style="color:#111">posy</span> <span style="color:#111">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Location</span><span style="color:#111">.</span><span style="color:#111">Y</span><span style="color:#111">;</span>
-		<span style="color:#111">sizex</span> <span style="color:#111">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Width</span><span style="color:#111">;</span>
-		<span style="color:#111">sizey</span> <span style="color:#111">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Height</span><span style="color:#111">;</span>
-		<span style="color:#111">label1</span><span style="color:#111">.</span><span style="color:#111">Text</span> <span style="color:#111">=</span> <span style="color:#111">label1</span><span style="color:#111">.</span><span style="color:#111">Text</span> <span style="color:#111">+</span> <span style="color:#d88200">&#34;\nx: &#34;</span>  <span style="color:#111">+</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Location</span><span style="color:#111">.</span><span style="color:#111">X</span><span style="color:#111">+</span> <span style="color:#d88200">&#34;\ny: &#34;</span> <span style="color:#111">+</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Location</span><span style="color:#111">.</span><span style="color:#111">Y</span>
-				<span style="color:#111">+</span><span style="color:#d88200">&#34;\nwidth: &#34;</span><span style="color:#111">+</span><span style="color:#111">sizex</span> <span style="color:#111">+</span> <span style="color:#d88200">&#34;\nheight: &#34;</span> <span style="color:#111">+</span> <span style="color:#111">sizey</span><span style="color:#111">;</span>
-		<span style="color:#111">}</span>
-	<span style="color:#111">}</span>
-
-<span style="color:#00a8c8">private</span> <span style="color:#00a8c8">void</span> <span style="color:#111">button2_Click</span><span style="color:#111">(</span><span style="color:#00a8c8">object</span> <span style="color:#111">sender</span><span style="color:#111">,</span> <span style="color:#111">System</span><span style="color:#111">.</span><span style="color:#111">EventArgs</span> <span style="color:#111">e</span><span style="color:#111">)</span>
-<span style="color:#111">{</span>
-	<span style="color:#75715e">//right
-</span><span style="color:#75715e"></span>	<span style="color:#111">posx</span> <span style="color:#111">=</span> <span style="color:#111">posx</span> <span style="color:#111">+</span><span style="color:#ae81ff">10</span><span style="color:#111">;</span>
-	<span style="color:#111">MoveWindow</span><span style="color:#111">((</span><span style="color:#111">IntPtr</span><span style="color:#111">)</span><span style="color:#111">window</span><span style="color:#111">,</span> <span style="color:#111">posx</span><span style="color:#111">,</span> <span style="color:#111">posy</span> <span style="color:#111">,</span> <span style="color:#111">sizex</span><span style="color:#111">,</span> <span style="color:#111">sizey</span><span style="color:#111">,</span> <span style="color:#00a8c8">true</span><span style="color:#111">);</span>
-<span style="color:#111">}</span>
-</code></pre></div><p>This is just to get a basic idea what I’ve done here. You can also look at the complete source code yourself (vs2003 project is attached) or just use the application as is (although it is pretty ugly – more like a proof of concept.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#75af00">[ DllImport(&#34;user32.dll&#34;) ]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">static</span> <span style="color:#00a8c8">extern</span> <span style="color:#111">IntPtr</span> <span style="color:#111">GetForegroundWindow</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">
+</span></span></span><span style="display:flex;"><span><span style="color:#75af00">[DllImportAttribute(&#34;user32.dll&#34;)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">[return: MarshalAs(UnmanagedType.Bool)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">static</span> <span style="color:#00a8c8">extern</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">GetWindowRect</span><span style="color:#111">(</span><span style="color:#111">IntPtr</span> <span style="color:#111">hWnd</span><span style="color:#111">,</span> <span style="color:#00a8c8">out</span> <span style="color:#111">RECT</span> <span style="color:#111">lpRect</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">
+</span></span></span><span style="display:flex;"><span><span style="color:#75af00">[DllImport(&#34;user32.dll&#34;, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">private</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">extern</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">MoveWindow</span><span style="color:#111">(</span><span style="color:#111">IntPtr</span> <span style="color:#111">hWnd</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">y</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">cx</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">cy</span><span style="color:#111">,</span> <span style="color:#00a8c8">bool</span> <span style="color:#111">repaint</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">private</span> <span style="color:#00a8c8">void</span> <span style="color:#111">timer1_Tick</span><span style="color:#111">(</span><span style="color:#00a8c8">object</span> <span style="color:#111">sender</span><span style="color:#111">,</span> <span style="color:#111">System</span><span style="color:#111">.</span><span style="color:#111">EventArgs</span> <span style="color:#111">e</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">IntPtr</span> <span style="color:#111">temp</span>  <span style="color:#111">=</span> <span style="color:#111">GetForegroundWindow</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">if</span><span style="color:#111">(</span> <span style="color:#111">me</span> <span style="color:#111">!=</span> <span style="color:#111">temp</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">window</span> <span style="color:#111">=</span> <span style="color:#111">temp</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">label1</span><span style="color:#111">.</span><span style="color:#111">Text</span> <span style="color:#111">=</span> <span style="color:#111">window</span><span style="color:#111">.</span><span style="color:#111">ToString</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#111">RECT</span> <span style="color:#111">t</span> <span style="color:#111">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">RECT</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#00a8c8">bool</span> <span style="color:#111">r</span> <span style="color:#111">=</span> <span style="color:#111">GetWindowRect</span><span style="color:#111">(</span><span style="color:#111">window</span><span style="color:#111">,</span> <span style="color:#00a8c8">out</span> <span style="color:#111">t</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">posx</span> <span style="color:#111">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Location</span><span style="color:#111">.</span><span style="color:#111">X</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">posy</span> <span style="color:#111">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Location</span><span style="color:#111">.</span><span style="color:#111">Y</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">sizex</span> <span style="color:#111">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Width</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">sizey</span> <span style="color:#111">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Height</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">label1</span><span style="color:#111">.</span><span style="color:#111">Text</span> <span style="color:#111">=</span> <span style="color:#111">label1</span><span style="color:#111">.</span><span style="color:#111">Text</span> <span style="color:#111">+</span> <span style="color:#d88200">&#34;\nx: &#34;</span>  <span style="color:#111">+</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Location</span><span style="color:#111">.</span><span style="color:#111">X</span><span style="color:#111">+</span> <span style="color:#d88200">&#34;\ny: &#34;</span> <span style="color:#111">+</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">Location</span><span style="color:#111">.</span><span style="color:#111">Y</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#111">+</span><span style="color:#d88200">&#34;\nwidth: &#34;</span><span style="color:#111">+</span><span style="color:#111">sizex</span> <span style="color:#111">+</span> <span style="color:#d88200">&#34;\nheight: &#34;</span> <span style="color:#111">+</span> <span style="color:#111">sizey</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">private</span> <span style="color:#00a8c8">void</span> <span style="color:#111">button2_Click</span><span style="color:#111">(</span><span style="color:#00a8c8">object</span> <span style="color:#111">sender</span><span style="color:#111">,</span> <span style="color:#111">System</span><span style="color:#111">.</span><span style="color:#111">EventArgs</span> <span style="color:#111">e</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//right</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">posx</span> <span style="color:#111">=</span> <span style="color:#111">posx</span> <span style="color:#111">+</span><span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">MoveWindow</span><span style="color:#111">((</span><span style="color:#111">IntPtr</span><span style="color:#111">)</span><span style="color:#111">window</span><span style="color:#111">,</span> <span style="color:#111">posx</span><span style="color:#111">,</span> <span style="color:#111">posy</span> <span style="color:#111">,</span> <span style="color:#111">sizex</span><span style="color:#111">,</span> <span style="color:#111">sizey</span><span style="color:#111">,</span> <span style="color:#00a8c8">true</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>This is just to get a basic idea what I’ve done here. You can also look at the complete source code yourself (vs2003 project is attached) or just use the application as is (although it is pretty ugly – more like a proof of concept.</p>
 <p>downloads:</p>
 <ul>
 <li><a href="/assets/windowsapplication1.exe">windowsapplication1.exe</a></li>

@@ -8,7 +8,7 @@
 Overview An operator in kubernetes is a service that watches the k8s-API for specific events to happen. Usually the operator also registers some custom resource definitions (CRD) to later watch the lifecycle of those objects.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="A hello world kubernetes operator in Rust">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -120,80 +119,80 @@ if (!doNotTrack) {
 <h2 id="custom-object-definition">Custom Object Definition</h2>
 <p>To do this in a hello world format, I decided on the following syntax.</p>
 <p>My custom resource is called Member and it only has a single optional property called memberOf.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span><span style="color:#111">:</span> <span style="color:#ae81ff">helloworld.apimeister.com/v1</span>
-<span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">Member</span>
-<span style="color:#f92672">metadata</span><span style="color:#111">:</span>
-  <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">patrick</span>
-<span style="color:#f92672">spec</span><span style="color:#111">:</span>
-  <span style="color:#f92672">memberOf</span><span style="color:#111">:</span> <span style="color:#ae81ff">blue</span>
-</code></pre></div><p>The definition of such a resource would look like this:.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span><span style="color:#111">:</span> <span style="color:#ae81ff">apiextensions.k8s.io/v1beta1</span>
-<span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">CustomResourceDefinition</span>
-<span style="color:#f92672">metadata</span><span style="color:#111">:</span>
-  <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">members.helloworld.apimeister.com</span>
-<span style="color:#f92672">spec</span><span style="color:#111">:</span>
-  <span style="color:#f92672">group</span><span style="color:#111">:</span> <span style="color:#ae81ff">helloworld.apimeister.com</span>
-  <span style="color:#f92672">versions</span><span style="color:#111">:</span>
-    - <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">v1</span>
-      <span style="color:#f92672">served</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span>
-      <span style="color:#f92672">storage</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span>
-  <span style="color:#f92672">scope</span><span style="color:#111">:</span> <span style="color:#ae81ff">Namespaced</span>
-  <span style="color:#f92672">names</span><span style="color:#111">:</span>
-    <span style="color:#f92672">plural</span><span style="color:#111">:</span> <span style="color:#ae81ff">members</span>
-    <span style="color:#f92672">singular</span><span style="color:#111">:</span> <span style="color:#ae81ff">member</span>
-    <span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">Member</span>
-</code></pre></div><h2 id="operators-in-rust">Operators in Rust</h2>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span><span style="color:#111">:</span> <span style="color:#ae81ff">helloworld.apimeister.com/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">Member</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">patrick</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">memberOf</span><span style="color:#111">:</span> <span style="color:#ae81ff">blue</span>
+</span></span></code></pre></div><p>The definition of such a resource would look like this:.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span><span style="color:#111">:</span> <span style="color:#ae81ff">apiextensions.k8s.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">CustomResourceDefinition</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">members.helloworld.apimeister.com</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">group</span><span style="color:#111">:</span> <span style="color:#ae81ff">helloworld.apimeister.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">versions</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">served</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">storage</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">scope</span><span style="color:#111">:</span> <span style="color:#ae81ff">Namespaced</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">names</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">plural</span><span style="color:#111">:</span> <span style="color:#ae81ff">members</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">singular</span><span style="color:#111">:</span> <span style="color:#ae81ff">member</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span><span style="color:#111">:</span> <span style="color:#ae81ff">Member</span>
+</span></span></code></pre></div><h2 id="operators-in-rust">Operators in Rust</h2>
 <p>There already exists a crate in the rust eco-system which has support for event watching.</p>
 <p>The crate I am using here is <a href="https://crates.io/crates/kube">kube</a>.</p>
 <p>The operator is acutally pretty slim from an implementation standpoint.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00a8c8">extern</span> <span style="color:#00a8c8">crate</span> <span style="color:#111">serde_derive</span><span style="color:#111">;</span>
-<span style="color:#00a8c8">use</span> <span style="color:#111">kube</span>::<span style="color:#111">{</span><span style="color:#111">api</span>::<span style="color:#111">{</span><span style="color:#111">Api</span><span style="color:#111">,</span> <span style="color:#111">ListParams</span><span style="color:#111">,</span> <span style="color:#111">WatchEvent</span><span style="color:#111">},</span> <span style="color:#111">Client</span><span style="color:#111">};</span>
-<span style="color:#00a8c8">use</span> <span style="color:#111">futures</span>::<span style="color:#111">{</span><span style="color:#111">StreamExt</span><span style="color:#111">,</span> <span style="color:#111">TryStreamExt</span><span style="color:#111">};</span>
-<span style="color:#00a8c8">use</span> <span style="color:#111">serde</span>::<span style="color:#111">{</span><span style="color:#111">Serialize</span><span style="color:#111">,</span> <span style="color:#111">Deserialize</span><span style="color:#111">};</span>
-<span style="color:#00a8c8">use</span> <span style="color:#111">kube_derive</span>::<span style="color:#111">CustomResource</span><span style="color:#111">;</span>
-<span style="color:#00a8c8">use</span> <span style="color:#111">kube</span>::<span style="color:#111">config</span>::<span style="color:#111">Config</span><span style="color:#111">;</span>
-
-<span style="color:#75715e">#[derive(CustomResource, Serialize, Deserialize, Default, Clone, Debug)]</span>
-<span style="color:#75715e">#[kube(group = </span><span style="color:#d88200">&#34;helloworld.apimeister.com&#34;</span><span style="color:#75715e">, version = </span><span style="color:#d88200">&#34;v1&#34;</span><span style="color:#75715e">, kind=</span><span style="color:#d88200">&#34;Member&#34;</span><span style="color:#75715e">, namespaced)]</span>
-<span style="color:#75715e">#[allow(non_snake_case)]</span>
-<span style="color:#00a8c8">pub</span> <span style="color:#00a8c8">struct</span> <span style="color:#75af00">MemberSpec</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">pub</span> <span style="color:#111">memberOf</span>: <span style="color:#111">Option</span><span style="color:#f92672">&lt;</span><span style="color:#111">String</span><span style="color:#f92672">&gt;</span>
-<span style="color:#111">}</span>
-
-<span style="color:#75715e">#[tokio::main]</span>
-<span style="color:#00a8c8">async</span> <span style="color:#00a8c8">fn</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> -&gt; <span style="color:#111">Result</span><span style="color:#f92672">&lt;</span><span style="color:#111">(),</span> <span style="color:#111">kube</span>::<span style="color:#111">Error</span><span style="color:#f92672">&gt;</span>  <span style="color:#111">{</span>
-    <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;starting hello world operator&#34;</span><span style="color:#111">);</span>
-    <span style="color:#00a8c8">let</span> <span style="color:#111">config</span> <span style="color:#f92672">=</span> <span style="color:#111">Config</span>::<span style="color:#111">infer</span><span style="color:#111">().</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span><span style="color:#111">;</span>
-    <span style="color:#00a8c8">let</span> <span style="color:#111">client</span>: <span style="color:#75af00">kube</span>::<span style="color:#111">Client</span> <span style="color:#f92672">=</span> <span style="color:#111">Client</span>::<span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#111">config</span><span style="color:#111">);</span>
-
-    <span style="color:#00a8c8">let</span> <span style="color:#111">crds</span>: <span style="color:#75af00">Api</span><span style="color:#f92672">&lt;</span><span style="color:#111">Member</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> <span style="color:#111">Api</span>::<span style="color:#111">namespaced</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;default&#34;</span><span style="color:#111">);</span>
-    <span style="color:#00a8c8">let</span> <span style="color:#111">lp</span> <span style="color:#f92672">=</span> <span style="color:#111">ListParams</span>::<span style="color:#111">default</span><span style="color:#111">();</span>
-
-    <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;subscribing events of type members.helloworld.apimeister.com/v1&#34;</span><span style="color:#111">);</span>
-    <span style="color:#00a8c8">let</span> <span style="color:#00a8c8">mut</span> <span style="color:#111">stream</span> <span style="color:#f92672">=</span> <span style="color:#111">crds</span><span style="color:#111">.</span><span style="color:#111">watch</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">lp</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;0&#34;</span><span style="color:#111">).</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span><span style="color:#111">.</span><span style="color:#111">boxed</span><span style="color:#111">();</span>
-    <span style="color:#00a8c8">while</span> <span style="color:#00a8c8">let</span> <span style="color:#111">Some</span><span style="color:#111">(</span><span style="color:#111">status</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#111">stream</span><span style="color:#111">.</span><span style="color:#111">try_next</span><span style="color:#111">().</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">match</span> <span style="color:#111">status</span> <span style="color:#111">{</span>
-            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Added</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
-              <span style="color:#00a8c8">match</span> <span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">spec</span><span style="color:#111">.</span><span style="color:#111">memberOf</span> <span style="color:#111">{</span>
-                <span style="color:#111">None</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;welcome {}&#34;</span><span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">()),</span>
-                <span style="color:#111">Some</span><span style="color:#111">(</span><span style="color:#111">member_of</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;welcome {} to the team {}&#34;</span>
-                          <span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">()</span>
-                          <span style="color:#111">,</span><span style="color:#111">member_of</span><span style="color:#111">),</span>
-              <span style="color:#111">}</span>
-            <span style="color:#111">},</span>
-            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Modified</span><span style="color:#111">(</span><span style="color:#111">_member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
-            <span style="color:#111">},</span>
-            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Deleted</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
-              <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;sad to see you go {}&#34;</span><span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">());</span>
-            <span style="color:#111">},</span>
-            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Error</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;error: {}&#34;</span><span style="color:#111">,</span> <span style="color:#111">member</span><span style="color:#111">),</span>
-            <span style="color:#111">_</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{}</span>
-        <span style="color:#111">}</span>
-    <span style="color:#111">}</span>
-    <span style="color:#111">println</span><span style="color:#f92672">!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;done&#34;</span><span style="color:#111">);</span>
-    <span style="color:#111">Ok</span><span style="color:#111">(())</span>
-<span style="color:#111">}</span>
-</code></pre></div><p>The complete source code can be downloaded from the following github repo <a href="https://github.com/JensWalter/hello-world-operator-rs">hello-world-operator-rs</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#00a8c8">extern</span> <span style="color:#00a8c8">crate</span> <span style="color:#111">serde_derive</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">use</span> <span style="color:#111">kube</span>::<span style="color:#111">{</span><span style="color:#111">api</span>::<span style="color:#111">{</span><span style="color:#111">Api</span><span style="color:#111">,</span> <span style="color:#111">ListParams</span><span style="color:#111">,</span> <span style="color:#111">WatchEvent</span><span style="color:#111">},</span> <span style="color:#111">Client</span><span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">use</span> <span style="color:#111">futures</span>::<span style="color:#111">{</span><span style="color:#111">StreamExt</span><span style="color:#111">,</span> <span style="color:#111">TryStreamExt</span><span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">use</span> <span style="color:#111">serde</span>::<span style="color:#111">{</span><span style="color:#111">Serialize</span><span style="color:#111">,</span> <span style="color:#111">Deserialize</span><span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">use</span> <span style="color:#111">kube_derive</span>::<span style="color:#111">CustomResource</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">use</span> <span style="color:#111">kube</span>::<span style="color:#111">config</span>::<span style="color:#111">Config</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[derive(CustomResource, Serialize, Deserialize, Default, Clone, Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[kube(group = </span><span style="color:#d88200">&#34;helloworld.apimeister.com&#34;</span><span style="color:#75715e">, version = </span><span style="color:#d88200">&#34;v1&#34;</span><span style="color:#75715e">, kind=</span><span style="color:#d88200">&#34;Member&#34;</span><span style="color:#75715e">, namespaced)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[allow(non_snake_case)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">pub</span> <span style="color:#00a8c8">struct</span> <span style="color:#75af00">MemberSpec</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">pub</span> <span style="color:#111">memberOf</span>: <span style="color:#111">Option</span><span style="color:#f92672">&lt;</span><span style="color:#111">String</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[tokio::main]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">async</span> <span style="color:#00a8c8">fn</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> -&gt; <span style="color:#111">Result</span><span style="color:#f92672">&lt;</span><span style="color:#111">(),</span> <span style="color:#111">kube</span>::<span style="color:#111">Error</span><span style="color:#f92672">&gt;</span>  <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">println!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;starting hello world operator&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">let</span> <span style="color:#111">config</span> <span style="color:#f92672">=</span> <span style="color:#111">Config</span>::<span style="color:#111">infer</span><span style="color:#111">().</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">let</span> <span style="color:#111">client</span>: <span style="color:#75af00">kube</span>::<span style="color:#111">Client</span> <span style="color:#f92672">=</span> <span style="color:#111">Client</span>::<span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#111">config</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">let</span> <span style="color:#111">crds</span>: <span style="color:#75af00">Api</span><span style="color:#f92672">&lt;</span><span style="color:#111">Member</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> <span style="color:#111">Api</span>::<span style="color:#111">namespaced</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;default&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">let</span> <span style="color:#111">lp</span> <span style="color:#f92672">=</span> <span style="color:#111">ListParams</span>::<span style="color:#111">default</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">println!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;subscribing events of type members.helloworld.apimeister.com/v1&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">let</span> <span style="color:#00a8c8">mut</span> <span style="color:#111">stream</span> <span style="color:#f92672">=</span> <span style="color:#111">crds</span><span style="color:#111">.</span><span style="color:#111">watch</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">lp</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;0&#34;</span><span style="color:#111">).</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span><span style="color:#111">.</span><span style="color:#111">boxed</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">while</span> <span style="color:#00a8c8">let</span> <span style="color:#111">Some</span><span style="color:#111">(</span><span style="color:#111">status</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#111">stream</span><span style="color:#111">.</span><span style="color:#111">try_next</span><span style="color:#111">().</span><span style="color:#00a8c8">await</span><span style="color:#f92672">?</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">match</span> <span style="color:#111">status</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Added</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#00a8c8">match</span> <span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">spec</span><span style="color:#111">.</span><span style="color:#111">memberOf</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#111">None</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;welcome {}&#34;</span><span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">()),</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#111">Some</span><span style="color:#111">(</span><span style="color:#111">member_of</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;welcome {} to the team {}&#34;</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#111">,</span><span style="color:#111">member_of</span><span style="color:#111">),</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Modified</span><span style="color:#111">(</span><span style="color:#111">_member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Deleted</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#111">println!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;sad to see you go {}&#34;</span><span style="color:#111">,</span><span style="color:#111">member</span><span style="color:#111">.</span><span style="color:#111">metadata</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">.</span><span style="color:#111">unwrap</span><span style="color:#111">());</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">WatchEvent</span>::<span style="color:#111">Error</span><span style="color:#111">(</span><span style="color:#111">member</span><span style="color:#111">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">println!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;error: {}&#34;</span><span style="color:#111">,</span> <span style="color:#111">member</span><span style="color:#111">),</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">_</span> <span style="color:#f92672">=&gt;</span> <span style="color:#111">{}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">println!</span><span style="color:#111">(</span><span style="color:#d88200">&#34;done&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">Ok</span><span style="color:#111">(())</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>The complete source code can be downloaded from the following github repo <a href="https://github.com/JensWalter/hello-world-operator-rs">hello-world-operator-rs</a>.</p>
 
 </div>
 

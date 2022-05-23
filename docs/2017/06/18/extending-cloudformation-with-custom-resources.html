@@ -8,7 +8,7 @@
 So for this use case (and some others like initial data load), AWS introduced custom resources. This Resource basically represents an AWS lambda invocation which is called whenever your template gets instantiated, removed or update.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="extending cloudformation with custom resources">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -125,113 +124,113 @@ if (!doNotTrack) {
 <p>If you forget to call the callback or your code doesn&rsquo;t exit correctly (e.g. uncaught exceptions), then CloudFormation wait a very long time (about 1 hour) until it actually times out.</p>
 <p>To make things easier, AWS provides a <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html#cfn-lambda-function-code-cfnresponsemodule">node module</a>, where all the callback stuff is handled correctly. And even better, it is already pre-installed if the Lambda function is inlined in the CloudFormation template, so no extra bundling is necessary here.</p>
 <p>So first I have to create a Lambda function inside my template (it can also be an externally defined lambda, but this makes it easier to demonstrate).</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
-<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
-    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
-        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
-</span><span style="color:#d88200">            var response = require(&#39;cfn-response&#39;);
-</span><span style="color:#d88200">            exports.handler = function(event, context) {
-</span><span style="color:#d88200">              console.log(&#34;event&#34;);
-</span><span style="color:#d88200">              console.log(event);
-</span><span style="color:#d88200">              console.log(&#34;context&#34;);
-</span><span style="color:#d88200">              console.log(context);
-</span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
-</span><span style="color:#d88200">            };</span>            
-      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
-      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
-      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
-      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
-</code></pre></div><p>This is the most basic function, which only logs the event and context and then confirms its execution back to CloudFormation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            var response = require(&#39;cfn-response&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            exports.handler = function(event, context) {
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              console.log(&#34;event&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              console.log(event);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              console.log(&#34;context&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              console.log(context);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            };</span>            
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
+</span></span></code></pre></div><p>This is the most basic function, which only logs the event and context and then confirms its execution back to CloudFormation.</p>
 <p>Now I enhanced my very basic version to at least differentiate between those CloudFormation operations.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
-<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
-    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
-        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
-</span><span style="color:#d88200">            const response = require(&#39;cfn-response&#39;);
-</span><span style="color:#d88200">            exports.handler = function(event, context) {
-</span><span style="color:#d88200">              if(event.RequestType == &#34;Create&#34;){
-</span><span style="color:#d88200">                console.log(&#34;creating something&#34;);
-</span><span style="color:#d88200">              }else if(event.RequestType == &#34;Update&#34;){
-</span><span style="color:#d88200">                console.log(&#34;updating something&#34;);
-</span><span style="color:#d88200">              }else {
-</span><span style="color:#d88200">                console.log(&#34;deleting something&#34;);
-</span><span style="color:#d88200">              }
-</span><span style="color:#d88200">              //and in any case confirm the transaction
-</span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
-</span><span style="color:#d88200">            };</span>            
-      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
-      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
-      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
-      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
-</code></pre></div><p>Now I have to make this Lambda accessible as CustomResource.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            const response = require(&#39;cfn-response&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            exports.handler = function(event, context) {
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              if(event.RequestType == &#34;Create&#34;){
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">                console.log(&#34;creating something&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              }else if(event.RequestType == &#34;Update&#34;){
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">                console.log(&#34;updating something&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              }else {
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">                console.log(&#34;deleting something&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              }
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              //and in any case confirm the transaction
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            };</span>            
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
+</span></span></code></pre></div><p>Now I have to make this Lambda accessible as CustomResource.</p>
 <p>CustomResources look like this.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">CustomResource1</span><span style="color:#111">:</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">Custom::CustomResourceFunction</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">ServiceToken</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt CustomResourceFunction.Arn</span>
-    <span style="color:#f92672">StackName</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;AWS::StackName&#34;</span>
-</code></pre></div><p>To bring all this together, this would be the concluding CloudFormation template with all resources.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
-<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
-    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
-        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
-</span><span style="color:#d88200">            const response = require(&#39;cfn-response&#39;);
-</span><span style="color:#d88200">            exports.handler = function(event, context) {
-</span><span style="color:#d88200">              if(event.RequestType == &#34;Create&#34;){
-</span><span style="color:#d88200">                console.log(&#34;creating something&#34;);
-</span><span style="color:#d88200">              }else if(event.RequestType == &#34;Update&#34;){
-</span><span style="color:#d88200">                console.log(&#34;updating something&#34;);
-</span><span style="color:#d88200">              }else {
-</span><span style="color:#d88200">                console.log(&#34;deleting something&#34;);
-</span><span style="color:#d88200">              }
-</span><span style="color:#d88200">              //and in any case confirm the transaction
-</span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
-</span><span style="color:#d88200">            };</span>            
-      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
-      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
-      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
-      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
-  <span style="color:#f92672">LambdaExecutionRole</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
-    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-      <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
-        <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
-        <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
-        - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
-          <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
-            <span style="color:#f92672">Service</span><span style="color:#111">:</span>
-            - <span style="color:#ae81ff">lambda.amazonaws.com</span>
-          <span style="color:#f92672">Action</span><span style="color:#111">:</span>
-          - <span style="color:#ae81ff">sts:AssumeRole</span>
-      <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
-      <span style="color:#f92672">Policies</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">PolicyName</span><span style="color:#111">:</span> <span style="color:#ae81ff">LogPolicy</span>
-        <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
-          <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
-          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
-            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
-            - <span style="color:#ae81ff">logs:CreateLogGroup</span>
-            - <span style="color:#ae81ff">logs:CreateLogStream</span>
-            - <span style="color:#ae81ff">logs:PutLogEvents</span>
-            <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#ae81ff">arn:aws:logs:*:*:*</span>
-  <span style="color:#f92672">CustomResource1</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">Custom::CustomResourceFunction</span>
-    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-      <span style="color:#f92672">ServiceToken</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt CustomResourceFunction.Arn</span>
-      <span style="color:#f92672">StackName</span><span style="color:#111">:</span>
-        <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;AWS::StackName&#34;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">CustomResource1</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">Custom::CustomResourceFunction</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ServiceToken</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt CustomResourceFunction.Arn</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">StackName</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;AWS::StackName&#34;</span>
+</span></span></code></pre></div><p>To bring all this together, this would be the concluding CloudFormation template with all resources.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">CustomResourceFunction</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Code</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#111">&gt;</span><span style="color:#d88200">
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            const response = require(&#39;cfn-response&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            exports.handler = function(event, context) {
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              if(event.RequestType == &#34;Create&#34;){
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">                console.log(&#34;creating something&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              }else if(event.RequestType == &#34;Update&#34;){
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">                console.log(&#34;updating something&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              }else {
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">                console.log(&#34;deleting something&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              }
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              //and in any case confirm the transaction
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              response.send(event, context, response.SUCCESS, {});
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">            };</span>            
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs6.10</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Role</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt LambdaExecutionRole.Arn</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">LambdaExecutionRole</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Service</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#ae81ff">lambda.amazonaws.com</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">sts:AssumeRole</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Policies</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">PolicyName</span><span style="color:#111">:</span> <span style="color:#ae81ff">LogPolicy</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#ae81ff">logs:CreateLogGroup</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#ae81ff">logs:CreateLogStream</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#ae81ff">logs:PutLogEvents</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#ae81ff">arn:aws:logs:*:*:*</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">CustomResource1</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">Custom::CustomResourceFunction</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ServiceToken</span><span style="color:#111">:</span> !<span style="color:#ae81ff">GetAtt CustomResourceFunction.Arn</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">StackName</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;AWS::StackName&#34;</span>
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

@@ -9,7 +9,7 @@ That is all good, as long as all your required functionality is provided by AWS.
 Since all clients are identified by API Key, I hoped for some mechanism within API-Gateway to provide information such as key name to my Lambda implementation.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="Retrieve the API key name in AWS API Gateway">
@@ -45,7 +45,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -119,32 +118,32 @@ if (!doNotTrack) {
 <p>Since all clients are identified by API Key, I hoped for some mechanism within API-Gateway to provide information such as key name to my Lambda implementation. Sadly something like this is currently not possible.</p>
 <p>So I started to implement this in my lambda. First I had to query all API-Keys since the SDK does not allow to search for keys by value.</p>
 <p>After retrieving all keys, I could just loop through the values and find the corresponding key name.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">var</span> <span style="color:#75af00">apiKey</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;abc123&#34;</span><span style="color:#111">;</span>
-  
-<span style="color:#75715e">// get all api key
-</span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">params</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span> <span style="color:#75af00">includeValues</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">true</span><span style="color:#111">,</span> <span style="color:#75af00">limit</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">500</span><span style="color:#111">};</span>
-<span style="color:#00a8c8">let</span> <span style="color:#75af00">keys</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">await</span> <span style="color:#75af00">APIGATEWAY</span><span style="color:#111">.</span><span style="color:#75af00">getApiKeys</span><span style="color:#111">(</span><span style="color:#75af00">params</span><span style="color:#111">).</span><span style="color:#75af00">promise</span><span style="color:#111">();</span>
-<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#00a8c8">let</span> <span style="color:#75af00">idx</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#75af00">idx</span><span style="color:#f92672">&lt;</span><span style="color:#75af00">keys</span><span style="color:#111">.</span><span style="color:#75af00">items</span><span style="color:#111">.</span><span style="color:#75af00">length</span><span style="color:#111">;</span><span style="color:#75af00">idx</span><span style="color:#f92672">++</span><span style="color:#111">){</span>
-  <span style="color:#00a8c8">let</span> <span style="color:#75af00">item</span> <span style="color:#f92672">=</span> <span style="color:#75af00">keys</span><span style="color:#111">.</span><span style="color:#75af00">items</span><span style="color:#111">[</span><span style="color:#75af00">idx</span><span style="color:#111">];</span>
-  <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#75af00">item</span><span style="color:#111">.</span><span style="color:#75af00">value</span><span style="color:#f92672">==</span><span style="color:#75af00">apiKey</span><span style="color:#111">){</span>
-    <span style="color:#75715e">//found the api key
-</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">break</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><p>So far so good. This provides the name of the key on every request. This is sustainable for small volume APIs, but not for high volume ones. If the API has more invocations, those requests will slow the API down. So introducing some kind of caching would be very helpful.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#00a8c8">var</span> <span style="color:#75af00">apiKey</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;abc123&#34;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// get all api key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">params</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span> <span style="color:#75af00">includeValues</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">true</span><span style="color:#111">,</span> <span style="color:#75af00">limit</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">500</span><span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">let</span> <span style="color:#75af00">keys</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">await</span> <span style="color:#75af00">APIGATEWAY</span><span style="color:#111">.</span><span style="color:#75af00">getApiKeys</span><span style="color:#111">(</span><span style="color:#75af00">params</span><span style="color:#111">).</span><span style="color:#75af00">promise</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#00a8c8">let</span> <span style="color:#75af00">idx</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#75af00">idx</span><span style="color:#f92672">&lt;</span><span style="color:#75af00">keys</span><span style="color:#111">.</span><span style="color:#75af00">items</span><span style="color:#111">.</span><span style="color:#75af00">length</span><span style="color:#111">;</span><span style="color:#75af00">idx</span><span style="color:#f92672">++</span><span style="color:#111">){</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">let</span> <span style="color:#75af00">item</span> <span style="color:#f92672">=</span> <span style="color:#75af00">keys</span><span style="color:#111">.</span><span style="color:#75af00">items</span><span style="color:#111">[</span><span style="color:#75af00">idx</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#75af00">item</span><span style="color:#111">.</span><span style="color:#75af00">value</span><span style="color:#f92672">==</span><span style="color:#75af00">apiKey</span><span style="color:#111">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//found the api key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#00a8c8">break</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>So far so good. This provides the name of the key on every request. This is sustainable for small volume APIs, but not for high volume ones. If the API has more invocations, those requests will slow the API down. So introducing some kind of caching would be very helpful.</p>
 <p>The API Gateway already has a mechanism that is called before the invocation, which is also capable of caching the results, the Custom Authorizer System.</p>
 <p>So I put this code into the custom authorizer to achieve caching and avoid too many queries on the AWS API.</p>
 <p>Here is the whole custom authorizer:</p>
 <!-- raw HTML omitted -->
 <p>After implementing the custom authorizer, key name is propagated throught he Lambda event requestContext object.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75af00">exports</span><span style="color:#111">.</span><span style="color:#75af00">handler</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">async</span> <span style="color:#111">(</span><span style="color:#75af00">event</span><span style="color:#111">,</span> <span style="color:#75af00">context</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">let</span> <span style="color:#75af00">keyname</span> <span style="color:#f92672">=</span> <span style="color:#75af00">event</span><span style="color:#111">.</span><span style="color:#75af00">requestContext</span><span style="color:#111">.</span><span style="color:#75af00">authorizer</span><span style="color:#111">.</span><span style="color:#75af00">apikey</span><span style="color:#111">;</span>
-  <span style="color:#00a8c8">return</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span><span style="color:#111">,</span>
-    <span style="color:#75af00">body</span><span style="color:#f92672">:</span> <span style="color:#75af00">keyname</span>
-  <span style="color:#111">};</span>
-<span style="color:#111">}</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75af00">exports</span><span style="color:#111">.</span><span style="color:#75af00">handler</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">async</span> <span style="color:#111">(</span><span style="color:#75af00">event</span><span style="color:#111">,</span> <span style="color:#75af00">context</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">let</span> <span style="color:#75af00">keyname</span> <span style="color:#f92672">=</span> <span style="color:#75af00">event</span><span style="color:#111">.</span><span style="color:#75af00">requestContext</span><span style="color:#111">.</span><span style="color:#75af00">authorizer</span><span style="color:#111">.</span><span style="color:#75af00">apikey</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">body</span><span style="color:#f92672">:</span> <span style="color:#75af00">keyname</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

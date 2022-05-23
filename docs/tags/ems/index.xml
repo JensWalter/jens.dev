@@ -26,7 +26,7 @@ What is working right now?
       <guid>https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</guid>
       <description>The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
  get message statistics reset stats to zero  get the stats as csv
-printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &amp;#39;NR&amp;gt;11&amp;#39; | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39; | grep -v &amp;#39;tcp://&amp;#39; | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
+printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39;  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1  | awk &amp;#39;NR&amp;gt;11&amp;#39;  | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39;  | grep -v &amp;#39;tcp://&amp;#39;  | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
     </item>
     
     <item>

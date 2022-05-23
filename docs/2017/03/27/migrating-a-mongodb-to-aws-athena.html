@@ -8,7 +8,7 @@
 I started with a JSON-export of mongodb, to have a look at the document structure.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="migrating a mongodb to AWS Athena">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -114,82 +113,82 @@ if (!doNotTrack) {
 
     <p>I have an existing application that uses a mongodb to store metadata on files to make them searchable. Since searching in those records is not very time sensitive for me, I thought about migrating the whole database to S3/Athena. The advantage here would be, that there would be no longer a database to maintain, since Athena runs serverless on AWS.</p>
 <p>I started with a JSON-export of mongodb, to have a look at the document structure.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mongoexport --db db --collection jens --out kanri.json
-</code></pre></div><p>Unfortunately, this only worked until I discovered the different format that mongodb is storing my filesize information.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#d88200">&#34;size&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#111">{</span><span style="color:#f92672">&#34;$numberLong&#34;</span><span style="color:#111">:</span><span style="color:#d88200">&#34;636649&#34;</span><span style="color:#111">}</span>
-<span style="color:#d88200">&#34;size&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">232206</span>
-<span style="color:#d88200">&#34;size&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">1.953838e+06</span>
-<span style="color:#d88200">&#34;size&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">951442.0</span>
-</code></pre></div><p>So I decided so export my data through the following php script to unify the different number formats into one.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#75af00">php</span>
-
-<span style="color:#111">$m</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#75af00">MongoClient</span><span style="color:#111">();</span>
-<span style="color:#111">$db</span> <span style="color:#f92672">=</span> <span style="color:#111">$m</span><span style="color:#f92672">-&gt;</span><span style="color:#75af00">selectDB</span><span style="color:#111">(</span><span style="color:#d88200">&#34;db&#34;</span><span style="color:#111">);</span>
-
-<span style="color:#111">$cursor</span> <span style="color:#f92672">=</span> <span style="color:#111">$db</span><span style="color:#f92672">-&gt;</span><span style="color:#75af00">jens</span><span style="color:#f92672">-&gt;</span><span style="color:#75af00">find</span><span style="color:#111">();</span>
-<span style="color:#111">$file</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;kanri_export.json&#39;</span><span style="color:#111">;</span>
-<span style="color:#00a8c8">foreach</span><span style="color:#111">(</span><span style="color:#111">$cursor</span> <span style="color:#00a8c8">as</span> <span style="color:#111">$item</span><span style="color:#111">){</span>
-	<span style="color:#00a8c8">echo</span> <span style="color:#75af00">json_encode</span><span style="color:#111">(</span><span style="color:#111">$item</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-
-<span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">{%endhighlight %}
-</span><span style="color:#960050;background-color:#1e0010">So here is my document structure to begin with.
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">```json
-</span><span style="color:#960050;background-color:#1e0010">{
-</span><span style="color:#960050;background-color:#1e0010">  &#34;_id&#34;: {
-</span><span style="color:#960050;background-color:#1e0010">    &#34;$id&#34;: &#34;4f75dfe6c06b88c92c000000&#34;
-</span><span style="color:#960050;background-color:#1e0010">  },
-</span><span style="color:#960050;background-color:#1e0010">  &#34;description&#34;: &#34;njams datasheet&#34;,
-</span><span style="color:#960050;background-color:#1e0010">  &#34;files&#34;: [{
-</span><span style="color:#960050;background-color:#1e0010">    &#34;type&#34;: &#34;application\/pdf&#34;,
-</span><span style="color:#960050;background-color:#1e0010">    &#34;name&#34;: &#34;nJAMS datasheet.pdf&#34;,
-</span><span style="color:#960050;background-color:#1e0010">    &#34;size&#34;: 636649,
-</span><span style="color:#960050;background-color:#1e0010">    &#34;md5&#34;: &#34;4ad2052803db0e6e7455fd5af0e9e6d6&#34;
-</span><span style="color:#960050;background-color:#1e0010">  }],
-</span><span style="color:#960050;background-color:#1e0010">  &#34;modified&#34;: {
-</span><span style="color:#960050;background-color:#1e0010">    &#34;sec&#34;: 1344177194,
-</span><span style="color:#960050;background-color:#1e0010">    &#34;usec&#34;: 676000
-</span><span style="color:#960050;background-color:#1e0010">  },
-</span><span style="color:#960050;background-color:#1e0010">  &#34;tags&#34;: [&#34;njams&#34;, &#34;fasi&#34;, &#34;datasheet&#34;],
-</span><span style="color:#960050;background-color:#1e0010">  &#34;ts&#34;: {
-</span><span style="color:#960050;background-color:#1e0010">    &#34;sec&#34;: 1333132200,
-</span><span style="color:#960050;background-color:#1e0010">    &#34;usec&#34;: 0
-</span><span style="color:#960050;background-color:#1e0010">  }
-</span><span style="color:#960050;background-color:#1e0010">}
-</span></code></pre></div><p>I uploaded the whole document into a S3 bucket and then started to look into Athena.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mongoexport --db db --collection jens --out kanri.json
+</span></span></code></pre></div><p>Unfortunately, this only worked until I discovered the different format that mongodb is storing my filesize information.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#d88200">&#34;size&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#111">{</span><span style="color:#f92672">&#34;$numberLong&#34;</span><span style="color:#111">:</span><span style="color:#d88200">&#34;636649&#34;</span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#d88200">&#34;size&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">232206</span>
+</span></span><span style="display:flex;"><span><span style="color:#d88200">&#34;size&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">1.953838e+06</span>
+</span></span><span style="display:flex;"><span><span style="color:#d88200">&#34;size&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">951442.0</span>
+</span></span></code></pre></div><p>So I decided so export my data through the following php script to unify the different number formats into one.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#75af00">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">$m</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#75af00">MongoClient</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">$db</span> <span style="color:#f92672">=</span> <span style="color:#111">$m</span><span style="color:#f92672">-&gt;</span><span style="color:#75af00">selectDB</span><span style="color:#111">(</span><span style="color:#d88200">&#34;db&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">$cursor</span> <span style="color:#f92672">=</span> <span style="color:#111">$db</span><span style="color:#f92672">-&gt;</span><span style="color:#75af00">jens</span><span style="color:#f92672">-&gt;</span><span style="color:#75af00">find</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">$file</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;kanri_export.json&#39;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">foreach</span><span style="color:#111">(</span><span style="color:#111">$cursor</span> <span style="color:#00a8c8">as</span> <span style="color:#111">$item</span><span style="color:#111">){</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">echo</span> <span style="color:#75af00">json_encode</span><span style="color:#111">(</span><span style="color:#111">$item</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">{%endhighlight %}
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">So here is my document structure to begin with.
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```json
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">{
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &#34;_id&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;$id&#34;: &#34;4f75dfe6c06b88c92c000000&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  },
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &#34;description&#34;: &#34;njams datasheet&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &#34;files&#34;: [{
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;type&#34;: &#34;application\/pdf&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;name&#34;: &#34;nJAMS datasheet.pdf&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;size&#34;: 636649,
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;md5&#34;: &#34;4ad2052803db0e6e7455fd5af0e9e6d6&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  }],
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &#34;modified&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;sec&#34;: 1344177194,
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;usec&#34;: 676000
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  },
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &#34;tags&#34;: [&#34;njams&#34;, &#34;fasi&#34;, &#34;datasheet&#34;],
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &#34;ts&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;sec&#34;: 1333132200,
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &#34;usec&#34;: 0
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  }
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}
+</span></span></span></code></pre></div><p>I uploaded the whole document into a S3 bucket and then started to look into Athena.</p>
 <p>As I found out, Athena (and hereby presto), has some issues with this source format, since it cannot access any element containing a special character like &lsquo;$&rsquo; or &lsquo;_&rsquo;. For those characters I needed to create a mapping for the SerDe to handle those fields.</p>
 <p>Here is the table definition I came up with:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">external</span> <span style="color:#00a8c8">TABLE</span> <span style="color:#111">structured</span><span style="color:#111">(</span>
-  <span style="color:#111">id</span> <span style="color:#111">struct</span><span style="color:#f92672">&lt;</span><span style="color:#111">oid</span><span style="color:#111">:</span><span style="color:#111">string</span><span style="color:#f92672">&gt;</span><span style="color:#111">,</span>
-  <span style="color:#111">description</span> <span style="color:#111">string</span><span style="color:#111">,</span>
-  <span style="color:#111">files</span> <span style="color:#111">array</span><span style="color:#f92672">&lt;</span><span style="color:#111">struct</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">type</span><span style="color:#111">:</span><span style="color:#111">string</span><span style="color:#111">,</span>
-                     <span style="color:#111">name</span><span style="color:#111">:</span><span style="color:#111">string</span><span style="color:#111">,</span>
-                     <span style="color:#00a8c8">size</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#111">,</span>
-                     <span style="color:#111">md5</span><span style="color:#111">:</span><span style="color:#111">string</span>
-                    <span style="color:#f92672">&gt;</span>
-             <span style="color:#f92672">&gt;</span><span style="color:#111">,</span>
-  <span style="color:#111">modified</span> <span style="color:#111">struct</span><span style="color:#f92672">&lt;</span><span style="color:#111">sec</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#111">,</span>
-                  <span style="color:#111">usec</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#f92672">&gt;</span><span style="color:#111">,</span>
-  <span style="color:#111">tags</span> <span style="color:#111">array</span><span style="color:#f92672">&lt;</span><span style="color:#111">string</span><span style="color:#f92672">&gt;</span><span style="color:#111">,</span>
-  <span style="color:#111">ts</span> <span style="color:#111">struct</span><span style="color:#f92672">&lt;</span><span style="color:#111">sec</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#111">,</span>
-            <span style="color:#111">usec</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#f92672">&gt;</span>
-<span style="color:#111">)</span>
-<span style="color:#00a8c8">row</span> <span style="color:#111">format</span> <span style="color:#111">serde</span> <span style="color:#d88200">&#39;org.openx.data.jsonserde.JsonSerDe&#39;</span>
-<span style="color:#00a8c8">WITH</span> <span style="color:#111">SERDEPROPERTIES</span> <span style="color:#111">(</span>
-      <span style="color:#d88200">&#34;mapping.oid&#34;</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;$id&#34;</span><span style="color:#111">,</span>
-      <span style="color:#d88200">&#34;mapping.id&#34;</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;_id&#34;</span>
-<span style="color:#111">)</span>  
-<span style="color:#00a8c8">location</span> <span style="color:#d88200">&#39;s3://kanri-meta/&#39;</span><span style="color:#111">;</span>
-</code></pre></div><p>In addition to searching column-wise, mongo also supports searching per RegEx through the complete document. Since Athena only works in columns and rows I created a second table, which only contains the raw JSON string.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">create</span> <span style="color:#00a8c8">external</span> <span style="color:#00a8c8">table</span> <span style="color:#111">raw</span><span style="color:#111">(</span>
-  <span style="color:#111">content</span> <span style="color:#111">string</span>
-<span style="color:#111">)</span>
-<span style="color:#00a8c8">row</span> <span style="color:#111">format</span> <span style="color:#111">serde</span> <span style="color:#d88200">&#39;org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe&#39;</span>
-<span style="color:#111">STORED</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">TEXTFILE</span>
-<span style="color:#00a8c8">LOCATION</span> <span style="color:#d88200">&#39;s3://kanri-meta/&#39;</span><span style="color:#111">;</span>
-</code></pre></div><p>Now whenever I needed the Regex capability, I could join in the raw-table and run the RegEx on this column. Since Athena separates the read-logic from the actual storage, I also did not need to duplicate my data pool for this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">external</span> <span style="color:#00a8c8">TABLE</span> <span style="color:#111">structured</span><span style="color:#111">(</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">id</span> <span style="color:#111">struct</span><span style="color:#f92672">&lt;</span><span style="color:#111">oid</span><span style="color:#111">:</span><span style="color:#111">string</span><span style="color:#f92672">&gt;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">description</span> <span style="color:#111">string</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">files</span> <span style="color:#111">array</span><span style="color:#f92672">&lt;</span><span style="color:#111">struct</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">type</span><span style="color:#111">:</span><span style="color:#111">string</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#111">name</span><span style="color:#111">:</span><span style="color:#111">string</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#00a8c8">size</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#111">md5</span><span style="color:#111">:</span><span style="color:#111">string</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#f92672">&gt;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">modified</span> <span style="color:#111">struct</span><span style="color:#f92672">&lt;</span><span style="color:#111">sec</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#111">usec</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#f92672">&gt;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">tags</span> <span style="color:#111">array</span><span style="color:#f92672">&lt;</span><span style="color:#111">string</span><span style="color:#f92672">&gt;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">ts</span> <span style="color:#111">struct</span><span style="color:#f92672">&lt;</span><span style="color:#111">sec</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">usec</span><span style="color:#111">:</span><span style="color:#111">bigint</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">row</span> <span style="color:#111">format</span> <span style="color:#111">serde</span> <span style="color:#d88200">&#39;org.openx.data.jsonserde.JsonSerDe&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">WITH</span> <span style="color:#111">SERDEPROPERTIES</span> <span style="color:#111">(</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#d88200">&#34;mapping.oid&#34;</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;$id&#34;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#d88200">&#34;mapping.id&#34;</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;_id&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">)</span>  
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">location</span> <span style="color:#d88200">&#39;s3://kanri-meta/&#39;</span><span style="color:#111">;</span>
+</span></span></code></pre></div><p>In addition to searching column-wise, mongo also supports searching per RegEx through the complete document. Since Athena only works in columns and rows I created a second table, which only contains the raw JSON string.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">create</span> <span style="color:#00a8c8">external</span> <span style="color:#00a8c8">table</span> <span style="color:#111">raw</span><span style="color:#111">(</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">content</span> <span style="color:#111">string</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">row</span> <span style="color:#111">format</span> <span style="color:#111">serde</span> <span style="color:#d88200">&#39;org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">STORED</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">TEXTFILE</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">LOCATION</span> <span style="color:#d88200">&#39;s3://kanri-meta/&#39;</span><span style="color:#111">;</span>
+</span></span></code></pre></div><p>Now whenever I needed the Regex capability, I could join in the raw-table and run the RegEx on this column. Since Athena separates the read-logic from the actual storage, I also did not need to duplicate my data pool for this.</p>
 
 </div>
 

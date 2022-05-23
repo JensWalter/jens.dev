@@ -9,7 +9,7 @@ Scenario:
  Raise an S3-Object-Create event Publish that event to SNS Subscribe to that event with a Lambda  As picture this would look like this:">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="Publish an S3 Event to Lambda through SNS">
@@ -45,7 +45,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -126,66 +125,66 @@ if (!doNotTrack) {
 <p>I use <a href="https://serverless.com/">serverless</a> as project template, since this by far the easiest starting Point for any serverless work.</p>
 <p>So here is my serverless YAML explained step-by-step (whole YAML is attached at the bottom).</p>
 <p>I left the header unchanged as it was created by the serverless framework.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">service</span><span style="color:#111">:</span> <span style="color:#ae81ff">bucket-subscription-sample</span>
-
-<span style="color:#f92672">provider</span><span style="color:#111">:</span>
-  <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">aws</span>
-  <span style="color:#f92672">runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs4.3</span>
-
-<span style="color:#f92672">functions</span><span style="color:#111">:</span>
-  <span style="color:#f92672">hello</span><span style="color:#111">:</span>
-    <span style="color:#f92672">handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">handler.hello</span>
-</code></pre></div><p>First I created a resources section. In this section I can later define my CloudFormation resources.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">resources</span><span style="color:#111">:</span>
-  <span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-<span style="color:#75715e">#place all CloudFormation resources below this line</span>
-</code></pre></div><p>Now I created an SNS topic first, since this object doesn&rsquo;t have any dependencies on others.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ChangeTopic</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the topic</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::SNS::Topic</span>
-</code></pre></div><p>After that, I can create an S3 bucket which will send notifications out to SNS.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">MySourceBucket</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the bucket</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::S3::Bucket</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">NotificationConfiguration</span><span style="color:#111">:</span>
-      <span style="color:#f92672">TopicConfigurations</span><span style="color:#111">:</span> <span style="color:#75715e">#create notifications to SNS</span>
-        - <span style="color:#f92672">Event</span><span style="color:#111">:</span> <span style="color:#ae81ff">s3:ObjectCreated:*</span> <span style="color:#75715e">#define the type of events</span>
-          <span style="color:#f92672">Topic</span><span style="color:#111">:</span>
-            <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">ChangeTopic</span> <span style="color:#75715e">#target topic referenced by its logical name</span>
-</code></pre></div><p>To grant S3 access to publish events to SNS I created the following TopicPolicy.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ChangeTopicPolicy</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the policy</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::SNS::TopicPolicy</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
-      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">Sid</span><span style="color:#111">:</span> <span style="color:#ae81ff">AllowBucketToPushNotificationEffect</span> <span style="color:#75715e">#identifier of the policy statement</span>
-        <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
-        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Service</span><span style="color:#111">:</span> <span style="color:#ae81ff">s3.amazonaws.com</span> <span style="color:#75715e">#allow s3 to used this policy</span>
-        <span style="color:#f92672">Action</span><span style="color:#111">:</span> <span style="color:#ae81ff">sns:Publish</span> <span style="color:#75715e">#grant publish rights</span>
-        <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;*&#34;</span> <span style="color:#75715e">#grant rights to all SNS topics (narrow it down if security is an issue)</span>
-    <span style="color:#f92672">Topics</span><span style="color:#111">:</span>
-    - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">ChangeTopic</span> <span style="color:#75715e">#policy target referenced by its logical name</span>
-</code></pre></div><p>To subscribe to a topic, I needed to create an subscription.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ChangeTopicSubscription</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::SNS::Subscription</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Endpoint</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">HelloLambdaFunction , &#34;Arn&#34; ]</span> <span style="color:#75715e">#lambda reference by ARN, by default serverless generates logical names by concatenating FunctionName with &#34;LambdaFunction&#34;</span>
-    <span style="color:#f92672">Protocol</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambda</span> <span style="color:#75715e">#protocol to invoke endpoint</span>
-    <span style="color:#f92672">TopicArn</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">ChangeTopic</span> <span style="color:#75715e">#topic to subscribe from</span>
-</code></pre></div><p>By default, SNS subscriptions aren&rsquo;t allowed to invoke any Lambda function. To fix this, I created a LambdaPermission, which grants SNS access to Lambda.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">HelloLambdaFunctionPermission</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the permission</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Permission</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Action</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambda:InvokeFunction</span> <span style="color:#75715e">#grant lambda invocations</span>
-    <span style="color:#f92672">Principal</span><span style="color:#111">:</span> <span style="color:#ae81ff">sns.amazonaws.com</span> <span style="color:#75715e">#grant rights to SNS</span>
-    <span style="color:#f92672">SourceArn</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">ChangeTopic</span> <span style="color:#75715e">#reference the source topic by logical name</span>
-    <span style="color:#f92672">FunctionName</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">HelloLambdaFunction, &#34;Arn&#34; ]</span> <span style="color:#75715e">#lambda reference by ARN, by default serverless generates logical names by concatenating FunctionName with &#34;LambdaFunction&#34;</span>
-</code></pre></div><p>Here is the overall serverless file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">service</span><span style="color:#111">:</span> <span style="color:#ae81ff">bucket-subscription-sample</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">provider</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span><span style="color:#111">:</span> <span style="color:#ae81ff">aws</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs4.3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">functions</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">hello</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">handler.hello</span>
+</span></span></code></pre></div><p>First I created a resources section. In this section I can later define my CloudFormation resources.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#place all CloudFormation resources below this line</span>
+</span></span></code></pre></div><p>Now I created an SNS topic first, since this object doesn&rsquo;t have any dependencies on others.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ChangeTopic</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the topic</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::SNS::Topic</span>
+</span></span></code></pre></div><p>After that, I can create an S3 bucket which will send notifications out to SNS.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">MySourceBucket</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the bucket</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::S3::Bucket</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">NotificationConfiguration</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">TopicConfigurations</span><span style="color:#111">:</span> <span style="color:#75715e">#create notifications to SNS</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">Event</span><span style="color:#111">:</span> <span style="color:#ae81ff">s3:ObjectCreated:*</span> <span style="color:#75715e">#define the type of events</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Topic</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">ChangeTopic</span> <span style="color:#75715e">#target topic referenced by its logical name</span>
+</span></span></code></pre></div><p>To grant S3 access to publish events to SNS I created the following TopicPolicy.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ChangeTopicPolicy</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the policy</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::SNS::TopicPolicy</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">Sid</span><span style="color:#111">:</span> <span style="color:#ae81ff">AllowBucketToPushNotificationEffect</span> <span style="color:#75715e">#identifier of the policy statement</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Service</span><span style="color:#111">:</span> <span style="color:#ae81ff">s3.amazonaws.com</span> <span style="color:#75715e">#allow s3 to used this policy</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Action</span><span style="color:#111">:</span> <span style="color:#ae81ff">sns:Publish</span> <span style="color:#75715e">#grant publish rights</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;*&#34;</span> <span style="color:#75715e">#grant rights to all SNS topics (narrow it down if security is an issue)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Topics</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">ChangeTopic</span> <span style="color:#75715e">#policy target referenced by its logical name</span>
+</span></span></code></pre></div><p>To subscribe to a topic, I needed to create an subscription.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ChangeTopicSubscription</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::SNS::Subscription</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Endpoint</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">HelloLambdaFunction , &#34;Arn&#34; ]</span> <span style="color:#75715e">#lambda reference by ARN, by default serverless generates logical names by concatenating FunctionName with &#34;LambdaFunction&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Protocol</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambda</span> <span style="color:#75715e">#protocol to invoke endpoint</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">TopicArn</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">ChangeTopic</span> <span style="color:#75715e">#topic to subscribe from</span>
+</span></span></code></pre></div><p>By default, SNS subscriptions aren&rsquo;t allowed to invoke any Lambda function. To fix this, I created a LambdaPermission, which grants SNS access to Lambda.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">HelloLambdaFunctionPermission</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the permission</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Permission</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Action</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambda:InvokeFunction</span> <span style="color:#75715e">#grant lambda invocations</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Principal</span><span style="color:#111">:</span> <span style="color:#ae81ff">sns.amazonaws.com</span> <span style="color:#75715e">#grant rights to SNS</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">SourceArn</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">ChangeTopic</span> <span style="color:#75715e">#reference the source topic by logical name</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">FunctionName</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">HelloLambdaFunction, &#34;Arn&#34; ]</span> <span style="color:#75715e">#lambda reference by ARN, by default serverless generates logical names by concatenating FunctionName with &#34;LambdaFunction&#34;</span>
+</span></span></code></pre></div><p>Here is the overall serverless file:</p>
 <p>[serverless.yml template][1]</p>
 <p>[1]:{{ site.url }}/assets/s3-subscription-serverless.yml</p>
 

@@ -8,7 +8,7 @@
 grep &#34;200 &#34; /var/log/apache2/apimeister-access.log \  | grep -v &#39;Googlebot&#39; \  | grep -v &#39;Baiduspider&#39; \  | grep -v &#39;bingbot&#39; \  | grep -v &#39;YandexBot&#39; \  | grep -v &#39;MJ12bot&#39; \  | grep -v &#39;meanpathbot&#39; \  | grep -v &#39;DotBot&#39; \  | grep -v &#39;AhrefsBot&#39; \  | cut -d &#39;&#34;&#39; -f 2 \  | cut -d &#39; &#39; -f 2 \  | sort | uniq -c | sort -rn | less ">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="get the most visited url from an access log through a single line of bash">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -113,19 +112,19 @@ if (!doNotTrack) {
     
 
     <p>If you have an apache access log and want to see the visit count of your site, you can use this one-liner to get some basic visit stats.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">grep <span style="color:#d88200">&#34;200 &#34;</span> /var/log/apache2/apimeister-access.log <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;Googlebot&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;Baiduspider&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;bingbot&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;YandexBot&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;MJ12bot&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;meanpathbot&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;DotBot&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;AhrefsBot&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> cut -d <span style="color:#d88200">&#39;&#34;&#39;</span> -f <span style="color:#ae81ff">2</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> cut -d <span style="color:#d88200">&#39; &#39;</span> -f <span style="color:#ae81ff">2</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> sort <span style="color:#111">|</span> uniq -c <span style="color:#111">|</span> sort -rn <span style="color:#111">|</span> less
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>grep <span style="color:#d88200">&#34;200 &#34;</span> /var/log/apache2/apimeister-access.log <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;Googlebot&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;Baiduspider&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;bingbot&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;YandexBot&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;MJ12bot&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;meanpathbot&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;DotBot&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> grep -v <span style="color:#d88200">&#39;AhrefsBot&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> cut -d <span style="color:#d88200">&#39;&#34;&#39;</span> -f <span style="color:#ae81ff">2</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> cut -d <span style="color:#d88200">&#39; &#39;</span> -f <span style="color:#ae81ff">2</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> sort <span style="color:#111">|</span> uniq -c <span style="color:#111">|</span> sort -rn <span style="color:#111">|</span> less
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

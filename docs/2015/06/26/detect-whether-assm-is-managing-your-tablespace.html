@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>detect whether ASSM is managing your tablespace &middot; </title>
         <meta name="description" content="I recently had an oracle database where I wanted to compress the clob store for more storage efficiency. To do that, I needed to convert the clob store from basicfiles to securefiles. As a requirement to use compressed securefiles, oracel states, that the tablespace must be managed by ASSM (Automatic Segment Space Management). In order to check this, I found the following sql query.
-select tablespace_name, SEGMENT_SPACE_MANAGEMENT from user_tablespaces; The output looks like:">
+select tablespace_name, SEGMENT_SPACE_MANAGEMENT  from user_tablespaces; The output looks like:">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="detect whether ASSM is managing your tablespace">
 <meta property="og:description" content="I recently had an oracle database where I wanted to compress the clob store for more storage efficiency. To do that, I needed to convert the clob store from basicfiles to securefiles. As a requirement to use compressed securefiles, oracel states, that the tablespace must be managed by ASSM (Automatic Segment Space Management). In order to check this, I found the following sql query.
-select tablespace_name, SEGMENT_SPACE_MANAGEMENT from user_tablespaces; The output looks like:">
+select tablespace_name, SEGMENT_SPACE_MANAGEMENT  from user_tablespaces; The output looks like:">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/06/26/detect-whether-assm-is-managing-your-tablespace.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -115,33 +114,33 @@ if (!doNotTrack) {
     <p>I recently had an oracle database where I wanted to compress the clob store for more storage efficiency. To do that, I needed to convert the clob store from basicfiles to securefiles.
 As a requirement to use compressed securefiles, oracel states, that the tablespace must be managed by ASSM (Automatic Segment Space Management).
 In order to check this, I found the following sql query.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">select</span> <span style="color:#111">tablespace_name</span><span style="color:#111">,</span> <span style="color:#111">SEGMENT_SPACE_MANAGEMENT</span>
-  <span style="color:#00a8c8">from</span> <span style="color:#111">user_tablespaces</span><span style="color:#111">;</span>
-</code></pre></div><p>The output looks like:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#111">TABLESPACE_NAME</span>                <span style="color:#111">SEGMENT_SPACE_MANAGEMENT</span>
-<span style="color:#75715e">------------------------------ ------------------------
-</span><span style="color:#75715e"></span><span style="color:#00a8c8">SYSTEM</span>                         <span style="color:#111">MANUAL</span>
-<span style="color:#111">SYSAUX</span>                         <span style="color:#111">AUTO</span>  
-<span style="color:#111">TEMP</span>                           <span style="color:#111">MANUAL</span>
-<span style="color:#111">USERS</span>                          <span style="color:#111">AUTO</span>  
-<span style="color:#111">EXAMPLE</span>                        <span style="color:#111">AUTO</span>  
-<span style="color:#f92672">|</span>
- <span style="color:#ae81ff">11</span> <span style="color:#00a8c8">rows</span> <span style="color:#111">selected</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">select</span> <span style="color:#111">tablespace_name</span><span style="color:#111">,</span> <span style="color:#111">SEGMENT_SPACE_MANAGEMENT</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">from</span> <span style="color:#111">user_tablespaces</span><span style="color:#111">;</span>
+</span></span></code></pre></div><p>The output looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#111">TABLESPACE_NAME</span>                <span style="color:#111">SEGMENT_SPACE_MANAGEMENT</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">------------------------------ ------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#00a8c8">SYSTEM</span>                         <span style="color:#111">MANUAL</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">SYSAUX</span>                         <span style="color:#111">AUTO</span>  
+</span></span><span style="display:flex;"><span><span style="color:#111">TEMP</span>                           <span style="color:#111">MANUAL</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">USERS</span>                          <span style="color:#111">AUTO</span>  
+</span></span><span style="display:flex;"><span><span style="color:#111">EXAMPLE</span>                        <span style="color:#111">AUTO</span>  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">11</span> <span style="color:#00a8c8">rows</span> <span style="color:#111">selected</span>
+</span></span></code></pre></div><ul>
 <li>AUTO means ASSM is managing the tablespace</li>
 <li>MANUAL means the tablespace is manually managed</li>
 </ul>
 <p>The ASSM property can also be queried by table name.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">SELECT</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">table_name</span><span style="color:#111">,</span><span style="color:#111">segment_subtype</span>
-<span style="color:#00a8c8">FROM</span> <span style="color:#111">user_segments</span>
-<span style="color:#00a8c8">where</span> <span style="color:#111">segment_type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;TABLE&#39;</span><span style="color:#111">;</span>
-</code></pre></div><p>The output looks like:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">TABLE_NAME</span>       <span style="color:#111">SEGMENT_SUBTYPE</span>
-<span style="color:#75715e">--------------------------------
-</span><span style="color:#75715e"></span><span style="color:#111">T1</span>               <span style="color:#111">ASSM</span>
-<span style="color:#f92672">|</span>
- <span style="color:#ae81ff">1</span> <span style="color:#00a8c8">row</span> <span style="color:#111">selected</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">SELECT</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">table_name</span><span style="color:#111">,</span><span style="color:#111">segment_subtype</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">FROM</span> <span style="color:#111">user_segments</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">where</span> <span style="color:#111">segment_type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;TABLE&#39;</span><span style="color:#111">;</span>
+</span></span></code></pre></div><p>The output looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">TABLE_NAME</span>       <span style="color:#111">SEGMENT_SUBTYPE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#111">T1</span>               <span style="color:#111">ASSM</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">1</span> <span style="color:#00a8c8">row</span> <span style="color:#111">selected</span>
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

@@ -14,7 +14,7 @@
       
       <guid>https://jens.dev/2009/09/23/searching-for-hash-strings-in-postgres.html</guid>
       <description>For one of my projects a have a database which has a rather large table consisting of just an url and a corresponding id. For performance reasons I added a md5 column which hashes the url. With this column it should be a lot faster to look up an url.
-CREATE TABLE pages ( id bigint NOT NULL, url character varying(255), md5 character(32), CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).</description>
+CREATE TABLE pages (  id bigint NOT NULL,  url character varying(255),  md5 character(32),  CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).</description>
     </item>
     
     <item>
@@ -24,7 +24,7 @@ CREATE TABLE pages ( id bigint NOT NULL, url character varying(255), md5 charact
       
       <guid>https://jens.dev/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins.html</guid>
       <description>So here is my situation. I have 2 tables with the following DDL.
-CREATE TABLE tags ( id bigint NOT NULL, &amp;#34;value&amp;#34; character varying(150), CONSTRAINT tags_pkey PRIMARY KEY (id), CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags ( sites_id bigint NOT NULL, pages_id bigint NOT NULL, tags_id bigint NOT NULL, count integer, updated timestamp without time zone, CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.</description>
+CREATE TABLE tags (  id bigint NOT NULL,  &amp;#34;value&amp;#34; character varying(150),  CONSTRAINT tags_pkey PRIMARY KEY (id),  CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags (  sites_id bigint NOT NULL,  pages_id bigint NOT NULL,  tags_id bigint NOT NULL,  count integer,  updated timestamp without time zone,  CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.</description>
     </item>
     
   </channel>

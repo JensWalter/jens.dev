@@ -8,7 +8,7 @@
 What I wanted to achieve was a cheaper upload mechanism for S3. The easiest way to allow upload through API gateway is to call a Lambda for every API call and then upload the payload into an S3 bucket. But this is rather costly if you increase the throughput from a few single call to a few hundred calls a second.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="Integrate API Gateway with Kinesis Firehose using CloudFormation">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -118,148 +117,148 @@ if (!doNotTrack) {
 <p>So here an overview picture of what I am about to build.
 <img src="/assets/api2firehose.png" alt="API Gateway to Kinesis Firehose"></p>
 <p>The easiest part in CloudFormation is the S3 bucket. This one does not require any specific configuration for this to work.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
-<span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">Firehose sample</span>
-<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-  <span style="color:#f92672">DataBucket</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::S3::Bucket</span>
-</code></pre></div><p>Now I configured a Firehose.
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">Firehose sample</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">DataBucket</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::S3::Bucket</span>
+</span></span></code></pre></div><p>Now I configured a Firehose.
 As a prerequisite I needed a role which would allow the Firehose to actually write into the S3 bucket.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">KinesisRole</span><span style="color:#111">:</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
-      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
-        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Service</span><span style="color:#111">:</span>
-          - <span style="color:#ae81ff">firehose.amazonaws.com</span>
-        <span style="color:#f92672">Action</span><span style="color:#111">:</span>
-        - <span style="color:#ae81ff">sts:AssumeRole</span>
-    <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
-    <span style="color:#f92672">Policies</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">PolicyName</span><span style="color:#111">:</span> <span style="color:#ae81ff">KinesisRolePolicy</span>
-        <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
-          <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
-          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
-            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
-              - <span style="color:#ae81ff">s3:AbortMultipartUpload</span>
-              - <span style="color:#ae81ff">s3:GetBucketLocation</span>
-              - <span style="color:#ae81ff">s3:GetObject</span>
-              - <span style="color:#ae81ff">s3:ListBucket</span>
-              - <span style="color:#ae81ff">s3:ListBucketMultipartUploads</span>
-              - <span style="color:#ae81ff">s3:PutObject</span>
-            <span style="color:#f92672">Resource</span><span style="color:#111">:</span>
-              - <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">DataBucket , Arn ]</span>
-              - <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
-                - <span style="color:#d88200">&#34;&#34;</span>
-                - - <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">DataBucket , Arn ]</span>
-                  - <span style="color:#d88200">&#34;/*&#34;</span>
-</code></pre></div><p>Now the Firehose configuration.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">EventFirehose</span><span style="color:#111">:</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::KinesisFirehose::DeliveryStream</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">S3DestinationConfiguration</span><span style="color:#111">:</span>
-      <span style="color:#f92672">BucketARN</span><span style="color:#111">:</span>
-        <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">DataBucket, Arn ]</span>
-      <span style="color:#f92672">BufferingHints</span><span style="color:#111">:</span>
-        <span style="color:#f92672">IntervalInSeconds</span><span style="color:#111">:</span> <span style="color:#ae81ff">60</span>
-        <span style="color:#f92672">SizeInMBs</span><span style="color:#111">:</span> <span style="color:#ae81ff">10</span>
-      <span style="color:#f92672">CompressionFormat</span><span style="color:#111">:</span> <span style="color:#ae81ff">GZIP</span>
-      <span style="color:#f92672">Prefix</span><span style="color:#111">:</span> <span style="color:#ae81ff">events/</span>
-      <span style="color:#f92672">RoleARN</span><span style="color:#111">:</span>
-        <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">KinesisRole, Arn ]</span>
-</code></pre></div><p>The API Gateway only consists of one method (without any resources), to keep the sample as simple as possible.
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">KinesisRole</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Service</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">firehose.amazonaws.com</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">sts:AssumeRole</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Policies</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">PolicyName</span><span style="color:#111">:</span> <span style="color:#ae81ff">KinesisRolePolicy</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#ae81ff">s3:AbortMultipartUpload</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#ae81ff">s3:GetBucketLocation</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#ae81ff">s3:GetObject</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#ae81ff">s3:ListBucket</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#ae81ff">s3:ListBucketMultipartUploads</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#ae81ff">s3:PutObject</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Resource</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">DataBucket , Arn ]</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>                - <span style="color:#d88200">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>                - - <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">DataBucket , Arn ]</span>
+</span></span><span style="display:flex;"><span>                  - <span style="color:#d88200">&#34;/*&#34;</span>
+</span></span></code></pre></div><p>Now the Firehose configuration.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">EventFirehose</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::KinesisFirehose::DeliveryStream</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">S3DestinationConfiguration</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">BucketARN</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">DataBucket, Arn ]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">BufferingHints</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">IntervalInSeconds</span><span style="color:#111">:</span> <span style="color:#ae81ff">60</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">SizeInMBs</span><span style="color:#111">:</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">CompressionFormat</span><span style="color:#111">:</span> <span style="color:#ae81ff">GZIP</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Prefix</span><span style="color:#111">:</span> <span style="color:#ae81ff">events/</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">RoleARN</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">KinesisRole, Arn ]</span>
+</span></span></code></pre></div><p>The API Gateway only consists of one method (without any resources), to keep the sample as simple as possible.
 Here the API Gateway definition.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ApiGatewayRestApi</span><span style="color:#111">:</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::RestApi</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Name</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
-        - <span style="color:#d88200">&#34;&#34;</span>
-        - - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::StackName</span>
-          - <span style="color:#d88200">&#34;-api&#34;</span>
-</code></pre></div><p>Now the tricky part for all of this lies in the method definition (specifically the input mapping).</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ApiGatewayPostMethod</span><span style="color:#111">:</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::Method</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">ApiKeyRequired</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span> <span style="color:#75715e">#to secure my API I used a simple API key. Otherwise my Firehose would be open to the internet.</span>
-    <span style="color:#f92672">AuthorizationType</span><span style="color:#111">:</span> <span style="color:#ae81ff">NONE</span>
-    <span style="color:#f92672">HttpMethod</span><span style="color:#111">:</span> <span style="color:#ae81ff">POST</span>
-    <span style="color:#f92672">Integration</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS</span> <span style="color:#75715e">#signal that we want to use an internal AWS service</span>
-      <span style="color:#f92672">Credentials</span><span style="color:#111">:</span>
-        <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">GatewayRole, Arn ]</span> <span style="color:#75715e">#role for the API to actually invoke the firehose</span>
-      <span style="color:#f92672">Uri</span><span style="color:#111">:</span>
-        <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
-          - <span style="color:#d88200">&#34;&#34;</span>
-          - - <span style="color:#d88200">&#34;arn:aws:apigateway:&#34;</span>
-            - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Region</span>
-            - <span style="color:#d88200">&#34;:firehose:action/PutRecord&#34;</span> <span style="color:#75715e">#this URI basically describes the service and action I want to invoke.</span>
-      <span style="color:#f92672">IntegrationHttpMethod</span><span style="color:#111">:</span> <span style="color:#ae81ff">POST</span> <span style="color:#75715e">#for kinesis using POST is required</span>
-      <span style="color:#f92672">RequestTemplates</span><span style="color:#111">:</span>
-        <span style="color:#f92672">application/json</span><span style="color:#111">:</span> <span style="color:#75715e">#now the mapping template for an incoming JSON</span>
-          <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
-            - <span style="color:#d88200">&#34;&#34;</span>
-            - - <span style="color:#d88200">&#34;#set( $key = $context.identity.apiKey )\n&#34;</span> <span style="color:#75715e">#assign the API key to local variable</span>
-              - <span style="color:#d88200">&#34;#set( $keyname = \&#34;apiKey\&#34; )\n&#34;</span>
-              - <span style="color:#d88200">&#34;#set( $traceidval = $input.params().get(\&#34;header\&#34;).get(\&#34;X-Amzn-Trace-Id\&#34;))&#34;</span> <span style="color:#75715e">#get the trace id to later extract a timestamp of the incoming request</span>
-              - <span style="color:#d88200">&#34;#set( $bodyname = \&#34;body\&#34; )\n&#34;</span>
-              - <span style="color:#d88200">&#34;#set( $traceid = \&#34;traceid\&#34;)\n&#34;</span>
-              - <span style="color:#d88200">&#34;#set( $body = $input.body )\n&#34;</span> <span style="color:#75715e">#assign the request payload to variable</span>
-              - <span style="color:#d88200">&#34;#set( $quote = &#39;\&#34;&#39; )\n&#34;</span>
-              - <span style="color:#d88200">&#34;#set( $b64 = $util.base64Encode(\&#34;{$quote$keyname$quote:$quote$key$quote,$quote$traceid$quote:$quote$traceidval$quote,$quote$bodyname$quote:$body}\&#34;) )\n&#34;</span>
-              <span style="color:#75715e">#now encode the payload in base64 to form a valid Firehose request</span>
-              - <span style="color:#d88200">&#34;{\n&#34;</span> <span style="color:#75715e">#begin of the Firehose request json</span>
-              - <span style="color:#f92672">&#34;\&#34;DeliveryStreamName\&#34;: </span><span style="color:#ae81ff">\&#34;&#34;</span>
-              - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">EventFirehose</span>
-              - <span style="color:#d88200">&#34;\&#34;,\n&#34;</span>
-              - <span style="color:#f92672">&#34; \&#34;Record\&#34;: { \&#34;Data\&#34;: </span><span style="color:#ae81ff">\&#34;$b64\&#34; }\n}&#34;</span> <span style="color:#75715e">#end of the Firehose request json</span>
-      <span style="color:#f92672">RequestParameters</span><span style="color:#111">:</span> <span style="color:#75715e">#Firehose requires the content type to not be json, but amz-json</span>
-        <span style="color:#f92672">integration.request.header.Content-Type</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;&#39;application/x-amz-json-1.1&#39;&#34;</span>
-      <span style="color:#f92672">IntegrationResponses</span><span style="color:#111">:</span>
-        - <span style="color:#f92672">StatusCode</span><span style="color:#111">:</span> <span style="color:#ae81ff">200</span> <span style="color:#75715e">#create a default response for the caller</span>
-          <span style="color:#f92672">ResponseTemplates</span><span style="color:#111">:</span>
-            <span style="color:#f92672">application/json</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;{&#34;status&#34;:&#34;OK&#34;}&#39;</span>
-    <span style="color:#f92672">MethodResponses</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">StatusCode</span><span style="color:#111">:</span> <span style="color:#ae81ff">200</span>
-    <span style="color:#f92672">ResourceId</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">ApiGatewayRestApi , RootResourceId ]</span>
-    <span style="color:#f92672">RestApiId</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref ApiGatewayRestApi</span>
-</code></pre></div><p>Now we still need the Gateway role to be defined.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">GatewayRole</span><span style="color:#111">:</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
-      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
-        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Service</span><span style="color:#111">:</span>
-          - <span style="color:#ae81ff">apigateway.amazonaws.com</span>
-        <span style="color:#f92672">Action</span><span style="color:#111">:</span>
-        - <span style="color:#ae81ff">sts:AssumeRole</span>
-    <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
-    <span style="color:#f92672">Policies</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">PolicyName</span><span style="color:#111">:</span> <span style="color:#ae81ff">GatewayRolePolicy</span>
-        <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
-          <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
-          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
-            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
-              - <span style="color:#ae81ff">firehose:PutRecord</span>
-            <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;*&#34;</span>
-</code></pre></div><p>I added a Deployment, so the API would automatically get deployed after it is created.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ApiGatewayDeployment</span><span style="color:#111">:</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::Deployment</span>
-  <span style="color:#f92672">DependsOn</span><span style="color:#111">:</span>
-    - <span style="color:#ae81ff">ApiGatewayPostMethod</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">RestApiId</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref ApiGatewayRestApi</span>
-    <span style="color:#f92672">StageName</span><span style="color:#111">:</span> <span style="color:#ae81ff">prod</span>
-</code></pre></div><p>Here is the overall CloudFormation template:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ApiGatewayRestApi</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::RestApi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Name</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#d88200">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        - - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::StackName</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#d88200">&#34;-api&#34;</span>
+</span></span></code></pre></div><p>Now the tricky part for all of this lies in the method definition (specifically the input mapping).</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ApiGatewayPostMethod</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::Method</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ApiKeyRequired</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span> <span style="color:#75715e">#to secure my API I used a simple API key. Otherwise my Firehose would be open to the internet.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">AuthorizationType</span><span style="color:#111">:</span> <span style="color:#ae81ff">NONE</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">HttpMethod</span><span style="color:#111">:</span> <span style="color:#ae81ff">POST</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Integration</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS</span> <span style="color:#75715e">#signal that we want to use an internal AWS service</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Credentials</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">GatewayRole, Arn ]</span> <span style="color:#75715e">#role for the API to actually invoke the firehose</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Uri</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#d88200">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>          - - <span style="color:#d88200">&#34;arn:aws:apigateway:&#34;</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Region</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#d88200">&#34;:firehose:action/PutRecord&#34;</span> <span style="color:#75715e">#this URI basically describes the service and action I want to invoke.</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">IntegrationHttpMethod</span><span style="color:#111">:</span> <span style="color:#ae81ff">POST</span> <span style="color:#75715e">#for kinesis using POST is required</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">RequestTemplates</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">application/json</span><span style="color:#111">:</span> <span style="color:#75715e">#now the mapping template for an incoming JSON</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Fn::Join</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#d88200">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>            - - <span style="color:#d88200">&#34;#set( $key = $context.identity.apiKey )\n&#34;</span> <span style="color:#75715e">#assign the API key to local variable</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;#set( $keyname = \&#34;apiKey\&#34; )\n&#34;</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;#set( $traceidval = $input.params().get(\&#34;header\&#34;).get(\&#34;X-Amzn-Trace-Id\&#34;))&#34;</span> <span style="color:#75715e">#get the trace id to later extract a timestamp of the incoming request</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;#set( $bodyname = \&#34;body\&#34; )\n&#34;</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;#set( $traceid = \&#34;traceid\&#34;)\n&#34;</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;#set( $body = $input.body )\n&#34;</span> <span style="color:#75715e">#assign the request payload to variable</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;#set( $quote = &#39;\&#34;&#39; )\n&#34;</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;#set( $b64 = $util.base64Encode(\&#34;{$quote$keyname$quote:$quote$key$quote,$quote$traceid$quote:$quote$traceidval$quote,$quote$bodyname$quote:$body}\&#34;) )\n&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">#now encode the payload in base64 to form a valid Firehose request</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;{\n&#34;</span> <span style="color:#75715e">#begin of the Firehose request json</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#f92672">&#34;\&#34;DeliveryStreamName\&#34;: </span><span style="color:#ae81ff">\&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">EventFirehose</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#d88200">&#34;\&#34;,\n&#34;</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#f92672">&#34; \&#34;Record\&#34;: { \&#34;Data\&#34;: </span><span style="color:#ae81ff">\&#34;$b64\&#34; }\n}&#34;</span> <span style="color:#75715e">#end of the Firehose request json</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">RequestParameters</span><span style="color:#111">:</span> <span style="color:#75715e">#Firehose requires the content type to not be json, but amz-json</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">integration.request.header.Content-Type</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;&#39;application/x-amz-json-1.1&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">IntegrationResponses</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">StatusCode</span><span style="color:#111">:</span> <span style="color:#ae81ff">200</span> <span style="color:#75715e">#create a default response for the caller</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">ResponseTemplates</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">application/json</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;{&#34;status&#34;:&#34;OK&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">MethodResponses</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">StatusCode</span><span style="color:#111">:</span> <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ResourceId</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">ApiGatewayRestApi , RootResourceId ]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">RestApiId</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref ApiGatewayRestApi</span>
+</span></span></code></pre></div><p>Now we still need the Gateway role to be defined.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">GatewayRole</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Service</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">apigateway.amazonaws.com</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">sts:AssumeRole</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Policies</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">PolicyName</span><span style="color:#111">:</span> <span style="color:#ae81ff">GatewayRolePolicy</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">PolicyDocument</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>              - <span style="color:#ae81ff">firehose:PutRecord</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Resource</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;*&#34;</span>
+</span></span></code></pre></div><p>I added a Deployment, so the API would automatically get deployed after it is created.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ApiGatewayDeployment</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::ApiGateway::Deployment</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">DependsOn</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">ApiGatewayPostMethod</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">RestApiId</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref ApiGatewayRestApi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">StageName</span><span style="color:#111">:</span> <span style="color:#ae81ff">prod</span>
+</span></span></code></pre></div><p>Here is the overall CloudFormation template:</p>
 <p>[api-to-firehose-cf.yml template][1]</p>
 <p>[1]:{{ site.url }}/assets/api-to-firehose-cf.yml</p>
 

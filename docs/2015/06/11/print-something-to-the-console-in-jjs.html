@@ -9,7 +9,7 @@
 nashorn&gt; System.out.println(&#34;hello world&#34;); script error: ReferenceError: &#34;System&#34; is not defined in &lt;STDIN&gt; at line number 1 ">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="print something to the console in jjs">
@@ -45,7 +45,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -116,17 +115,17 @@ if (!doNotTrack) {
 
     <p>Once I got jjs running I started with some pretty simple stuff.
 To print something to the console I found the following ways.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">//javascript style
-</span><span style="color:#75715e"></span><span style="color:#75af00">print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world&#34;</span><span style="color:#111">);</span> <span style="color:#75715e">// don&#39;t forget the parentheses here, otherwise jjs wont like you
-</span><span style="color:#75715e">//java style
-</span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">System</span> <span style="color:#f92672">=</span> <span style="color:#75af00">Java</span><span style="color:#111">.</span><span style="color:#75af00">type</span><span style="color:#111">(</span><span style="color:#d88200">&#39;java.lang.System&#39;</span><span style="color:#111">);</span>
-<span style="color:#75af00">System</span><span style="color:#111">.</span><span style="color:#75af00">out</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world&#34;</span><span style="color:#111">);</span>
-<span style="color:#75715e">//of course there is an error out too
-</span><span style="color:#75715e"></span><span style="color:#75af00">System</span><span style="color:#111">.</span><span style="color:#75af00">err</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world&#34;</span><span style="color:#111">);</span>
-</code></pre></div><p>Don&rsquo;t forget to declare System as Variable, otherwise it will fail.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75af00">nashorn</span><span style="color:#f92672">&gt;</span> <span style="color:#75af00">System</span><span style="color:#111">.</span><span style="color:#75af00">out</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world&#34;</span><span style="color:#111">);</span>
-<span style="color:#75af00">script</span> <span style="color:#75af00">error</span><span style="color:#f92672">:</span> <span style="color:#75af00">ReferenceError</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#34;System&#34;</span> <span style="color:#75af00">is</span> <span style="color:#75af00">not</span> <span style="color:#75af00">defined</span> <span style="color:#00a8c8">in</span> <span style="color:#f92672">&lt;</span><span style="color:#75af00">STDIN</span><span style="color:#f92672">&gt;</span> <span style="color:#75af00">at</span> <span style="color:#75af00">line</span> <span style="color:#75af00">number</span> <span style="color:#ae81ff">1</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">//javascript style
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75af00">print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world&#34;</span><span style="color:#111">);</span> <span style="color:#75715e">// don&#39;t forget the parentheses here, otherwise jjs wont like you
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//java style
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">System</span> <span style="color:#f92672">=</span> <span style="color:#75af00">Java</span><span style="color:#111">.</span><span style="color:#75af00">type</span><span style="color:#111">(</span><span style="color:#d88200">&#39;java.lang.System&#39;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">System</span><span style="color:#111">.</span><span style="color:#75af00">out</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//of course there is an error out too
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75af00">System</span><span style="color:#111">.</span><span style="color:#75af00">err</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world&#34;</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>Don&rsquo;t forget to declare System as Variable, otherwise it will fail.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75af00">nashorn</span><span style="color:#f92672">&gt;</span> <span style="color:#75af00">System</span><span style="color:#111">.</span><span style="color:#75af00">out</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">script</span> <span style="color:#75af00">error</span><span style="color:#f92672">:</span> <span style="color:#75af00">ReferenceError</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#34;System&#34;</span> <span style="color:#75af00">is</span> <span style="color:#75af00">not</span> <span style="color:#75af00">defined</span> <span style="color:#00a8c8">in</span> <span style="color:#f92672">&lt;</span><span style="color:#75af00">STDIN</span><span style="color:#f92672">&gt;</span> <span style="color:#75af00">at</span> <span style="color:#75af00">line</span> <span style="color:#75af00">number</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

@@ -15,7 +15,7 @@
       <guid>https://jens.dev/2017/06/15/how-the-web-component-slot-system-works.html</guid>
       <description>In my previous post I described how to send data in form of attributes to a web component. Since this mechanism is only applicable for simple values, there also is a separate mechanism for inserting complex values.
 Let me explain the goal first. If I have a web component which consists of the following internal structure.
-&amp;lt;hello-card&amp;gt; #shadow-root &amp;lt;div id=&amp;#34;header&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/hello-card&amp;gt; To use this component, you have to insert it into the DOM and it will render a visual representation.</description>
+&amp;lt;hello-card&amp;gt;  #shadow-root  &amp;lt;div id=&amp;#34;header&amp;#34;&amp;gt;  &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;  &amp;lt;/div&amp;gt;  &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt;  &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;  &amp;lt;/div&amp;gt; &amp;lt;/hello-card&amp;gt; To use this component, you have to insert it into the DOM and it will render a visual representation.</description>
     </item>
     
     <item>

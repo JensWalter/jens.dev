@@ -15,7 +15,7 @@
       <guid>https://jens.dev/2008/10/03/generate-random-timestamps-in-mysql.html</guid>
       <description>I’m now try to prepare a mysql performance comparison between hdd and flash. So to create a lot of test data I needed a function to create random timestamps in a certain range.
 After trying google I gave up and started with the mysql documentation and came up with the following statement:
-select from_unixtime( unix_timestamp(&amp;#39;2008-01-01 01:00:00&amp;#39;)+floor(rand()*31536000) ); So lets break it it down a bit:
+select from_unixtime(  unix_timestamp(&amp;#39;2008-01-01 01:00:00&amp;#39;)+floor(rand()*31536000) ); So lets break it it down a bit:
 first I set a start date (minimum for the random)</description>
     </item>
     

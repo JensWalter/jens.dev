@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>get oracle allocation sizes part 2 &middot; </title>
         <meta name="description" content="In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.
-SELECT segment_name table_name, sum(bytes) tablesize, (SELECT sum(bytes) FROM user_segments ind WHERE segment_name in (select index_name from user_indexes where table_name=tab.segment_name) ) indexsize, (SELECT sum(bytes) FROM user_segments ls WHERE segment_name in (select segment_name from user_lobs where table_name=tab.">
+SELECT segment_name table_name, sum(bytes) tablesize,  (SELECT sum(bytes) FROM user_segments ind  WHERE segment_name in  (select index_name from user_indexes  where table_name=tab.segment_name)  ) indexsize,  (SELECT sum(bytes) FROM user_segments ls  WHERE segment_name in  (select segment_name from user_lobs  where table_name=tab.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="get oracle allocation sizes part 2">
 <meta property="og:description" content="In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.
-SELECT segment_name table_name, sum(bytes) tablesize, (SELECT sum(bytes) FROM user_segments ind WHERE segment_name in (select index_name from user_indexes where table_name=tab.segment_name) ) indexsize, (SELECT sum(bytes) FROM user_segments ls WHERE segment_name in (select segment_name from user_lobs where table_name=tab.">
+SELECT segment_name table_name, sum(bytes) tablesize,  (SELECT sum(bytes) FROM user_segments ind  WHERE segment_name in  (select index_name from user_indexes  where table_name=tab.segment_name)  ) indexsize,  (SELECT sum(bytes) FROM user_segments ls  WHERE segment_name in  (select segment_name from user_lobs  where table_name=tab.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2016/06/21/get-oracle-allocation-sizes-part-2.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -113,22 +112,22 @@ if (!doNotTrack) {
     
 
     <p>In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">SELECT</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">table_name</span><span style="color:#111">,</span> <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">bytes</span><span style="color:#111">)</span> <span style="color:#111">tablesize</span><span style="color:#111">,</span>
-  <span style="color:#111">(</span><span style="color:#00a8c8">SELECT</span> <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">bytes</span><span style="color:#111">)</span> <span style="color:#00a8c8">FROM</span> <span style="color:#111">user_segments</span> <span style="color:#111">ind</span>
-    <span style="color:#00a8c8">WHERE</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">in</span>
-      <span style="color:#111">(</span><span style="color:#00a8c8">select</span> <span style="color:#111">index_name</span> <span style="color:#00a8c8">from</span> <span style="color:#111">user_indexes</span>
-        <span style="color:#00a8c8">where</span> <span style="color:#00a8c8">table_name</span><span style="color:#f92672">=</span><span style="color:#111">tab</span><span style="color:#111">.</span><span style="color:#111">segment_name</span><span style="color:#111">)</span>
-  <span style="color:#111">)</span> <span style="color:#111">indexsize</span><span style="color:#111">,</span>
-  <span style="color:#111">(</span><span style="color:#00a8c8">SELECT</span> <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">bytes</span><span style="color:#111">)</span> <span style="color:#00a8c8">FROM</span> <span style="color:#111">user_segments</span> <span style="color:#111">ls</span>
-    <span style="color:#00a8c8">WHERE</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">in</span>
-      <span style="color:#111">(</span><span style="color:#00a8c8">select</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">from</span> <span style="color:#111">user_lobs</span>
-        <span style="color:#00a8c8">where</span> <span style="color:#00a8c8">table_name</span><span style="color:#f92672">=</span><span style="color:#111">tab</span><span style="color:#111">.</span><span style="color:#111">segment_name</span><span style="color:#111">)</span>
-  <span style="color:#111">)</span> <span style="color:#111">lobsize</span>
-<span style="color:#00a8c8">FROM</span> <span style="color:#111">user_segments</span> <span style="color:#111">tab</span>
-<span style="color:#00a8c8">WHERE</span> <span style="color:#111">segment_type</span> <span style="color:#00a8c8">in</span> <span style="color:#111">(</span><span style="color:#d88200">&#39;TABLE&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;TABLE PARTITION&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;TABLE SUBPARTITION&#39;</span><span style="color:#111">)</span>
-<span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">(</span><span style="color:#111">segment_name</span><span style="color:#111">)</span>
-<span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span> <span style="color:#111">segment_name</span><span style="color:#111">;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">SELECT</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">table_name</span><span style="color:#111">,</span> <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">bytes</span><span style="color:#111">)</span> <span style="color:#111">tablesize</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">(</span><span style="color:#00a8c8">SELECT</span> <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">bytes</span><span style="color:#111">)</span> <span style="color:#00a8c8">FROM</span> <span style="color:#111">user_segments</span> <span style="color:#111">ind</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">WHERE</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">in</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">(</span><span style="color:#00a8c8">select</span> <span style="color:#111">index_name</span> <span style="color:#00a8c8">from</span> <span style="color:#111">user_indexes</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">where</span> <span style="color:#00a8c8">table_name</span><span style="color:#f92672">=</span><span style="color:#111">tab</span><span style="color:#111">.</span><span style="color:#111">segment_name</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">)</span> <span style="color:#111">indexsize</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">(</span><span style="color:#00a8c8">SELECT</span> <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#111">bytes</span><span style="color:#111">)</span> <span style="color:#00a8c8">FROM</span> <span style="color:#111">user_segments</span> <span style="color:#111">ls</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">WHERE</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">in</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">(</span><span style="color:#00a8c8">select</span> <span style="color:#111">segment_name</span> <span style="color:#00a8c8">from</span> <span style="color:#111">user_lobs</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">where</span> <span style="color:#00a8c8">table_name</span><span style="color:#f92672">=</span><span style="color:#111">tab</span><span style="color:#111">.</span><span style="color:#111">segment_name</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">)</span> <span style="color:#111">lobsize</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">FROM</span> <span style="color:#111">user_segments</span> <span style="color:#111">tab</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">WHERE</span> <span style="color:#111">segment_type</span> <span style="color:#00a8c8">in</span> <span style="color:#111">(</span><span style="color:#d88200">&#39;TABLE&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;TABLE PARTITION&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;TABLE SUBPARTITION&#39;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">(</span><span style="color:#111">segment_name</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span> <span style="color:#111">segment_name</span><span style="color:#111">;</span>
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

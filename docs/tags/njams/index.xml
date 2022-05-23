@@ -24,7 +24,7 @@ The select checks if there are messages, which have/had no recorded information 
       
       <guid>https://jens.dev/2015/09/26/njams-getting-the-client-version-of-all-engines.html</guid>
       <description>After migrating a nJAMS on a large BusinessWorks environment, you need to check, whether all engines are actually using the updated version of the client. To check this, you can either check every engine log file or you can just go directly to the database.
-SELECT o.DOMAIN_NAME domain, o.OBJECTNAME engine, o.CLIENT_VERSION, o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
+SELECT o.DOMAIN_NAME domain,  o.OBJECTNAME engine,  o.CLIENT_VERSION,  o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
    domain engine client_version last_update     fs_dev C1_Services-C1_Services-1 3.</description>
     </item>
     
@@ -36,7 +36,7 @@ SELECT o.DOMAIN_NAME domain, o.OBJECTNAME engine, o.CLIENT_VERSION, o.LAST_UPDAT
       <guid>https://jens.dev/2015/09/17/njams-getting-a-daily-success-error-rate-per-deployed-service.html</guid>
       <description>Often people ask for various reports which can be generated out of the nJAMS/BWPM data pool.
 To start with a simple one, here the select for getting a success/error/warning rate of all deployed engines over time aggregated on daily basis.
-select trunc(jobstart) datum, deployment_name, count(*) execution_count, sum(case when LASTEVENTSTATUS=&amp;#39;1&amp;#39; then 1 else 0 end) success_count, sum(case when LASTEVENTSTATUS=&amp;#39;2&amp;#39; then 1 else 0 end) warning_count, sum(case when LASTEVENTSTATUS=&amp;#39;3&amp;#39; then 1 else 0 end) error_count, sum(case when LASTEVENTSTATUS=&amp;#39;0&amp;#39; then 1 else 0 end) running_count from ( SELECT m.</description>
+select trunc(jobstart) datum, deployment_name,  count(*) execution_count,  sum(case when LASTEVENTSTATUS=&amp;#39;1&amp;#39; then 1 else 0 end) success_count,  sum(case when LASTEVENTSTATUS=&amp;#39;2&amp;#39; then 1 else 0 end) warning_count,  sum(case when LASTEVENTSTATUS=&amp;#39;3&amp;#39; then 1 else 0 end) error_count,  sum(case when LASTEVENTSTATUS=&amp;#39;0&amp;#39; then 1 else 0 end) running_count from (  SELECT m.</description>
     </item>
     
     <item>
@@ -46,7 +46,7 @@ select trunc(jobstart) datum, deployment_name, count(*) execution_count, sum(cas
       
       <guid>https://jens.dev/2015/09/16/njams-how-the-njams_t_monitor_main-status-works.html</guid>
       <description>nJAMS/BWPM has a rather complex system for determining the status of a process. Although all of this is easily accessible through the GUI, you sometimes need to go directly to the database for some further reporting. So here the select to get the calculated state of the GUI.
-SELECT m.jobstart,o.deployment_name,o.objectname, CASE WHEN m.LASTEVENTSTATUS=&amp;#39;3&amp;#39; THEN &amp;#39;error&amp;#39; WHEN m.LASTEVENTSTATUS=&amp;#39;2&amp;#39; THEN &amp;#39;warning&amp;#39; WHEN m.LASTEVENTSTATUS=&amp;#39;1&amp;#39; THEN CASE WHEN m.status=&amp;#39;3&amp;#39; THEN &amp;#39;success with error&amp;#39; WHEN m.</description>
+SELECT m.jobstart,o.deployment_name,o.objectname,  CASE  WHEN m.LASTEVENTSTATUS=&amp;#39;3&amp;#39; THEN &amp;#39;error&amp;#39;  WHEN m.LASTEVENTSTATUS=&amp;#39;2&amp;#39; THEN &amp;#39;warning&amp;#39;  WHEN m.LASTEVENTSTATUS=&amp;#39;1&amp;#39; THEN  CASE  WHEN m.</description>
     </item>
     
   </channel>

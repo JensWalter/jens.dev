@@ -8,7 +8,7 @@
 First I had to find the coresponding class of the jjs tool. I&rsquo;m not sure I found the right one, but I did find a Shell class within the nashorn.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="debugging a java application with an interactive shell">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -122,9 +121,9 @@ Instead I had to fallback to files, to provide the launcher code for my actual a
 This is what the launch configuration in intelliJ looks like.</p>
 <p><img src="/assets/shell-launch-config.png" alt="intelliJ launch configuration"></p>
 <p>After that, the debugger starts an empty shell. What I needed from that point onwards, was to start the real application. For that, I wrote the following Javascript and put it into the project directory.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">var</span> <span style="color:#75af00">args</span> <span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#34;-cq&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-cs&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-ll&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;debug&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-p&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;/Users/jens/tmp/store&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-t&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;1m&#34;</span><span style="color:#111">];</span>
-<span style="color:#75af00">Java</span><span style="color:#111">.</span><span style="color:#75af00">type</span><span style="color:#111">(</span><span style="color:#d88200">&#34;io.trivium.Start&#34;</span><span style="color:#111">).</span><span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#75af00">args</span><span style="color:#111">);</span>
-</code></pre></div><p>Including this script, the launch configuration had to be adjusted with the correct script filename.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#00a8c8">var</span> <span style="color:#75af00">args</span> <span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#34;-cq&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-cs&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-ll&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;debug&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-p&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;/Users/jens/tmp/store&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;-t&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;1m&#34;</span><span style="color:#111">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">Java</span><span style="color:#111">.</span><span style="color:#75af00">type</span><span style="color:#111">(</span><span style="color:#d88200">&#34;io.trivium.Start&#34;</span><span style="color:#111">).</span><span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#75af00">args</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>Including this script, the launch configuration had to be adjusted with the correct script filename.</p>
 <p><img src="/assets/shell-launch-configuration-with-script.png" alt="intelliJ launch configuration"></p>
 <p>So now I could start my application through the launch configuration and in effect have a shell to interact with my code base at run-time.</p>
 

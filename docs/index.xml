@@ -14,7 +14,7 @@
       
       <guid>https://jens.dev/2021/02/13/how-to-access-azure-key-vault-in-rust.html</guid>
       <description>Introduction Since the Azure SDK for Rust is still not published on crates.io, here is an example how to use the current git repo for accessing an Azure Key Vault.
-Cargo.toml [package] name = &amp;#34;keyvault-sample&amp;#34; version = &amp;#34;0.1.0&amp;#34; edition = &amp;#34;2018&amp;#34; [dependencies] azure_key_vault = { git = &amp;#34;https://github.com/Azure/azure-sdk-for-rust.git&amp;#34; } azure_identity = { git = &amp;#34;https://github.com/Azure/azure-sdk-for-rust.git&amp;#34; } tokio = { version = &amp;#34;1&amp;#34;, features = [&amp;#34;full&amp;#34;] } main.rs use azure_identity::token_credentials::ClientSecretCredential; use azure_identity::token_credentials::TokenCredentialOptions; use azure_key_vault::KeyVaultClient; #[tokio::main] async fn main() -&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt; { //azure credentials  let client_id = &amp;#34;11111111-1111-1111-1111-111111111111&amp;#34;.</description>
+Cargo.toml [package] name = &amp;#34;keyvault-sample&amp;#34; version = &amp;#34;0.1.0&amp;#34; edition = &amp;#34;2018&amp;#34;  [dependencies] azure_key_vault = { git = &amp;#34;https://github.com/Azure/azure-sdk-for-rust.git&amp;#34; } azure_identity = { git = &amp;#34;https://github.com/Azure/azure-sdk-for-rust.git&amp;#34; } tokio = { version = &amp;#34;1&amp;#34;, features = [&amp;#34;full&amp;#34;] } main.rs use azure_identity::token_credentials::ClientSecretCredential; use azure_identity::token_credentials::TokenCredentialOptions; use azure_key_vault::KeyVaultClient;  #[tokio::main] async fn main() -&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt; {  //azure credentials  let client_id = &amp;#34;11111111-1111-1111-1111-111111111111&amp;#34;.</description>
     </item>
     
     <item>
@@ -139,7 +139,7 @@ So for this use case (and some others like initial data load), AWS introduced cu
       <guid>https://jens.dev/2017/06/15/how-the-web-component-slot-system-works.html</guid>
       <description>In my previous post I described how to send data in form of attributes to a web component. Since this mechanism is only applicable for simple values, there also is a separate mechanism for inserting complex values.
 Let me explain the goal first. If I have a web component which consists of the following internal structure.
-&amp;lt;hello-card&amp;gt; #shadow-root &amp;lt;div id=&amp;#34;header&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/hello-card&amp;gt; To use this component, you have to insert it into the DOM and it will render a visual representation.</description>
+&amp;lt;hello-card&amp;gt;  #shadow-root  &amp;lt;div id=&amp;#34;header&amp;#34;&amp;gt;  &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;  &amp;lt;/div&amp;gt;  &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt;  &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;  &amp;lt;/div&amp;gt; &amp;lt;/hello-card&amp;gt; To use this component, you have to insert it into the DOM and it will render a visual representation.</description>
     </item>
     
     <item>
@@ -223,7 +223,7 @@ Scenario:
       <description>For testing purposes I needed a service which would generate a self signed certificate. To reduce my dependency on locally installed tools, I implemented this service as AWS Lambda function (or microservice if you want to call it that).
 Here is what I came up with:
 The generated output looks like this:
-{ &amp;#34;cert&amp;#34;: { &amp;#34;filename&amp;#34;: &amp;#34;cert.pem&amp;#34;, &amp;#34;fileContent&amp;#34;: &amp;#34;LS0tLS1CRUdJTiBDRVJU...&amp;#34; }, &amp;#34;key&amp;#34;: { &amp;#34;filename&amp;#34;: &amp;#34;key.pem&amp;#34;, &amp;#34;fileContent&amp;#34;: &amp;#34;LS0tLS1CRUdJTiBQUklW...&amp;#34; } } PS: you might need to adjust the CN to your own domain name, currently all certificates will have the CN apimeister.</description>
+{  &amp;#34;cert&amp;#34;: {  &amp;#34;filename&amp;#34;: &amp;#34;cert.pem&amp;#34;,  &amp;#34;fileContent&amp;#34;: &amp;#34;LS0tLS1CRUdJTiBDRVJU...&amp;#34;  },  &amp;#34;key&amp;#34;: {  &amp;#34;filename&amp;#34;: &amp;#34;key.pem&amp;#34;,  &amp;#34;fileContent&amp;#34;: &amp;#34;LS0tLS1CRUdJTiBQUklW.</description>
     </item>
     
     <item>
@@ -255,7 +255,7 @@ Now since this is possible, calling a GC, although there is still free memory av
       <description>In Cognito all registered users need to be confirmed before they can interact with other services.
 Out-of-the-box Amazon supports confirmation by
  email SMS web UI lambda  To automate this process, confirming with a Lambda function is the only way to trigger the confirmation process. So I created the following lambda to confirm all created users.
-exports.handler = (event, context, callback) =&amp;gt; { event.response.autoConfirmUser=true; callback(null, event); }; Then I used this lambda as &amp;ldquo;Pre sign-up&amp;rdquo;-trigger.</description>
+exports.handler = (event, context, callback) =&amp;gt; {  event.response.autoConfirmUser=true;  callback(null, event); }; Then I used this lambda as &amp;ldquo;Pre sign-up&amp;rdquo;-trigger.</description>
     </item>
     
     <item>
@@ -306,7 +306,7 @@ What is working right now?
       
       <guid>https://jens.dev/2016/06/21/get-oracle-allocation-sizes-part-2.html</guid>
       <description>In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.
-SELECT segment_name table_name, sum(bytes) tablesize, (SELECT sum(bytes) FROM user_segments ind WHERE segment_name in (select index_name from user_indexes where table_name=tab.segment_name) ) indexsize, (SELECT sum(bytes) FROM user_segments ls WHERE segment_name in (select segment_name from user_lobs where table_name=tab.</description>
+SELECT segment_name table_name, sum(bytes) tablesize,  (SELECT sum(bytes) FROM user_segments ind  WHERE segment_name in  (select index_name from user_indexes  where table_name=tab.segment_name)  ) indexsize,  (SELECT sum(bytes) FROM user_segments ls  WHERE segment_name in  (select segment_name from user_lobs  where table_name=tab.</description>
     </item>
     
     <item>
@@ -327,7 +327,7 @@ To achieve this,I came up with the following solution.</description>
       <guid>https://jens.dev/2016/03/10/embed-a-github-commit-log-into-markdown.html</guid>
       <description>I started to write some documentation for a project of mine and I wanted to embed a change log on certain elements in the documentation. Since my documentation format is mkDocs, all documents are written in markdown.
 So here is what I came up with:
-**last commits** &amp;lt;div id=&amp;#39;commits&amp;#39; data-path=&amp;#39;src/io/trivium/extension/&amp;#39;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;script src=&amp;#39;https://code.jquery.com/jquery-2.2.1.min.js&amp;#39;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var path = $(&amp;#39;#commits&amp;#39;).data(&amp;#39;path&amp;#39;); var url = &amp;#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&amp;#39;+path; $.ajax({type:&amp;#39;GET&amp;#39;, url:url, success: function(data){ var str=&amp;#34;&amp;lt;table class=&amp;#39;docutils&amp;#39;&amp;gt;&amp;lt;thead&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;message&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;date&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;author&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;link&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/thead&amp;gt;&amp;lt;tbody&amp;gt;&amp;#34;; for(var idx=0;idx&amp;lt;data.length &amp;amp;&amp;amp; idx&amp;lt;10;idx++){ var one = data[idx]; var d = one.</description>
+**last commits**  &amp;lt;div id=&amp;#39;commits&amp;#39; data-path=&amp;#39;src/io/trivium/extension/&amp;#39;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;script src=&amp;#39;https://code.jquery.com/jquery-2.2.1.min.js&amp;#39;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var path = $(&amp;#39;#commits&amp;#39;).data(&amp;#39;path&amp;#39;); var url = &amp;#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&amp;#39;+path; $.ajax({type:&amp;#39;GET&amp;#39;,  url:url,  success: function(data){  var str=&amp;#34;&amp;lt;table class=&amp;#39;docutils&amp;#39;&amp;gt;&amp;lt;thead&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;message&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;date&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;author&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;link&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/thead&amp;gt;&amp;lt;tbody&amp;gt;&amp;#34;;  for(var idx=0;idx&amp;lt;data.</description>
     </item>
     
     <item>
@@ -373,7 +373,7 @@ A much greater pain point comes in if you start to think about, how to host this
       <guid>https://jens.dev/2015/10/10/formdatahandler-implements-com-sun-net-httpserver-httphandler.html</guid>
       <description>I just needed a dependency free version of a FormData Parser. Since all libraries I found were rather heavy weight I decided to start on my own implementation and share this one.
 To use this one, you can just extends the class below.
-public class FileUpload extends FormDataHandler{ @Override public void handle(HttpExchange httpExchange, List&amp;lt;MultiPart&amp;gt; parts){} } </description>
+public class FileUpload extends FormDataHandler{  @Override  public void handle(HttpExchange httpExchange, List&amp;lt;MultiPart&amp;gt; parts){} } </description>
     </item>
     
     <item>
@@ -392,7 +392,7 @@ public class FileUpload extends FormDataHandler{ @Override public void handle(Ht
       
       <guid>https://jens.dev/2015/09/26/njams-getting-the-client-version-of-all-engines.html</guid>
       <description>After migrating a nJAMS on a large BusinessWorks environment, you need to check, whether all engines are actually using the updated version of the client. To check this, you can either check every engine log file or you can just go directly to the database.
-SELECT o.DOMAIN_NAME domain, o.OBJECTNAME engine, o.CLIENT_VERSION, o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
+SELECT o.DOMAIN_NAME domain,  o.OBJECTNAME engine,  o.CLIENT_VERSION,  o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
    domain engine client_version last_update     fs_dev C1_Services-C1_Services-1 3.</description>
     </item>
     
@@ -404,7 +404,7 @@ SELECT o.DOMAIN_NAME domain, o.OBJECTNAME engine, o.CLIENT_VERSION, o.LAST_UPDAT
       <guid>https://jens.dev/2015/09/17/njams-getting-a-daily-success-error-rate-per-deployed-service.html</guid>
       <description>Often people ask for various reports which can be generated out of the nJAMS/BWPM data pool.
 To start with a simple one, here the select for getting a success/error/warning rate of all deployed engines over time aggregated on daily basis.
-select trunc(jobstart) datum, deployment_name, count(*) execution_count, sum(case when LASTEVENTSTATUS=&amp;#39;1&amp;#39; then 1 else 0 end) success_count, sum(case when LASTEVENTSTATUS=&amp;#39;2&amp;#39; then 1 else 0 end) warning_count, sum(case when LASTEVENTSTATUS=&amp;#39;3&amp;#39; then 1 else 0 end) error_count, sum(case when LASTEVENTSTATUS=&amp;#39;0&amp;#39; then 1 else 0 end) running_count from ( SELECT m.</description>
+select trunc(jobstart) datum, deployment_name,  count(*) execution_count,  sum(case when LASTEVENTSTATUS=&amp;#39;1&amp;#39; then 1 else 0 end) success_count,  sum(case when LASTEVENTSTATUS=&amp;#39;2&amp;#39; then 1 else 0 end) warning_count,  sum(case when LASTEVENTSTATUS=&amp;#39;3&amp;#39; then 1 else 0 end) error_count,  sum(case when LASTEVENTSTATUS=&amp;#39;0&amp;#39; then 1 else 0 end) running_count from (  SELECT m.</description>
     </item>
     
     <item>
@@ -414,7 +414,7 @@ select trunc(jobstart) datum, deployment_name, count(*) execution_count, sum(cas
       
       <guid>https://jens.dev/2015/09/16/njams-how-the-njams_t_monitor_main-status-works.html</guid>
       <description>nJAMS/BWPM has a rather complex system for determining the status of a process. Although all of this is easily accessible through the GUI, you sometimes need to go directly to the database for some further reporting. So here the select to get the calculated state of the GUI.
-SELECT m.jobstart,o.deployment_name,o.objectname, CASE WHEN m.LASTEVENTSTATUS=&amp;#39;3&amp;#39; THEN &amp;#39;error&amp;#39; WHEN m.LASTEVENTSTATUS=&amp;#39;2&amp;#39; THEN &amp;#39;warning&amp;#39; WHEN m.LASTEVENTSTATUS=&amp;#39;1&amp;#39; THEN CASE WHEN m.status=&amp;#39;3&amp;#39; THEN &amp;#39;success with error&amp;#39; WHEN m.</description>
+SELECT m.jobstart,o.deployment_name,o.objectname,  CASE  WHEN m.LASTEVENTSTATUS=&amp;#39;3&amp;#39; THEN &amp;#39;error&amp;#39;  WHEN m.LASTEVENTSTATUS=&amp;#39;2&amp;#39; THEN &amp;#39;warning&amp;#39;  WHEN m.LASTEVENTSTATUS=&amp;#39;1&amp;#39; THEN  CASE  WHEN m.</description>
     </item>
     
     <item>
@@ -469,8 +469,8 @@ tc qdisc del dev enp0s3 root netem </description>
       
       <guid>https://jens.dev/2015/07/11/query-index-usage-stats-in-oracle.html</guid>
       <description>how often an index was used
-select p.object_name &amp;#34;object&amp;#34;, to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;) &amp;#34;Begin|Interval|time&amp;#34;, p.search_columns &amp;#34;Search Columns&amp;#34;, count(*) &amp;#34;Invocation|Count&amp;#34; from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name like &amp;#39;%INDEX_%&amp;#39; group by p.object_name,to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;),search_columns how an index was used
-select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist_sql_plan p, dba_hist_sqlstat s where p.object_owner &amp;lt;&amp;gt; &amp;#39;SYS&amp;#39; and p.operation like &amp;#39;%INDEX%&amp;#39; and p.sql_id = s.sql_id group by p.</description>
+select  p.object_name &amp;#34;object&amp;#34;,  to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;) &amp;#34;Begin|Interval|time&amp;#34;,  p.search_columns &amp;#34;Search Columns&amp;#34;,  count(*) &amp;#34;Invocation|Count&amp;#34; from  dba_hist_snapshot sn,  dba_hist_sql_plan p,  dba_hist_sqlstat st where  st.sql_id = p.sql_id and  sn.snap_id = st.snap_id and  p.object_name like &amp;#39;%INDEX_%&amp;#39; group by  p.object_name,to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;),search_columns how an index was used
+select  p.object_name c1,  p.operation c2,  p.options c3,  count(1) c4 from  dba_hist_sql_plan p,  dba_hist_sqlstat s where  p.</description>
     </item>
     
     <item>
@@ -490,7 +490,7 @@ First I had to find the coresponding class of the jjs tool. I&amp;rsquo;m not su
       
       <guid>https://jens.dev/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html</guid>
       <description>Normally, the JVM does not allow extending the classpath during runtime. But due to the demand, people found ways around that restriction. To bring one of the work-around to jjs I wrote the following javascript function.
-function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader(); var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class; var ClassArray = Java.type(&amp;#34;java.lang.Class[]&amp;#34;); var parameters = new ClassArray(1); parameters[0]= java.net.URL.class; var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&amp;#34;addURL&amp;#34;, parameters); method.setAccessible(true); var ObjectArray = Java.type(&amp;#34;java.lang.Object[]&amp;#34;); var array = new ObjectArray(1); var/*java.</description>
+function addUrlToClasspath(pathName){ 	var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader();  var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class;  var ClassArray = Java.type(&amp;#34;java.lang.Class[]&amp;#34;);  var parameters = new ClassArray(1);  parameters[0]= java.net.URL.class;  var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&amp;#34;addURL&amp;#34;, parameters);  method.</description>
     </item>
     
     <item>
@@ -500,7 +500,7 @@ function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader =
       
       <guid>https://jens.dev/2015/06/27/query-clob-settings-in-oracle.html</guid>
       <description>You can query all clob related settings from the database with the following query.
-SELECT table_name, column_name, securefile AS &amp;#34;isSecureFile&amp;#34;, compression AS &amp;#34;Compressed&amp;#34; , encrypt AS &amp;#34;Encrypted&amp;#34;, DEDUPLICATION as &amp;#34;Deduplicated&amp;#34;, in_row AS &amp;#34;StoredInRow&amp;#34; FROM user_lobs    TABLE_NAME COLUMN_NAME isSecureFile Compressed Encrypted Deduplicated StoredInRow     SAMPLE_DATASET_INTRO XMLDATA YES NO NO NO YES   SAMPLE_DATASET_EVOLVE XMLDATA YES NO NO NO YES   SAMPLE_DATASET_PARTN XMLDATA YES NO NO NO YES   SAMPLE_DATASET_FULLTEXT XMLDATA YES NO NO NO YES   SAMPLE_DATASET_XQUERY XMLDATA YES NO NO NO YES   SAMPLE_DATASET_REPOS IMAGE YES NO NO NO YES    </description>
+SELECT table_name,  column_name,  securefile AS &amp;#34;isSecureFile&amp;#34;,  compression AS &amp;#34;Compressed&amp;#34; ,  encrypt AS &amp;#34;Encrypted&amp;#34;,  DEDUPLICATION as &amp;#34;Deduplicated&amp;#34;,  in_row AS &amp;#34;StoredInRow&amp;#34; FROM user_lobs    TABLE_NAME COLUMN_NAME isSecureFile Compressed Encrypted Deduplicated StoredInRow     SAMPLE_DATASET_INTRO XMLDATA YES NO NO NO YES   SAMPLE_DATASET_EVOLVE XMLDATA YES NO NO NO YES   SAMPLE_DATASET_PARTN XMLDATA YES NO NO NO YES   SAMPLE_DATASET_FULLTEXT XMLDATA YES NO NO NO YES   SAMPLE_DATASET_XQUERY XMLDATA YES NO NO NO YES   SAMPLE_DATASET_REPOS IMAGE YES NO NO NO YES    </description>
     </item>
     
     <item>
@@ -520,7 +520,7 @@ Determining the size of a table can be a bit tricky within oracle. You can size 
       
       <guid>https://jens.dev/2015/06/26/detect-whether-assm-is-managing-your-tablespace.html</guid>
       <description>I recently had an oracle database where I wanted to compress the clob store for more storage efficiency. To do that, I needed to convert the clob store from basicfiles to securefiles. As a requirement to use compressed securefiles, oracel states, that the tablespace must be managed by ASSM (Automatic Segment Space Management). In order to check this, I found the following sql query.
-select tablespace_name, SEGMENT_SPACE_MANAGEMENT from user_tablespaces; The output looks like:</description>
+select tablespace_name, SEGMENT_SPACE_MANAGEMENT  from user_tablespaces; The output looks like:</description>
     </item>
     
     <item>
@@ -531,7 +531,7 @@ select tablespace_name, SEGMENT_SPACE_MANAGEMENT from user_tablespaces; The outp
       <guid>https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</guid>
       <description>The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
  get message statistics reset stats to zero  get the stats as csv
-printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &amp;#39;NR&amp;gt;11&amp;#39; | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39; | grep -v &amp;#39;tcp://&amp;#39; | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
+printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39;  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1  | awk &amp;#39;NR&amp;gt;11&amp;#39;  | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39;  | grep -v &amp;#39;tcp://&amp;#39;  | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
     </item>
     
     <item>
@@ -562,7 +562,7 @@ grep &amp;#34;200 &amp;#34; /var/log/apache2/apimeister-access.log \  | grep -v 
       
       <guid>https://jens.dev/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</guid>
       <description>When you have a partioned table full of UUIDs but partitioned through timestamp, you need a way to translate the UUID back into a timestamp to match a partition where the key is stored. So here is my way of how to extract the timestamp out of an UUIDv1.
-select ts,to_timestamp(date &amp;#39;1970-01-01&amp;#39;+ (ts/(24*60*60))) from ( select trunc((to_number(substr(uuid,16,3)||&amp;#39;000000000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,10,4)||&amp;#39;00000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,0,8) ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) -122192928000000000)/10000000) ts from ( select &amp;#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&amp;#39; uuid from dual ) ) </description>
+select ts,to_timestamp(date &amp;#39;1970-01-01&amp;#39;+ (ts/(24*60*60))) from (  select  trunc((to_number(substr(uuid,16,3)||&amp;#39;000000000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;)  +to_number(substr(uuid,10,4)||&amp;#39;00000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;)  +to_number(substr(uuid,0,8) ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;)  -122192928000000000)/10000000) ts  from (  select &amp;#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&amp;#39; uuid from dual  ) ) </description>
     </item>
     
     <item>
@@ -583,7 +583,7 @@ var string = new java.lang.String(&amp;#34;hello world&amp;#34;); //alternative 
       
       <guid>https://jens.dev/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs.html</guid>
       <description>The task is pretty simple, read the content of text file as one-liner. Here is what I came up with.
-var filename = &amp;#34;engine.log&amp;#34;; var content = new java.lang.String( java.nio.file.Files.readAllBytes( java.nio.file.Paths.get(filename) ) ); </description>
+var filename = &amp;#34;engine.log&amp;#34;; var content = new java.lang.String(  java.nio.file.Files.readAllBytes(  java.nio.file.Paths.get(filename)  )  ); </description>
     </item>
     
     <item>
@@ -674,7 +674,7 @@ After asking around I came to the conclusion that every designer (from different
       
       <guid>https://jens.dev/2009/09/23/searching-for-hash-strings-in-postgres.html</guid>
       <description>For one of my projects a have a database which has a rather large table consisting of just an url and a corresponding id. For performance reasons I added a md5 column which hashes the url. With this column it should be a lot faster to look up an url.
-CREATE TABLE pages ( id bigint NOT NULL, url character varying(255), md5 character(32), CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).</description>
+CREATE TABLE pages (  id bigint NOT NULL,  url character varying(255),  md5 character(32),  CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).</description>
     </item>
     
     <item>
@@ -733,7 +733,7 @@ They also provide a little help in form of a little text file, but with this, it
       
       <guid>https://jens.dev/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins.html</guid>
       <description>So here is my situation. I have 2 tables with the following DDL.
-CREATE TABLE tags ( id bigint NOT NULL, &amp;#34;value&amp;#34; character varying(150), CONSTRAINT tags_pkey PRIMARY KEY (id), CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags ( sites_id bigint NOT NULL, pages_id bigint NOT NULL, tags_id bigint NOT NULL, count integer, updated timestamp without time zone, CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.</description>
+CREATE TABLE tags (  id bigint NOT NULL,  &amp;#34;value&amp;#34; character varying(150),  CONSTRAINT tags_pkey PRIMARY KEY (id),  CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags (  sites_id bigint NOT NULL,  pages_id bigint NOT NULL,  tags_id bigint NOT NULL,  count integer,  updated timestamp without time zone,  CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.</description>
     </item>
     
     <item>
@@ -743,7 +743,7 @@ CREATE TABLE tags ( id bigint NOT NULL, &amp;#34;value&amp;#34; character varyin
       
       <guid>https://jens.dev/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql.html</guid>
       <description>I just needed a simple stored procedure to extract the hostname from any given URL. So here is what I came up with.
-CREATE OR REPLACE FUNCTION getHostFromUrl(p_url character varying) RETURNS character varying AS $BODY$ declare begin return substring(p_url from &amp;#39;http.?://(.*?)/(.*)&amp;#39;); end; $BODY$ LANGUAGE &amp;#39;plpgsql&amp;#39; VOLATILE COST 100; </description>
+CREATE OR REPLACE FUNCTION getHostFromUrl(p_url character varying)  RETURNS character varying AS $BODY$ declare begin  return substring(p_url from &amp;#39;http.?://(.*?)/(.*)&amp;#39;); end; $BODY$  LANGUAGE &amp;#39;plpgsql&amp;#39; VOLATILE  COST 100; </description>
     </item>
     
     <item>
@@ -901,7 +901,7 @@ First you should install the EMS server and hibernate (version provided by Tibco
       <guid>https://jens.dev/2008/10/03/generate-random-timestamps-in-mysql.html</guid>
       <description>I’m now try to prepare a mysql performance comparison between hdd and flash. So to create a lot of test data I needed a function to create random timestamps in a certain range.
 After trying google I gave up and started with the mysql documentation and came up with the following statement:
-select from_unixtime( unix_timestamp(&amp;#39;2008-01-01 01:00:00&amp;#39;)+floor(rand()*31536000) ); So lets break it it down a bit:
+select from_unixtime(  unix_timestamp(&amp;#39;2008-01-01 01:00:00&amp;#39;)+floor(rand()*31536000) ); So lets break it it down a bit:
 first I set a start date (minimum for the random)</description>
     </item>
     

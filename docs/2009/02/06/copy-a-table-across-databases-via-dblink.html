@@ -7,7 +7,7 @@
         <meta name="description" content="Recently I ran into the situation that I needed to copy a large subset of data from one database to another. Normally I would say, make a dump and then re-import the data into the new schema. But this solution has some serious drawbacks. First you have to copy the complete database. Second you have to maintain the structure of the data. A third problem could be that you have to copy the complete dump to the target location (in case it is not the same machine and your database is a bit larger e.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="copy a table across databases via dblink">
@@ -41,7 +41,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -118,38 +117,38 @@ if (!doNotTrack) {
 <li>only the subset of 1 month is needed</li>
 </ul>
 <p><strong>ddl for the original table:</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TABLE</span> <span style="color:#111">realtime</span>
-<span style="color:#111">(</span>
-<span style="color:#111">name</span> <span style="color:#111">varchar</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">),</span>
-<span style="color:#111">date</span> <span style="color:#00a8c8">timestamp</span><span style="color:#111">,</span>
-<span style="color:#111">bid</span> <span style="color:#111">numeric</span><span style="color:#111">,</span>
-<span style="color:#111">ask</span> <span style="color:#111">numeric</span>
-<span style="color:#111">)</span>
-</code></pre></div><p><strong>ddl for the target table:</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TABLE</span> <span style="color:#111">realtime</span>
-<span style="color:#111">(</span>
-<span style="color:#111">symbol</span> <span style="color:#111">varchar</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">),</span>
-<span style="color:#111">date</span> <span style="color:#00a8c8">timestamp</span><span style="color:#111">,</span>
-<span style="color:#111">price</span> <span style="color:#111">numeric</span><span style="color:#111">,</span>
-<span style="color:#d88200">&#34;day&#34;</span> <span style="color:#111">char</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">),</span>
-<span style="color:#00a8c8">max</span> <span style="color:#111">numeric</span><span style="color:#111">,</span>
-<span style="color:#00a8c8">avg</span> <span style="color:#111">numeric</span><span style="color:#111">,</span>
-<span style="color:#111">atr</span> <span style="color:#111">numeric</span>
-<span style="color:#111">)</span>
-</code></pre></div><p><strong>here the mapping:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TABLE</span> <span style="color:#111">realtime</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">(</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">name</span> <span style="color:#111">varchar</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">),</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">date</span> <span style="color:#00a8c8">timestamp</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">bid</span> <span style="color:#111">numeric</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">ask</span> <span style="color:#111">numeric</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">)</span>
+</span></span></code></pre></div><p><strong>ddl for the target table:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TABLE</span> <span style="color:#111">realtime</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">(</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">symbol</span> <span style="color:#111">varchar</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">),</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">date</span> <span style="color:#00a8c8">timestamp</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">price</span> <span style="color:#111">numeric</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#d88200">&#34;day&#34;</span> <span style="color:#111">char</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">),</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">max</span> <span style="color:#111">numeric</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">avg</span> <span style="color:#111">numeric</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">atr</span> <span style="color:#111">numeric</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">)</span>
+</span></span></code></pre></div><p><strong>here the mapping:</strong></p>
 <p>realtime.name -&gt; realtime.symbol</p>
 <p>realtime.date -&gt; realtime.date</p>
 <p>(realtime.bid + realtime.ask) /2 -&gt; realtime.price</p>
 <p>-&gt; other columns filled by trigger</p>
 <p>To get this task done I decided to use a dblink between those two database instances (<a href="http://www.postgresql.org/docs/current/static/contrib-dblink.html">how-to here</a>).</p>
 <p>So here is the select I used to transfer the month January to the new db:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">insert</span> <span style="color:#00a8c8">into</span> <span style="color:#111">realtime</span> <span style="color:#111">(</span><span style="color:#111">symbol</span><span style="color:#111">,</span><span style="color:#111">date</span><span style="color:#111">,</span><span style="color:#111">price</span><span style="color:#111">)</span>
-<span style="color:#00a8c8">select</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">from</span> <span style="color:#111">dblink</span><span style="color:#111">(</span><span style="color:#d88200">&#39;dbname=stocks&#39;</span><span style="color:#111">,</span>
-              <span style="color:#d88200">&#39;select name,date,(bid+ask)/2 as price
-</span><span style="color:#d88200">              from realtime
-</span><span style="color:#d88200">              where date &gt; to_date(&#39;&#39;20081231&#39;&#39;,&#39;&#39;yyyyMMDD&#39;&#39;) and date &amp;lt; to_date(&#39;&#39;20090201&#39;&#39;,&#39;&#39;yyyyMMDD&#39;&#39;)&#39;</span><span style="color:#111">)</span>
-         <span style="color:#00a8c8">as</span> <span style="color:#111">t1</span> <span style="color:#111">(</span><span style="color:#111">name</span> <span style="color:#111">character</span> <span style="color:#111">varying</span><span style="color:#111">,</span><span style="color:#111">date</span> <span style="color:#00a8c8">timestamp</span><span style="color:#111">,</span><span style="color:#111">price</span> <span style="color:#111">numeric</span><span style="color:#111">);</span>
-</code></pre></div><p>As you can see this approach is pretty straight forward. You basically write an insert statement for the new table and use a dblink as source. In the dblink definition you can apply any given sql criteria.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">insert</span> <span style="color:#00a8c8">into</span> <span style="color:#111">realtime</span> <span style="color:#111">(</span><span style="color:#111">symbol</span><span style="color:#111">,</span><span style="color:#111">date</span><span style="color:#111">,</span><span style="color:#111">price</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">select</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">from</span> <span style="color:#111">dblink</span><span style="color:#111">(</span><span style="color:#d88200">&#39;dbname=stocks&#39;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#d88200">&#39;select name,date,(bid+ask)/2 as price
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              from realtime
+</span></span></span><span style="display:flex;"><span><span style="color:#d88200">              where date &gt; to_date(&#39;&#39;20081231&#39;&#39;,&#39;&#39;yyyyMMDD&#39;&#39;) and date &amp;lt; to_date(&#39;&#39;20090201&#39;&#39;,&#39;&#39;yyyyMMDD&#39;&#39;)&#39;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#00a8c8">as</span> <span style="color:#111">t1</span> <span style="color:#111">(</span><span style="color:#111">name</span> <span style="color:#111">character</span> <span style="color:#111">varying</span><span style="color:#111">,</span><span style="color:#111">date</span> <span style="color:#00a8c8">timestamp</span><span style="color:#111">,</span><span style="color:#111">price</span> <span style="color:#111">numeric</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>As you can see this approach is pretty straight forward. You basically write an insert statement for the new table and use a dblink as source. In the dblink definition you can apply any given sql criteria.</p>
 <p>One real drawback has this solution, because of the mode of operation of the dblink approach it is pretty slow. Here is what the postgres documentation has to say about this:</p>
 <p>dblink fetches the entire remote query result before returning any of it to the local system. If the query is expected to return a large number of rows, it’s better to open it as a cursor with dblink_open and then fetch a manageable number of rows at a time.For me the performance was ok because I just copied several hundred megabytes.</p>
 

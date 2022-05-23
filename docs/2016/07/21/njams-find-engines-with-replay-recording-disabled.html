@@ -8,7 +8,7 @@
 The select checks if there are messages, which have/had no recorded information for replay. As a safeguard, the query checks if later jobs of the affected engine report recorded data (recording was re-enabled afterwards).">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="[njams] find engines with replay recording disabled">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -114,25 +113,25 @@ if (!doNotTrack) {
 
     <p>From time to time it happens that somebody disables njams replay recording on some engine for whatever reason and forgets about it. So later on when you need an overview on what engine recording is actually disabled, you can run the following select to gather that insight.</p>
 <p>The select checks if there are messages, which have/had no recorded information for replay. As a safeguard, the query checks if later jobs of the affected engine report recorded data (recording was re-enabled afterwards).</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">select</span> <span style="color:#111">engine_name</span><span style="color:#111">,</span><span style="color:#111">objectname</span> <span style="color:#111">process_name</span><span style="color:#111">,</span><span style="color:#00a8c8">max</span><span style="color:#111">(</span><span style="color:#111">attribute_ts</span><span style="color:#111">)</span> <span style="color:#111">last_activity</span>
-<span style="color:#00a8c8">from</span> <span style="color:#111">(</span>
-  <span style="color:#00a8c8">select</span> <span style="color:#111">a</span><span style="color:#111">.</span><span style="color:#111">main_logid</span><span style="color:#111">,</span>
-    <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#00a8c8">case</span> <span style="color:#00a8c8">when</span> <span style="color:#111">attribute_name</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;$njams_recorded&#39;</span> <span style="color:#00a8c8">then</span> <span style="color:#ae81ff">1</span> <span style="color:#00a8c8">else</span> <span style="color:#ae81ff">0</span> <span style="color:#00a8c8">end</span><span style="color:#111">)</span> <span style="color:#111">recorded</span><span style="color:#111">,</span>
-    <span style="color:#00a8c8">max</span><span style="color:#111">(</span><span style="color:#111">a</span><span style="color:#111">.</span><span style="color:#111">attribute_ts</span><span style="color:#111">)</span> <span style="color:#111">attribute_ts</span>
-  <span style="color:#00a8c8">from</span> <span style="color:#111">njams_t_monitor_attributes</span> <span style="color:#111">a</span>
-  <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">a</span><span style="color:#111">.</span><span style="color:#111">main_logid</span>
-<span style="color:#111">)</span> <span style="color:#111">x</span>
-<span style="color:#00a8c8">inner</span> <span style="color:#00a8c8">join</span> <span style="color:#111">njams_t_monitor_main</span> <span style="color:#111">m</span> <span style="color:#00a8c8">on</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">main_logid</span><span style="color:#f92672">=</span><span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">logid</span>
-<span style="color:#00a8c8">inner</span> <span style="color:#00a8c8">join</span> <span style="color:#111">njams_t_domain_objects</span> <span style="color:#111">o</span> <span style="color:#00a8c8">on</span> <span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">domain_object_id</span><span style="color:#f92672">=</span><span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">obj_id</span>
-<span style="color:#00a8c8">where</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">recorded</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
-  <span style="color:#00a8c8">and</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">attribute_ts</span> <span style="color:#f92672">&gt;</span>
-    <span style="color:#111">nvl</span><span style="color:#111">(</span>
-      <span style="color:#111">(</span><span style="color:#00a8c8">select</span> <span style="color:#00a8c8">max</span><span style="color:#111">(</span><span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">jobstart</span><span style="color:#111">)</span> <span style="color:#111">jobstart</span>
-       <span style="color:#00a8c8">from</span> <span style="color:#111">njams_t_monitor_main</span> <span style="color:#111">m</span>
-       <span style="color:#00a8c8">where</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">obj_id</span><span style="color:#f92672">=</span><span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">domain_object_id</span><span style="color:#111">)</span>
-      <span style="color:#111">,</span><span style="color:#111">sysdate</span><span style="color:#f92672">-</span><span style="color:#ae81ff">999</span><span style="color:#111">)</span>
-<span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">engine_name</span><span style="color:#111">,</span><span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">objectname</span>
-</code></pre></div><p><strong>result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">select</span> <span style="color:#111">engine_name</span><span style="color:#111">,</span><span style="color:#111">objectname</span> <span style="color:#111">process_name</span><span style="color:#111">,</span><span style="color:#00a8c8">max</span><span style="color:#111">(</span><span style="color:#111">attribute_ts</span><span style="color:#111">)</span> <span style="color:#111">last_activity</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">from</span> <span style="color:#111">(</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">select</span> <span style="color:#111">a</span><span style="color:#111">.</span><span style="color:#111">main_logid</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">sum</span><span style="color:#111">(</span><span style="color:#00a8c8">case</span> <span style="color:#00a8c8">when</span> <span style="color:#111">attribute_name</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;$njams_recorded&#39;</span> <span style="color:#00a8c8">then</span> <span style="color:#ae81ff">1</span> <span style="color:#00a8c8">else</span> <span style="color:#ae81ff">0</span> <span style="color:#00a8c8">end</span><span style="color:#111">)</span> <span style="color:#111">recorded</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">max</span><span style="color:#111">(</span><span style="color:#111">a</span><span style="color:#111">.</span><span style="color:#111">attribute_ts</span><span style="color:#111">)</span> <span style="color:#111">attribute_ts</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">from</span> <span style="color:#111">njams_t_monitor_attributes</span> <span style="color:#111">a</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">a</span><span style="color:#111">.</span><span style="color:#111">main_logid</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">)</span> <span style="color:#111">x</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">inner</span> <span style="color:#00a8c8">join</span> <span style="color:#111">njams_t_monitor_main</span> <span style="color:#111">m</span> <span style="color:#00a8c8">on</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">main_logid</span><span style="color:#f92672">=</span><span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">logid</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">inner</span> <span style="color:#00a8c8">join</span> <span style="color:#111">njams_t_domain_objects</span> <span style="color:#111">o</span> <span style="color:#00a8c8">on</span> <span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">domain_object_id</span><span style="color:#f92672">=</span><span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">obj_id</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">where</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">recorded</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">and</span> <span style="color:#111">x</span><span style="color:#111">.</span><span style="color:#111">attribute_ts</span> <span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">nvl</span><span style="color:#111">(</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">(</span><span style="color:#00a8c8">select</span> <span style="color:#00a8c8">max</span><span style="color:#111">(</span><span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">jobstart</span><span style="color:#111">)</span> <span style="color:#111">jobstart</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#00a8c8">from</span> <span style="color:#111">njams_t_monitor_main</span> <span style="color:#111">m</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#00a8c8">where</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">obj_id</span><span style="color:#f92672">=</span><span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">domain_object_id</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#111">,</span><span style="color:#111">sysdate</span><span style="color:#f92672">-</span><span style="color:#ae81ff">999</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">engine_name</span><span style="color:#111">,</span><span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">objectname</span>
+</span></span></code></pre></div><p><strong>result:</strong></p>
 <table>
 <thead>
 <tr>

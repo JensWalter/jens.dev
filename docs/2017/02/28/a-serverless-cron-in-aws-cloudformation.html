@@ -12,7 +12,7 @@ So here is my YAML explained step-by-step (whole YAML is attached at the bottom)
 I copied the header from an existing template since I have nothing to add here:">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="a serverless cron in AWS CloudFormation">
@@ -51,7 +51,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -131,66 +130,66 @@ if (!doNotTrack) {
 <p>I use a CloudFormation template as project definition for this task.</p>
 <p>So here is my YAML explained step-by-step (whole YAML is attached at the bottom).</p>
 <p>I copied the header from an existing template since I have nothing to add here:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
-<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-</code></pre></div><p>First I create a role, which is a requirement for a lambda function. Since I only implement a dummy lambda, my role has no policies attached.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">LambdaRole</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
-      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
-        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Service</span><span style="color:#111">:</span>
-          - <span style="color:#ae81ff">lambda.amazonaws.com</span> <span style="color:#75715e">#allow lambda to assume that role</span>
-        <span style="color:#f92672">Action</span><span style="color:#111">:</span>
-        - <span style="color:#ae81ff">sts:AssumeRole</span>
-    <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
-</code></pre></div><p>After that, I can create the lambda function that I want to run in case of an triggered event.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">CronFunction</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Code</span><span style="color:#111">:</span> <span style="color:#75715e">#locate the code of the function</span>
-      <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#ae81ff">&gt;</span> <span style="color:#75715e">#inline code to simplify the sample</span>
-        <span style="color:#ae81ff">exports.handler = function(event, context) {</span>
-          <span style="color:#ae81ff">console.log(&#34;running code&#34;);</span>
-          <span style="color:#ae81ff">context.succeed(&#34;done&#34;);</span>
-        }<span style="color:#ae81ff">;</span>
-    <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
-    <span style="color:#f92672">Role</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">LambdaRole , &#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the already defined role by its Arn</span>
-    <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs4.3</span> <span style="color:#75715e">#runtime is nodejs since my function is implemented in javascript</span>
-    <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">60</span> <span style="color:#75715e">#timeout for the lambda</span>
-</code></pre></div><p>Now I can define the event, that should trigger my function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span></code></pre></div><p>First I create a role, which is a requirement for a lambda function. Since I only implement a dummy lambda, my role has no policies attached.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">LambdaRole</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::IAM::Role</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">AssumeRolePolicyDocument</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2012-10-17&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Statement</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">Effect</span><span style="color:#111">:</span> <span style="color:#ae81ff">Allow</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Principal</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Service</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">lambda.amazonaws.com</span> <span style="color:#75715e">#allow lambda to assume that role</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Action</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">sts:AssumeRole</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/&#34;</span>
+</span></span></code></pre></div><p>After that, I can create the lambda function that I want to run in case of an triggered event.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">CronFunction</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Code</span><span style="color:#111">:</span> <span style="color:#75715e">#locate the code of the function</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZipFile</span><span style="color:#111">:</span> <span style="color:#ae81ff">&gt;</span> <span style="color:#75715e">#inline code to simplify the sample</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">exports.handler = function(event, context) {</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">console.log(&#34;running code&#34;);</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">context.succeed(&#34;done&#34;);</span>
+</span></span><span style="display:flex;"><span>        }<span style="color:#ae81ff">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Role</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">LambdaRole , &#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the already defined role by its Arn</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Runtime</span><span style="color:#111">:</span> <span style="color:#ae81ff">nodejs4.3</span> <span style="color:#75715e">#runtime is nodejs since my function is implemented in javascript</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Timeout</span><span style="color:#111">:</span> <span style="color:#ae81ff">60</span> <span style="color:#75715e">#timeout for the lambda</span>
+</span></span></code></pre></div><p>Now I can define the event, that should trigger my function.</p>
 <p>A little heads up regarding the cron pattern. This is not a standard linux cron pattern, Amazon used some variation and it does produce error if you paste in linux cron patterns. So if you can, I would suggest using the rate expression instead.</p>
 <p>e.g. if you want your code to run every 15 minutes, you can implement that either way:</p>
 <ul>
 <li>rate expression: rate(15 minutes)</li>
 <li>cron expression: cron(0/15 * * * ? *)</li>
 </ul>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">CronEvent</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Events::Rule</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">ScheduleExpression</span><span style="color:#111">:</span> <span style="color:#ae81ff">cron(0/15 * * * ? *)</span> <span style="color:#75715e">#when the event should trigger</span>
-    <span style="color:#f92672">Targets</span><span style="color:#111">:</span>
-      - <span style="color:#f92672">Arn</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronFunction , &#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the lambda function by its arn</span>
-        <span style="color:#f92672">Id</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">CronFunction</span> <span style="color:#75715e">#unique name of the target</span>
-</code></pre></div><p>At last, we need to define a permission, so that the event is actually allowed to invoke the lambda.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">LambdaInvokePermission</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
-  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Permission</span>
-  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-    <span style="color:#f92672">FunctionName</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronFunction ,&#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the lambda function by its arn</span>
-    <span style="color:#f92672">Action</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambda:InvokeFunction</span> <span style="color:#75715e">#allow invoking of lambda functions</span>
-    <span style="color:#f92672">Principal</span><span style="color:#111">:</span> <span style="color:#ae81ff">events.amazonaws.com</span> <span style="color:#75715e">#grant permission to the events system</span>
-    <span style="color:#f92672">SourceArn</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronEvent , &#34;Arn&#34; ]</span> <span style="color:#75715e">#define which event is allowed to trigger lambdas</span>
-</code></pre></div><p>To instantiate this template, just download the file and run the following command:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws cloudformation create-stack --stack-name myteststack --template-body file://cron-sample-cf.yml --capabilities CAPABILITY_IAM
-</code></pre></div><p>Here is the overall CloudFormation template:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">CronEvent</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Events::Rule</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ScheduleExpression</span><span style="color:#111">:</span> <span style="color:#ae81ff">cron(0/15 * * * ? *)</span> <span style="color:#75715e">#when the event should trigger</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Targets</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">Arn</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronFunction , &#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the lambda function by its arn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Id</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">CronFunction</span> <span style="color:#75715e">#unique name of the target</span>
+</span></span></code></pre></div><p>At last, we need to define a permission, so that the event is actually allowed to invoke the lambda.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">LambdaInvokePermission</span><span style="color:#111">:</span> <span style="color:#75715e">#logical name of the resource</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Permission</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">FunctionName</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronFunction ,&#34;Arn&#34; ]</span> <span style="color:#75715e">#reference the lambda function by its arn</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Action</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambda:InvokeFunction</span> <span style="color:#75715e">#allow invoking of lambda functions</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Principal</span><span style="color:#111">:</span> <span style="color:#ae81ff">events.amazonaws.com</span> <span style="color:#75715e">#grant permission to the events system</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">SourceArn</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">CronEvent , &#34;Arn&#34; ]</span> <span style="color:#75715e">#define which event is allowed to trigger lambdas</span>
+</span></span></code></pre></div><p>To instantiate this template, just download the file and run the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws cloudformation create-stack --stack-name myteststack --template-body file://cron-sample-cf.yml --capabilities CAPABILITY_IAM
+</span></span></code></pre></div><p>Here is the overall CloudFormation template:</p>
 <p>[cron-sample-cf.yml template][1]</p>
 <p>[1]:{{ site.url }}/assets/cron-sample-cf.yml</p>
 

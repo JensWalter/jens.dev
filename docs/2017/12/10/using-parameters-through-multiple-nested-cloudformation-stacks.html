@@ -8,7 +8,7 @@
 AWS has a simple answer for that, &ldquo;use import/export&rdquo;. The drawback of this approach is, the exports are globally visible. So If you only want to share data between nested stacks you can use normal output values.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="Using parameters through multiple nested CloudFormation stacks">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -119,47 +118,47 @@ if (!doNotTrack) {
 <p>So the root stack only contains of two separate sub-stacks with no information on its own.</p>
 <p>The first stack (stack A) defines a S3 bucket. The second stack (stack B) defines a lambda which will do some operations on the objects of this bucket.</p>
 <p>Here is the definition of stack A.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
-<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-  <span style="color:#f92672">bucket</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::S3::Bucket</span>
-<span style="color:#f92672">Outputs</span><span style="color:#111">:</span>
-  <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Value</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref bucket</span>
-</code></pre></div><p>Here the definition of stack B, with the lambda and a parameter definition for the required bucket name.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
-<span style="color:#f92672">Parameters</span><span style="color:#111">:</span>
-  <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">String</span>
-    <span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">name of the bucket.</span>
-<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-  <span style="color:#f92672">BucketFunction</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
-    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-      <span style="color:#f92672">Code</span><span style="color:#111">:</span> <span style="color:#ae81ff">...</span>
-      <span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">performs some operation on the given bucket.</span>
-      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
-      <span style="color:#f92672">Role</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambdarole</span>
-      <span style="color:#f92672">Environment</span><span style="color:#111">:</span>
-        <span style="color:#f92672">Variables</span><span style="color:#111">:</span>
-          <span style="color:#f92672">bucket</span><span style="color:#111">:</span>
-            <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">BucketName</span>
-</code></pre></div><p>Now, the wiring is pretty straight forward. I had to connect the output of the first stack into the parameters section of the second stack. All this has to be done on the root level stack.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
-<span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">root level stack</span>
-<span style="color:#f92672">Resources</span><span style="color:#111">:</span>
-  <span style="color:#f92672">stackA</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::CloudFormation::Stack</span>
-    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-      <span style="color:#f92672">TemplateURL</span><span style="color:#111">:</span> <span style="color:#ae81ff">stackA.yml</span>
-  <span style="color:#f92672">stackB</span><span style="color:#111">:</span>
-    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::CloudFormation::Stack</span>
-    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
-      <span style="color:#f92672">TemplateURL</span><span style="color:#111">:</span> <span style="color:#ae81ff">stackB.yml</span>
-      <span style="color:#f92672">Parameters</span><span style="color:#111">:</span>
-        <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
-          <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">stackA , Outputs.BucketName ]</span>
-</code></pre></div><p>This way I could share private information within my CloudFormation templates without the need to expose them publicly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bucket</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::S3::Bucket</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Outputs</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Value</span><span style="color:#111">:</span> !<span style="color:#ae81ff">Ref bucket</span>
+</span></span></code></pre></div><p>Here the definition of stack B, with the lambda and a parameter definition for the required bucket name.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Parameters</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">String</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">name of the bucket.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">BucketFunction</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::Lambda::Function</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Code</span><span style="color:#111">:</span> <span style="color:#ae81ff">...</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">performs some operation on the given bucket.</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Handler</span><span style="color:#111">:</span> <span style="color:#ae81ff">index.handler</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Role</span><span style="color:#111">:</span> <span style="color:#ae81ff">lambdarole</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Environment</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">Variables</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">bucket</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">Ref</span><span style="color:#111">:</span> <span style="color:#ae81ff">BucketName</span>
+</span></span></code></pre></div><p>Now, the wiring is pretty straight forward. I had to connect the output of the first stack into the parameters section of the second stack. All this has to be done on the root level stack.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AWSTemplateFormatVersion</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2010-09-09&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Description</span><span style="color:#111">:</span> <span style="color:#ae81ff">root level stack</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Resources</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stackA</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::CloudFormation::Stack</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">TemplateURL</span><span style="color:#111">:</span> <span style="color:#ae81ff">stackA.yml</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stackB</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Type</span><span style="color:#111">:</span> <span style="color:#ae81ff">AWS::CloudFormation::Stack</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Properties</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">TemplateURL</span><span style="color:#111">:</span> <span style="color:#ae81ff">stackB.yml</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">Parameters</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">BucketName</span><span style="color:#111">:</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">Fn::GetAtt</span><span style="color:#111">:</span> <span style="color:#111">[</span> <span style="color:#ae81ff">stackA , Outputs.BucketName ]</span>
+</span></span></code></pre></div><p>This way I could share private information within my CloudFormation templates without the need to expose them publicly.</p>
 
 </div>
 

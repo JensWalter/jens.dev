@@ -8,7 +8,7 @@
 Now since this is possible, calling a GC, although there is still free memory available becomes a different meaning.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="invoking java gc through bash">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -115,16 +114,16 @@ if (!doNotTrack) {
     <p>Sometimes Java processes start accumulating memory over time and do not give them back to the OS. In previous versions of Java, this was a limitation of the JVM. In Java 8 and newer, with the arrival of the G1 garbage collector, the JVM releases memory back to the OS after a GC run.</p>
 <p>Now since this is possible, calling a GC, although there is still free memory available becomes a different meaning. On the other hand most application aren&rsquo;t build with that in mind, so they do not offer any public interface to trigger a GC.</p>
 <p>Luckily, the Oracle JDK has a tool for that call &ldquo;jcmd&rdquo;.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/usr/lib/java/jdk-1.8.0-66_H02-linux_x64/bin/jcmd <span style="color:#f92672">{</span>PID<span style="color:#f92672">}</span> GC.run
-</code></pre></div><p>Now, to invoke this regularly and not only invoking one, but all engines running this application jar, I used the following script and hooked that into the crontab.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>
-/usr/lib/java/jdk-1.8.0-66_H02-linux_x64/bin/jcmd <span style="color:#111">|</span> grep app.jar <span style="color:#111">|</span> cut --delimiter<span style="color:#f92672">=</span><span style="color:#d88200">&#39; &#39;</span> -f <span style="color:#ae81ff">1</span> <span style="color:#111">|</span> <span style="color:#00a8c8">while</span> <span style="color:#111">read</span> -r line
-<span style="color:#00a8c8">do</span>
-   /usr/lib/java/jdk-1.8.0-66_H02-linux_x64/bin/jcmd <span style="color:#111">$line</span> GC.run
-   sleep 1<span style="color:#111">;</span>
-<span style="color:#00a8c8">done</span>
-</code></pre></div><p>Now, every couple of hours, a GC is invoked on the JVM, so the memory bloat stays within reason.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/usr/lib/java/jdk-1.8.0-66_H02-linux_x64/bin/jcmd <span style="color:#f92672">{</span>PID<span style="color:#f92672">}</span> GC.run
+</span></span></code></pre></div><p>Now, to invoke this regularly and not only invoking one, but all engines running this application jar, I used the following script and hooked that into the crontab.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>/usr/lib/java/jdk-1.8.0-66_H02-linux_x64/bin/jcmd <span style="color:#111">|</span> grep app.jar <span style="color:#111">|</span> cut --delimiter<span style="color:#f92672">=</span><span style="color:#d88200">&#39; &#39;</span> -f <span style="color:#ae81ff">1</span> <span style="color:#111">|</span> <span style="color:#00a8c8">while</span> <span style="color:#111">read</span> -r line
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">do</span>
+</span></span><span style="display:flex;"><span>   /usr/lib/java/jdk-1.8.0-66_H02-linux_x64/bin/jcmd <span style="color:#111">$line</span> GC.run
+</span></span><span style="display:flex;"><span>   sleep 1<span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">done</span>
+</span></span></code></pre></div><p>Now, every couple of hours, a GC is invoked on the JVM, so the memory bloat stays within reason.</p>
 
 </div>
 

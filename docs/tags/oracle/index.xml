@@ -14,7 +14,7 @@
       
       <guid>https://jens.dev/2016/06/21/get-oracle-allocation-sizes-part-2.html</guid>
       <description>In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.
-SELECT segment_name table_name, sum(bytes) tablesize, (SELECT sum(bytes) FROM user_segments ind WHERE segment_name in (select index_name from user_indexes where table_name=tab.segment_name) ) indexsize, (SELECT sum(bytes) FROM user_segments ls WHERE segment_name in (select segment_name from user_lobs where table_name=tab.</description>
+SELECT segment_name table_name, sum(bytes) tablesize,  (SELECT sum(bytes) FROM user_segments ind  WHERE segment_name in  (select index_name from user_indexes  where table_name=tab.segment_name)  ) indexsize,  (SELECT sum(bytes) FROM user_segments ls  WHERE segment_name in  (select segment_name from user_lobs  where table_name=tab.</description>
     </item>
     
     <item>
@@ -35,8 +35,8 @@ SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY duration_ms ASC) &amp;#34;50p
       
       <guid>https://jens.dev/2015/07/11/query-index-usage-stats-in-oracle.html</guid>
       <description>how often an index was used
-select p.object_name &amp;#34;object&amp;#34;, to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;) &amp;#34;Begin|Interval|time&amp;#34;, p.search_columns &amp;#34;Search Columns&amp;#34;, count(*) &amp;#34;Invocation|Count&amp;#34; from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name like &amp;#39;%INDEX_%&amp;#39; group by p.object_name,to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;),search_columns how an index was used
-select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist_sql_plan p, dba_hist_sqlstat s where p.object_owner &amp;lt;&amp;gt; &amp;#39;SYS&amp;#39; and p.operation like &amp;#39;%INDEX%&amp;#39; and p.sql_id = s.sql_id group by p.</description>
+select  p.object_name &amp;#34;object&amp;#34;,  to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;) &amp;#34;Begin|Interval|time&amp;#34;,  p.search_columns &amp;#34;Search Columns&amp;#34;,  count(*) &amp;#34;Invocation|Count&amp;#34; from  dba_hist_snapshot sn,  dba_hist_sql_plan p,  dba_hist_sqlstat st where  st.sql_id = p.sql_id and  sn.snap_id = st.snap_id and  p.object_name like &amp;#39;%INDEX_%&amp;#39; group by  p.object_name,to_char(sn.begin_interval_time,&amp;#39;yyyy-mm&amp;#39;),search_columns how an index was used
+select  p.object_name c1,  p.operation c2,  p.options c3,  count(1) c4 from  dba_hist_sql_plan p,  dba_hist_sqlstat s where  p.</description>
     </item>
     
     <item>
@@ -46,7 +46,7 @@ select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist
       
       <guid>https://jens.dev/2015/06/27/query-clob-settings-in-oracle.html</guid>
       <description>You can query all clob related settings from the database with the following query.
-SELECT table_name, column_name, securefile AS &amp;#34;isSecureFile&amp;#34;, compression AS &amp;#34;Compressed&amp;#34; , encrypt AS &amp;#34;Encrypted&amp;#34;, DEDUPLICATION as &amp;#34;Deduplicated&amp;#34;, in_row AS &amp;#34;StoredInRow&amp;#34; FROM user_lobs    TABLE_NAME COLUMN_NAME isSecureFile Compressed Encrypted Deduplicated StoredInRow     SAMPLE_DATASET_INTRO XMLDATA YES NO NO NO YES   SAMPLE_DATASET_EVOLVE XMLDATA YES NO NO NO YES   SAMPLE_DATASET_PARTN XMLDATA YES NO NO NO YES   SAMPLE_DATASET_FULLTEXT XMLDATA YES NO NO NO YES   SAMPLE_DATASET_XQUERY XMLDATA YES NO NO NO YES   SAMPLE_DATASET_REPOS IMAGE YES NO NO NO YES    </description>
+SELECT table_name,  column_name,  securefile AS &amp;#34;isSecureFile&amp;#34;,  compression AS &amp;#34;Compressed&amp;#34; ,  encrypt AS &amp;#34;Encrypted&amp;#34;,  DEDUPLICATION as &amp;#34;Deduplicated&amp;#34;,  in_row AS &amp;#34;StoredInRow&amp;#34; FROM user_lobs    TABLE_NAME COLUMN_NAME isSecureFile Compressed Encrypted Deduplicated StoredInRow     SAMPLE_DATASET_INTRO XMLDATA YES NO NO NO YES   SAMPLE_DATASET_EVOLVE XMLDATA YES NO NO NO YES   SAMPLE_DATASET_PARTN XMLDATA YES NO NO NO YES   SAMPLE_DATASET_FULLTEXT XMLDATA YES NO NO NO YES   SAMPLE_DATASET_XQUERY XMLDATA YES NO NO NO YES   SAMPLE_DATASET_REPOS IMAGE YES NO NO NO YES    </description>
     </item>
     
     <item>
@@ -66,7 +66,7 @@ Determining the size of a table can be a bit tricky within oracle. You can size 
       
       <guid>https://jens.dev/2015/06/26/detect-whether-assm-is-managing-your-tablespace.html</guid>
       <description>I recently had an oracle database where I wanted to compress the clob store for more storage efficiency. To do that, I needed to convert the clob store from basicfiles to securefiles. As a requirement to use compressed securefiles, oracel states, that the tablespace must be managed by ASSM (Automatic Segment Space Management). In order to check this, I found the following sql query.
-select tablespace_name, SEGMENT_SPACE_MANAGEMENT from user_tablespaces; The output looks like:</description>
+select tablespace_name, SEGMENT_SPACE_MANAGEMENT  from user_tablespaces; The output looks like:</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@ select tablespace_name, SEGMENT_SPACE_MANAGEMENT from user_tablespaces; The outp
       
       <guid>https://jens.dev/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html</guid>
       <description>When you have a partioned table full of UUIDs but partitioned through timestamp, you need a way to translate the UUID back into a timestamp to match a partition where the key is stored. So here is my way of how to extract the timestamp out of an UUIDv1.
-select ts,to_timestamp(date &amp;#39;1970-01-01&amp;#39;+ (ts/(24*60*60))) from ( select trunc((to_number(substr(uuid,16,3)||&amp;#39;000000000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,10,4)||&amp;#39;00000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) +to_number(substr(uuid,0,8) ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;) -122192928000000000)/10000000) ts from ( select &amp;#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&amp;#39; uuid from dual ) ) </description>
+select ts,to_timestamp(date &amp;#39;1970-01-01&amp;#39;+ (ts/(24*60*60))) from (  select  trunc((to_number(substr(uuid,16,3)||&amp;#39;000000000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;)  +to_number(substr(uuid,10,4)||&amp;#39;00000000&amp;#39; ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;)  +to_number(substr(uuid,0,8) ,&amp;#39;xxxxxxxxxxxxxxxx&amp;#39;)  -122192928000000000)/10000000) ts  from (  select &amp;#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&amp;#39; uuid from dual  ) ) </description>
     </item>
     
     <item>

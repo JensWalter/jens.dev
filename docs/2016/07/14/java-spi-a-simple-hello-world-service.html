@@ -8,7 +8,7 @@
 So what I wanted to build was a simple service (HelloService), which defines an interface but looks for its implementation in the classpath at runtime (something SPI was built for).">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="Java SPI - a simple hello world service">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -119,54 +118,54 @@ If you&rsquo;re looking for a more complete introduction into SPI, just go for t
 <p><strong>Project 1 HelloService</strong></p>
 <p><img src="/assets/serviceLoader.png" alt="hello service project structure"></p>
 <p>HelloService.java is the interface that has to be implemented.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> <span style="color:#111">com.apimeister.spi</span><span style="color:#f92672">;</span>
-
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">interface</span> <span style="color:#75af00">HelloService</span> <span style="color:#f92672">{</span>
-	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">sayHello</span><span style="color:#f92672">();</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Start.java is the starting point for running this jar.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> <span style="color:#111">com.apimeister.spi</span><span style="color:#f92672">;</span>
-
-<span style="color:#f92672">import</span> <span style="color:#111">java.util.Iterator</span><span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> <span style="color:#111">java.util.ServiceLoader</span><span style="color:#f92672">;</span>
-
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Start</span> <span style="color:#f92672">{</span>
-
-	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#f92672">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-		<span style="color:#111">ServiceLoader</span><span style="color:#f92672">&lt;</span><span style="color:#111">HelloService</span><span style="color:#f92672">&gt;</span> <span style="color:#111">loader</span> <span style="color:#f92672">=</span><span style="color:#111">ServiceLoader</span><span style="color:#f92672">.</span><span style="color:#75af00">load</span><span style="color:#f92672">(</span><span style="color:#111">HelloService</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">);</span>
-		<span style="color:#111">Iterator</span><span style="color:#f92672">&lt;</span><span style="color:#111">HelloService</span><span style="color:#f92672">&gt;</span> <span style="color:#111">iter</span> <span style="color:#f92672">=</span> <span style="color:#111">loader</span><span style="color:#f92672">.</span><span style="color:#75af00">iterator</span><span style="color:#f92672">();</span>
-		<span style="color:#00a8c8">while</span><span style="color:#f92672">(</span><span style="color:#111">iter</span><span style="color:#f92672">.</span><span style="color:#75af00">hasNext</span><span style="color:#f92672">()){</span>
-			<span style="color:#111">iter</span><span style="color:#f92672">.</span><span style="color:#75af00">next</span><span style="color:#f92672">().</span><span style="color:#75af00">sayHello</span><span style="color:#f92672">();</span>
-		<span style="color:#f92672">}</span>
-		<span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;done&#34;</span><span style="color:#f92672">);</span>
-	<span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Running this project (after exporting it as jar file) leads to the following output.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">C:<span style="color:#8045ff">\T</span>emp&gt;java -cp helloService.jar com.apimeister.spi.Start
-
-<span style="color:#00a8c8">done</span>
-</code></pre></div><p>Now lets add some implementation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#111">com.apimeister.spi</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">interface</span> <span style="color:#75af00">HelloService</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">sayHello</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Start.java is the starting point for running this jar.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#111">com.apimeister.spi</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#111">java.util.Iterator</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#111">java.util.ServiceLoader</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Start</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#f92672">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">ServiceLoader</span><span style="color:#f92672">&lt;</span><span style="color:#111">HelloService</span><span style="color:#f92672">&gt;</span> <span style="color:#111">loader</span> <span style="color:#f92672">=</span><span style="color:#111">ServiceLoader</span><span style="color:#f92672">.</span><span style="color:#75af00">load</span><span style="color:#f92672">(</span><span style="color:#111">HelloService</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">Iterator</span><span style="color:#f92672">&lt;</span><span style="color:#111">HelloService</span><span style="color:#f92672">&gt;</span> <span style="color:#111">iter</span> <span style="color:#f92672">=</span> <span style="color:#111">loader</span><span style="color:#f92672">.</span><span style="color:#75af00">iterator</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#00a8c8">while</span><span style="color:#f92672">(</span><span style="color:#111">iter</span><span style="color:#f92672">.</span><span style="color:#75af00">hasNext</span><span style="color:#f92672">()){</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#111">iter</span><span style="color:#f92672">.</span><span style="color:#75af00">next</span><span style="color:#f92672">().</span><span style="color:#75af00">sayHello</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;done&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Running this project (after exporting it as jar file) leads to the following output.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>C:<span style="color:#8045ff">\T</span>emp&gt;java -cp helloService.jar com.apimeister.spi.Start
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">done</span>
+</span></span></code></pre></div><p>Now lets add some implementation.</p>
 <p><strong>Project 2 HelloGermany</strong></p>
 <p><img src="/assets/serviceImpl.png" alt="hello service implementation project structure"></p>
 <p>The project consists of 2 files.
 HelloService.java implements the service.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> <span style="color:#111">com.apimeister.spi.germany</span><span style="color:#f92672">;</span>
-
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloService</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">apimeister</span><span style="color:#f92672">.</span><span style="color:#75af00">spi</span><span style="color:#f92672">.</span><span style="color:#75af00">HelloService</span><span style="color:#f92672">{</span>
-
-	<span style="color:#75af00">@Override</span>
-	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">sayHello</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-		<span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;hello Germany&#34;</span><span style="color:#f92672">);</span>
-	<span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Second file (<strong>com.apimeister.spi.HelloService</strong>) is the service definition manifest.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">apimeister</span><span style="color:#f92672">.</span><span style="color:#75af00">spi</span><span style="color:#f92672">.</span><span style="color:#75af00">germany</span><span style="color:#f92672">.</span><span style="color:#75af00">HelloService</span>
-</code></pre></div><p>The name of the file defines the service that has to be hooked into. The content of the file is the classpath of the implementation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#111">com.apimeister.spi.germany</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloService</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">apimeister</span><span style="color:#f92672">.</span><span style="color:#75af00">spi</span><span style="color:#f92672">.</span><span style="color:#75af00">HelloService</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75af00">@Override</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">sayHello</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;hello Germany&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Second file (<strong>com.apimeister.spi.HelloService</strong>) is the service definition manifest.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">apimeister</span><span style="color:#f92672">.</span><span style="color:#75af00">spi</span><span style="color:#f92672">.</span><span style="color:#75af00">germany</span><span style="color:#f92672">.</span><span style="color:#75af00">HelloService</span>
+</span></span></code></pre></div><p>The name of the file defines the service that has to be hooked into. The content of the file is the classpath of the implementation.</p>
 <p>After exporting this project as separate JAR-file, I can re-run my project with both jar in the classpath in the command prompt.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">C:<span style="color:#8045ff">\T</span>emp&gt;java -cp helloGermany.jar<span style="color:#111">;</span>helloService.jar com.apimeister.spi.Start
-hello Germany
-<span style="color:#00a8c8">done</span>
-</code></pre></div><p>Now the external implementation is called without changing any of the original code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>C:<span style="color:#8045ff">\T</span>emp&gt;java -cp helloGermany.jar<span style="color:#111">;</span>helloService.jar com.apimeister.spi.Start
+</span></span><span style="display:flex;"><span>hello Germany
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">done</span>
+</span></span></code></pre></div><p>Now the external implementation is called without changing any of the original code.</p>
 
 </div>
 

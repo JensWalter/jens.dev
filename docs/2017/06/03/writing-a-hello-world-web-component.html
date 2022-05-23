@@ -11,7 +11,7 @@ A web component is Javascript class, which defines an HTML element with its own 
 So the most basic web component would look like this.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="writing a hello world web component">
@@ -49,7 +49,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -123,45 +122,45 @@ if (!doNotTrack) {
 <p>Starting small.</p>
 <p>A web component is Javascript class, which defines an HTML element with its own layout, structure and behavior.</p>
 <p>So the most basic web component would look like this.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
-<span style="color:#111">}</span>
-</code></pre></div><p>To use this element, this class has to be registered within the browser with a given alias.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75af00">customElements</span><span style="color:#111">.</span><span style="color:#75af00">define</span><span style="color:#111">(</span><span style="color:#d88200">&#39;hello-world&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">HelloWorld</span><span style="color:#111">);</span>
-</code></pre></div><p>Important here is, that all custom element aliases must contain a &lsquo;-&rsquo;. Otherwise, it could lead to conflicts with existing HTML elements.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>To use this element, this class has to be registered within the browser with a given alias.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75af00">customElements</span><span style="color:#111">.</span><span style="color:#75af00">define</span><span style="color:#111">(</span><span style="color:#d88200">&#39;hello-world&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">HelloWorld</span><span style="color:#111">);</span>
+</span></span></code></pre></div><p>Important here is, that all custom element aliases must contain a &lsquo;-&rsquo;. Otherwise, it could lead to conflicts with existing HTML elements.</p>
 <p>Now I can use this element by just adding a corresponding element to the DOM.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#111">&lt;</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
-  <span style="color:#111">&lt;</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;</span>
-<span style="color:#111">&lt;/</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
-</code></pre></div><p>This concludes the basic structure of what has to be defined. Expanding on that, I wanted to add some actual content to my web component, to make it somewhat more useful.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#111">&lt;</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">&lt;</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">&lt;/</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
+</span></span></code></pre></div><p>This concludes the basic structure of what has to be defined. Expanding on that, I wanted to add some actual content to my web component, to make it somewhat more useful.</p>
 <p>Since this control is called hello-world, it should say &ldquo;hello world&rdquo; whenever it is injected into the DOM. To achieve this, I have to add a constructor to my class.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
-  <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
-    <span style="color:#75715e">// Attach a shadow root to the element.
-</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">let</span> <span style="color:#75af00">shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
-    <span style="color:#75af00">shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello world&lt;/p&gt;`</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><p>All this together in one HTML file would look like this.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#111">&lt;</span><span style="color:#f92672">html</span><span style="color:#111">&gt;</span>
-<span style="color:#111">&lt;</span><span style="color:#f92672">head</span><span style="color:#111">&gt;</span>
-  <span style="color:#111">&lt;</span><span style="color:#f92672">script</span><span style="color:#111">&gt;</span>
-  <span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-      <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
-      <span style="color:#75715e">// Attach a shadow root to the element.
-</span><span style="color:#75715e"></span>      <span style="color:#00a8c8">let</span> <span style="color:#75af00">shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
-      <span style="color:#75af00">shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello world&lt;/p&gt;`</span><span style="color:#111">;</span>
-    <span style="color:#111">}</span>
-  <span style="color:#111">}</span>
-  <span style="color:#75af00">customElements</span><span style="color:#111">.</span><span style="color:#75af00">define</span><span style="color:#111">(</span><span style="color:#d88200">&#39;hello-world&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">HelloWorld</span><span style="color:#111">);</span>
-  <span style="color:#111">&lt;/</span><span style="color:#f92672">script</span><span style="color:#111">&gt;</span>
-<span style="color:#111">&lt;/</span><span style="color:#f92672">head</span><span style="color:#111">&gt;</span>
-<span style="color:#111">&lt;</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
-  <span style="color:#111">&lt;</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;</span>
-<span style="color:#111">&lt;/</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
-<span style="color:#111">&lt;/</span><span style="color:#f92672">html</span><span style="color:#111">&gt;</span>
-</code></pre></div><p>If your browser supports it, the following iframe gets filled with the hello world control.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Attach a shadow root to the element.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#00a8c8">let</span> <span style="color:#75af00">shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello world&lt;/p&gt;`</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>All this together in one HTML file would look like this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#111">&lt;</span><span style="color:#f92672">html</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">&lt;</span><span style="color:#f92672">head</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">&lt;</span><span style="color:#f92672">script</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">class</span> <span style="color:#75af00">HelloWorld</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">HTMLElement</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">constructor</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">super</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Attach a shadow root to the element.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#00a8c8">let</span> <span style="color:#75af00">shadowRoot</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">attachShadow</span><span style="color:#111">({</span><span style="color:#75af00">mode</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;open&#39;</span><span style="color:#111">});</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75af00">shadowRoot</span><span style="color:#111">.</span><span style="color:#75af00">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#d88200">`&lt;p&gt;hello world&lt;/p&gt;`</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">customElements</span><span style="color:#111">.</span><span style="color:#75af00">define</span><span style="color:#111">(</span><span style="color:#d88200">&#39;hello-world&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">HelloWorld</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">&lt;/</span><span style="color:#f92672">script</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">&lt;/</span><span style="color:#f92672">head</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">&lt;</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">&lt;</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;&lt;/</span><span style="color:#f92672">hello-world</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">&lt;/</span><span style="color:#f92672">body</span><span style="color:#111">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">&lt;/</span><span style="color:#f92672">html</span><span style="color:#111">&gt;</span>
+</span></span></code></pre></div><p>If your browser supports it, the following iframe gets filled with the hello world control.</p>
 <!-- raw HTML omitted -->
 <p>[complete hello world sample html][1]</p>
 <p>[1]:{{ site.url }}/assets/wc-hello-world.html</p>

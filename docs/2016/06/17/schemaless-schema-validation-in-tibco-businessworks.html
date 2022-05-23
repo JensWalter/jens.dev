@@ -8,7 +8,7 @@
 To achieve this,I came up with the following solution.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="schemaless schema validation in TIBCO BusinessWorks">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -116,17 +115,17 @@ if (!doNotTrack) {
 <p>To achieve this,I came up with the following solution. This way, the java activity validates against any in the project registered schema.
 <img src="/assets/validateXsd.png" alt="xsd validation process"></p>
 <p>content of the java code activity:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//get the default tibco parser
-</span><span style="color:#75715e"></span><span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">datamodel</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">.</span><span style="color:#75af00">DefaultXiParser</span> <span style="color:#111">parser</span> <span style="color:#f92672">=</span>
-    <span style="color:#00a8c8">new</span> <span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">datamodel</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">.</span><span style="color:#75af00">DefaultXiParser</span><span style="color:#f92672">();</span>
-<span style="color:#75715e">//transform string into a xml inputsource
-</span><span style="color:#75715e"></span><span style="color:#111">org</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">sax</span><span style="color:#f92672">.</span><span style="color:#75af00">InputSource</span> <span style="color:#111">inputsource</span> <span style="color:#f92672">=</span>
-    <span style="color:#00a8c8">new</span> <span style="color:#111">org</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">sax</span><span style="color:#f92672">.</span><span style="color:#75af00">InputSource</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">StringReader</span><span style="color:#f92672">(</span><span style="color:#111">xml</span><span style="color:#f92672">));</span>
-<span style="color:#75715e">//parse the xml with the Tibco RepoAgent as schema provider
-</span><span style="color:#75715e">//valide against any matching schema that exists within the project
-</span><span style="color:#75715e"></span><span style="color:#111">parser</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">(</span> <span style="color:#111">inputsource</span><span style="color:#f92672">,</span>
-  <span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">pe</span><span style="color:#f92672">.</span><span style="color:#75af00">core</span><span style="color:#f92672">.</span><span style="color:#75af00">Engine</span><span style="color:#f92672">.</span><span style="color:#75af00">getRepoAgent</span><span style="color:#f92672">().</span><span style="color:#75af00">getSmNamespaceProvider</span><span style="color:#f92672">());</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">//get the default tibco parser
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">datamodel</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">.</span><span style="color:#75af00">DefaultXiParser</span> <span style="color:#111">parser</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">new</span> <span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">datamodel</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">.</span><span style="color:#75af00">DefaultXiParser</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//transform string into a xml inputsource
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#111">org</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">sax</span><span style="color:#f92672">.</span><span style="color:#75af00">InputSource</span> <span style="color:#111">inputsource</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">new</span> <span style="color:#111">org</span><span style="color:#f92672">.</span><span style="color:#75af00">xml</span><span style="color:#f92672">.</span><span style="color:#75af00">sax</span><span style="color:#f92672">.</span><span style="color:#75af00">InputSource</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">StringReader</span><span style="color:#f92672">(</span><span style="color:#111">xml</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//parse the xml with the Tibco RepoAgent as schema provider
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//valide against any matching schema that exists within the project
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#111">parser</span><span style="color:#f92672">.</span><span style="color:#75af00">parse</span><span style="color:#f92672">(</span> <span style="color:#111">inputsource</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">com</span><span style="color:#f92672">.</span><span style="color:#75af00">tibco</span><span style="color:#f92672">.</span><span style="color:#75af00">pe</span><span style="color:#f92672">.</span><span style="color:#75af00">core</span><span style="color:#f92672">.</span><span style="color:#75af00">Engine</span><span style="color:#f92672">.</span><span style="color:#75af00">getRepoAgent</span><span style="color:#f92672">().</span><span style="color:#75af00">getSmNamespaceProvider</span><span style="color:#f92672">());</span>
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

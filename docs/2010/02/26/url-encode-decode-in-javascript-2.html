@@ -8,7 +8,7 @@
 The code I came up with is far from perfect but it worked for me. To decode an URL use url_decode(url) and to reverse it just call the utf16to8 function.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="URL encode / decode in JavaScript">
@@ -43,7 +43,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -114,16 +113,16 @@ if (!doNotTrack) {
 
     <p>Decoding and Encoding URLs in JavaScript should be a pretty easy thing to do especially since all browsers still have the functionality built-in. Interestingly no browser allows the JavaScript runtime to use this feature. So I had to write it for myself.</p>
 <p>The code I came up with is far from perfect but it worked for me. To decode an URL use url_decode(url) and to reverse it just call the utf16to8 function. The rest does your browser for you.</p>
-<pre><code class="language-javascriptfunction" data-lang="javascriptfunction">var hex = /^[0-9a-fA-F]{2}/;
-var out='';
-var arr = str.split('%');
+<pre tabindex="0"><code class="language-javascriptfunction" data-lang="javascriptfunction">var hex = /^[0-9a-fA-F]{2}/;
+var out=&#39;&#39;;
+var arr = str.split(&#39;%&#39;);
 if(arr.length&amp;lt;2) return str;
 for(var i=0;i&amp;lt;arr.length;i++)
 {
   /*look for hex values */
   if(hex.exec(arr[i])) {
     out += String.fromCharCode(parseInt(arr[i].substring(0,2),16))+arr[i].substring(2,arr[i].length);
-  } else { if(i==0) out+=arr[i]; else out+='%'+arr[i];
+  } else { if(i==0) out+=arr[i]; else out+=&#39;%&#39;+arr[i];
   }
 }
 return utf8to16(out);
@@ -132,7 +131,7 @@ return utf8to16(out);
 function utf16to8(str) {
     var out, i, len, c;
 
-    out = &quot;&quot;;
+    out = &#34;&#34;;
     len = str.length;
     for(i = 0; i &amp;lt; len; i++) {
 	c = str.charCodeAt(i);
@@ -154,7 +153,7 @@ function utf8to16(str) {
     var out, i, len, c;
     var char2, char3;
 
-    out = &quot;&quot;;
+    out = &#34;&#34;;
     len = str.length;
     i = 0;
     while(i &amp;lt; len) {

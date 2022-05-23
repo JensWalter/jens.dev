@@ -9,7 +9,7 @@ before
 printf &#39;show stat queue &gt; wide&#39; \  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 TIBCO Enterprise Message Service Administration Tool. Copyright 2003-2013 by TIBCO Software Inc. All rights reserved. Version 8.0.0 V9 6/7/2013 Connected to: tcp://localhost:7222 Type &#39;help&#39; for commands help, &#39;exit&#39; to exit: tcp://localhost:7222&gt; In-Total In-Rate Out-Total Out-Rate Queue Name Msgs Size Msgs Size Msgs Size Msgs Size &lt;total&gt; 701858 3.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="reset the TIBCO EMS statistics">
@@ -45,7 +45,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -116,53 +115,53 @@ if (!doNotTrack) {
 
     <p>resetting the TIBCO EMS statistics without restarting the server.</p>
 <p><strong>before</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#111">printf</span> <span style="color:#d88200">&#39;show stat queue &gt; wide&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">TIBCO Enterprise Message Service Administration Tool.
-Copyright 2003-2013 by TIBCO Software Inc.
-All rights reserved.
-Version 8.0.0 V9 6/7/2013
-Connected to: tcp://localhost:7222
-Type <span style="color:#d88200">&#39;help&#39;</span> <span style="color:#00a8c8">for</span> commands help, <span style="color:#d88200">&#39;exit&#39;</span> to exit:
-tcp://localhost:7222&gt;                                              In-Total         In-Rate             Out-Total        Out-Rate
-Queue Name                                  Msgs   Size      Msgs   Size         Msgs   Size      Msgs   Size
-&lt;total&gt;                                   <span style="color:#ae81ff">701858</span>    3.5 GB      <span style="color:#ae81ff">0</span>    0.0 Kb    <span style="color:#ae81ff">547449</span>    2.9 GB      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams.error                                  <span style="color:#ae81ff">166</span>  787.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$TMP</span>$.E4EMS-SERVER.1BCE55688D705A38.1          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">1</span>    2.1 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams                                          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams.test                                     <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-q.routed                                       <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-queue.1                                        <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams.command                                 <span style="color:#ae81ff">48</span>   25.1 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$sys</span>.redelivery.delay                          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-q.output                                       <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$sys</span>.undelivered                               <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams.event                               <span style="color:#ae81ff">680307</span>    3.5 GB      <span style="color:#ae81ff">0</span>    0.0 Kb    <span style="color:#ae81ff">547448</span>    2.9 GB      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$sys</span>.admin                                  <span style="color:#ae81ff">5942</span>    1.2 MB      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$sys</span>.lookup                                <span style="color:#ae81ff">15395</span>    2.9 MB      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-</code></pre></div><p><strong>run command</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#111">printf</span> <span style="color:#d88200">&#39;set server statistics=disabled\nset server statistics=enabled\n&#39;</span> <span style="color:#8045ff">\
-</span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1
-</code></pre></div><p><strong>after:</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Connected to: tcp://localhost:7222
-Type <span style="color:#d88200">&#39;help&#39;</span> <span style="color:#00a8c8">for</span> commands help, <span style="color:#d88200">&#39;exit&#39;</span> to exit:
-tcp://localhost:7222&gt;                                              In-Total         In-Rate             Out-Total        Out-Rate
-Queue Name                                  Msgs   Size      Msgs   Size         Msgs   Size      Msgs   Size
-&lt;total&gt;                                        <span style="color:#ae81ff">2</span>    0.4 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">1</span>    2.1 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams.error                                    <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$TMP</span>$.E4EMS-SERVER.1BCE55688D705A3F.1          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">1</span>    2.1 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams                                          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams.test                                     <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-q.routed                                       <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-queue.1                                        <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams.command                                  <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$sys</span>.redelivery.delay                          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-q.output                                       <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$sys</span>.undelivered                               <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-njams.event                                    <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$sys</span>.admin                                     <span style="color:#ae81ff">2</span>    0.4 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-<span style="color:#111">$sys</span>.lookup                                    <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#111">printf</span> <span style="color:#d88200">&#39;show stat queue &gt; wide&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TIBCO Enterprise Message Service Administration Tool.
+</span></span><span style="display:flex;"><span>Copyright 2003-2013 by TIBCO Software Inc.
+</span></span><span style="display:flex;"><span>All rights reserved.
+</span></span><span style="display:flex;"><span>Version 8.0.0 V9 6/7/2013
+</span></span><span style="display:flex;"><span>Connected to: tcp://localhost:7222
+</span></span><span style="display:flex;"><span>Type <span style="color:#d88200">&#39;help&#39;</span> <span style="color:#00a8c8">for</span> commands help, <span style="color:#d88200">&#39;exit&#39;</span> to exit:
+</span></span><span style="display:flex;"><span>tcp://localhost:7222&gt;                                              In-Total         In-Rate             Out-Total        Out-Rate
+</span></span><span style="display:flex;"><span>Queue Name                                  Msgs   Size      Msgs   Size         Msgs   Size      Msgs   Size
+</span></span><span style="display:flex;"><span>&lt;total&gt;                                   <span style="color:#ae81ff">701858</span>    3.5 GB      <span style="color:#ae81ff">0</span>    0.0 Kb    <span style="color:#ae81ff">547449</span>    2.9 GB      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams.error                                  <span style="color:#ae81ff">166</span>  787.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$TMP</span>$.E4EMS-SERVER.1BCE55688D705A38.1          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">1</span>    2.1 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams                                          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams.test                                     <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>q.routed                                       <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>queue.1                                        <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams.command                                 <span style="color:#ae81ff">48</span>   25.1 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$sys</span>.redelivery.delay                          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>q.output                                       <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$sys</span>.undelivered                               <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams.event                               <span style="color:#ae81ff">680307</span>    3.5 GB      <span style="color:#ae81ff">0</span>    0.0 Kb    <span style="color:#ae81ff">547448</span>    2.9 GB      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$sys</span>.admin                                  <span style="color:#ae81ff">5942</span>    1.2 MB      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$sys</span>.lookup                                <span style="color:#ae81ff">15395</span>    2.9 MB      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span></code></pre></div><p><strong>run command</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#111">printf</span> <span style="color:#d88200">&#39;set server statistics=disabled\nset server statistics=enabled\n&#39;</span> <span style="color:#8045ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#8045ff"></span>  <span style="color:#111">|</span> ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1
+</span></span></code></pre></div><p><strong>after:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Connected to: tcp://localhost:7222
+</span></span><span style="display:flex;"><span>Type <span style="color:#d88200">&#39;help&#39;</span> <span style="color:#00a8c8">for</span> commands help, <span style="color:#d88200">&#39;exit&#39;</span> to exit:
+</span></span><span style="display:flex;"><span>tcp://localhost:7222&gt;                                              In-Total         In-Rate             Out-Total        Out-Rate
+</span></span><span style="display:flex;"><span>Queue Name                                  Msgs   Size      Msgs   Size         Msgs   Size      Msgs   Size
+</span></span><span style="display:flex;"><span>&lt;total&gt;                                        <span style="color:#ae81ff">2</span>    0.4 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">1</span>    2.1 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams.error                                    <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$TMP</span>$.E4EMS-SERVER.1BCE55688D705A3F.1          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">1</span>    2.1 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams                                          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams.test                                     <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>q.routed                                       <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>queue.1                                        <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams.command                                  <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$sys</span>.redelivery.delay                          <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>q.output                                       <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$sys</span>.undelivered                               <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span>njams.event                                    <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$sys</span>.admin                                     <span style="color:#ae81ff">2</span>    0.4 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span><span style="display:flex;"><span><span style="color:#111">$sys</span>.lookup                                    <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb         <span style="color:#ae81ff">0</span>    0.0 Kb      <span style="color:#ae81ff">0</span>    0.0 Kb
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

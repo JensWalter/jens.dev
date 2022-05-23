@@ -11,7 +11,7 @@ adding a delay
 tc qdisc del dev enp0s3 root netem ">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="add a network delay in linux">
@@ -49,7 +49,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -120,16 +119,16 @@ if (!doNotTrack) {
 
     <p>Adding a delay to all network traffic is pretty easy and can be done through the following command.</p>
 <p><strong>adding a delay</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#for device enp0s3</span>
-tc qdisc add dev enp0s3 root netem delay 100ms
-</code></pre></div><p><strong>query the current delay</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#for all devices</span>
-tc -s qdisc
-<span style="color:#75715e">#for device enp0s3</span>
-tc qdisc show dev enp0s3
-</code></pre></div><p><strong>removing the delay</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tc qdisc del dev enp0s3 root netem
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#for device enp0s3</span>
+</span></span><span style="display:flex;"><span>tc qdisc add dev enp0s3 root netem delay 100ms
+</span></span></code></pre></div><p><strong>query the current delay</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#for all devices</span>
+</span></span><span style="display:flex;"><span>tc -s qdisc
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#for device enp0s3</span>
+</span></span><span style="display:flex;"><span>tc qdisc show dev enp0s3
+</span></span></code></pre></div><p><strong>removing the delay</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tc qdisc del dev enp0s3 root netem
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

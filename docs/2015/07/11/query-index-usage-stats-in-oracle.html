@@ -5,17 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>query index usage statistics in oracle &middot; </title>
         <meta name="description" content="how often an index was used
-select p.object_name &#34;object&#34;, to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;) &#34;Begin|Interval|time&#34;, p.search_columns &#34;Search Columns&#34;, count(*) &#34;Invocation|Count&#34; from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name like &#39;%INDEX_%&#39; group by p.object_name,to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;),search_columns how an index was used
-select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist_sql_plan p, dba_hist_sqlstat s where p.object_owner &lt;&gt; &#39;SYS&#39; and p.operation like &#39;%INDEX%&#39; and p.sql_id = s.sql_id group by p.">
+select  p.object_name &#34;object&#34;,  to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;) &#34;Begin|Interval|time&#34;,  p.search_columns &#34;Search Columns&#34;,  count(*) &#34;Invocation|Count&#34; from  dba_hist_snapshot sn,  dba_hist_sql_plan p,  dba_hist_sqlstat st where  st.sql_id = p.sql_id and  sn.snap_id = st.snap_id and  p.object_name like &#39;%INDEX_%&#39; group by  p.object_name,to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;),search_columns how an index was used
+select  p.object_name c1,  p.operation c2,  p.options c3,  count(1) c4 from  dba_hist_sql_plan p,  dba_hist_sqlstat s where  p.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="query index usage statistics in oracle">
 <meta property="og:description" content="how often an index was used
-select p.object_name &#34;object&#34;, to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;) &#34;Begin|Interval|time&#34;, p.search_columns &#34;Search Columns&#34;, count(*) &#34;Invocation|Count&#34; from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name like &#39;%INDEX_%&#39; group by p.object_name,to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;),search_columns how an index was used
-select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist_sql_plan p, dba_hist_sqlstat s where p.object_owner &lt;&gt; &#39;SYS&#39; and p.operation like &#39;%INDEX%&#39; and p.sql_id = s.sql_id group by p.">
+select  p.object_name &#34;object&#34;,  to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;) &#34;Begin|Interval|time&#34;,  p.search_columns &#34;Search Columns&#34;,  count(*) &#34;Invocation|Count&#34; from  dba_hist_snapshot sn,  dba_hist_sql_plan p,  dba_hist_sqlstat st where  st.sql_id = p.sql_id and  sn.snap_id = st.snap_id and  p.object_name like &#39;%INDEX_%&#39; group by  p.object_name,to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;),search_columns how an index was used
+select  p.object_name c1,  p.operation c2,  p.options c3,  count(1) c4 from  dba_hist_sql_plan p,  dba_hist_sqlstat s where  p.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/07/11/query-index-usage-stats-in-oracle.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">
@@ -45,7 +45,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -115,45 +114,45 @@ if (!doNotTrack) {
     
 
     <p><strong>how often an index was used</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">select</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span> <span style="color:#d88200">&#34;object&#34;</span><span style="color:#111">,</span>
-   <span style="color:#111">to_char</span><span style="color:#111">(</span><span style="color:#111">sn</span><span style="color:#111">.</span><span style="color:#111">begin_interval_time</span><span style="color:#111">,</span><span style="color:#d88200">&#39;yyyy-mm&#39;</span><span style="color:#111">)</span>  <span style="color:#d88200">&#34;Begin|Interval|time&#34;</span><span style="color:#111">,</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">search_columns</span>                                 <span style="color:#d88200">&#34;Search Columns&#34;</span><span style="color:#111">,</span>
-   <span style="color:#00a8c8">count</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">)</span>                                         <span style="color:#d88200">&#34;Invocation|Count&#34;</span>
-<span style="color:#00a8c8">from</span>
-   <span style="color:#111">dba_hist_snapshot</span>  <span style="color:#111">sn</span><span style="color:#111">,</span>
-   <span style="color:#111">dba_hist_sql_plan</span>   <span style="color:#111">p</span><span style="color:#111">,</span>
-   <span style="color:#111">dba_hist_sqlstat</span>   <span style="color:#111">st</span>
-<span style="color:#00a8c8">where</span>
-    <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">sql_id</span> <span style="color:#f92672">=</span> <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">sql_id</span>
-<span style="color:#00a8c8">and</span>
-   <span style="color:#111">sn</span><span style="color:#111">.</span><span style="color:#111">snap_id</span> <span style="color:#f92672">=</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">snap_id</span>   
-<span style="color:#00a8c8">and</span>   
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span> <span style="color:#00a8c8">like</span> <span style="color:#d88200">&#39;%INDEX_%&#39;</span>
-<span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span><span style="color:#111">,</span><span style="color:#111">to_char</span><span style="color:#111">(</span><span style="color:#111">sn</span><span style="color:#111">.</span><span style="color:#111">begin_interval_time</span><span style="color:#111">,</span><span style="color:#d88200">&#39;yyyy-mm&#39;</span><span style="color:#111">),</span><span style="color:#111">search_columns</span>
-</code></pre></div><p><strong>how an index was used</strong></p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">select</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span> <span style="color:#111">c1</span><span style="color:#111">,</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">operation</span>   <span style="color:#111">c2</span><span style="color:#111">,</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">options</span>     <span style="color:#111">c3</span><span style="color:#111">,</span>
-   <span style="color:#00a8c8">count</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>      <span style="color:#111">c4</span>
-<span style="color:#00a8c8">from</span>
-   <span style="color:#111">dba_hist_sql_plan</span> <span style="color:#111">p</span><span style="color:#111">,</span>
-   <span style="color:#111">dba_hist_sqlstat</span> <span style="color:#111">s</span>
-<span style="color:#00a8c8">where</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_owner</span> <span style="color:#f92672">&lt;&gt;</span> <span style="color:#d88200">&#39;SYS&#39;</span>
-<span style="color:#00a8c8">and</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">operation</span> <span style="color:#00a8c8">like</span> <span style="color:#d88200">&#39;%INDEX%&#39;</span>
-<span style="color:#00a8c8">and</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">sql_id</span> <span style="color:#f92672">=</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">sql_id</span>
-<span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span><span style="color:#111">,</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">operation</span><span style="color:#111">,</span>
-   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">options</span>
-<span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span>
-   <span style="color:#ae81ff">4</span><span style="color:#111">,</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span><span style="color:#ae81ff">3</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">select</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span> <span style="color:#d88200">&#34;object&#34;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">to_char</span><span style="color:#111">(</span><span style="color:#111">sn</span><span style="color:#111">.</span><span style="color:#111">begin_interval_time</span><span style="color:#111">,</span><span style="color:#d88200">&#39;yyyy-mm&#39;</span><span style="color:#111">)</span>  <span style="color:#d88200">&#34;Begin|Interval|time&#34;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">search_columns</span>                                 <span style="color:#d88200">&#34;Search Columns&#34;</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#00a8c8">count</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">)</span>                                         <span style="color:#d88200">&#34;Invocation|Count&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">from</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">dba_hist_snapshot</span>  <span style="color:#111">sn</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">dba_hist_sql_plan</span>   <span style="color:#111">p</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">dba_hist_sqlstat</span>   <span style="color:#111">st</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">where</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">sql_id</span> <span style="color:#f92672">=</span> <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">sql_id</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">and</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">sn</span><span style="color:#111">.</span><span style="color:#111">snap_id</span> <span style="color:#f92672">=</span> <span style="color:#111">st</span><span style="color:#111">.</span><span style="color:#111">snap_id</span>   
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">and</span>   
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span> <span style="color:#00a8c8">like</span> <span style="color:#d88200">&#39;%INDEX_%&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span><span style="color:#111">,</span><span style="color:#111">to_char</span><span style="color:#111">(</span><span style="color:#111">sn</span><span style="color:#111">.</span><span style="color:#111">begin_interval_time</span><span style="color:#111">,</span><span style="color:#d88200">&#39;yyyy-mm&#39;</span><span style="color:#111">),</span><span style="color:#111">search_columns</span>
+</span></span></code></pre></div><p><strong>how an index was used</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">select</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span> <span style="color:#111">c1</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">operation</span>   <span style="color:#111">c2</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">options</span>     <span style="color:#111">c3</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#00a8c8">count</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>      <span style="color:#111">c4</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">from</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">dba_hist_sql_plan</span> <span style="color:#111">p</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">dba_hist_sqlstat</span> <span style="color:#111">s</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">where</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_owner</span> <span style="color:#f92672">&lt;&gt;</span> <span style="color:#d88200">&#39;SYS&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">and</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">operation</span> <span style="color:#00a8c8">like</span> <span style="color:#d88200">&#39;%INDEX%&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">and</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">sql_id</span> <span style="color:#f92672">=</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">sql_id</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">object_name</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">operation</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#00a8c8">options</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">4</span><span style="color:#111">,</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div>
 </div>
 
         <footer class="post-footer clearfix">

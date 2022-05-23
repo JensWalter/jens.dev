@@ -5,16 +5,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>[njams] getting the client version of all engines &middot; </title>
         <meta name="description" content="After migrating a nJAMS on a large BusinessWorks environment, you need to check, whether all engines are actually using the updated version of the client. To check this, you can either check every engine log file or you can just go directly to the database.
-SELECT o.DOMAIN_NAME domain, o.OBJECTNAME engine, o.CLIENT_VERSION, o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
+SELECT o.DOMAIN_NAME domain,  o.OBJECTNAME engine,  o.CLIENT_VERSION,  o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
    domain engine client_version last_update     fs_dev C1_Services-C1_Services-1 3.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.80.0" />
+        <meta name="generator" content="Hugo 0.97.3" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="[njams] getting the client version of all engines">
 <meta property="og:description" content="After migrating a nJAMS on a large BusinessWorks environment, you need to check, whether all engines are actually using the updated version of the client. To check this, you can either check every engine log file or you can just go directly to the database.
-SELECT o.DOMAIN_NAME domain, o.OBJECTNAME engine, o.CLIENT_VERSION, o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
+SELECT o.DOMAIN_NAME domain,  o.OBJECTNAME engine,  o.CLIENT_VERSION,  o.LAST_UPDATE FROM njams_t_domain_objects o WHERE o.type=3 result:
    domain engine client_version last_update     fs_dev C1_Services-C1_Services-1 3.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/09/26/njams-getting-the-client-version-of-all-engines.html">
@@ -45,7 +45,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
         <div id="wrapper">
             <header class="site-header">
@@ -115,13 +114,13 @@ if (!doNotTrack) {
     
 
     <p>After migrating a nJAMS on a large BusinessWorks environment, you need to check, whether all engines are actually using the updated version of the client. To check this, you can either check every engine log file or you can just go directly to the database.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">SELECT</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">DOMAIN_NAME</span> <span style="color:#00a8c8">domain</span><span style="color:#111">,</span>
-  <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">OBJECTNAME</span> <span style="color:#111">engine</span><span style="color:#111">,</span>
-  <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">CLIENT_VERSION</span><span style="color:#111">,</span>
-  <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">LAST_UPDATE</span>
-<span style="color:#00a8c8">FROM</span> <span style="color:#111">njams_t_domain_objects</span> <span style="color:#111">o</span>
-<span style="color:#00a8c8">WHERE</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#00a8c8">type</span><span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
-</code></pre></div><p><strong>result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#00a8c8">SELECT</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">DOMAIN_NAME</span> <span style="color:#00a8c8">domain</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">OBJECTNAME</span> <span style="color:#111">engine</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">CLIENT_VERSION</span><span style="color:#111">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#111">LAST_UPDATE</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">FROM</span> <span style="color:#111">njams_t_domain_objects</span> <span style="color:#111">o</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">WHERE</span> <span style="color:#111">o</span><span style="color:#111">.</span><span style="color:#00a8c8">type</span><span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p><strong>result:</strong></p>
 <table>
 <thead>
 <tr>
