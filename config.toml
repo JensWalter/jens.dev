@@ -3,7 +3,6 @@ title = "My personal blog"
 theme = "ghostwriter"
 languageCode = "en-us"
 googleAnalytics = "UA-5676095-8"
-
 Paginate=999 
 uglyurls = true
 publishDir = "docs"
