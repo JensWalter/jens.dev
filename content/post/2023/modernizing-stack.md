@@ -15,11 +15,11 @@ For now, this is a work in progress and I will update this page as each new arti
 ### Lets define what we mean by Tibco classic stack
 
 * [The Classic BusinessWorks stack]({{< ref "/post/2023/classic-stack" >}})
-* [Reaping some benefits of containerization]({{< ref "/post/2023/reaping-some-benefits" >}})
 
 ### Lets start with containerization
 
 * [Containerizing a BusinessWorks Stack]({{< ref "/post/2023/containerizing-businessworks" >}} "Containerizing a BusinessWorks Stack")
+* [Reaping some benefits of containerization]({{< ref "/post/2023/reaping-some-benefits" >}})
 
 ### Migration to Container Orchestration / Kubernetes
 

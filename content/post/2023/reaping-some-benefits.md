@@ -23,7 +23,7 @@ With the switch to Docker, those requirements disappeared. The only requirement 
 
 * That itself lead to decoupling of our software from the infractructure. Now we can move/switch machine on the fly with very little effort.
 * Security became a lot easier, since the OS could be patch even with downtime at any time without affecting our service
-* The hardware layout (like 2 machines per Region as Ha-Cluster) was no longer set in stone. We could split machines up horizontally, and also add machines on-demand if we needed to.
+* The hardware layout (like 2 machines per Region as HA-Cluster) was no longer set in stone. We could split machines up horizontally, and also add machines on-demand if we needed to.
 
 ### Healthchecks
 
