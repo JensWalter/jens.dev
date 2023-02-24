@@ -5,37 +5,37 @@ tags:
  - tibco
  - container
 ---
-We just started out migration and saw some impressive result very early on.
+We just started the migration and saw some impressive results very early on.
 
 ### Deployment
 
-We started with some very heavy custom script rolling out big composites. Those composite container definitions for BW engines, SQL script, EMS definitions and filesystem deployment. Overall this process grew so complex that even a `simple` composite deployment could easily take 2-3 hours.
+We started with some very heavy custom scripting to deploy large composites. These composite container definitions for BW engines, SQL script, EMS definitions and file system deployment. Overall, this process became so complex that even a "simple" composite deployment could easily take 2-3 hours.
 
-By splitting the composite apart into containers and building our composite structure on top of docker compose deployment times where now down to minutes (up 5 minutes for container pulls and restarts). This is a huge improvement over the existing deployment times.
+By splitting the composite into containers and building our composite structure on top of Docker Compose, deployment times were now down to minutes (up to 5 minutes for container pulls and restarts). This is a huge improvement over existing deployment times.
 
-Also by using YAML managed in a git repository as compose definition our definitions became reversible. So if a production rollout failed, we could easily roll back to the last status (especially regarding the 5min deployment time). Before that, there alsway was some consideration of whether a roullout actually helped of if a hotfix (meaning manual interaction) after the rollout was faster. This was now no longer a consideration.
+Also, by using YAML managed in a git repository as a compose definition, our definitions became reversible. So if a production rollout failed, we could easily roll back to the last state (especially regarding the 5min deployment time). Before that, there was also the consideration of whether a rollout really helped, or if a hotfix (meaning manual interaction) was faster after the rollout. This is no longer a consideration.
 
 ### Infrastructure
 
-Rolling out a classic tibco environment means installing the software on multiple machines and then creating a management domain on top of that. From that point onward all of the involved machined have to be maintained in sync. So Update either OS or Tibco Software need to happen in tandem to ensure consistency across failure domains.
+Rolling out a classic Tibco environment means installing the software on multiple machines and then creating a management domain on top of it. From that point on, all the machines involved need to be kept in sync. So updates to either the operating system or the Tibco software have to be done in tandem to ensure consistency across the fault domains.
 
-With the switch to Docker, those requirements disappeared. The only requirement for the OS was that the docker daemon was installed and is accessible.
+With the move to Docker, these requirements disappeared. The only requirement on the OS was that the Docker daemon was installed and accessible.
 
-* That itself lead to decoupling of our software from the infractructure. Now we can move/switch machine on the fly with very little effort.
-* Security became a lot easier, since the OS could be patch even with downtime at any time without affecting our service
-* The hardware layout (like 2 machines per Region as HA-Cluster) was no longer set in stone. We could split machines up horizontally, and also add machines on-demand if we needed to.
+* That in itself decoupled our software from the infrastructure. Now we can move/swap machines on the fly with very little effort.
+* Security became much easier as the OS could be patched at any time, even during downtime, without affecting our service.
+* The hardware layout (such as 2 machines per region as a HA cluster) was no longer set in stone. We could split machines horizontally and add machines as needed.
 
 ### Healthchecks
 
-Docker container itself do only provide a hosting environment for application. But with the introduction of container orchestration (docker-compose) we were able to implement container specific HelathChecks.
+Docker containers themselves only provide a hosting environment for the application. But with the introduction of container orchestration (docker-compose) we were able to implement container specific health checks.
 
-We did implement some generic health check for BW to guarantee that the engine is still functional (not just running). We also provided a mechanism so every engine can also extend this generic check with some specific check. For example if a database connection is often the cause of error, we can implement a health check and deal with it on the container level.
+We implemented a generic health check for BW to guarantee that the engine is still functional (not just running). We also provided a mechanism so that each engine can also extend this generic check with some specific checks. For example, if a database connection is often the cause of errors, we can implement a health check and deal with it at the container level.
 
 ### Future Perspective
 
-After decoupling the OS from base software (Tibco BusinessWorks, Hawk,...) and also our code, we became independent from our fixed infrstructure.
-That lead to new options of how to split/setup and scale hardware. Starting with that we also saw the opportunity to do something similar with the code we deployed.
+By decoupling the OS from the base software (Tibco BusinessWorks, Hawk,...) and also from our code, we became independent from our fixed infrastructure.
+This led to new ways of partitioning and scaling hardware. From there, we saw the opportunity to do something similar with the code we deployed.
 
-Up to that point we collected all code regarding one backend in engine. This is a neccesity because deployment and infractructure would go out of control. Thanks to our decoupling we no longer had this restriction, so we started to elaborate on different code segmentations.
+Up to that point, we had been collecting all the code related to a backend in Engine. This is a necessity because deployment and infrastructure would get out of control. Thanks to our decoupling, we no longer had this limitation, so we started working on different code segmentations.
 
-After a back an forth about how to split and maintain our codebase, we always came to the same consclusion. In the final draft, we would always split our code abse into 'micro services', so every process starter becomes its own engine. This was the only way how we could ensure the fexibilty we wanted to go forward. The only downside that came with that was the massive amount of infrastructue we would need to host this many engines.
+After some back and forth about how to split and maintain our codebase, we always came to the same conclusion. In the final design, we would always split our code base into "micro services" so that each process starter would become its own engine. This was the only way to ensure the flexibility we wanted. The only downside was the massive amount of infrastructure we would need to host so many engines.
