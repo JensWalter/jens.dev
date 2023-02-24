@@ -23,14 +23,14 @@ The CI pipeline in use is Jenkins. Every time a checkin in happening a Jenkins j
 - EAR file for Tibco Administrator
 - files for local file system patches
 
-[jenkins-ci]
+![jenkins-ci](/assets/2023/jenkins-ci.drawio.png)
 
 While this applies to every since engine, the need arose early to also define composites (multiple engines).
 Composites are also defined through sources repositories. Those repositories only consist of versioned depenendencies, but have no code of their own. This way we could re-use the exising pipelines and architecture.
 
 # How stuff is rolled out.
 
-[jenkins-rollout]
+![jenkins-rollout](/assets/2023/jenkins-deploy.drawio.png)
 
 Every environment had its own definition file as jenkins job definition.
 This definition file covers settings like:

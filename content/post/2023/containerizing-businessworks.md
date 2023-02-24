@@ -20,9 +20,11 @@ Early on we started with docker CLI on a VM. This provided us tooling for Deploy
 Soon after that we switched to docker-compose. This was caused by the need to define service compositions.
 Another feature that came through compose was the optional to deploy and scale engines horizontally through mutliple machines. This was a very early requirement since we wanted to move production services over which had 24/7 HA-requirements.
 
+![docker-compose](/assets/2023/docker-compose.drawio.png)
+
 This rather minimal change already resulted in some signification improvements in our development and operations procedures.
 
-## Benefits
+## Initial Benefits
 
 1. Every engine is now packaged as its own container. That means every single engine has its own version of BusinessWorks, has its own set of OS dependencies and can be scaled independently through a standardized interface. Also moving engines between machines and balancing the load throughout a cluster of machines is a standard feature of docker-compose, so no adjustments necessary.
 
@@ -42,7 +44,8 @@ Functionally we have reached the following feature set.
 | deploy format | EAR-file | container image |
 | deploy repository | file directory | container registry |
 | deploy script | bash with AppManage calls | docker cli |
-| start/stop | AppManage/Administrator | docker cli / portainer |
+| deploy SQL scripts | custom script | n/a |
+| deploy EMS destination | custom script | BW projectlib (temporary) || start/stop | AppManage/Administrator | docker cli / portainer |
 | monitor | Administrator/Hawk | docker compose |
 | Web UI | Administrator | portainer |
 | Log Files | Adminitrator | FluentBit, ElasticSearch, Kibana |
