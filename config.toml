@@ -28,8 +28,13 @@ tag = "tags"
 [Permalinks]
   post = "/:year/:month/:day/:filename"
 
-[markup.highlight]
-  style = "monokailight"
+[markup]
+  defaultMarkdownHandler = 'goldmark'
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "monokailight"
 
 [menu]
 main = [ 

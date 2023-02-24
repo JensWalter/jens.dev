@@ -42,8 +42,12 @@ Updating our software stack (like updating a JDK or even the BW version) became 
 ### Future Perspective
 
 By decoupling the OS from the base software (Tibco BusinessWorks, Hawk,...) and also from our code, we became independent from our fixed infrastructure.
-This led to new ways of partitioning and scaling hardware. From there, we saw the opportunity to do something similar with the code we deployed.
+This led to new ways of partitioning and scaling hardware independently of our software. From there, we saw an opportunity to do something similar with the code we deployed.
 
-Up to that point, we had been collecting all the code related to a backend in Engine. This is a necessity because deployment and infrastructure would get out of control. Thanks to our decoupling, we no longer had this limitation, so we started working on different code segmentations.
+Up to that point, we had been collecting all the code related to a single backend into one engine. This is a necessity because the deployment process and its infrastructure needs would get out of control. Thanks to our decoupling, we no longer had this limitation, so we started working on different code segmentations.
 
-After some back and forth about how to split and maintain our codebase, we always came to the same conclusion. In the final design, we would always split our code base into "micro services" so that each process starter would become its own engine. This was the only way to ensure the flexibility we wanted. The only downside was the massive amount of infrastructure we would need to host so many engines.
+After some back and forth about how to split and maintain our codebase, we always came to the same conclusion. In the final design, we would always split our code base into "micro services" so that each process starter would become its own engine. This was the only way to get the flexibility we wanted. The only downside was the massive amount of infrastructure we would need to host so many engines.
+
+Another aspect of this discussion was that we began to work out how complex it would be to introduce another software stack side-by-side with this architecture. Since the software component was already decoupled from the infrastructure, onboarding something became a straightforward task.
+
+[Next Up: Getting started with Kubernetes]({{< ref "/post/2023/getting-started-kubernetes" >}})

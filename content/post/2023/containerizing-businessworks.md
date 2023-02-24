@@ -51,3 +51,5 @@ Functionally we have reached the following feature set.
 | monitor | Administrator/Hawk | docker compose |
 | Web UI | Administrator | portainer |
 | Log Files | Adminitrator | FluentBit, ElasticSearch, Kibana |
+
+[Next Up: Reaping some benefits of containerization]({{< ref "/post/2023/reaping-some-benefits" >}})

@@ -14,15 +14,24 @@ For now, this is a work in progress and I will update this page as each new arti
 
 ### Lets define what we mean by Tibco classic stack
 
-* [The Classic BusinessWorks stack]({{< ref "/post/2023/classic-stack" >}})
+* [The Classic BusinessWorks stack]({{< ref "/post/2023/classic-businessworks-stack" >}})
 
 ### Lets start with containerization
 
-* [Containerizing a BusinessWorks Stack]({{< ref "/post/2023/containerizing-businessworks" >}} "Containerizing a BusinessWorks Stack")
+* [Containerizing a BusinessWorks Stack]({{< ref "/post/2023/containerizing-businessworks" >}})
 * [Reaping some benefits of containerization]({{< ref "/post/2023/reaping-some-benefits" >}})
 
 ### Migration to Container Orchestration / Kubernetes
 
+* [Getting started with Kubernetes]({{< ref "/post/2023/getting-started-kubernetes" >}})
+
+
+
 ### Deployment in a GitOps world
 
+<!--Kustomizing in Kubernetes World-->
+<!--Argo--> 
+
 ### Scaling BW in a Kubernetes world
+
+* [Scaling in Kubernetes]({{< ref "/post/2023/scaling-businessworks-in-kubernetes" >}})

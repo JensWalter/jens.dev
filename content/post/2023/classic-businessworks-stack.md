@@ -56,3 +56,5 @@ Tasks supported by our Jenkins jobs:
     - deploy BW EAR through Administrator
     - run filesystem rollout (e.g. SSL certificates, config files)
 - deploy composite (just a collection of multiple engines)
+
+[Next Up: Containerizing a BusinessWorks Stack]({{< ref "/post/2023/containerizing-businessworks" >}})
