@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>why sub-selects can be faster than inner joins &middot; </title>
         <meta name="description" content="So here is my situation. I have 2 tables with the following DDL.
-CREATE TABLE tags (  id bigint NOT NULL,  &#34;value&#34; character varying(150),  CONSTRAINT tags_pkey PRIMARY KEY (id),  CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags (  sites_id bigint NOT NULL,  pages_id bigint NOT NULL,  tags_id bigint NOT NULL,  count integer,  updated timestamp without time zone,  CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.">
+CREATE TABLE tags ( id bigint NOT NULL, &#34;value&#34; character varying(150), CONSTRAINT tags_pkey PRIMARY KEY (id), CONSTRAINT tags_value_key UNIQUE (value) ) CREATE TABLE sites_tags ( sites_id bigint NOT NULL, pages_id bigint NOT NULL, tags_id bigint NOT NULL, count integer, updated timestamp without time zone, CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="why sub-selects can be faster than inner joins">
 <meta property="og:description" content="So here is my situation. I have 2 tables with the following DDL.
-CREATE TABLE tags (  id bigint NOT NULL,  &#34;value&#34; character varying(150),  CONSTRAINT tags_pkey PRIMARY KEY (id),  CONSTRAINT tags_value_key UNIQUE (value) )  CREATE TABLE sites_tags (  sites_id bigint NOT NULL,  pages_id bigint NOT NULL,  tags_id bigint NOT NULL,  count integer,  updated timestamp without time zone,  CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.">
+CREATE TABLE tags ( id bigint NOT NULL, &#34;value&#34; character varying(150), CONSTRAINT tags_pkey PRIMARY KEY (id), CONSTRAINT tags_value_key UNIQUE (value) ) CREATE TABLE sites_tags ( sites_id bigint NOT NULL, pages_id bigint NOT NULL, tags_id bigint NOT NULL, count integer, updated timestamp without time zone, CONSTRAINT sites_tags_pkey PRIMARY KEY (sites_id, pages_id, tags_id) ) As you can see, the tags table is a simple value-id-table.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2009/06/25/why-sub-selects-can-be-faster-than-inner-joins.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

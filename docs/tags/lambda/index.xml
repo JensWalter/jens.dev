@@ -27,7 +27,7 @@ Since all clients are identified by API Key, I hoped for some mechanism within A
       <description>For testing purposes I needed a service which would generate a self signed certificate. To reduce my dependency on locally installed tools, I implemented this service as AWS Lambda function (or microservice if you want to call it that).
 Here is what I came up with:
 The generated output looks like this:
-{  &amp;#34;cert&amp;#34;: {  &amp;#34;filename&amp;#34;: &amp;#34;cert.pem&amp;#34;,  &amp;#34;fileContent&amp;#34;: &amp;#34;LS0tLS1CRUdJTiBDRVJU...&amp;#34;  },  &amp;#34;key&amp;#34;: {  &amp;#34;filename&amp;#34;: &amp;#34;key.pem&amp;#34;,  &amp;#34;fileContent&amp;#34;: &amp;#34;LS0tLS1CRUdJTiBQUklW.</description>
+{ &amp;#34;cert&amp;#34;: { &amp;#34;filename&amp;#34;: &amp;#34;cert.pem&amp;#34;, &amp;#34;fileContent&amp;#34;: &amp;#34;LS0tLS1CRUdJTiBDRVJU...&amp;#34; }, &amp;#34;key&amp;#34;: { &amp;#34;filename&amp;#34;: &amp;#34;key.pem&amp;#34;, &amp;#34;fileContent&amp;#34;: &amp;#34;LS0tLS1CRUdJTiBQUklW...&amp;#34; } } PS: you might need to adjust the CN to your own domain name, currently all certificates will have the CN apimeister.</description>
     </item>
     
     <item>
@@ -38,8 +38,8 @@ The generated output looks like this:
       <guid>https://jens.dev/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</guid>
       <description>In Cognito all registered users need to be confirmed before they can interact with other services.
 Out-of-the-box Amazon supports confirmation by
- email SMS web UI lambda  To automate this process, confirming with a Lambda function is the only way to trigger the confirmation process. So I created the following lambda to confirm all created users.
-exports.handler = (event, context, callback) =&amp;gt; {  event.response.autoConfirmUser=true;  callback(null, event); }; Then I used this lambda as &amp;ldquo;Pre sign-up&amp;rdquo;-trigger.</description>
+email SMS web UI lambda To automate this process, confirming with a Lambda function is the only way to trigger the confirmation process. So I created the following lambda to confirm all created users.
+exports.handler = (event, context, callback) =&amp;gt; { event.response.autoConfirmUser=true; callback(null, event); }; Then I used this lambda as &amp;ldquo;Pre sign-up&amp;rdquo;-trigger.</description>
     </item>
     
   </channel>

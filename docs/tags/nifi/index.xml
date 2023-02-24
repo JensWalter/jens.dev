@@ -14,7 +14,7 @@
       
       <guid>https://jens.dev/2016/12/16/converting-csv-to-orc-with-apache-nifi.html</guid>
       <description>Converting a CSV to ORC files usually takes a Hadoop cluster to perform the task. Since I only wanted to convert files for later uploading into an existing cluster, I tried some different approach. Searching for some tool to do the task, I arrived at Apache NiFi.
-Here is the flow I used to transform my data.  step 1 - list all exiting CSV files step 2 - read each file into memory step 3 - convert content into AVRO  sadly AVRO needs a schema of you data to do the actual conversion.</description>
+Here is the flow I used to transform my data. step 1 - list all exiting CSV files step 2 - read each file into memory step 3 - convert content into AVRO sadly AVRO needs a schema of you data to do the actual conversion.</description>
     </item>
     
   </channel>

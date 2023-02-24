@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>extract the UUIDv1 encapsulated timestamp within an oracle select &middot; </title>
         <meta name="description" content="When you have a partioned table full of UUIDs but partitioned through timestamp, you need a way to translate the UUID back into a timestamp to match a partition where the key is stored. So here is my way of how to extract the timestamp out of an UUIDv1.
-select ts,to_timestamp(date &#39;1970-01-01&#39;&#43; (ts/(24*60*60))) from (  select  trunc((to_number(substr(uuid,16,3)||&#39;000000000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;)  &#43;to_number(substr(uuid,10,4)||&#39;00000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;)  &#43;to_number(substr(uuid,0,8) ,&#39;xxxxxxxxxxxxxxxx&#39;)  -122192928000000000)/10000000) ts  from (  select &#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&#39; uuid from dual  ) ) ">
+select ts,to_timestamp(date &#39;1970-01-01&#39;&#43; (ts/(24*60*60))) from ( select trunc((to_number(substr(uuid,16,3)||&#39;000000000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;) &#43;to_number(substr(uuid,10,4)||&#39;00000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;) &#43;to_number(substr(uuid,0,8) ,&#39;xxxxxxxxxxxxxxxx&#39;) -122192928000000000)/10000000) ts from ( select &#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&#39; uuid from dual ) ) ">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="extract the UUIDv1 encapsulated timestamp within an oracle select">
 <meta property="og:description" content="When you have a partioned table full of UUIDs but partitioned through timestamp, you need a way to translate the UUID back into a timestamp to match a partition where the key is stored. So here is my way of how to extract the timestamp out of an UUIDv1.
-select ts,to_timestamp(date &#39;1970-01-01&#39;&#43; (ts/(24*60*60))) from (  select  trunc((to_number(substr(uuid,16,3)||&#39;000000000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;)  &#43;to_number(substr(uuid,10,4)||&#39;00000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;)  &#43;to_number(substr(uuid,0,8) ,&#39;xxxxxxxxxxxxxxxx&#39;)  -122192928000000000)/10000000) ts  from (  select &#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&#39; uuid from dual  ) ) ">
+select ts,to_timestamp(date &#39;1970-01-01&#39;&#43; (ts/(24*60*60))) from ( select trunc((to_number(substr(uuid,16,3)||&#39;000000000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;) &#43;to_number(substr(uuid,10,4)||&#39;00000000&#39; ,&#39;xxxxxxxxxxxxxxxx&#39;) &#43;to_number(substr(uuid,0,8) ,&#39;xxxxxxxxxxxxxxxx&#39;) -122192928000000000)/10000000) ts from ( select &#39;0f0e9cea-121c-11e5-a831-14dae9ef67fb&#39; uuid from dual ) ) ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/06/14/extract-the-uuidv1-encapsulated-timestamp-within-an-oracle-select.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

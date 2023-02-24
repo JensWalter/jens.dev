@@ -24,7 +24,7 @@ First I had to find the coresponding class of the jjs tool. I&amp;rsquo;m not su
       
       <guid>https://jens.dev/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html</guid>
       <description>Normally, the JVM does not allow extending the classpath during runtime. But due to the demand, people found ways around that restriction. To bring one of the work-around to jjs I wrote the following javascript function.
-function addUrlToClasspath(pathName){ 	var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader();  var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class;  var ClassArray = Java.type(&amp;#34;java.lang.Class[]&amp;#34;);  var parameters = new ClassArray(1);  parameters[0]= java.net.URL.class;  var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&amp;#34;addURL&amp;#34;, parameters);  method.</description>
+function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader(); var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class; var ClassArray = Java.type(&amp;#34;java.lang.Class[]&amp;#34;); var parameters = new ClassArray(1); parameters[0]= java.net.URL.class; var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&amp;#34;addURL&amp;#34;, parameters); method.setAccessible(true); var ObjectArray = Java.type(&amp;#34;java.lang.Object[]&amp;#34;); var array = new ObjectArray(1); var/*java.</description>
     </item>
     
     <item>
@@ -45,7 +45,7 @@ var string = new java.lang.String(&amp;#34;hello world&amp;#34;); //alternative 
       
       <guid>https://jens.dev/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs.html</guid>
       <description>The task is pretty simple, read the content of text file as one-liner. Here is what I came up with.
-var filename = &amp;#34;engine.log&amp;#34;; var content = new java.lang.String(  java.nio.file.Files.readAllBytes(  java.nio.file.Paths.get(filename)  )  ); </description>
+var filename = &amp;#34;engine.log&amp;#34;; var content = new java.lang.String( java.nio.file.Files.readAllBytes( java.nio.file.Paths.get(filename) ) ); </description>
     </item>
     
     <item>

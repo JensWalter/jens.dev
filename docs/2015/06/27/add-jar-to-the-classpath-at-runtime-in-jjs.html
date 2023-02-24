@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>add jar to the classpath at runtime in jjs (the hacky way) &middot; </title>
         <meta name="description" content="Normally, the JVM does not allow extending the classpath during runtime. But due to the demand, people found ways around that restriction. To bring one of the work-around to jjs I wrote the following javascript function.
-function addUrlToClasspath(pathName){ 	var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader();  var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class;  var ClassArray = Java.type(&#34;java.lang.Class[]&#34;);  var parameters = new ClassArray(1);  parameters[0]= java.net.URL.class;  var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&#34;addURL&#34;, parameters);  method.">
+function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader(); var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class; var ClassArray = Java.type(&#34;java.lang.Class[]&#34;); var parameters = new ClassArray(1); parameters[0]= java.net.URL.class; var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&#34;addURL&#34;, parameters); method.setAccessible(true); var ObjectArray = Java.type(&#34;java.lang.Object[]&#34;); var array = new ObjectArray(1); var/*java.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="add jar to the classpath at runtime in jjs (the hacky way)">
 <meta property="og:description" content="Normally, the JVM does not allow extending the classpath during runtime. But due to the demand, people found ways around that restriction. To bring one of the work-around to jjs I wrote the following javascript function.
-function addUrlToClasspath(pathName){ 	var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader();  var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class;  var ClassArray = Java.type(&#34;java.lang.Class[]&#34;);  var parameters = new ClassArray(1);  parameters[0]= java.net.URL.class;  var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&#34;addURL&#34;, parameters);  method.">
+function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader(); var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class; var ClassArray = Java.type(&#34;java.lang.Class[]&#34;); var parameters = new ClassArray(1); parameters[0]= java.net.URL.class; var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&#34;addURL&#34;, parameters); method.setAccessible(true); var ObjectArray = Java.type(&#34;java.lang.Object[]&#34;); var array = new ObjectArray(1); var/*java.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

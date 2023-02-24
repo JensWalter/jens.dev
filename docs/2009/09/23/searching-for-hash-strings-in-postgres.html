@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>searching for hash strings in postgres &middot; </title>
         <meta name="description" content="For one of my projects a have a database which has a rather large table consisting of just an url and a corresponding id. For performance reasons I added a md5 column which hashes the url. With this column it should be a lot faster to look up an url.
-CREATE TABLE pages (  id bigint NOT NULL,  url character varying(255),  md5 character(32),  CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).">
+CREATE TABLE pages ( id bigint NOT NULL, url character varying(255), md5 character(32), CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="searching for hash strings in postgres">
 <meta property="og:description" content="For one of my projects a have a database which has a rather large table consisting of just an url and a corresponding id. For performance reasons I added a md5 column which hashes the url. With this column it should be a lot faster to look up an url.
-CREATE TABLE pages (  id bigint NOT NULL,  url character varying(255),  md5 character(32),  CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).">
+CREATE TABLE pages ( id bigint NOT NULL, url character varying(255), md5 character(32), CONSTRAINT pages_pkey PRIMARY KEY (id) ) The faster lookup should mainly be possible through the shorter column length (and therefore smaller index).">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2009/09/23/searching-for-hash-strings-in-postgres.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

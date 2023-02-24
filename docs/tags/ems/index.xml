@@ -15,7 +15,7 @@
       <guid>https://jens.dev/2016/06/26/connecting-nodejs-to-tibco-ems.html</guid>
       <description>I recently started a new project to bring Tibco EMS connectivity to nodejs. It is still in a pretty early stage, so it is rather limited in its capabilities. A current version of the feature set will be maintained within github.
 What is working right now?
- send a text message to queue (request/reply and push) send a text message to topic (request/reply and push)  More is about to come in the future.</description>
+send a text message to queue (request/reply and push) send a text message to topic (request/reply and push) More is about to come in the future.</description>
     </item>
     
     <item>
@@ -25,8 +25,8 @@ What is working right now?
       
       <guid>https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</guid>
       <description>The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
- get message statistics reset stats to zero  get the stats as csv
-printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39;  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1  | awk &amp;#39;NR&amp;gt;11&amp;#39;  | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39;  | grep -v &amp;#39;tcp://&amp;#39;  | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
+get message statistics reset stats to zero get the stats as csv
+printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &amp;#39;NR&amp;gt;11&amp;#39; | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39; | grep -v &amp;#39;tcp://&amp;#39; | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
     </item>
     
     <item>
@@ -37,7 +37,7 @@ printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&a
       <guid>https://jens.dev/2015/06/24/reset-the-tibco-ems-statistics.html</guid>
       <description>resetting the TIBCO EMS statistics without restarting the server.
 before
-printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 TIBCO Enterprise Message Service Administration Tool. Copyright 2003-2013 by TIBCO Software Inc. All rights reserved. Version 8.0.0 V9 6/7/2013 Connected to: tcp://localhost:7222 Type &amp;#39;help&amp;#39; for commands help, &amp;#39;exit&amp;#39; to exit: tcp://localhost:7222&amp;gt; In-Total In-Rate Out-Total Out-Rate Queue Name Msgs Size Msgs Size Msgs Size Msgs Size &amp;lt;total&amp;gt; 701858 3.</description>
+printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \ | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 TIBCO Enterprise Message Service Administration Tool. Copyright 2003-2013 by TIBCO Software Inc. All rights reserved. Version 8.0.0 V9 6/7/2013 Connected to: tcp://localhost:7222 Type &amp;#39;help&amp;#39; for commands help, &amp;#39;exit&amp;#39; to exit: tcp://localhost:7222&amp;gt; In-Total In-Rate Out-Total Out-Rate Queue Name Msgs Size Msgs Size Msgs Size Msgs Size &amp;lt;total&amp;gt; 701858 3.</description>
     </item>
     
     <item>

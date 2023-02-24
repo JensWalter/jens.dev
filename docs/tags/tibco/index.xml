@@ -15,8 +15,9 @@
       <guid>https://jens.dev/2020/08/09/containerizing-businessworks-5.html</guid>
       <description>Preparation To prepare the container build, I downloaded the current versions of TRA/BW/EMS from the TIBCO edelivery platform.
 I downloaded the following artifacts:
- TIB_TRA_5.11.0_linux_x86_64.zip TIB_BW_5.14.0_linux26gl23_x86_64.zip TIB_rv_8.4.6_linux_x86.zip TIB_ems_8.5.1_linux_x86_64.zip  Now to bring those together into a container I copied all of those into a tibco-businessworks-runtime directory.
-Installation To support a headless installation, the TIBCO universal installer uses silent files. I attached my silent file at the end of this post.</description>
+TIB_TRA_5.11.0_linux_x86_64.zip TIB_BW_5.14.0_linux26gl23_x86_64.zip TIB_rv_8.4.6_linux_x86.zip TIB_ems_8.5.1_linux_x86_64.zip Now to bring those together into a container I copied all of those into a tibco-businessworks-runtime directory.
+Installation To support a headless installation, the TIBCO universal installer uses silent files. I attached my silent file at the end of this post.
+The Dockerfile is also attached.</description>
     </item>
     
     <item>
@@ -27,7 +28,7 @@ Installation To support a headless installation, the TIBCO universal installer u
       <guid>https://jens.dev/2016/06/26/connecting-nodejs-to-tibco-ems.html</guid>
       <description>I recently started a new project to bring Tibco EMS connectivity to nodejs. It is still in a pretty early stage, so it is rather limited in its capabilities. A current version of the feature set will be maintained within github.
 What is working right now?
- send a text message to queue (request/reply and push) send a text message to topic (request/reply and push)  More is about to come in the future.</description>
+send a text message to queue (request/reply and push) send a text message to topic (request/reply and push) More is about to come in the future.</description>
     </item>
     
     <item>
@@ -47,8 +48,8 @@ To achieve this,I came up with the following solution.</description>
       
       <guid>https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html</guid>
       <description>The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
- get message statistics reset stats to zero  get the stats as csv
-printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39;  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1  | awk &amp;#39;NR&amp;gt;11&amp;#39;  | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39;  | grep -v &amp;#39;tcp://&amp;#39;  | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
+get message statistics reset stats to zero get the stats as csv
+printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&amp;#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &amp;#39;NR&amp;gt;11&amp;#39; | awk &amp;#39;{ printf $1&amp;#34;;&amp;#34;$2&amp;#34;;&amp;#34;$8&amp;#34;\n&amp;#34;; }&amp;#39; | grep -v &amp;#39;tcp://&amp;#39; | grep -v &amp;#39;&amp;lt;total&amp;gt;&amp;#39; The output looks like:</description>
     </item>
     
     <item>
@@ -59,7 +60,7 @@ printf &amp;#39;show stat queue &amp;gt; wide\nshow stat topic &amp;gt; wide\n&a
       <guid>https://jens.dev/2015/06/24/reset-the-tibco-ems-statistics.html</guid>
       <description>resetting the TIBCO EMS statistics without restarting the server.
 before
-printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 TIBCO Enterprise Message Service Administration Tool. Copyright 2003-2013 by TIBCO Software Inc. All rights reserved. Version 8.0.0 V9 6/7/2013 Connected to: tcp://localhost:7222 Type &amp;#39;help&amp;#39; for commands help, &amp;#39;exit&amp;#39; to exit: tcp://localhost:7222&amp;gt; In-Total In-Rate Out-Total Out-Rate Queue Name Msgs Size Msgs Size Msgs Size Msgs Size &amp;lt;total&amp;gt; 701858 3.</description>
+printf &amp;#39;show stat queue &amp;gt; wide&amp;#39; \ | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 TIBCO Enterprise Message Service Administration Tool. Copyright 2003-2013 by TIBCO Software Inc. All rights reserved. Version 8.0.0 V9 6/7/2013 Connected to: tcp://localhost:7222 Type &amp;#39;help&amp;#39; for commands help, &amp;#39;exit&amp;#39; to exit: tcp://localhost:7222&amp;gt; In-Total In-Rate Out-Total Out-Rate Queue Name Msgs Size Msgs Size Msgs Size Msgs Size &amp;lt;total&amp;gt; 701858 3.</description>
     </item>
     
     <item>
@@ -149,9 +150,10 @@ So I started some measurements with a simple test process. The test process crea
       
       <guid>https://jens.dev/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</guid>
       <description>Recently I got a hardware upgrade so I could finally switch to a 64-bit environment. To fully use that machine I wanted to install TIBCO in 64-bit mode. After starting the installation I got this message:
- TIBINS202527: Error: ERROR: You are running a 64-bit product installer on a 32-bit system.
-  This is not supported.
- The Problem was I was running a 64-bit OS with a 64-bit Kernel:</description>
+TIBINS202527: Error: ERROR: You are running a 64-bit product installer on a 32-bit system.
+This is not supported.
+The Problem was I was running a 64-bit OS with a 64-bit Kernel:
+So I tried to find the problem.</description>
     </item>
     
     <item>

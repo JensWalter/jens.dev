@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>[njams] how the njams_t_monitor_main status works &middot; </title>
         <meta name="description" content="nJAMS/BWPM has a rather complex system for determining the status of a process. Although all of this is easily accessible through the GUI, you sometimes need to go directly to the database for some further reporting. So here the select to get the calculated state of the GUI.
-SELECT m.jobstart,o.deployment_name,o.objectname,  CASE  WHEN m.LASTEVENTSTATUS=&#39;3&#39; THEN &#39;error&#39;  WHEN m.LASTEVENTSTATUS=&#39;2&#39; THEN &#39;warning&#39;  WHEN m.LASTEVENTSTATUS=&#39;1&#39; THEN  CASE  WHEN m.">
+SELECT m.jobstart,o.deployment_name,o.objectname, CASE WHEN m.LASTEVENTSTATUS=&#39;3&#39; THEN &#39;error&#39; WHEN m.LASTEVENTSTATUS=&#39;2&#39; THEN &#39;warning&#39; WHEN m.LASTEVENTSTATUS=&#39;1&#39; THEN CASE WHEN m.status=&#39;3&#39; THEN &#39;success with error&#39; WHEN m.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="[njams] how the njams_t_monitor_main status works">
 <meta property="og:description" content="nJAMS/BWPM has a rather complex system for determining the status of a process. Although all of this is easily accessible through the GUI, you sometimes need to go directly to the database for some further reporting. So here the select to get the calculated state of the GUI.
-SELECT m.jobstart,o.deployment_name,o.objectname,  CASE  WHEN m.LASTEVENTSTATUS=&#39;3&#39; THEN &#39;error&#39;  WHEN m.LASTEVENTSTATUS=&#39;2&#39; THEN &#39;warning&#39;  WHEN m.LASTEVENTSTATUS=&#39;1&#39; THEN  CASE  WHEN m.">
+SELECT m.jobstart,o.deployment_name,o.objectname, CASE WHEN m.LASTEVENTSTATUS=&#39;3&#39; THEN &#39;error&#39; WHEN m.LASTEVENTSTATUS=&#39;2&#39; THEN &#39;warning&#39; WHEN m.LASTEVENTSTATUS=&#39;1&#39; THEN CASE WHEN m.status=&#39;3&#39; THEN &#39;success with error&#39; WHEN m.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/09/16/njams-how-the-njams_t_monitor_main-status-works.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

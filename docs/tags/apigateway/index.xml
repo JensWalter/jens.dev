@@ -26,7 +26,7 @@ Since all clients are identified by API Key, I hoped for some mechanism within A
       <guid>https://jens.dev/2017/05/09/hosting-a-cloudfront-site-with-s3-and-api-gateway.html</guid>
       <description>Here my scenario I try to cover this time.
 Scenario:
- host a webpage through S3 with Cloudfront as CDN host an API through ApiGateway with Cloudfront in front  As picture this would look like this:
+host a webpage through S3 with Cloudfront as CDN host an API through ApiGateway with Cloudfront in front As picture this would look like this:
 The use case would be to host the API and static resources within one domain. The obvious perk of this architecture would be no more CORS dependency.
 I use a CloudFormation template as project definition for this task.</description>
     </item>

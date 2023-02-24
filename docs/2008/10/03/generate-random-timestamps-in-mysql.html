@@ -6,17 +6,17 @@
         <title>generate random timestamps in mysql &middot; </title>
         <meta name="description" content="I’m now try to prepare a mysql performance comparison between hdd and flash. So to create a lot of test data I needed a function to create random timestamps in a certain range.
 After trying google I gave up and started with the mysql documentation and came up with the following statement:
-select from_unixtime(  unix_timestamp(&#39;2008-01-01 01:00:00&#39;)&#43;floor(rand()*31536000) ); So lets break it it down a bit:
+select from_unixtime( unix_timestamp(&#39;2008-01-01 01:00:00&#39;)&#43;floor(rand()*31536000) ); So lets break it it down a bit:
 first I set a start date (minimum for the random)">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="generate random timestamps in mysql">
 <meta property="og:description" content="I’m now try to prepare a mysql performance comparison between hdd and flash. So to create a lot of test data I needed a function to create random timestamps in a certain range.
 After trying google I gave up and started with the mysql documentation and came up with the following statement:
-select from_unixtime(  unix_timestamp(&#39;2008-01-01 01:00:00&#39;)&#43;floor(rand()*31536000) ); So lets break it it down a bit:
+select from_unixtime( unix_timestamp(&#39;2008-01-01 01:00:00&#39;)&#43;floor(rand()*31536000) ); So lets break it it down a bit:
 first I set a start date (minimum for the random)">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2008/10/03/generate-random-timestamps-in-mysql.html">

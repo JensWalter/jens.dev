@@ -14,9 +14,10 @@
       
       <guid>https://jens.dev/2009/02/24/installing-tibco-tra-56-on-a-debian-64bit.html</guid>
       <description>Recently I got a hardware upgrade so I could finally switch to a 64-bit environment. To fully use that machine I wanted to install TIBCO in 64-bit mode. After starting the installation I got this message:
- TIBINS202527: Error: ERROR: You are running a 64-bit product installer on a 32-bit system.
-  This is not supported.
- The Problem was I was running a 64-bit OS with a 64-bit Kernel:</description>
+TIBINS202527: Error: ERROR: You are running a 64-bit product installer on a 32-bit system.
+This is not supported.
+The Problem was I was running a 64-bit OS with a 64-bit Kernel:
+So I tried to find the problem.</description>
     </item>
     
   </channel>

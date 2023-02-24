@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>get the most visited url from an access log through a single line of bash &middot; </title>
         <meta name="description" content="If you have an apache access log and want to see the visit count of your site, you can use this one-liner to get some basic visit stats.
-grep &#34;200 &#34; /var/log/apache2/apimeister-access.log \  | grep -v &#39;Googlebot&#39; \  | grep -v &#39;Baiduspider&#39; \  | grep -v &#39;bingbot&#39; \  | grep -v &#39;YandexBot&#39; \  | grep -v &#39;MJ12bot&#39; \  | grep -v &#39;meanpathbot&#39; \  | grep -v &#39;DotBot&#39; \  | grep -v &#39;AhrefsBot&#39; \  | cut -d &#39;&#34;&#39; -f 2 \  | cut -d &#39; &#39; -f 2 \  | sort | uniq -c | sort -rn | less ">
+grep &#34;200 &#34; /var/log/apache2/apimeister-access.log \ | grep -v &#39;Googlebot&#39; \ | grep -v &#39;Baiduspider&#39; \ | grep -v &#39;bingbot&#39; \ | grep -v &#39;YandexBot&#39; \ | grep -v &#39;MJ12bot&#39; \ | grep -v &#39;meanpathbot&#39; \ | grep -v &#39;DotBot&#39; \ | grep -v &#39;AhrefsBot&#39; \ | cut -d &#39;&#34;&#39; -f 2 \ | cut -d &#39; &#39; -f 2 \ | sort | uniq -c | sort -rn | less ">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="get the most visited url from an access log through a single line of bash">
 <meta property="og:description" content="If you have an apache access log and want to see the visit count of your site, you can use this one-liner to get some basic visit stats.
-grep &#34;200 &#34; /var/log/apache2/apimeister-access.log \  | grep -v &#39;Googlebot&#39; \  | grep -v &#39;Baiduspider&#39; \  | grep -v &#39;bingbot&#39; \  | grep -v &#39;YandexBot&#39; \  | grep -v &#39;MJ12bot&#39; \  | grep -v &#39;meanpathbot&#39; \  | grep -v &#39;DotBot&#39; \  | grep -v &#39;AhrefsBot&#39; \  | cut -d &#39;&#34;&#39; -f 2 \  | cut -d &#39; &#39; -f 2 \  | sort | uniq -c | sort -rn | less ">
+grep &#34;200 &#34; /var/log/apache2/apimeister-access.log \ | grep -v &#39;Googlebot&#39; \ | grep -v &#39;Baiduspider&#39; \ | grep -v &#39;bingbot&#39; \ | grep -v &#39;YandexBot&#39; \ | grep -v &#39;MJ12bot&#39; \ | grep -v &#39;meanpathbot&#39; \ | grep -v &#39;DotBot&#39; \ | grep -v &#39;AhrefsBot&#39; \ | cut -d &#39;&#34;&#39; -f 2 \ | cut -d &#39; &#39; -f 2 \ | sort | uniq -c | sort -rn | less ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/06/17/get-the-most-visited-url-from-an-access-log-through-a-single-line-of-bash.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

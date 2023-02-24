@@ -6,16 +6,16 @@
         <title>[njams] getting a daily success/error rate per deployed service &middot; </title>
         <meta name="description" content="Often people ask for various reports which can be generated out of the nJAMS/BWPM data pool.
 To start with a simple one, here the select for getting a success/error/warning rate of all deployed engines over time aggregated on daily basis.
-select trunc(jobstart) datum, deployment_name,  count(*) execution_count,  sum(case when LASTEVENTSTATUS=&#39;1&#39; then 1 else 0 end) success_count,  sum(case when LASTEVENTSTATUS=&#39;2&#39; then 1 else 0 end) warning_count,  sum(case when LASTEVENTSTATUS=&#39;3&#39; then 1 else 0 end) error_count,  sum(case when LASTEVENTSTATUS=&#39;0&#39; then 1 else 0 end) running_count from (  SELECT m.">
+select trunc(jobstart) datum, deployment_name, count(*) execution_count, sum(case when LASTEVENTSTATUS=&#39;1&#39; then 1 else 0 end) success_count, sum(case when LASTEVENTSTATUS=&#39;2&#39; then 1 else 0 end) warning_count, sum(case when LASTEVENTSTATUS=&#39;3&#39; then 1 else 0 end) error_count, sum(case when LASTEVENTSTATUS=&#39;0&#39; then 1 else 0 end) running_count from ( SELECT m.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="[njams] getting a daily success/error rate per deployed service">
 <meta property="og:description" content="Often people ask for various reports which can be generated out of the nJAMS/BWPM data pool.
 To start with a simple one, here the select for getting a success/error/warning rate of all deployed engines over time aggregated on daily basis.
-select trunc(jobstart) datum, deployment_name,  count(*) execution_count,  sum(case when LASTEVENTSTATUS=&#39;1&#39; then 1 else 0 end) success_count,  sum(case when LASTEVENTSTATUS=&#39;2&#39; then 1 else 0 end) warning_count,  sum(case when LASTEVENTSTATUS=&#39;3&#39; then 1 else 0 end) error_count,  sum(case when LASTEVENTSTATUS=&#39;0&#39; then 1 else 0 end) running_count from (  SELECT m.">
+select trunc(jobstart) datum, deployment_name, count(*) execution_count, sum(case when LASTEVENTSTATUS=&#39;1&#39; then 1 else 0 end) success_count, sum(case when LASTEVENTSTATUS=&#39;2&#39; then 1 else 0 end) warning_count, sum(case when LASTEVENTSTATUS=&#39;3&#39; then 1 else 0 end) error_count, sum(case when LASTEVENTSTATUS=&#39;0&#39; then 1 else 0 end) running_count from ( SELECT m.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/09/17/njams-getting-a-daily-success-error-rate-per-deployed-service.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

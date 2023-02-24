@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>get hostname from url as stored procedure in plpgsql &middot; </title>
         <meta name="description" content="I just needed a simple stored procedure to extract the hostname from any given URL. So here is what I came up with.
-CREATE OR REPLACE FUNCTION getHostFromUrl(p_url character varying)  RETURNS character varying AS $BODY$ declare begin  return substring(p_url from &#39;http.?://(.*?)/(.*)&#39;); end; $BODY$  LANGUAGE &#39;plpgsql&#39; VOLATILE  COST 100; ">
+CREATE OR REPLACE FUNCTION getHostFromUrl(p_url character varying) RETURNS character varying AS $BODY$ declare begin return substring(p_url from &#39;http.?://(.*?)/(.*)&#39;); end; $BODY$ LANGUAGE &#39;plpgsql&#39; VOLATILE COST 100; ">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="get hostname from url as stored procedure in plpgsql">
 <meta property="og:description" content="I just needed a simple stored procedure to extract the hostname from any given URL. So here is what I came up with.
-CREATE OR REPLACE FUNCTION getHostFromUrl(p_url character varying)  RETURNS character varying AS $BODY$ declare begin  return substring(p_url from &#39;http.?://(.*?)/(.*)&#39;); end; $BODY$  LANGUAGE &#39;plpgsql&#39; VOLATILE  COST 100; ">
+CREATE OR REPLACE FUNCTION getHostFromUrl(p_url character varying) RETURNS character varying AS $BODY$ declare begin return substring(p_url from &#39;http.?://(.*?)/(.*)&#39;); end; $BODY$ LANGUAGE &#39;plpgsql&#39; VOLATILE COST 100; ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2009/06/09/get-hostname-from-url-as-stored-procedure-in-plpgsql.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

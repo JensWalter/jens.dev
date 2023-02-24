@@ -14,7 +14,8 @@
       
       <guid>https://jens.dev/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system.html</guid>
       <description>I recently encountered a requirement that could be fulfilled by the nchan module for nginx. nchan does provide prebuilt packages for Archlinux, Debian, Ubuntu and Fedora. Sadly, there is nothing there for gentoo users. So I directly skipped ahead to the &amp;ldquo;build from source&amp;rdquo; section. The instructions where pretty basic:
- clone the github repo configure nginx with ./configure &amp;ndash;add-module=path/to/nchan build  For me this lead to the following result:</description>
+clone the github repo configure nginx with ./configure &amp;ndash;add-module=path/to/nchan build For me this lead to the following result:
+EXTRA_ECONF=&amp;#34;--add-module==/tmp/nchan-1.0.3&amp;#34; emerge -avt nginx [ebuild R ] www-servers/nginx-1.</description>
     </item>
     
   </channel>

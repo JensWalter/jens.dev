@@ -78,7 +78,7 @@ So for this use case (and some others like initial data load), AWS introduced cu
       <guid>https://jens.dev/2017/05/09/hosting-a-cloudfront-site-with-s3-and-api-gateway.html</guid>
       <description>Here my scenario I try to cover this time.
 Scenario:
- host a webpage through S3 with Cloudfront as CDN host an API through ApiGateway with Cloudfront in front  As picture this would look like this:
+host a webpage through S3 with Cloudfront as CDN host an API through ApiGateway with Cloudfront in front As picture this would look like this:
 The use case would be to host the API and static resources within one domain. The obvious perk of this architecture would be no more CORS dependency.
 I use a CloudFormation template as project definition for this task.</description>
     </item>
@@ -91,7 +91,7 @@ I use a CloudFormation template as project definition for this task.</descriptio
       <guid>https://jens.dev/2017/02/28/a-serverless-cron-in-aws-cloudformation.html</guid>
       <description>Here my scenario I try to cover this time.
 Scenario:
- Raise an event based on a cron pattern Subscribe to that event with a Lambda  As picture this would look like this:
+Raise an event based on a cron pattern Subscribe to that event with a Lambda As picture this would look like this:
 I use a CloudFormation template as project definition for this task.
 So here is my YAML explained step-by-step (whole YAML is attached at the bottom).
 I copied the header from an existing template since I have nothing to add here:</description>
@@ -105,7 +105,7 @@ I copied the header from an existing template since I have nothing to add here:<
       <guid>https://jens.dev/2017/02/19/publish-an-s3-event-to-lambda-through-sns.html</guid>
       <description>My path through starting with AWS CloudFormation was a somewhat rocky path. Often I wished for simple CF Templates which would only show one pattern at a time. So I&amp;rsquo;m starting a short series where I will try to describe some patterns I experienced and hopefully lower the entry barrier for CloudFormation since it is great tool.
 Scenario:
- Raise an S3-Object-Create event Publish that event to SNS Subscribe to that event with a Lambda  As picture this would look like this:</description>
+Raise an S3-Object-Create event Publish that event to SNS Subscribe to that event with a Lambda As picture this would look like this:</description>
     </item>
     
   </channel>

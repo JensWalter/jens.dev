@@ -5,15 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>installing the nchan module for nginx on a gentoo based system &middot; </title>
         <meta name="description" content="I recently encountered a requirement that could be fulfilled by the nchan module for nginx. nchan does provide prebuilt packages for Archlinux, Debian, Ubuntu and Fedora. Sadly, there is nothing there for gentoo users. So I directly skipped ahead to the &ldquo;build from source&rdquo; section. The instructions where pretty basic:
- clone the github repo configure nginx with ./configure &ndash;add-module=path/to/nchan build  For me this lead to the following result:">
+clone the github repo configure nginx with ./configure &ndash;add-module=path/to/nchan build For me this lead to the following result:
+EXTRA_ECONF=&#34;--add-module==/tmp/nchan-1.0.3&#34; emerge -avt nginx [ebuild R ] www-servers/nginx-1.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="installing the nchan module for nginx on a gentoo based system">
 <meta property="og:description" content="I recently encountered a requirement that could be fulfilled by the nchan module for nginx. nchan does provide prebuilt packages for Archlinux, Debian, Ubuntu and Fedora. Sadly, there is nothing there for gentoo users. So I directly skipped ahead to the &ldquo;build from source&rdquo; section. The instructions where pretty basic:
- clone the github repo configure nginx with ./configure &ndash;add-module=path/to/nchan build  For me this lead to the following result:">
+clone the github repo configure nginx with ./configure &ndash;add-module=path/to/nchan build For me this lead to the following result:
+EXTRA_ECONF=&#34;--add-module==/tmp/nchan-1.0.3&#34; emerge -avt nginx [ebuild R ] www-servers/nginx-1.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2016/10/16/installing-the-nchan-module-for-nginx-on-a-gentoo-based-system.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

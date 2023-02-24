@@ -2,13 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jens.dev/project/keda-oracle-scaler.html</loc>
+    <lastmod>2022-05-22T18:13:50+00:00</lastmod>
+  </url><url>
+    <loc>https://jens.dev/</loc>
+    <lastmod>2022-05-22T18:13:50+00:00</lastmod>
+  </url><url>
+    <loc>https://jens.dev/project.html</loc>
+    <lastmod>2022-05-22T18:13:50+00:00</lastmod>
+  </url><url>
     <loc>https://jens.dev/tags/keda.html</loc>
     <lastmod>2022-05-22T10:13:50+00:00</lastmod>
   </url><url>
     <loc>https://jens.dev/tags/kubernetes.html</loc>
-    <lastmod>2022-05-22T10:13:50+00:00</lastmod>
-  </url><url>
-    <loc>https://jens.dev/</loc>
     <lastmod>2022-05-22T10:13:50+00:00</lastmod>
   </url><url>
     <loc>https://jens.dev/post.html</loc>
@@ -28,9 +34,6 @@
   </url><url>
     <loc>https://jens.dev/2021/02/13/how-to-access-azure-key-vault-in-rust.html</loc>
     <lastmod>2021-02-13T10:13:50+00:00</lastmod>
-  </url><url>
-    <loc>https://jens.dev/project.html</loc>
-    <lastmod>2020-11-18T02:13:50+00:00</lastmod>
   </url><url>
     <loc>https://jens.dev/project/tibco-ems-rust-bindings.html</loc>
     <lastmod>2020-11-18T02:13:50+00:00</lastmod>

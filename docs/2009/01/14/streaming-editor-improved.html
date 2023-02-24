@@ -8,7 +8,7 @@
 Although I tried different existing editors like sed or replace, non of it got it right for me. All implementations waited for a newline to work with the data. I also tried disabling every possible buffer but the problem still persists.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="Streaming editor improved">
@@ -119,16 +119,16 @@ if (!doNotTrack) {
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">argv</span><span style="color:#111">[])</span>
 </span></span><span style="display:flex;"><span><span style="color:#111">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#111">setbuf</span><span style="color:#111">(</span><span style="color:#111">stdin</span><span style="color:#111">,</span><span style="color:#111">NULL</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75af00">setbuf</span><span style="color:#111">(</span><span style="color:#111">stdin</span><span style="color:#111">,</span><span style="color:#111">NULL</span><span style="color:#111">);</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">char</span> <span style="color:#111">c</span><span style="color:#111">;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">int</span> <span style="color:#111">tag</span> <span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">do</span> <span style="color:#111">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#111">getchar</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#75af00">getchar</span><span style="color:#111">();</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">c</span> <span style="color:#f92672">==</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">&amp;</span><span style="color:#111">lt</span><span style="color:#111">;</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">tag</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#f92672">++</span><span style="color:#111">tag</span><span style="color:#111">;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">c</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#39;&gt;&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">tag</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#f92672">--</span><span style="color:#111">tag</span><span style="color:#111">;</span> <span style="color:#111">c</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;\n&#39;</span><span style="color:#111">;}</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">tag</span> <span style="color:#f92672">==</span><span style="color:#ae81ff">0</span> <span style="color:#111">){</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#111">putchar</span><span style="color:#111">(</span><span style="color:#111">c</span><span style="color:#111">);</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#111">fflush</span><span style="color:#111">(</span><span style="color:#111">stdout</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75af00">putchar</span><span style="color:#111">(</span><span style="color:#111">c</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75af00">fflush</span><span style="color:#111">(</span><span style="color:#111">stdout</span><span style="color:#111">);</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#111">}</span> <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">c</span> <span style="color:#f92672">!=</span> <span style="color:#111">EOF</span><span style="color:#111">);</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>

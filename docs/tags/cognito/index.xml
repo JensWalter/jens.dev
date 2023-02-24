@@ -15,8 +15,8 @@
       <guid>https://jens.dev/2016/11/11/auto-confirming-a-newly-created-cognito-user.html</guid>
       <description>In Cognito all registered users need to be confirmed before they can interact with other services.
 Out-of-the-box Amazon supports confirmation by
- email SMS web UI lambda  To automate this process, confirming with a Lambda function is the only way to trigger the confirmation process. So I created the following lambda to confirm all created users.
-exports.handler = (event, context, callback) =&amp;gt; {  event.response.autoConfirmUser=true;  callback(null, event); }; Then I used this lambda as &amp;ldquo;Pre sign-up&amp;rdquo;-trigger.</description>
+email SMS web UI lambda To automate this process, confirming with a Lambda function is the only way to trigger the confirmation process. So I created the following lambda to confirm all created users.
+exports.handler = (event, context, callback) =&amp;gt; { event.response.autoConfirmUser=true; callback(null, event); }; Then I used this lambda as &amp;ldquo;Pre sign-up&amp;rdquo;-trigger.</description>
     </item>
     
   </channel>

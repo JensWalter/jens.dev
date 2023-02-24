@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>get oracle allocation sizes part 2 &middot; </title>
         <meta name="description" content="In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.
-SELECT segment_name table_name, sum(bytes) tablesize,  (SELECT sum(bytes) FROM user_segments ind  WHERE segment_name in  (select index_name from user_indexes  where table_name=tab.segment_name)  ) indexsize,  (SELECT sum(bytes) FROM user_segments ls  WHERE segment_name in  (select segment_name from user_lobs  where table_name=tab.">
+SELECT segment_name table_name, sum(bytes) tablesize, (SELECT sum(bytes) FROM user_segments ind WHERE segment_name in (select index_name from user_indexes where table_name=tab.segment_name) ) indexsize, (SELECT sum(bytes) FROM user_segments ls WHERE segment_name in (select segment_name from user_lobs where table_name=tab.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="get oracle allocation sizes part 2">
 <meta property="og:description" content="In my previous [post]({% post_url 2015-06-27-get-table-and-index-allocation-size-in-oracle %}) I looked at table and index sizes. This was fine for simple tables. Now I got the same request, but wanted to size a table which also included partitions and subpartitions.
-SELECT segment_name table_name, sum(bytes) tablesize,  (SELECT sum(bytes) FROM user_segments ind  WHERE segment_name in  (select index_name from user_indexes  where table_name=tab.segment_name)  ) indexsize,  (SELECT sum(bytes) FROM user_segments ls  WHERE segment_name in  (select segment_name from user_lobs  where table_name=tab.">
+SELECT segment_name table_name, sum(bytes) tablesize, (SELECT sum(bytes) FROM user_segments ind WHERE segment_name in (select index_name from user_indexes where table_name=tab.segment_name) ) indexsize, (SELECT sum(bytes) FROM user_segments ls WHERE segment_name in (select segment_name from user_lobs where table_name=tab.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2016/06/21/get-oracle-allocation-sizes-part-2.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

@@ -15,7 +15,7 @@
       <guid>https://jens.dev/2017/06/15/how-the-web-component-slot-system-works.html</guid>
       <description>In my previous post I described how to send data in form of attributes to a web component. Since this mechanism is only applicable for simple values, there also is a separate mechanism for inserting complex values.
 Let me explain the goal first. If I have a web component which consists of the following internal structure.
-&amp;lt;hello-card&amp;gt;  #shadow-root  &amp;lt;div id=&amp;#34;header&amp;#34;&amp;gt;  &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;  &amp;lt;/div&amp;gt;  &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt;  &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;  &amp;lt;/div&amp;gt; &amp;lt;/hello-card&amp;gt; To use this component, you have to insert it into the DOM and it will render a visual representation.</description>
+&amp;lt;hello-card&amp;gt; #shadow-root &amp;lt;div id=&amp;#34;header&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt; &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/hello-card&amp;gt; To use this component, you have to insert it into the DOM and it will render a visual representation.</description>
     </item>
     
     <item>
@@ -50,7 +50,7 @@ So the most basic web component would look like this.</description>
       <guid>https://jens.dev/2016/03/10/embed-a-github-commit-log-into-markdown.html</guid>
       <description>I started to write some documentation for a project of mine and I wanted to embed a change log on certain elements in the documentation. Since my documentation format is mkDocs, all documents are written in markdown.
 So here is what I came up with:
-**last commits**  &amp;lt;div id=&amp;#39;commits&amp;#39; data-path=&amp;#39;src/io/trivium/extension/&amp;#39;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;script src=&amp;#39;https://code.jquery.com/jquery-2.2.1.min.js&amp;#39;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var path = $(&amp;#39;#commits&amp;#39;).data(&amp;#39;path&amp;#39;); var url = &amp;#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&amp;#39;+path; $.ajax({type:&amp;#39;GET&amp;#39;,  url:url,  success: function(data){  var str=&amp;#34;&amp;lt;table class=&amp;#39;docutils&amp;#39;&amp;gt;&amp;lt;thead&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;message&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;date&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;author&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;link&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/thead&amp;gt;&amp;lt;tbody&amp;gt;&amp;#34;;  for(var idx=0;idx&amp;lt;data.</description>
+**last commits** &amp;lt;div id=&amp;#39;commits&amp;#39; data-path=&amp;#39;src/io/trivium/extension/&amp;#39;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;script src=&amp;#39;https://code.jquery.com/jquery-2.2.1.min.js&amp;#39;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var path = $(&amp;#39;#commits&amp;#39;).data(&amp;#39;path&amp;#39;); var url = &amp;#39;https://api.github.com/repos/trivium-io/trivium/commits?path=&amp;#39;+path; $.ajax({type:&amp;#39;GET&amp;#39;, url:url, success: function(data){ var str=&amp;#34;&amp;lt;table class=&amp;#39;docutils&amp;#39;&amp;gt;&amp;lt;thead&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;message&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;date&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;author&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;link&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/thead&amp;gt;&amp;lt;tbody&amp;gt;&amp;#34;; for(var idx=0;idx&amp;lt;data.length &amp;amp;&amp;amp; idx&amp;lt;10;idx++){ var one = data[idx]; var d = one.</description>
     </item>
     
     <item>
@@ -60,7 +60,7 @@ So here is what I came up with:
       
       <guid>https://jens.dev/2015/06/27/add-jar-to-the-classpath-at-runtime-in-jjs.html</guid>
       <description>Normally, the JVM does not allow extending the classpath during runtime. But due to the demand, people found ways around that restriction. To bring one of the work-around to jjs I wrote the following javascript function.
-function addUrlToClasspath(pathName){ 	var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader();  var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class;  var ClassArray = Java.type(&amp;#34;java.lang.Class[]&amp;#34;);  var parameters = new ClassArray(1);  parameters[0]= java.net.URL.class;  var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&amp;#34;addURL&amp;#34;, parameters);  method.</description>
+function addUrlToClasspath(pathName){ var/*java.net.URLClassLoader*/ sysloader = /*(java.net.URLClassLoader) */ java.lang.ClassLoader.getSystemClassLoader(); var/*java.lang.Class*/ sysclass = java.net.URLClassLoader.class; var ClassArray = Java.type(&amp;#34;java.lang.Class[]&amp;#34;); var parameters = new ClassArray(1); parameters[0]= java.net.URL.class; var/*java.lang.reflect.Method*/ method = sysclass.getDeclaredMethod(&amp;#34;addURL&amp;#34;, parameters); method.setAccessible(true); var ObjectArray = Java.type(&amp;#34;java.lang.Object[]&amp;#34;); var array = new ObjectArray(1); var/*java.</description>
     </item>
     
     <item>
@@ -81,7 +81,7 @@ var string = new java.lang.String(&amp;#34;hello world&amp;#34;); //alternative 
       
       <guid>https://jens.dev/2015/06/12/read-the-content-of-a-file-in-one-line-in-jjs.html</guid>
       <description>The task is pretty simple, read the content of text file as one-liner. Here is what I came up with.
-var filename = &amp;#34;engine.log&amp;#34;; var content = new java.lang.String(  java.nio.file.Files.readAllBytes(  java.nio.file.Paths.get(filename)  )  ); </description>
+var filename = &amp;#34;engine.log&amp;#34;; var content = new java.lang.String( java.nio.file.Files.readAllBytes( java.nio.file.Paths.get(filename) ) ); </description>
     </item>
     
     <item>

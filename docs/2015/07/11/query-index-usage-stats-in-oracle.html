@@ -5,17 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>query index usage statistics in oracle &middot; </title>
         <meta name="description" content="how often an index was used
-select  p.object_name &#34;object&#34;,  to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;) &#34;Begin|Interval|time&#34;,  p.search_columns &#34;Search Columns&#34;,  count(*) &#34;Invocation|Count&#34; from  dba_hist_snapshot sn,  dba_hist_sql_plan p,  dba_hist_sqlstat st where  st.sql_id = p.sql_id and  sn.snap_id = st.snap_id and  p.object_name like &#39;%INDEX_%&#39; group by  p.object_name,to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;),search_columns how an index was used
-select  p.object_name c1,  p.operation c2,  p.options c3,  count(1) c4 from  dba_hist_sql_plan p,  dba_hist_sqlstat s where  p.">
+select p.object_name &#34;object&#34;, to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;) &#34;Begin|Interval|time&#34;, p.search_columns &#34;Search Columns&#34;, count(*) &#34;Invocation|Count&#34; from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name like &#39;%INDEX_%&#39; group by p.object_name,to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;),search_columns how an index was used
+select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist_sql_plan p, dba_hist_sqlstat s where p.object_owner &lt;&gt; &#39;SYS&#39; and p.operation like &#39;%INDEX%&#39; and p.sql_id = s.sql_id group by p.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="query index usage statistics in oracle">
 <meta property="og:description" content="how often an index was used
-select  p.object_name &#34;object&#34;,  to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;) &#34;Begin|Interval|time&#34;,  p.search_columns &#34;Search Columns&#34;,  count(*) &#34;Invocation|Count&#34; from  dba_hist_snapshot sn,  dba_hist_sql_plan p,  dba_hist_sqlstat st where  st.sql_id = p.sql_id and  sn.snap_id = st.snap_id and  p.object_name like &#39;%INDEX_%&#39; group by  p.object_name,to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;),search_columns how an index was used
-select  p.object_name c1,  p.operation c2,  p.options c3,  count(1) c4 from  dba_hist_sql_plan p,  dba_hist_sqlstat s where  p.">
+select p.object_name &#34;object&#34;, to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;) &#34;Begin|Interval|time&#34;, p.search_columns &#34;Search Columns&#34;, count(*) &#34;Invocation|Count&#34; from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name like &#39;%INDEX_%&#39; group by p.object_name,to_char(sn.begin_interval_time,&#39;yyyy-mm&#39;),search_columns how an index was used
+select p.object_name c1, p.operation c2, p.options c3, count(1) c4 from dba_hist_sql_plan p, dba_hist_sqlstat s where p.object_owner &lt;&gt; &#39;SYS&#39; and p.operation like &#39;%INDEX%&#39; and p.sql_id = s.sql_id group by p.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/07/11/query-index-usage-stats-in-oracle.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">

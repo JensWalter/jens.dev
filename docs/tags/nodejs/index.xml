@@ -25,7 +25,7 @@ So for this use case (and some others like initial data load), AWS introduced cu
       <guid>https://jens.dev/2016/06/26/connecting-nodejs-to-tibco-ems.html</guid>
       <description>I recently started a new project to bring Tibco EMS connectivity to nodejs. It is still in a pretty early stage, so it is rather limited in its capabilities. A current version of the feature set will be maintained within github.
 What is working right now?
- send a text message to queue (request/reply and push) send a text message to topic (request/reply and push)  More is about to come in the future.</description>
+send a text message to queue (request/reply and push) send a text message to topic (request/reply and push) More is about to come in the future.</description>
     </item>
     
   </channel>

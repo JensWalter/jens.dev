@@ -5,17 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>getting monthly throughput stats of a TIBCO EMS instance &middot; </title>
         <meta name="description" content="The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
- get message statistics reset stats to zero  get the stats as csv
-printf &#39;show stat queue &gt; wide\nshow stat topic &gt; wide\n&#39;  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1  | awk &#39;NR&gt;11&#39;  | awk &#39;{ printf $1&#34;;&#34;$2&#34;;&#34;$8&#34;\n&#34;; }&#39;  | grep -v &#39;tcp://&#39;  | grep -v &#39;&lt;total&gt;&#39; The output looks like:">
+get message statistics reset stats to zero get the stats as csv
+printf &#39;show stat queue &gt; wide\nshow stat topic &gt; wide\n&#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &#39;NR&gt;11&#39; | awk &#39;{ printf $1&#34;;&#34;$2&#34;;&#34;$8&#34;\n&#34;; }&#39; | grep -v &#39;tcp://&#39; | grep -v &#39;&lt;total&gt;&#39; The output looks like:">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.99.1" />
+        <meta name="generator" content="Hugo 0.110.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="getting monthly throughput stats of a TIBCO EMS instance">
 <meta property="og:description" content="The TIBCO EMS does not provide the capability to gather monthly throughput statistics on its own. So we we have to improvise to get some stats on a regularly basis. The process would look like the following.
- get message statistics reset stats to zero  get the stats as csv
-printf &#39;show stat queue &gt; wide\nshow stat topic &gt; wide\n&#39;  | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1  | awk &#39;NR&gt;11&#39;  | awk &#39;{ printf $1&#34;;&#34;$2&#34;;&#34;$8&#34;\n&#34;; }&#39;  | grep -v &#39;tcp://&#39;  | grep -v &#39;&lt;total&gt;&#39; The output looks like:">
+get message statistics reset stats to zero get the stats as csv
+printf &#39;show stat queue &gt; wide\nshow stat topic &gt; wide\n&#39; | ./tibemsadmin64 -server tcp://localhost:7222 -user user1 -password user1 | awk &#39;NR&gt;11&#39; | awk &#39;{ printf $1&#34;;&#34;$2&#34;;&#34;$8&#34;\n&#34;; }&#39; | grep -v &#39;tcp://&#39; | grep -v &#39;&lt;total&gt;&#39; The output looks like:">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jens.dev/2015/06/25/getting-monthly-throughput-stats-of-a-tibco-ems-instance.html">
         <link rel="stylesheet" href="https://jens.dev/dist/site.css">
