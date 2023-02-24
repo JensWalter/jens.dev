@@ -21,7 +21,7 @@ tag = "tags"
   headline = ""
   description = ""
   github = "https://github.com/JensWalter"
-  twitter = "https://twitter.com/jens_walter"
+  mastodon = "https://hachyderm.io/@jenswalter"
   opengraph = true
   rss = true
 
