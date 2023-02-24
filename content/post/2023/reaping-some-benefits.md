@@ -31,3 +31,11 @@ Docker container itself do only provide a hosting environment for application. B
 
 We did implement some generic health check for BW to guarantee that the engine is still functional (not just running). We also provided a mechanism so every engine can also extend this generic check with some specific check. For example if a database connection is often the cause of error, we can implement a health check and deal with it on the container level.
 
+### Future Perspective
+
+After decoupling the OS from base software (Tibco BusinessWorks, Hawk,...) and also our code, we became independent from our fixed infrstructure.
+That lead to new options of how to split/setup and scale hardware. Starting with that we also saw the opportunity to do something similar with the code we deployed.
+
+Up to that point we collected all code regarding one backend in engine. This is a neccesity because deployment and infractructure would go out of control. Thanks to our decoupling we no longer had this restriction, so we started to elaborate on different code segmentations.
+
+After a back an forth about how to split and maintain our codebase, we always came to the same consclusion. In the final draft, we would always split our code abse into 'micro services', so every process starter becomes its own engine. This was the only way how we could ensure the fexibilty we wanted to go forward. The only downside that came with that was the massive amount of infrastructue we would need to host this many engines.
