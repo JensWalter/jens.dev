@@ -6,11 +6,11 @@ tags:
  - cloud
 ---
 
-This will be series of posts on what steps we took to migrate an existing Environment to the cloud.
+This will be a series of posts about the steps we took to migrate an existing environment to the cloud.
 
-All of the steps taken here took us about 5 years to implement and I will post several articles about the most important steps taken.
+All the steps we took here took us about 5 years to implement and I will post several articles about the major steps we took.
 
-For now this is still a work in progress and I will update this page, whenever a new article come out.
+For now, this is a work in progress and I will update this page as each new article comes out.
 
 ### Lets define what we mean by Tibco classic stack
 

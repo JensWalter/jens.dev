@@ -34,6 +34,8 @@ This rather minimal change already resulted in some signification improvements i
 
 4. Engine lifecycle run fully automated in docker-compose. Healthcheck can be implemented an run inside BW. External issue like machine issue are detected and containers are failed over to another machine. Out-of-memory exceptions are handled the same way without human interaction.
 
+5. 25% reduced hardware footprint by eliminating our standby engines. Previously, each engine consisted of a pair of load-balanced engines and a pair of active standby engines. Depending on the type of workload, the process was distributed to the appropriate engine. With Container, we no longer needed this mechanism, all load-balanced engines became 2 instances, all active-standby engines became 1 instance (which is itself hardware independent, so it can failover in case of a problem).
+
 ## Feature Stack comparison
 
 Functionally we have reached the following feature set.
