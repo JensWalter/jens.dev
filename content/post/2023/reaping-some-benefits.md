@@ -31,6 +31,14 @@ Docker containers themselves only provide a hosting environment for the applicat
 
 We implemented a generic health check for BW to guarantee that the engine is still functional (not just running). We also provided a mechanism so that each engine can also extend this generic check with some specific checks. For example, if a database connection is often the cause of errors, we can implement a health check and deal with it at the container level.
 
+### Security
+
+Since all the software became part of the container image, we no longer had any dependencies on the underlying OS. OS patches or even major upgrades could happen at any time without us worrying that some library or functionality would break.
+
+Also, updating dependencies we need for certain engines (openssl, Oracle AQ drivers) became easier because it would only affect a single container. So we can update and test that single engine and not worry about shared dependencies leaking into the stack.
+
+Updating our software stack (like updating a JDK or even the BW version) became an iterative problem. We could update each engine on its own without interfering with other engines. This led to a huge increase in updating spped of our core components (we did the first 2 major BW updates within 1 year).
+
 ### Future Perspective
 
 By decoupling the OS from the base software (Tibco BusinessWorks, Hawk,...) and also from our code, we became independent from our fixed infrastructure.
