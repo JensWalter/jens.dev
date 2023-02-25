@@ -5,12 +5,7 @@ languageCode = "en-us"
 googleAnalytics = "UA-5676095-8"
 Paginate=999 
 uglyurls = true
-publishDir = "docs"
-
-[privacy.googleAnalytics]
-anonymizeIP = true
-respectDoNotTrack = true
-useSessionStorage = false
+# publishDir = "docs"
 
 [taxonomies]
 tag = "tags"
