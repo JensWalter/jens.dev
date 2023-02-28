@@ -1,6 +1,6 @@
 ---
 title:  "Reaping some benefits of containerization"
-date:   2023-05-24T10:08:54Z
+date:   2023-05-27T18:08:54Z
 tags:
  - tibco
  - container

@@ -1,6 +1,6 @@
 ---
 title:  "The Classic BusinessWorks Stack"
-date:   2023-05-20T10:08:54Z
+date:   2023-05-27T12:08:54Z
 tags:
  - tibco
  - cloud

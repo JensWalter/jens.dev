@@ -1,6 +1,6 @@
 ---
 title:  "Scaling BusinessWorks in Kubernetes"
-date:   2023-05-5T10:08:54Z
+date:   2023-05-05T10:08:54Z
 tags:
  - tibco
  - cloud

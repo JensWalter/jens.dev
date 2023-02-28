@@ -1,6 +1,6 @@
 ---
 title:  "Getting Started with Kubernetes"
-date:   2023-05-5T10:08:54Z
+date:   2023-05-05T10:08:54Z
 tags:
  - tibco
  - cloud
@@ -13,9 +13,11 @@ The deployment was still error prone and relied on bash script execution on the 
 
 EMS deployment (Queues/Topics/Bridges) was not possible with the current approach.
 
-So far we had no way of implementing persitence, since all containers were running stateless and local files would get discarded after the container completed.
+So far we had no way of implementing persistence, since all containers were running stateless and local files would get discarded after the container completed.
 
 Also docker-compose has no concept of how we could scale our configuration out to the multitude of our DEV/TEST environments (which we had tens of to support). So maintaining environment configurations also grew into a complex task itself.
 
 Getting resource consumption statistics grew more complex since gathering this information meant interacting with a host directly. We also did not want to go further into operating procedures of the OS, but focus our Code.
+
+So we decided to take the next step in our journey. We decided to move to Kubernetes.
 
