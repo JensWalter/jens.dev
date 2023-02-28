@@ -1,6 +1,6 @@
 ---
 title:  "Containerizing a BusinessWorks Stack"
-date:   2023-05-27T14:08:54Z
+date:   2023-02-27T14:08:54Z
 tags:
  - tibco
  - container

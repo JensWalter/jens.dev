@@ -1,6 +1,6 @@
 ---
 title:  "Modernizing a Classic Tibco stack"
-date:   2023-05-27T10:08:54Z
+date:   2023-02-27T10:08:54Z
 tags:
  - tibco
  - cloud
@@ -23,5 +23,3 @@ For now, this is a work in progress and I will update this page as each new arti
 
 ### Migration to Container Orchestration / Kubernetes
 
-<!-- * [Getting started with Kubernetes]({{< ref "/post/2023/getting-started-kubernetes" >}}) -->
-<!-- * [Scaling in Kubernetes]({{< ref "/post/2023/scaling-businessworks-in-kubernetes" >}}) -->

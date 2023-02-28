@@ -1,6 +1,6 @@
 ---
 title:  "Reaping some benefits of containerization"
-date:   2023-05-27T18:08:54Z
+date:   2023-02-27T18:08:54Z
 tags:
  - tibco
  - container
@@ -49,5 +49,3 @@ Up to that point, we had been collecting all the code related to a single backen
 After some back and forth about how to split and maintain our codebase, we always came to the same conclusion. In the final design, we would always split our code base into "micro services" so that each process starter would become its own engine. This was the only way to get the flexibility we wanted. The only downside was the massive amount of infrastructure we would need to host so many engines.
 
 Another aspect of this discussion was that we began to work out how complex it would be to introduce another software stack side-by-side with this architecture. Since the software component was already decoupled from the infrastructure, onboarding something became a straightforward task.
-
-[Next Up: Getting started with Kubernetes]({{< ref "/post/2023/getting-started-kubernetes" >}})
