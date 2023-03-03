@@ -5,20 +5,20 @@ tags:
  - tibco
  - container
 ---
-Containerizing BusinessWorks 5 comes with its own set of challenges. Most of those are related to the surrounding ecosystem and architectures that evolved around those.
+Containerizing BusinessWorks 5 comes with its own set of challenges. Most of these are related to the surrounding ecosystem and the architectures that have evolved around it.
 
-In a classic scenario, a BusinessWorks Engines run inside a Adminitrator domain and reports is lifecycle through Hawk. Deployment of an engine is also usually handled by an combination of those tools.
+In a classic scenario, a BusinessWorks engine runs within an administrator domain and reports its lifecycle through Hawk. Deployment of an engine is also typically handled by a combination of these tools.
 
-The important part here is that only BusinessWorks provides implementations for interfaces. The other tools are used to administer/monitor/maintain BW engines and keep those running.
+It is important to note that only BusinessWorks provides the interface implementations. The other tools are used to manage/monitor/maintain BW engines and keep them running.
 
-So to think about containerization, we started with exploring way how to package the BusinessWorks engine into a container. I already [wrote a blog post]({{< ref "/post/2020/containerizing-businessworks-5" >}} "wrote a blog post") about the technical details here, so I will not go deeper into those.
+So, to think about containerization, we started by exploring how to package the BusinessWorks engine into a container. I already [wrote a blog post]({{< ref "/post/2020/containerizing-businessworks-5" >}}"wrote a blog post") about the technical details here, so I will not go into those in detail.
 
-Now that we found a way to package a BusinessWorks engine as container we started to explore options coming with the new ecosystem.
+Now that we had found a way to package a BusinessWorks engine as a container, we started to explore the options that came with the new ecosystem.
 
-Early on we started with docker CLI on a VM. This provided us tooling for Deployment of engines, Starting/Stopping of engines and also basic monitoring capabilities.
+Early on, we started with the Docker CLI on a VM. This gave us tools for deploying engines, starting/stopping engines, and also basic monitoring capabilities.
 
-Soon after that we switched to docker-compose. This was caused by the need to define service compositions.
-Another feature that came through compose was the optional to deploy and scale engines horizontally through mutliple machines. This was a very early requirement since we wanted to move production services over which had 24/7 HA-requirements.
+Soon after, we moved to docker-compose. This was driven by the need to define service compositions.
+Another feature that came with compose was the ability to deploy and scale engines horizontally across multiple machines. This was a very early requirement as we wanted to move production services that had 24/7 HA requirements.
 
 ![docker-compose](/assets/2023/docker-compose.drawio.png)
 
@@ -26,15 +26,15 @@ This rather minimal change already resulted in some signification improvements i
 
 ## Initial Benefits
 
-1. Every engine is now packaged as its own container. That means every single engine has its own version of BusinessWorks, has its own set of OS dependencies and can be scaled independently through a standardized interface. Also moving engines between machines and balancing the load throughout a cluster of machines is a standard feature of docker-compose, so no adjustments necessary.
+1. Each engine is now packaged as its own container. This means that each engine has its own version of BusinessWorks, has its own set of OS dependencies, and can be scaled independently through a standardized interface. Also, moving engines between machines and balancing the load across a cluster of machines is a standard feature of docker-compose, so no customization is required.
 
-2. Log capturing and forwarding is now done by deploying a fluentbit log forwarder. All Log a gathered in a ElasticSearch and provided to the user through Kibana (WebUI with full text search capabilties). This now becomes the central entry point for every kind of log.
+2. Log capturing and forwarding is now done by using a fluentbit log forwarder. All logs are collected in an ElasticSearch and made available to the user via Kibana (WebUI with full text search capabilities). This now becomes the central entry point for any type of log.
 
-3. Administrator and Hawk are no longer required.
+3. Administrator and Hawk are no longer needed.
 
-4. Engine lifecycle run fully automated in docker-compose. Healthcheck can be implemented an run inside BW. External issue like machine issue are detected and containers are failed over to another machine. Out-of-memory exceptions are handled the same way without human interaction.
+4. Engine lifecycle is fully automated in docker-compose. Healthcheck can be implemented and run within BW. External problems such as machine problems are detected and containers are failed over to another machine. Out of memory exceptions are handled in the same way without human interaction.
 
-5. 25% reduced hardware footprint by eliminating our standby engines. Previously, each engine consisted of a pair of load-balanced engines and a pair of active standby engines. Depending on the type of workload, the process was distributed to the appropriate engine. With Container, we no longer needed this mechanism, all load-balanced engines became 2 instances, all active-standby engines became 1 instance (which is itself hardware independent, so it can failover in case of a problem).
+5. 25% reduction in hardware footprint by eliminating our standby engines. Previously, each engine consisted of a pair of load balanced engines and a pair of active standby engines. Depending on the type of workload, the process was distributed to the appropriate engine. With Container, we no longer needed this mechanism, all load-balanced engines became 2 instances, all active-standby engines became 1 instance (which is itself hardware independent, so it can failover in case of a problem).
 
 ## Feature Stack comparison
 

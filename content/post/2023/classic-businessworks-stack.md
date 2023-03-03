@@ -9,52 +9,52 @@ Since I already defined the software stack as a whole, let define how things wor
 
 # How Sources and Dependencies are kept.
 
-All sources where located in one big mono-repo.
-This repo defined engines, which followed the definition of backend systems.
-So for every system (with all of its services) we hade one source project present.
-Shared functionality was distributed through project-libraries, so it can be pulled into multple engines.
+All the sources were in one big mono-repo.
+This repo defined engines that followed the definition of backend systems.
+So for each system (with all its services) we had a source project.
+Shared functionality was distributed through project libraries so that it could be pulled into multiple engines.
 
 # How to build stuff.
 
-The CI pipeline in use is Jenkins. Every time a checkin in happening a Jenkins job is trigger to build a zip file which contains the following definitions:
+The CI pipeline used is Jenkins. Each time a check-in occurs, a Jenkins job is triggered to create a zip file containing the following definitions
 - ems queues/topics
-- file shares (required directories for testing)
-- database script
+- File shares (required directories for testing)
+- Database script
 - EAR file for Tibco Administrator
-- files for local file system patches
+- Files for local file system patches
 
 ![jenkins-ci](/assets/2023/jenkins-ci.drawio.png)
 
-While this applies to every since engine, the need arose early to also define composites (multiple engines).
-Composites are also defined through sources repositories. Those repositories only consist of versioned depenendencies, but have no code of their own. This way we could re-use the exising pipelines and architecture.
+While this applies to any since engine, the need to define composites (multiple engines) arose early on.
+Composites are also defined by source repositories. These repositories consist only of versioned dependencies, but have no code of their own. This allowed us to reuse the existing pipelines and architecture.
 
 # How stuff is rolled out.
 
 ![jenkins-rollout](/assets/2023/jenkins-deploy.drawio.png)
 
-Every environment had its own definition file as jenkins job definition.
-This definition file covers settings like:
-- database url/credentials
+Each environment had its own definition file as a Jenkins job definition.
+This definition file contains settings such as
+- Database url/credentials
 - Tibco EMS url/credentials
 - Tibco Administrator url/credentials
 - Machine list (used for file rollout)
-- installed software list
-- additional feature list
-    - has DMZ support
-    - is setup as cluster/singe instance
+- Installed software list
+- Additional feature list
+   - is DMZ supported
+    - Is set up as a cluster/single instance
     - has regions
 
-Through the jenkins UI we could select an environment first. Depending on the selected environment and therefore feature present on that environment we coudl trigger tasks to be performed.
+Using the Jenkins UI, we could first select an environment. Depending on the selected environment and therefore the features available on that environment, we could trigger tasks to be executed.
 
 Tasks supported by our Jenkins jobs:
-- restart environment
-- rollout software (install/update EMS, BW, third party components)
-- deploy Single engine
-    - deploy database script
-    - EMS definitions, Queue, Topics, Bridges, Routes
-    - prepare Fileshares
-    - deploy BW EAR through Administrator
-    - run filesystem rollout (e.g. SSL certificates, config files)
-- deploy composite (just a collection of multiple engines)
+- Restart environment
+- Deploy software (install/update EMS, BW, 3rd party components)
+- Deploy single engine
+    - Deploy database script
+    - EMS definitions, queue, topics, bridges, routes
+    - Prepare file shares
+    - Deploy BW EAR via Administrator
+    - Perform file system rollout (e.g. SSL certificates, config files)
+- Deploy composite (just a collection of multiple engines)
 
 [Next Up: Containerizing a BusinessWorks Stack]({{< ref "/post/2023/containerizing-businessworks" >}})
