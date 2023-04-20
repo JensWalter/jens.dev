@@ -21,3 +21,4 @@ Getting resource consumption statistics grew more complex since gathering this i
 
 So we decided to take the next step in our journey. We decided to move to Kubernetes.
 
+Managing our own Kubernetes cluster was not in question, so we took on whatever our cloud was presenting us.
