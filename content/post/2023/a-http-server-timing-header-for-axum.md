@@ -1,6 +1,8 @@
 ---
 title: "A HTTP Server-Timing Header for axum"
 date: 2023-04-20
+tags:
+ - rust
 ---
 Recently I was wondering how I could track the timings of an API I wrote and was looking for ways to implement something to keep track of the individual stages of a request process.
 
