@@ -1,6 +1,6 @@
 ---
 title:  "Getting Started with Kubernetes"
-date:   2023-05-05T10:08:54Z
+date:   2023-06-05T10:08:54Z
 tags:
  - tibco
  - cloud
