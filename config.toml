@@ -10,6 +10,10 @@ uglyurls = true
 [taxonomies]
 tag = "tags"
 
+[services]
+  [services.rss]
+    limit = 20
+    
 [Params]
   mainSections = ["post"]
   intro = true
