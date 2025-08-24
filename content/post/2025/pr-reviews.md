@@ -1,7 +1,6 @@
 ---
 title: "Letting an LLM Review Our Pull Requests (So You Don’t Have To)"
 date: 2025-08-08
-description: "How we automated pull-request reviews with GitHub Actions and the Gemini CLI. We feed each PR diff to an LLM to flag issues with file/line references and priorities. The review is posted to the PR and the Actions summary. Simple setup, big impact on review speed and quality."
 canonical: https://downtozero.cloud/posts/2025/pr-reviews/
 tags:
 - downtozero
