@@ -121,7 +121,7 @@ We iterated a bit to reach this. The most impactful tweaks were: insisting on fi
 
 ## What the review looks like
 
-{{< figure src="/images/2025/gemini-review.png" alt="Github Action Comment showing various errors" >}}
+{{< figure src="/assets/2025/gemini-review.png" alt="Github Action Comment showing various errors" >}}
 
 
 On a typical PR, we see sections like:
