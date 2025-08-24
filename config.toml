@@ -2,10 +2,10 @@ baseurl = "https://jens.dev/"
 title = "My personal blog"
 theme = "ghostwriter"
 languageCode = "en-us"
-googleAnalytics = "UA-5676095-8"
-Paginate=999 
 uglyurls = true
-# publishDir = "docs"
+
+[pagination]
+  pagerSize = 999
 
 [taxonomies]
 tag = "tags"
@@ -25,7 +25,7 @@ tag = "tags"
   rss = true
 
 [Permalinks]
-  post = "/:year/:month/:day/:filename"
+  post = "/:year/:month/:day/:contentbasename"
 
 [markup]
   defaultMarkdownHandler = 'goldmark'

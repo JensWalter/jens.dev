@@ -1,6 +1,8 @@
 ---
 title: "A Solar Powered GitHub Runner"
 date: 2023-04-15T09:08:05Z
+tags:
+- downtozero
 ---
 <a href="https://downtozero.cloud/posts/assets/2023/solar-powered-github-runner/">This is a cross-posting from downtozero.cloud</a>
 
