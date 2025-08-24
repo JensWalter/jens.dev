@@ -5,6 +5,8 @@ canonical: https://downtozero.cloud/posts/2025/pr-reviews/
 tags:
 - downtozero
 ---
+> This post is a cross-post from [Down to Zero](https://downtozero.cloud/). Canonical source: https://downtozero.cloud/posts/2025/pr-reviews/
+
 We love automation. We use it to power our infrastructure, to scale workloads down to zero, and—increasingly—to shrink the amount of human attention needed to ship high-quality code. One place that still felt stubbornly manual was **pull-request reviews**. Between Cursor as our IDE, ChatGPT/Codex for prototyping, and `gemini-cli` for quick checks, our local workflows were fast—but CI still waited for a human.
 
 So we asked a simple question: could we let a large language model read the diff, spot issues, and comment directly on the PR?
