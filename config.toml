@@ -38,5 +38,5 @@ tag = "tags"
 [menu]
 main = [ 
 { name= "Blog",url= "/", weight= 1},
-{ name= "Projects", url= "/project.html", weight= 2}
+{ name= "Projects", url= "/project/", weight= 2}
 ]
