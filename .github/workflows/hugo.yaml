@@ -34,12 +34,12 @@ jobs:
         run: |
           DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' xj4dyqut.cr.dtz.dev/website:latest)
           echo "IMAGE_URL=$DIGEST" >> $GITHUB_ENV
-      # - name: Deploy latest image to service
-      #   uses: DownToZero-Cloud/containers-service-update@main
-      #   with:
-      #     container_image: ${{ env.IMAGE_URL }}
-      #     api_key: ${{ secrets.DTZ_API_KEY }}
-      #     service_id: service-abc
+      - name: Deploy latest image to service
+        uses: DownToZero-Cloud/containers-service-update@main
+        with:
+          container_image: ${{ env.IMAGE_URL }}
+          api_key: ${{ secrets.DTZ_API_KEY }}
+          service_id: service-pfrlnjz6
       - name: Publish image URL to summary
         run: |
           echo "## Deployed image" >> $GITHUB_STEP_SUMMARY
