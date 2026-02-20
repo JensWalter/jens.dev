@@ -3,6 +3,7 @@ title = "My personal blog"
 theme = "ghostwriter"
 languageCode = "en-us"
 uglyurls = true
+enableRobotsTXT = true
 
 [pagination]
   pagerSize = 999
