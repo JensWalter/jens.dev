@@ -11,7 +11,7 @@ tags:
 
 ## A quick follow-up
 
-In the previous post I introduced **gguf-runner**, a small Rust CLI for running GGUF models locally with a focus on:
+In the [previous post](/2026/02/17/gguf-runner-blogpost.html) I introduced **gguf-runner**, a small Rust CLI for running GGUF models locally with a focus on:
 
 - CPU-only inference
 - mmap-based model loading
@@ -20,8 +20,6 @@ In the previous post I introduced **gguf-runner**, a small Rust CLI for running 
 If you haven’t read that one yet, it explains the motivation and the general design of the project.
 
 This post is a follow-up covering some of the more recent additions, most notably **vision support**, along with a few practical improvements like **GitHub release binaries**, better documentation, and a number of performance tweaks.
-
-[previous post](/post/2026/gguf-runner-blogpost)
 
 ---
 
