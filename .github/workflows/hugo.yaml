@@ -17,6 +17,23 @@ jobs:
           hugo-version: latest
       - name: build website
         run: hugo
+      - name: Install ISRG Root YE
+        run: |
+          curl -fsSL https://letsencrypt.org/certs/gen-y/root-ye.pem \
+            -o root-ye.pem
+
+          sudo cp root-ye.pem \
+            /usr/local/share/ca-certificates/root-ye.crt
+
+          sudo update-ca-certificates
+
+      - name: Verify certificate chain
+        run: |
+          openssl s_client \
+            -connect ueo.ventures:443 \
+            -servername ueo.ventures \
+            -verify_return_error \
+            </dev/null
       - name: Login to xj4dyqut.cr.dtz.dev
         uses: docker/login-action@v4
         with:
