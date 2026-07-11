@@ -1,0 +1,363 @@
+title    = "My personal blog"
+base_url = "https://jens.dev"
+sitemap  = true
+# local build-output leftovers; never rendered
+ignore_dirs = ["public"]
+
+[nav]
+links = [
+  { label = "Blog",     url = "/" },
+  { label = "Projects", url = "/project/" },
+]
+
+[markdown]
+syntax_highlighting = true
+highlight_style     = "InspiredGitHub"
+unsafe_html         = true
+
+# ---------------------------------------------------------------------------
+# Legacy Hugo URLs. Post/project/section-index `.html` URLs are handled by
+# the built-in ugly-URL fallback; only URLs with no markdown source behind
+# them need explicit entries: the old /post listing and the tag pages.
+# ---------------------------------------------------------------------------
+
+[[redirect]]
+from = "/post/index.html"
+to   = "/"
+[[redirect]]
+from = "/post/"
+to   = "/"
+[[redirect]]
+from = "/post"
+to   = "/"
+[[redirect]]
+from = "/tags/index.html"
+to   = "/tags/"
+
+[[redirect]]
+from = "/tags/64-bit.html"
+to   = "/tags/64-bit"
+
+[[redirect]]
+from = "/tags/ai.html"
+to   = "/tags/ai"
+
+[[redirect]]
+from = "/tags/ajax.html"
+to   = "/tags/ajax"
+
+[[redirect]]
+from = "/tags/amazon.html"
+to   = "/tags/amazon"
+
+[[redirect]]
+from = "/tags/ant.html"
+to   = "/tags/ant"
+
+[[redirect]]
+from = "/tags/apache.html"
+to   = "/tags/apache"
+
+[[redirect]]
+from = "/tags/api.html"
+to   = "/tags/api"
+
+[[redirect]]
+from = "/tags/api-gateway.html"
+to   = "/tags/api-gateway"
+
+[[redirect]]
+from = "/tags/api101.html"
+to   = "/tags/api101"
+
+[[redirect]]
+from = "/tags/apigateway.html"
+to   = "/tags/apigateway"
+
+[[redirect]]
+from = "/tags/athena.html"
+to   = "/tags/athena"
+
+[[redirect]]
+from = "/tags/aws.html"
+to   = "/tags/aws"
+
+[[redirect]]
+from = "/tags/azure.html"
+to   = "/tags/azure"
+
+[[redirect]]
+from = "/tags/bash.html"
+to   = "/tags/bash"
+
+[[redirect]]
+from = "/tags/bondoraapi.html"
+to   = "/tags/bondoraapi"
+
+[[redirect]]
+from = "/tags/businessevents.html"
+to   = "/tags/businessevents"
+
+[[redirect]]
+from = "/tags/businessworks.html"
+to   = "/tags/businessworks"
+
+[[redirect]]
+from = "/tags/celero.io.html"
+to   = "/tags/celero.io"
+
+[[redirect]]
+from = "/tags/cloud.html"
+to   = "/tags/cloud"
+
+[[redirect]]
+from = "/tags/cloudformation.html"
+to   = "/tags/cloudformation"
+
+[[redirect]]
+from = "/tags/cloudfront.html"
+to   = "/tags/cloudfront"
+
+[[redirect]]
+from = "/tags/cloudtheweb.com.html"
+to   = "/tags/cloudtheweb.com"
+
+[[redirect]]
+from = "/tags/codeberg.html"
+to   = "/tags/codeberg"
+
+[[redirect]]
+from = "/tags/cognito.html"
+to   = "/tags/cognito"
+
+[[redirect]]
+from = "/tags/container.html"
+to   = "/tags/container"
+
+[[redirect]]
+from = "/tags/csharp.html"
+to   = "/tags/csharp"
+
+[[redirect]]
+from = "/tags/dblink.html"
+to   = "/tags/dblink"
+
+[[redirect]]
+from = "/tags/designer.html"
+to   = "/tags/designer"
+
+[[redirect]]
+from = "/tags/docker.html"
+to   = "/tags/docker"
+
+[[redirect]]
+from = "/tags/downtozero.html"
+to   = "/tags/downtozero"
+
+[[redirect]]
+from = "/tags/dynamodb.html"
+to   = "/tags/dynamodb"
+
+[[redirect]]
+from = "/tags/ems.html"
+to   = "/tags/ems"
+
+[[redirect]]
+from = "/tags/firehose.html"
+to   = "/tags/firehose"
+
+[[redirect]]
+from = "/tags/gguf.html"
+to   = "/tags/gguf"
+
+[[redirect]]
+from = "/tags/github.html"
+to   = "/tags/github"
+
+[[redirect]]
+from = "/tags/github-actions.html"
+to   = "/tags/github-actions"
+
+[[redirect]]
+from = "/tags/gnome-3.0.html"
+to   = "/tags/gnome-3.0"
+
+[[redirect]]
+from = "/tags/gnomeshell.html"
+to   = "/tags/gnomeshell"
+
+[[redirect]]
+from = "/tags/google-analytics.html"
+to   = "/tags/google-analytics"
+
+[[redirect]]
+from = "/tags/gtk.html"
+to   = "/tags/gtk"
+
+[[redirect]]
+from = "/tags/html.html"
+to   = "/tags/html"
+
+[[redirect]]
+from = "/tags/imap.html"
+to   = "/tags/imap"
+
+[[redirect]]
+from = "/tags/java.html"
+to   = "/tags/java"
+
+[[redirect]]
+from = "/tags/javascript.html"
+to   = "/tags/javascript"
+
+[[redirect]]
+from = "/tags/jjs.html"
+to   = "/tags/jjs"
+
+[[redirect]]
+from = "/tags/keda.html"
+to   = "/tags/keda"
+
+[[redirect]]
+from = "/tags/kubernetes.html"
+to   = "/tags/kubernetes"
+
+[[redirect]]
+from = "/tags/kubernetes-operator.html"
+to   = "/tags/kubernetes-operator"
+
+[[redirect]]
+from = "/tags/lambda.html"
+to   = "/tags/lambda"
+
+[[redirect]]
+from = "/tags/letsencrypt.html"
+to   = "/tags/letsencrypt"
+
+[[redirect]]
+from = "/tags/linux.html"
+to   = "/tags/linux"
+
+[[redirect]]
+from = "/tags/llm.html"
+to   = "/tags/llm"
+
+[[redirect]]
+from = "/tags/mintosapi.html"
+to   = "/tags/mintosapi"
+
+[[redirect]]
+from = "/tags/mongodb.html"
+to   = "/tags/mongodb"
+
+[[redirect]]
+from = "/tags/mule.html"
+to   = "/tags/mule"
+
+[[redirect]]
+from = "/tags/mysql.html"
+to   = "/tags/mysql"
+
+[[redirect]]
+from = "/tags/nashorn.html"
+to   = "/tags/nashorn"
+
+[[redirect]]
+from = "/tags/nginx.html"
+to   = "/tags/nginx"
+
+[[redirect]]
+from = "/tags/nifi.html"
+to   = "/tags/nifi"
+
+[[redirect]]
+from = "/tags/njams.html"
+to   = "/tags/njams"
+
+[[redirect]]
+from = "/tags/nodejs.html"
+to   = "/tags/nodejs"
+
+[[redirect]]
+from = "/tags/oauth.html"
+to   = "/tags/oauth"
+
+[[redirect]]
+from = "/tags/oracle.html"
+to   = "/tags/oracle"
+
+[[redirect]]
+from = "/tags/performance.html"
+to   = "/tags/performance"
+
+[[redirect]]
+from = "/tags/postgres.html"
+to   = "/tags/postgres"
+
+[[redirect]]
+from = "/tags/random-timestamp.html"
+to   = "/tags/random-timestamp"
+
+[[redirect]]
+from = "/tags/rust.html"
+to   = "/tags/rust"
+
+[[redirect]]
+from = "/tags/serverless.html"
+to   = "/tags/serverless"
+
+[[redirect]]
+from = "/tags/shell.html"
+to   = "/tags/shell"
+
+[[redirect]]
+from = "/tags/shell-tools.net.html"
+to   = "/tags/shell-tools.net"
+
+[[redirect]]
+from = "/tags/sns.html"
+to   = "/tags/sns"
+
+[[redirect]]
+from = "/tags/sql.html"
+to   = "/tags/sql"
+
+[[redirect]]
+from = "/tags/ssh.html"
+to   = "/tags/ssh"
+
+[[redirect]]
+from = "/tags/streaming-api.html"
+to   = "/tags/streaming-api"
+
+[[redirect]]
+from = "/tags/tibco.html"
+to   = "/tags/tibco"
+
+[[redirect]]
+from = "/tags/tomcat.html"
+to   = "/tags/tomcat"
+
+[[redirect]]
+from = "/tags/tra.html"
+to   = "/tags/tra"
+
+[[redirect]]
+from = "/tags/uuid.html"
+to   = "/tags/uuid"
+
+[[redirect]]
+from = "/tags/webcomponents.html"
+to   = "/tags/webcomponents"
+
+[[redirect]]
+from = "/tags/wget.html"
+to   = "/tags/wget"
+
+[[redirect]]
+from = "/tags/xslt.html"
+to   = "/tags/xslt"
+
+[[redirect]]
+from = "/tags/yahoo-finance.html"
+to   = "/tags/yahoo-finance"

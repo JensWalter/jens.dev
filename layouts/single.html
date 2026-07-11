@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block ogtype %}article{% endblock %}
+
+{% block main %}
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+            {%- if page.description %}
+            <p class="post-description" itemprop="description">{{ page.description }}</p>
+            {%- endif %}
+            {%- if page.date and page.url is starting_with(pat="/2") %}
+            <p class="post-date post-line">
+                <span>Published <time datetime="{{ page.date | date_format(format='%Y-%m-%d') }}" itemprop="datePublished">{{ page.date | date_format(format="%a, %b %-d, %Y") }}</time></span>
+            </p>
+            {%- endif %}
+        </header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+            {{ page.content | safe }}
+        </div>
+
+        <footer class="post-footer clearfix">
+            {%- if page.tags %}
+            <p class="post-tags">
+                <span>Tagged:</span>
+                {%- for tag in page.tags %}{% if not loop.first %}, {% endif %}
+                <a href="/tags/{{ tag }}">{{ tag }}</a>
+                {%- endfor %}
+            </p>
+            {%- endif %}
+
+            <div class="share">
+            </div>
+        </footer>
+    </article>
+</div>
+{% endblock %}

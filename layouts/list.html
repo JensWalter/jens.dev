@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{% if page.path is starting_with(pat="/tags/") %}{{ page.path | split(pat="/") | last | title }}{% else %}{{ page.title }}{% endif %}{% endblock %}
+
+{% block main %}
+<div id="post-index" class="container">
+    {%- if page.path is starting_with(pat="/tags/") %}
+    <header class="post-header">
+        <h3 style="margin:0;">tag: {{ page.path | split(pat="/") | last | title }}</h3>
+    </header>
+
+    <ol class="post-list tag-list">
+        {%- for p in pages %}
+        <li class="post-stub" itemprop="blogPost" itemscope="" itemtype="https://schema.org/BlogPosting">
+            <a href="{{ p.url }}" itemprop="url">
+                <h4 class="post-stub-title" itemprop="name">{{ p.title }}</h4>
+                {%- set stub_date = p.date | default(value=p.git_date) %}
+                {%- if stub_date %}
+                <time class="post-stub-date" datetime="{{ stub_date | date_format(format='%Y-%m-%d') }}">Published {{ stub_date | date_format(format="%a, %b %-d, %Y") }}</time>
+                {%- endif %}
+            </a>
+        </li>
+        {%- endfor %}
+    </ol>
+
+    <div class="post-navigation tag-navigation">
+    </div>
+    {%- else %}
+    <header class="post-header">
+        <h1 class="post-title"></h1>
+        <p></p>
+    </header>
+
+    <ol class="post-list">
+        {%- for p in pages %}
+        <li class="post-stub">
+            <a href="{{ p.url }}">
+                <h4 class="post-stub-title">{{ p.title }}</h4>
+                {%- if p.date %}
+                <time class="post-stub-date" datetime="{{ p.date | date_format(format='%Y-%m-%d') }}">Created {{ p.date | date_format(format="%Y") }}</time>
+                {%- endif %}
+            </a>
+        </li>
+        {%- endfor %}
+    </ol>
+
+    <div class="post-navigation">
+    </div>
+    {%- endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.title | xml_escape }}</title>
+    <link>{{ site.base_url | default(value='') }}/</link>
+    <description>Recent content on {{ site.title | xml_escape }}</description>
+    <language>en-us</language>
+    <atom:link href="{{ site.base_url | default(value='') }}/index.xml" rel="self" type="application/rss+xml" />
+    {%- for p in pages %}
+    {%- if p.url is starting_with(pat="/2") %}
+    <item>
+      <title>{{ p.title | xml_escape }}</title>
+      <link>{{ site.base_url | default(value='') }}{{ p.url }}</link>
+      {%- set pub_date = p.date | default(value=p.git_date) %}
+      {%- if pub_date %}
+      <pubDate>{{ pub_date | date_format(format="%a, %d %b %Y 00:00:00 +0000") }}</pubDate>
+      {%- endif %}
+      <guid>{{ site.base_url | default(value='') }}{{ p.url }}</guid>
+      <description>{{ p.snippet | xml_escape }}</description>
+    </item>
+    {%- endif %}
+    {%- endfor %}
+  </channel>
+</rss>
