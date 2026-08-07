@@ -4,9 +4,11 @@ date: 2026-06-28
 description: "How to map the OCI platform variant to a rustc target-cpu so a Rust binary actually uses AVX2/AVX-512 for LLM and image work inside a container — and how to merge the variants into one multi-arch tag."
 tags:
 - rust
-- docker
 - llm
 - ai
+- gguf
+- gguf-runner
+- docker
 ---
 
 In an [earlier post](/2026/03/08/gguf-runner-update.html) about gguf-runner I made a point that kept nagging at me afterwards.

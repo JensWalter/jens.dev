@@ -7,6 +7,7 @@ tags:
 - llm
 - ai
 - gguf
+- gguf-runner
 ---
 
 ## A quick follow-up

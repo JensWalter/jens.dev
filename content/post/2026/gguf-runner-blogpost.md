@@ -2,10 +2,12 @@
 title: "gguf-runner: a minimal GGUF CLI"
 date: 2026-02-17
 description: "A small Rust CLI to run GGUF models locally: mmap loading, CPU-only inference, and a general-purpose terminal runner that can lean on RAM (and swap) for large models."
-tags: 
+tags:
 - rust
 - llm
 - ai
+- gguf
+- gguf-runner
 ---
 
 I’ve been playing with local LLMs again.
