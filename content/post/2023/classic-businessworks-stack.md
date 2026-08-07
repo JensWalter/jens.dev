@@ -3,6 +3,7 @@ title:  "The Classic BusinessWorks Stack"
 date:   2023-02-27T12:08:54Z
 tags:
  - tibco
+ - businessworks
  - cloud
 ---
 Since I already defined the software stack as a whole, let define how things worked before the migration started.

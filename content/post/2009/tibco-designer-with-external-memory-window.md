@@ -2,8 +2,9 @@
 title: TIBCO Designer with external memory window
 date: 2009-04-24T18:13:10Z
 tags:
+  - tibco
+  - businessworks
   - designer
-  - TIBCO
 ---
 During Research for my last blog post I found an interesting feature of the designer. If the designer uses more than one gigabyte of heap memory, the display of the memory usage gets a bit fuzzy.
 

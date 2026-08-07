@@ -2,6 +2,7 @@
 title:  "generate a self signed certificate with AWS Lambda"
 date:   2017-01-05 19:58:54 +0200
 tags:
+  - aws
   - lambda
 ---
 For testing purposes I needed a service which would generate a self signed certificate. To reduce my dependency on locally installed tools, I implemented this service as AWS Lambda function (or microservice if you want to call it that).

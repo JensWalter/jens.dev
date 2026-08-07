@@ -5,6 +5,7 @@ description: "A heavy Rust integration test suite kept getting killed by Codeber
 tags:
 - codeberg
 - rust
+- ci
 ---
 
 After I got [building containers on Codeberg](/2026/03/15/building-containers-on-codeberg.html) sorted out, the next thing that broke on me was much more boring on paper: the test job kept getting killed.

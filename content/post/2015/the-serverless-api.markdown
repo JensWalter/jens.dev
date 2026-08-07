@@ -2,10 +2,10 @@
 title:  "the serverless API"
 date:   2015-12-16 11:53:54 +0200
 tags:
-  - amazon
   - aws
-  - api101
+  - api
   - api-gateway
+  - serverless
 ---
 Building an API does come with a lot of different facets to consider. One of the greater ones is, how to run all this. Building an API implementation is a rather easy Task, most developers today have some experience with connecting with API and already had their point of contact with various technologies to fulfill this task.
 

@@ -2,9 +2,9 @@
 title: init script for the TIBCO Administrator
 date: 2009-09-05T19:03:06Z
 tags:
-  - BusinessWorks
+  - tibco
+  - businessworks
   - shell
-  - TIBCO
 ---
 I recently ran into the situation that I needed to install a TIBCO BusinessWorks with Administrator onto a RedHat Server. Under Windows the installer provides everything you need to run your domain as a Service. In Linux this looks different. I have found no init script templates nor did the installer generate me some stubs. So I had to write them myself. So here is what I came up with (I know it isn’t perfect, but it works – suggestions are always welcome).
 

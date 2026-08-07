@@ -2,9 +2,9 @@
 title: Tibco EMS with database backend (postgresql)
 date: 2008-11-16T20:48:11Z
 tags:
-  - EMS
+  - tibco
+  - ems
   - postgres
-  - TIBCO
 ---
 I recently tried to build a JMS Server with database backend. The chosen product was the TIBCO EMS Server. The Server brings its own database support over hibernate.
 

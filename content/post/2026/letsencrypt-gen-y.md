@@ -3,8 +3,9 @@ title: "When Let's Encrypt Is Valid but GitHub Actions Still Rejects It"
 date: 2026-06-10
 description: "Debugging a TLS certificate validation failure in GitHub Actions caused by Let's Encrypt's new Generation Y certificate hierarchy and an untrusted ISRG Root YE certificate."
 tags:
-  - letsencrypt
-  - github-actions
+- lets-encrypt
+- github-actions
+- ci
 ---
 
 A few days ago I ran into a surprisingly tricky TLS issue while setting up automated tests for a service running behind Let's Encrypt certificates.

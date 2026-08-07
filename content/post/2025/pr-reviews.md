@@ -3,7 +3,11 @@ title: "Letting an LLM Review Our Pull Requests (So You Don’t Have To)"
 date: 2025-08-08
 canonical: https://downtozero.cloud/posts/2025/pr-reviews/
 tags:
-- downtozero
+- down-to-zero
+- ai
+- llm
+- github-actions
+- ci
 ---
 > This post is a cross-post from [Down to Zero](https://downtozero.cloud/). Canonical source: https://downtozero.cloud/posts/2025/pr-reviews/
 

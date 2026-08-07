@@ -2,7 +2,7 @@
 title:  "writing a hello world web component"
 date:   2017-06-03 10:08:54 +0200
 tags:
-  - webcomponents
+  - web-components
   - javascript
   - html
 ---

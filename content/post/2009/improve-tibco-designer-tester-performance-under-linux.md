@@ -2,10 +2,11 @@
 title: improve TIBCO Designer tester performance under linux
 date: 2009-04-22T00:20:25Z
 tags:
+  - tibco
+  - businessworks
   - designer
   - java
   - linux
-  - TIBCO
 ---
 I’m using the TIBCO designer for quite a while now. Before using it in a debian environment I developed all TIBCO related stuff in Windows XP. Now with the switch to linux there came quite a shift in user experience. One thing that really annoyed me was the slow performance of the designer debugger.
 

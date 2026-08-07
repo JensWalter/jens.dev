@@ -2,8 +2,8 @@
 title: 'BusinessEvents 4: using Scorecards in a clustered environment'
 date: 2010-10-23T20:43:18Z
 tags:
-  - BusinessEvents
-  - TIBCO
+  - businessevents
+  - tibco
 ---
 Scorecards have a special purpose in TIBCO BE. There are often used for static (as in Java-style static) values which should be globally accessible through the whole engine. As Java statics, TIBCO describes its main purpose in instance dependent Variables which are only valid in the context of one Processing Unit in an Inference engine.
 

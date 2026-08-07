@@ -2,9 +2,9 @@
 title: bringing the yahoo finance stream to the shell
 date: 2009-02-03T16:17:06Z
 tags:
+  - yahoo-finance
+  - streaming-api
   - shell
-  - streaming api
-  - yahoo finance
 ---
 A little while ago a posted a primitive way to get to yahoo finance streaming data. As you can guess this was just the beginning. To raise the bar I tried to parse the received data and bring it to the shell. To get this done I needed several tools.
 

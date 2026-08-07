@@ -3,8 +3,8 @@ title: installing TIBCO TRA 5.6 on a debian 64bit
 date: 2009-02-24T00:59:40Z
 tags:
   - 64-bit
-  - TIBCO
-  - TRA
+  - tibco
+  - tra
 ---
 Recently I got a hardware upgrade so I could finally switch to a 64-bit environment. To fully use that machine I wanted to install TIBCO in 64-bit mode. After starting the installation I got this message:
 

@@ -5,6 +5,7 @@ tags:
   - java
   - nashorn
   - jjs
+  - javascript
 ---
 Since a while ago, the JVM has an embedded Javascript engine within. Since Java 8 (I think) this engine got extended through an interactive shell. So now you can start an interactive Javascript shell within your JVM.
 Knowing that, I wondered why nobody tried to use this feature, to do some debugging.

@@ -3,7 +3,9 @@ title:  "Scaling BusinessWorks in Kubernetes"
 date:   2023-06-05T10:08:54Z
 tags:
  - tibco
+ - businessworks
  - cloud
+ - kubernetes
 ---
 Scaling our services in Kubernetes represented a multitude of problems.
 

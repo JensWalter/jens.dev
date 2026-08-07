@@ -2,8 +2,8 @@
 title: extracting information from websites through xslt
 date: 2009-06-05T19:05:40Z
 tags:
-  - HTML
-  - XSLT
+  - html
+  - xslt
 ---
 Today, most websites feature some kind of feed, so every user who wants to stay in touch, can follow new publications very easily. Some sites support RSS-feeds or mail notification. Although this is pretty common, there are still sites out there who doesn’t. For that purpose I tried to find some easy solution.
 

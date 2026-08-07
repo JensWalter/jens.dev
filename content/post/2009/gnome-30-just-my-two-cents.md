@@ -2,8 +2,8 @@
 title: gnome 3.0, just my two cents
 date: 2009-05-08T14:10:59Z
 tags:
-  - gnome 3.0
-  - gnomeshell
+  - gnome
+  - gnome-shell
   - gtk
 ---
 Over the last weeks there were several discussions how to handle the gnome 3.0 release. There are a lot of different points of view out there what has to be done in gnome to deserve a 3.0 release.

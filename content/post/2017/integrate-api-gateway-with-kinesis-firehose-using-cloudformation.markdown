@@ -2,7 +2,9 @@
 title:  "Integrate API Gateway with Kinesis Firehose using CloudFormation"
 date:   2017-08-24 10:08:54 +0200
 tags:
+  - aws
   - cloudformation
+  - api-gateway
   - firehose
 ---
 Integrating API Gateway with other AWS Services can be pretty important to increase the scope of an API into other services.

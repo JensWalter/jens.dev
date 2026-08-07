@@ -2,6 +2,7 @@
 title:  "visualizing a cloudformation template"
 date:   2017-06-24 10:08:54 +0200
 tags:
+  - aws
   - cloudformation
 ---
 CloudFormation templates grow pretty fast over the period of a project.

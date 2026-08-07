@@ -2,6 +2,7 @@
 title:  "auto-confirming a newly created Cognito user"
 date:   2016-11-11 19:49:54 +0200
 tags:
+  - aws
   - cognito
   - lambda
 ---

@@ -3,7 +3,8 @@ title:  "Reaping some benefits of containerization"
 date:   2023-02-27T18:08:54Z
 tags:
  - tibco
- - container
+ - businessworks
+ - containers
 ---
 We just started the migration and saw some impressive results very early on.
 

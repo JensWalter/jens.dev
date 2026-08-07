@@ -2,6 +2,7 @@
 title:  "migrating a mongodb to AWS Athena"
 date:   2017-03-27 12:52:54 +0200
 tags:
+  - aws
   - athena
   - mongodb
 ---

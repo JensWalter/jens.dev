@@ -3,7 +3,7 @@ title: generate random timestamps in mysql
 date: 2008-10-03T12:13:15Z
 tags:
   - mysql
-  - random timestamp
+  - timestamps
 ---
 I’m now try to prepare a mysql performance comparison between hdd and flash. So to create a lot of test data I needed a function to create random timestamps in a certain range.
 

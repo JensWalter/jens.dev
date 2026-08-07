@@ -2,8 +2,8 @@
 title: 'what&#8217;s the sitch'
 date: 2009-04-09T00:26:32Z
 tags:
-  - streaming api
-  - yahoo finance
+  - yahoo-finance
+  - streaming-api
 ---
 As I have a lot to do right am not really coming closer to my goal to write a general purpose app which can pull data from the yahoo streaming server. So I decided to post a few facts about the yahoo api. I hope this helps someone developing his app. So lets see what we have. First an explanation of these cryptic symbols:
 

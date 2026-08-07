@@ -1,8 +1,10 @@
 ---
 title: "Building containers on Codeberg"
 date: 2026-03-15
-tags: 
+tags:
 - codeberg
+- containers
+- ci
 ---
 
 I have been moving more and more of my smaller projects over to Codeberg lately.

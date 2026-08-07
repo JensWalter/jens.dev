@@ -2,7 +2,7 @@
 title: Moving Windows remotely with .NET
 date: 2008-12-10T19:34:16Z
 tags:
-  - csharp
+  - c-sharp
 ---
 A colleague of mine has a dual-monitor windows system.
 

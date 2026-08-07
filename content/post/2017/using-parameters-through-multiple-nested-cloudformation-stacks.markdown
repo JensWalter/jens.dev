@@ -2,6 +2,7 @@
 title:  "Using parameters through multiple nested CloudFormation stacks"
 date:   2017-12-10 10:08:54 +0200
 tags:
+  - aws
   - cloudformation
 ---
 As stacks grow, it is not always advisable to have all resources managed in one single stack. So to split up resources by their usage leads to the question on how can CloudFormation reference data from a different stack.

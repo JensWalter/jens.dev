@@ -2,8 +2,8 @@
 title: adding IP-restriction to BusinessWorks processes
 date: 2009-08-17T01:16:07Z
 tags:
-  - BusinessWorks
-  - TIBCO
+  - tibco
+  - businessworks
 ---
 Recently I got into the situation that somebody used some interface a way it was not designed for and so created an out-of-memory situation which couldn’t be handled by the engine itself. So now I got the case that one client block the complete service due to invalid requests which he shouldn’t do in the first place.
 

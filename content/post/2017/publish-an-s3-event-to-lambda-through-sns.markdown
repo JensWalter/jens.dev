@@ -2,8 +2,12 @@
 title:  "Publish an S3 Event to Lambda through SNS"
 date:   2017-02-19 14:00:54 +0200
 tags:
+  - aws
   - cloudformation
   - serverless
+  - s3
+  - lambda
+  - sns
 ---
 My path through starting with AWS CloudFormation was a somewhat rocky path. Often I wished for simple CF Templates which would only show one pattern at a time. So I'm starting a short series where I will try to describe some patterns I experienced and hopefully lower the entry barrier for CloudFormation since it is great tool.
 

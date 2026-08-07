@@ -3,7 +3,9 @@ title:  "Getting Started with Kubernetes"
 date:   2023-06-05T10:08:54Z
 tags:
  - tibco
+ - businessworks
  - cloud
+ - kubernetes
 ---
 The more engines we migrated, the more we reached the limits of our approach.
 

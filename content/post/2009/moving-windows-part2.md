@@ -2,7 +2,7 @@
 title: Moving Windows Part2
 date: 2009-02-01T02:02:22Z
 tags:
-  - csharp
+  - c-sharp
 ---
 A little while ago a posted an application which was able to move windows remotely. After receiving some feedback from users who actually use this application (originally only made as proof of concept) I decided to work on it a little more.
 

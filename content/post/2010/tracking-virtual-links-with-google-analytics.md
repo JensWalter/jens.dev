@@ -3,7 +3,7 @@ title: tracking virtual links with google analytics
 date: 2010-01-04T19:57:00Z
 tags:
   - cloudtheweb.com
-  - google analytics
+  - google-analytics
   - javascript
 ---
 Tracking dynamic sites is sometimes a bit tricky. Typically tracking systems are specialized in tracking page views. More sophisticated system have there own way of tracking custom event ([like shown here](http://code.google.com/apis/analytics/docs/tracking/eventTrackerOverview.html)).

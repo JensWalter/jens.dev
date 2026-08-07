@@ -2,10 +2,10 @@
 title: use yahoo finance streaming api
 date: 2008-12-02T12:23:33Z
 tags:
+  - yahoo-finance
+  - streaming-api
   - ajax
-  - streaming api
   - wget
-  - yahoo finance
 ---
 In the past I used [this ruby script](http://rubyforge.org/projects/yahoofinance/) to poll for the current stock data and put it into a database to create a little history.
 

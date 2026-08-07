@@ -3,7 +3,8 @@ title:  "Containerizing a BusinessWorks Stack"
 date:   2023-02-27T14:08:54Z
 tags:
  - tibco
- - container
+ - businessworks
+ - containers
 ---
 Containerizing BusinessWorks 5 comes with its own set of challenges. Most of these are related to the surrounding ecosystem and the architectures that have evolved around it.
 

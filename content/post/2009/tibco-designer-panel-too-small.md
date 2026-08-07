@@ -2,9 +2,9 @@
 title: TIBCO Designer Panel too small
 date: 2009-10-13T18:52:38Z
 tags:
-  - BusinessWorks
+  - tibco
+  - businessworks
   - designer
-  - TIBCO
 ---
 Recently I ran into some rather trivial problem which isn’t really addressed by the TIBCO Designer. I had a process which wouldn’t fit into the Design Panel. There was just not enough space on the canvas to fit in the actual flow.
 

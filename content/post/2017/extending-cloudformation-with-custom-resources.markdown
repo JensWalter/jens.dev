@@ -2,7 +2,9 @@
 title:  "extending cloudformation with custom resources"
 date:   2017-06-18 10:08:54 +0200
 tags:
+  - aws
   - cloudformation
+  - lambda
   - nodejs
 ---
 CloudFormation is a pretty capable tool which provides templating functionality for most of the Amazon web services. But still, keeping up with the release cadence of all the AWS services isn't that easy. So there always is a little gap of what features the console offers and what CloudFormation offers.

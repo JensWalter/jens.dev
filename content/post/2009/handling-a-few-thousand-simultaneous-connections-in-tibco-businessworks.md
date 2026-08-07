@@ -2,8 +2,8 @@
 title: handling a few thousand simultaneous connections in TIBCO BusinessWorks
 date: 2009-12-08T17:22:16Z
 tags:
-  - BusinessWorks
-  - TIBCO
+  - tibco
+  - businessworks
   - tomcat
 ---
 Scaling with TIBCO BusinessWorks can sometimes be a bit tricky. Recently I began testing some scenarios how to scale a Webservice a bit larger. The first source of information was of course the official documentation and to look at the proposed best practice values for such an engine.

@@ -2,7 +2,8 @@
 title:  "Retrieve the API key name in AWS API Gateway"
 date:   2019-04-12 10:08:54 +0200
 tags:
-  - apigateway
+  - aws
+  - api-gateway
   - lambda
 ---
 

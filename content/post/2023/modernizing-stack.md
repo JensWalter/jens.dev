@@ -3,6 +3,7 @@ title:  "Modernizing a Classic Tibco stack"
 date:   2023-02-27T10:08:54Z
 tags:
  - tibco
+ - businessworks
  - cloud
 ---
 
@@ -22,4 +23,3 @@ For now, this is a work in progress and I will update this page as each new arti
 * [Reaping some benefits of containerization]({{< ref "/post/2023/reaping-some-benefits" >}})
 
 ### Migration to Container Orchestration / Kubernetes
-

@@ -2,9 +2,9 @@
 title: writing Unicode characters to Oracle with TIBCO BusinessWorks
 date: 2009-05-28T14:19:33Z
 tags:
-  - BusinessWorks
-  - Oracle
-  - TIBCO
+  - tibco
+  - businessworks
+  - oracle
 ---
 As always, I get the most puzzling mysteries from work requirements. I got the requirement of sending an email with Russian characters through TIBCO BusinessWorks. So far so good. BusinessWorks has full support of Unicode, so it should be not a problem to get this one running. Lucky me the reality looks different.
 

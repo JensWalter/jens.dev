@@ -2,7 +2,7 @@
 title:  "how the web component slot system works"
 date:   2017-06-15 10:08:54 +0200
 tags:
-  - webcomponents
+  - web-components
   - javascript
   - html
 ---

@@ -2,7 +2,8 @@
 title: Streaming editor improved
 date: 2009-01-14T15:51:03Z
 tags:
-  - yahoo finance
+  - yahoo-finance
+  - streaming-api
 ---
 I recently ran into the situation that I needed a streaming editor which does not work line-wise. I was receiving an html stream and wanted to remove all the html tags.
 

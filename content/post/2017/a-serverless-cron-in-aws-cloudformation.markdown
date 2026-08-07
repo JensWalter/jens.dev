@@ -2,8 +2,10 @@
 title:  "a serverless cron in AWS CloudFormation"
 date:   2017-02-28 16:52:54 +0200
 tags:
+  - aws
   - cloudformation
   - serverless
+  - lambda
 ---
 Here my scenario I try to cover this time.
 

@@ -2,7 +2,9 @@
 title:  "Integrate API Gateway with SNS using CloudFormation"
 date:   2017-09-13 10:08:54 +0200
 tags:
+  - aws
   - cloudformation
+  - api-gateway
   - sns
 ---
 In my last post, I described how an API Gateway can interact with Kinesis Firehose. This time I used the same approach to connect the API Gateway to SNS.

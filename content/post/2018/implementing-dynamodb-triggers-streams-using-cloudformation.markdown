@@ -2,8 +2,10 @@
 title:  "Implementing DynamoDB triggers (streams) using CloudFormation"
 date:   2018-01-10 10:08:54 +0200
 tags:
+  - aws
   - cloudformation
   - dynamodb
+  - lambda
 ---
 In serverless architectures, as much as possible of the implementation should be done event-driven. One driver of this is using triggers whenever possible.
 

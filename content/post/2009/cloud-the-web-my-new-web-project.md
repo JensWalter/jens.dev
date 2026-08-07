@@ -3,7 +3,7 @@ title: 'cloud-the-web - my new web project'
 date: 2009-08-08T12:28:01Z
 tags:
   - cloudtheweb.com
-  - HTML
+  - html
   - javascript
 ---
 A little time ago I started experimenting with some of the new HTML 5 features. Some seam pretty impressive although some a rather unnecessary in my opinion. But one thing got me really hooked – the HTML canvas.
