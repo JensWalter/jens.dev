@@ -1,5 +1,5 @@
 baseurl = "https://jens.dev/"
-title = "My personal blog"
+title = "jens.dev"
 theme = "ghostwriter"
 languageCode = "en-us"
 uglyurls = true
