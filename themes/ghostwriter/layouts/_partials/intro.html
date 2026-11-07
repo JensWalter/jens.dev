@@ -1,6 +1,10 @@
-{{ if .Site.Params.intro }}
+{{ if and .Site.Params.intro .IsHome }}
     <header class="post-header">
-        <h1 class="post-title" itemprop="name">{{ .Site.Params.headline }}</h1>
-        <p>{{ .Site.Params.description }}</p>
+        {{- with .Site.Params.headline }}
+        <h1 class="post-title" itemprop="name">{{ . }}</h1>
+        {{- end }}
+        {{- with .Site.Params.description }}
+        <p>{{ . }}</p>
+        {{- end }}
     </header>
 {{ end }}

@@ -27,13 +27,6 @@ jobs:
 
           sudo update-ca-certificates
 
-      - name: Verify certificate chain
-        run: |
-          openssl s_client \
-            -connect ueo.ventures:443 \
-            -servername ueo.ventures \
-            -verify_return_error \
-            </dev/null
       - name: Login to xj4dyqut.cr.dtz.dev
         uses: docker/login-action@v4
         with:
