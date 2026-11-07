@@ -17,7 +17,7 @@ Most of the configuration should be preset by the link used.
 If you need it, you can add additional rights to the request (in my case reports where not part of the url):
 "BidsRead BidsEdit Investments SmBuy SmSell ReportRead ReportCreate"
 
-On the other side, you need to register an app with bondora. You can set most of the values as you like, but you must set the callback URL back to google "https://developers.google.com/oauthplayground".
+On the other side, you need to register an app with bondora. You can set most of the values as you like, but you must set the callback URL back to google `https://developers.google.com/oauthplayground`.
 
 ![bondora registration](/assets/bondora registration.png)
 

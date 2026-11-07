@@ -1,12 +1,13 @@
 ---
 title: "A Solar Powered GitHub Runner"
 date: 2023-04-15T09:08:05Z
+canonical: https://downtozero.cloud/posts/2023/solar-powered-github-runner/
 tags:
 - down-to-zero
 - github-actions
 - ci
 ---
-<a href="https://downtozero.cloud/posts/assets/2023/solar-powered-github-runner/">This is a cross-posting from downtozero.cloud</a>
+<a href="https://downtozero.cloud/posts/2023/solar-powered-github-runner/">This is a cross-posting from downtozero.cloud</a>
 
 The more our little project progresses, the more code we produce. And like most of our community these days, we host our code on GitHub.
 

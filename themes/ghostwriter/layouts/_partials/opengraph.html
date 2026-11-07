@@ -1,9 +1,22 @@
+<meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:title" content="{{ .Title }}">
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{- with .Params.images }}
+{{- $images := .Params.images }}
+{{- if and (not $images) .IsPage }}
+{{- with findRESubmatch `<img[^>]+src="([^"]+)"` .Content 1 }}
+{{- $images = slice (index (index . 0) 1) }}
+{{- end }}
+{{- end }}
+{{- $images = $images | default .Site.Params.images }}
+{{- with $images }}
 {{- range first 6 . }}
 <meta property="og:image" content="{{ . | absURL }}" />
 {{- end }}
+{{- end }}
+<meta name="twitter:card" content="{{ if $images }}summary_large_image{{ else }}summary{{ end }}">
+{{- with .Site.Params.mastodon }}
+{{- $u := urls.Parse . }}
+<meta name="fediverse:creator" content="{{ strings.TrimPrefix "/" $u.Path }}@{{ $u.Host }}">
 {{- end }}

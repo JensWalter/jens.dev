@@ -8,12 +8,12 @@
                         <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
                     </h1>
                     <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
-                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                        <i class="bi bi-chevron-up" aria-hidden="true"></i>
                     </a>
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2025 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                    <span>&copy; {{ now.Year }} / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -22,8 +22,6 @@
             </div>
         </footer>
 
-        <script src="{{ .Site.BaseURL }}js/jquery-1.11.3.min.js"></script>
-        <script src="{{ .Site.BaseURL }}js/jquery.fitvids.js"></script>
         <script src="{{ .Site.BaseURL }}js/scripts.js"></script>
     </body>
 </html>

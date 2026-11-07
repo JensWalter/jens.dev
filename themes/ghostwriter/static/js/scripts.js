@@ -1,18 +1,14 @@
-jQuery(function ($) {
-
-    /* ============================================================ */
-    /* Responsive Videos */
-    /* ============================================================ */
-
-    $(".post-content").fitVids();
+document.addEventListener('DOMContentLoaded', function () {
 
     /* ============================================================ */
     /* Scroll To Top */
     /* ============================================================ */
 
-    $('.js-jump-top').on('click', function (e) {
-        e.preventDefault();
+    document.querySelectorAll('.js-jump-top').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+            e.preventDefault();
 
-        $('html, body').animate({ 'scrollTop': 0 });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     });
 });

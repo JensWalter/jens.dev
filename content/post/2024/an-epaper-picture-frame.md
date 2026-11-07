@@ -6,7 +6,7 @@ tags:
 ---
 I was recently on the lookout for a e-paper version of a picture frame that could be battery powered. After an inital short search, and a short excourse to aliexpress (to build my own version) I found something that resembled what I was looking for.
 
-https://framelabs.eu/en/
+https://framelabs.eu/
 
 This site demonstrates nice picture frames with an embedded e-paper display. It is also battery powered and has quite a long battery life.
 

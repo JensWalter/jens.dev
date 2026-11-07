@@ -1,9 +1,7 @@
 baseurl = "https://jens.dev/"
 title = "jens.dev"
 theme = "ghostwriter"
-languageCode = "en-us"
 uglyurls = true
-enableRobotsTXT = true
 
 [pagination]
   pagerSize = 999
