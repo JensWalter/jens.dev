@@ -1,0 +1,7 @@
+{{- with .Params.tags }}
+    <ul class="chips">
+        {{- range . }}
+            <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}.html">{{ . }}</a></li>
+        {{- end }}
+    </ul>
+{{- end }}

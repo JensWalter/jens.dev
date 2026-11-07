@@ -1,0 +1,15 @@
+<li class="project-stub">
+    <time class="project-stub-year" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
+    <div class="project-stub-body">
+        <h2 class="project-stub-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        {{- with .Params.tags }}
+            <p class="project-stub-tags">{{ partial "tag-line.html" $ }}</p>
+        {{- end }}
+        {{- with .Description }}
+            <p class="project-stub-description">{{ . }}</p>
+        {{- end }}
+        {{- with .Params.links }}
+            <p class="project-stub-links">{{ partial "link-line.html" $ }}</p>
+        {{- end }}
+    </div>
+</li>

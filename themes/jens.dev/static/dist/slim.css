@@ -1,0 +1,739 @@
+/* ============================================================ */
+/* Slim: quieter header, post lists and footer. Loaded after site.css */
+/* ============================================================ */
+
+body {
+    border-top: 3px solid #F03838;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100%;
+}
+
+#wrapper {
+    flex: 1 0 auto;
+    margin-bottom: 0;
+}
+
+#wrapper:after { display: none; }
+
+/* Line header, lists and footer up with the post text (.post-container) */
+.site-header .container,
+#post-index,
+.footer .container {
+    box-sizing: border-box;
+    padding: 0 40px;
+}
+
+/* ============================================================ */
+/* Site Header */
+/* ============================================================ */
+
+.site-header {
+    overflow: visible;
+    padding: 28px 0 0;
+    text-align: left;
+    text-transform: none;
+}
+
+.site-header .container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+}
+
+.site-header .site-title-wrapper {
+    display: block;
+    margin: 0 auto 0 0;
+}
+
+.site-header .site-title {
+    float: none;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: none;
+}
+
+.site-header .site-title a {
+    background: none;
+    color: #303030;
+    float: none;
+    padding: 0;
+}
+
+.site-header .site-title a:hover {
+    background: none;
+    color: #F03838;
+}
+
+.site-header .site-nav {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+}
+
+.site-header .site-nav-item {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.site-header .site-nav-item a { color: #5F5F5F; }
+
+.site-header .site-nav-item a:hover { color: #F03838; }
+
+.site-social {
+    display: flex;
+    gap: 14px;
+}
+
+.site-social .button-square {
+    background: none;
+    color: #767676;
+    float: none;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.site-social .button-square:hover {
+    background: none;
+    color: #F03838;
+}
+
+/* Room between the slim header and post/page titles */
+.post-container { padding-top: 56px; }
+
+/* ============================================================ */
+/* List Intro (home tagline, list and tag headings) */
+/* ============================================================ */
+
+.list-intro { margin: 64px 0 44px; }
+
+.list-intro-title {
+    color: #303030;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.list-intro-description {
+    color: #5F5F5F;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ============================================================ */
+/* Post List, grouped by year */
+/* ============================================================ */
+
+.post-year { margin: 0 0 40px; }
+
+.post-year-title {
+    color: #303030;
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+
+.post-list-compact { margin: 0; }
+
+.post-list-compact .post-stub { border-bottom: none; }
+
+.post-list-compact .post-stub a,
+.post-list-compact .post-stub a:hover {
+    align-items: baseline;
+    background: none;
+    display: flex;
+    gap: 20px;
+    padding: 6px 0;
+}
+
+.post-list-compact .post-stub a {
+    color: #303030;
+    transition: color 0.15s ease-in-out;
+}
+
+.post-list-compact .post-stub a:hover { color: #F03838; }
+
+.post-list-compact .post-stub-date {
+    color: #767676;
+    flex: 0 0 3.6em;
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+}
+
+.post-list-compact .post-stub-date:before { content: none; }
+
+.post-list-compact .post-stub-title {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.post-list-compact .post-stub-description {
+    color: #5F5F5F;
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.post-navigation { margin: 40px auto 0; }
+
+/* ============================================================ */
+/* Project List */
+/* ============================================================ */
+
+.project-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.project-list .project-stub {
+    align-items: baseline;
+    display: flex;
+    gap: 20px;
+    margin: 0 0 36px;
+}
+
+.project-stub-year {
+    color: #767676;
+    flex: 0 0 3.6em;
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+}
+
+.project-stub-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.project-stub-title a { color: #303030; }
+
+.project-stub-title a:hover { color: #F03838; }
+
+.project-stub-tags,
+.project-stub-description,
+.project-stub-links {
+    line-height: 1.6;
+    margin: 0;
+}
+
+.project-stub-tags {
+    font-size: 14px;
+    margin: 2px 0 8px;
+}
+
+.project-stub-tags a { color: #767676; }
+
+.project-stub-description {
+    color: #5F5F5F;
+    font-size: 16px;
+}
+
+.project-stub-links {
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.project-stub-links a { color: #303030; }
+
+.project-stub-links a:after,
+.page-head-links a:after {
+    color: #767676;
+    content: " \2197";
+}
+
+.project-stub-tags a:hover,
+.project-stub-links a:hover { color: #F03838; }
+
+/* ============================================================ */
+/* Page Header (plain single pages) */
+/* ============================================================ */
+
+.page-head {
+    border-bottom: 1px solid #ECECEC;
+    margin: 0 0 36px;
+    padding: 0 0 28px;
+}
+
+.page-head-title {
+    color: #303030;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 10px;
+}
+
+.page-head-tags,
+.page-head-description,
+.page-head-links {
+    line-height: 1.6;
+    margin: 0;
+}
+
+.page-head-tags {
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.page-head-tags a { color: #767676; }
+
+.page-head-description {
+    color: #5F5F5F;
+    font-size: 18px;
+}
+
+.page-head-links {
+    font-size: 15px;
+    margin-top: 12px;
+}
+
+.page-head-links a { color: #303030; }
+
+.page-head-tags a:hover,
+.page-head-links a:hover { color: #F03838; }
+
+/* ============================================================ */
+/* Shared: small labels, sections, tag chips */
+/* ============================================================ */
+
+.eyebrow {
+    color: #767676;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+}
+
+.eyebrow a { color: #767676; }
+
+.eyebrow a:hover { color: #F03838; }
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.chips li { margin: 0; }
+
+.chips a {
+    background: #FFF;
+    border: 1px solid #E3E3E0;
+    border-radius: 999px;
+    color: #5F5F5F;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 1;
+    padding: 6px 11px;
+}
+
+.chips a:hover {
+    border-color: #F03838;
+    color: #F03838;
+}
+
+.tag-section,
+.project-section,
+.article-section { margin: 0 0 48px; }
+
+.section-label {
+    border-bottom: 1px solid #ECECEC;
+    color: #767676;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin: 0 0 24px;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.post-list-dated .post-stub-date { flex-basis: 5.4em; }
+
+/* ============================================================ */
+/* Project Page */
+/* ============================================================ */
+
+.project-hero {
+    background: #F5F5F3;
+    border-radius: 10px;
+    margin: 0 0 48px;
+    padding: 36px 40px 32px;
+}
+
+.project-hero-title {
+    color: #303030;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.project-hero-lead {
+    color: #424242;
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 14px 0 0;
+}
+
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 0;
+}
+
+.project-action {
+    align-items: center;
+    background: #FFF;
+    border: 1px solid #D9D9D6;
+    border-radius: 6px;
+    color: #303030;
+    display: inline-flex;
+    font-size: 15px;
+    font-weight: 600;
+    gap: 8px;
+    line-height: 1;
+    padding: 10px 16px;
+    transition: all 0.15s ease-in-out;
+}
+
+.project-action:hover {
+    border-color: #F03838;
+    color: #F03838;
+}
+
+.project-action-primary {
+    background: #303030;
+    border-color: #303030;
+    color: #FFF;
+}
+
+.project-action-primary:hover {
+    background: #F03838;
+    border-color: #F03838;
+    color: #FFF;
+}
+
+/* ============================================================ */
+/* Blog Post */
+/* ============================================================ */
+
+/* Quiet header: a hairline with a short accent marks where the text starts */
+.article-head {
+    border-bottom: 1px solid #ECECEC;
+    margin: 0 0 40px;
+    padding: 0 0 28px;
+    position: relative;
+}
+
+.article-head:after {
+    background: #F03838;
+    bottom: -1px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 48px;
+}
+
+.article-head-title {
+    color: #303030;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0;
+    max-width: 760px;
+}
+
+/* Prose keeps a comfortable line length; code, images and tables use the full width */
+.post-content > p,
+.post-content > ul,
+.post-content > ol,
+.post-content > blockquote,
+.post-content > h1,
+.post-content > h2,
+.post-content > h3,
+.post-content > h4 { max-width: 720px; }
+
+.post-content > :first-child { margin-top: 0; }
+
+.post-content h1,
+.post-content h2 {
+    color: #303030;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 48px 0 16px;
+}
+
+.post-content h3 {
+    color: #303030;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 36px 0 12px;
+}
+
+.post-content h4 {
+    color: #303030;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 28px 0 10px;
+}
+
+.post-content p { margin: 0 0 24px; }
+
+.post-content li {
+    line-height: 1.7;
+    margin: 0 0 6px;
+}
+
+.post-content a {
+    text-decoration: underline;
+    text-decoration-color: rgba(240, 56, 56, 0.35);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.post-content a:hover {
+    border-bottom: none;
+    padding: 0;
+    text-decoration-color: #F03838;
+}
+
+.post-content blockquote {
+    border-left: 3px solid #E3E3E0;
+    margin: 32px 0;
+    padding: 2px 0 2px 24px;
+}
+
+.post-content blockquote p {
+    color: #5F5F5F;
+    font-style: normal;
+}
+
+.post-content pre {
+    border: 1px solid #E8E8E4;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 28px;
+    padding: 16px 18px;
+}
+
+.post-content code {
+    background: #F3F3F1;
+    font-size: 88%;
+}
+
+.post-content pre code {
+    background: none;
+    font-size: inherit;
+}
+
+.post-content img {
+    border-radius: 8px;
+    margin: 32px 0;
+}
+
+.post-content hr {
+    border-bottom: 1px solid #ECECEC;
+    margin: 48px 0;
+}
+
+.post-content tr { border-bottom: 1px solid #ECECEC; }
+
+.article-foot { margin: 64px 0 0; }
+
+.article-section .chips { margin: 0; }
+
+.project-card {
+    background: #F5F5F3;
+    border-radius: 10px;
+    color: #5F5F5F;
+    display: block;
+    margin: 0 0 12px;
+    padding: 24px 28px;
+    transition: background 0.15s ease-in-out;
+}
+
+.project-card:hover { background: #EFEFEC; }
+
+.project-card-title {
+    color: #303030;
+    display: block;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.project-card:hover .project-card-title { color: #F03838; }
+
+.project-card-lead {
+    display: block;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 6px 0 0;
+}
+
+.project-card-more {
+    color: #303030;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 12px 0 0;
+}
+
+.article-nav {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.article-nav-link {
+    border: 1px solid #E3E3E0;
+    border-radius: 10px;
+    color: #303030;
+    display: block;
+    padding: 18px 22px;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.article-nav-link:hover { border-color: #F03838; }
+
+.article-nav-link .eyebrow { margin: 0 0 6px; }
+
+.article-nav-newer {
+    grid-column: 2;
+    text-align: right;
+}
+
+.article-nav-title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.article-nav-link:hover .article-nav-title { color: #F03838; }
+
+/* ============================================================ */
+/* Footer */
+/* ============================================================ */
+
+.footer {
+    background: none;
+    border-top: 1px solid #ECECEC;
+    flex: none;
+    height: auto;
+    margin-top: 80px;
+    padding: 24px 0 40px;
+}
+
+.footer .container {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    justify-content: space-between;
+}
+
+.footer-copyright {
+    color: #767676;
+    font-size: 13px;
+    text-align: left;
+    text-transform: none;
+}
+
+.footer-copyright a {
+    color: #767676;
+    font-weight: 400;
+}
+
+.footer-copyright a:hover { color: #F03838; }
+
+.footer-top {
+    color: #767676;
+    font-size: 13px;
+}
+
+.footer-top:hover { color: #F03838; }
+
+/* ============================================================ */
+/* Media Queries */
+/* ============================================================ */
+
+@media only screen and (max-width: 600px) {
+    .site-header .container,
+    #post-index,
+    .footer .container {
+        padding: 0 25px;
+    }
+
+    .site-header { padding-top: 20px; }
+
+    .site-header .site-title { margin: 0; }
+
+    .site-header .site-nav-item {
+        display: block;
+        margin: 0;
+    }
+
+    .list-intro { margin: 40px 0 32px; }
+
+    .page-head-title { font-size: 26px; }
+
+    .project-hero {
+        border-radius: 8px;
+        padding: 24px 20px;
+    }
+
+    .project-hero-title { font-size: 26px; }
+
+    .project-hero-lead { font-size: 17px; }
+
+    .article-head-title { font-size: 25px; }
+
+    .post-content h1,
+    .post-content h2 { font-size: 22px; }
+
+    .project-card { padding: 20px; }
+
+    .article-nav { grid-template-columns: 1fr; }
+
+    .article-nav-newer {
+        grid-column: 1;
+        text-align: left;
+    }
+
+    .post-list-compact {
+        margin: 0;
+    }
+
+    .post-list-compact .post-stub a,
+    .post-list-compact .post-stub a:hover {
+        gap: 14px;
+        padding: 6px 0;
+    }
+
+    .post-list-compact .post-stub-title { display: inline; }
+
+    .post-list-compact .post-stub-date:before {
+        content: none;
+        display: none;
+    }
+}

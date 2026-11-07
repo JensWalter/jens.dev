@@ -1,0 +1,16 @@
+<li class="post-stub">
+    <a href="{{ .Permalink }}">
+        {{ if .Date }}
+          <time class="post-stub-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ dateFormat (default "2006" .Site.Params.dateFormat) .Date }}</time>
+        {{ end }}
+        <span class="post-stub-title">
+            {{ .Title }}
+            {{ with .Description }}
+                <span class="post-stub-description">{{ . }}</span>
+            {{ end }}
+        </span>
+        {{ with .Params.featured }}
+            <span class="post-stub-tag">Featured</span>
+        {{ end }}
+    </a>
+</li>

@@ -1,0 +1,4 @@
+{{- range $index, $link := .Params.links -}}
+    {{- if $index }} · {{ end -}}
+    <a href="{{ .url }}">{{ .name }}</a>
+{{- end -}}

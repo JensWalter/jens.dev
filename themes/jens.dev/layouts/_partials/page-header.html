@@ -1,0 +1,13 @@
+<header class="page-head">
+    <p class="eyebrow">{{ .Section | singularize | humanize }} · <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time></p>
+    <h1 class="page-head-title">{{ .Title }}</h1>
+    {{- with .Params.tags }}
+        <p class="page-head-tags">{{ partial "tag-line.html" $ }}</p>
+    {{- end }}
+    {{- with .Description }}
+        <p class="page-head-description">{{ . }}</p>
+    {{- end }}
+    {{- with .Params.links }}
+        <p class="page-head-links">{{ partial "link-line.html" $ }}</p>
+    {{- end }}
+</header>

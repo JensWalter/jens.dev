@@ -1,0 +1,6 @@
+<header class="article-head">
+    <p class="eyebrow">
+        <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">{{ dateFormat (default "Jan 2, 2006" .Site.Params.dateFormat) .Date }}</time>
+    </p>
+    <h1 class="article-head-title" itemprop="name headline">{{ .Title }}</h1>
+</header>

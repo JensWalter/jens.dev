@@ -1,0 +1,8 @@
+{{- /* True when the post carries the project's main (first) tag, or shares at least two of its tags */ -}}
+{{- $projectTags := apply (.project.Params.tags | default slice) "lower" "." -}}
+{{- $postTags := apply (.post.Params.tags | default slice) "lower" "." -}}
+{{- $match := false -}}
+{{- if $projectTags -}}
+    {{- $match = or (in $postTags (index $projectTags 0)) (ge (len (intersect $projectTags $postTags)) 2) -}}
+{{- end -}}
+{{- return $match -}}

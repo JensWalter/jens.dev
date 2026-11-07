@@ -1,6 +1,6 @@
 baseurl = "https://jens.dev/"
 title = "jens.dev"
-theme = "ghostwriter"
+theme = "jens.dev"
 uglyurls = true
 
 [pagination]

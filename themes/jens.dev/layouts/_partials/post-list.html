@@ -1,0 +1,10 @@
+{{ range .GroupByDate "2006" }}
+    <section class="post-year">
+        <h2 class="post-year-title">{{ .Key }}</h2>
+        <ol class="post-list post-list-compact">
+            {{ range .Pages }}
+                {{ partial "post-stub.html" . }}
+            {{ end }}
+        </ol>
+    </section>
+{{ end }}

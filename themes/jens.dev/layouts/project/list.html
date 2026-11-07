@@ -1,0 +1,15 @@
+{{ partial "header.html" . }}
+
+<div id="post-index" class="container">
+    <header class="list-intro">
+        <h1 class="list-intro-title">{{ .Title }}</h1>
+    </header>
+
+    <ol class="project-list">
+        {{ range .Pages }}
+            {{ partial "project-stub.html" . }}
+        {{ end }}
+    </ol>
+</div>
+
+{{ partial "footer.html" . }}

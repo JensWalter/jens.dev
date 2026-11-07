@@ -1,0 +1,58 @@
+{{ partial "header.html" . }}
+
+<div class="container">
+    <article class="post-container">
+        <header class="project-hero">
+            <p class="eyebrow">
+                <a href="{{ .CurrentSection.RelPermalink }}">{{ .CurrentSection.Title }}</a> · since <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
+            </p>
+            <h1 class="project-hero-title">{{ .Title }}</h1>
+            {{- with .Description }}
+                <p class="project-hero-lead">{{ . }}</p>
+            {{- end }}
+            {{- with .Params.links }}
+                <div class="project-actions">
+                    {{- range $index, $link := . }}
+                        {{- $kind := .kind | default "site" }}
+                        {{- $icon := index (dict "site" "globe2" "code" "code-slash" "package" "box-seam") $kind }}
+                        {{- $label := index (dict "site" "Visit %s" "code" "Source on %s" "package" "Package on %s") $kind }}
+                        <a class="project-action{{ if not $index }} project-action-primary{{ end }}" href="{{ .url }}">
+                            <i class="bi bi-{{ $icon }}" aria-hidden="true"></i> {{ printf $label .name }}
+                        </a>
+                    {{- end }}
+                </div>
+            {{- end }}
+            {{ partial "tag-chips.html" . }}
+        </header>
+
+        <section class="project-section">
+            <h2 class="section-label">About</h2>
+            {{ partial "page-content.html" . }}
+        </section>
+
+        {{ $project := . }}
+        {{ $related := slice }}
+        {{ range where .Site.RegularPages "Section" "post" }}
+            {{ if partial "related-match.html" (dict "project" $project "post" .) }}
+                {{ $related = $related | append . }}
+            {{ end }}
+        {{ end }}
+        {{ with first 5 $related }}
+            <section class="project-section">
+                <h2 class="section-label">Related posts</h2>
+                <ol class="post-list post-list-compact post-list-dated">
+                    {{ range . }}
+                        <li class="post-stub">
+                            <a href="{{ .Permalink }}">
+                                <time class="post-stub-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
+                                <span class="post-stub-title">{{ .Title }}</span>
+                            </a>
+                        </li>
+                    {{ end }}
+                </ol>
+            </section>
+        {{ end }}
+    </article>
+</div>
+
+{{ partial "footer.html" . }}

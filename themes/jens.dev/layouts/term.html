@@ -1,0 +1,31 @@
+{{ partial "header.html" . }}
+<div id="post-index" class="container">
+    <header class="list-intro">
+        <h1 class="list-intro-title">tag: {{ .Title }}</h1>
+    </header>
+
+    {{ with where .Pages "Section" "project" }}
+        <section class="tag-section">
+            <h2 class="section-label">Projects</h2>
+            <ol class="project-list">
+                {{ range . }}
+                    {{ partial "project-stub.html" . }}
+                {{ end }}
+            </ol>
+        </section>
+    {{ end }}
+
+    {{ $pag := .Paginate (where .Pages "Section" "post") }}
+    {{ with $pag.Pages }}
+        <section class="tag-section">
+            <h2 class="section-label">Posts</h2>
+            {{ partial "post-list.html" . }}
+        </section>
+    {{ end }}
+
+    <div class="post-navigation tag-navigation">
+        {{ partial "tag-pagination.html" . }}
+    </div>
+</div>
+
+{{ partial "footer.html" . }}

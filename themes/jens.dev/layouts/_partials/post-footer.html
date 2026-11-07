@@ -1,0 +1,49 @@
+<footer class="article-foot">
+    {{ with .Params.tags }}
+        <section class="article-section">
+            <h2 class="section-label">Tags</h2>
+            {{ partial "tag-chips.html" $ }}
+        </section>
+    {{ end }}
+
+    {{ $post := . }}
+    {{ $projects := slice }}
+    {{ range where .Site.RegularPages "Section" "project" }}
+        {{ if partial "related-match.html" (dict "project" . "post" $post) }}
+            {{ $projects = $projects | append . }}
+        {{ end }}
+    {{ end }}
+    {{ with $projects }}
+        <section class="article-section">
+            <h2 class="section-label">{{ if gt (len .) 1 }}Projects{{ else }}Project{{ end }}</h2>
+            {{ range . }}
+                <a class="project-card" href="{{ .Permalink }}">
+                    <span class="project-card-title">{{ .Title }}</span>
+                    {{ with .Description }}<span class="project-card-lead">{{ . }}</span>{{ end }}
+                    <span class="project-card-more">View project &rarr;</span>
+                </a>
+            {{ end }}
+        </section>
+    {{ end }}
+
+    {{ $posts := where .Site.RegularPages "Section" "post" }}
+    {{- /* On a date-descending list, Prev is the older and Next the newer post */}}
+    {{ $older := $posts.Prev . }}
+    {{ $newer := $posts.Next . }}
+    {{ if or $older $newer }}
+        <nav class="article-nav">
+            {{ with $older }}
+                <a class="article-nav-link article-nav-older" href="{{ .Permalink }}">
+                    <span class="eyebrow">&larr; Older</span>
+                    <span class="article-nav-title">{{ .Title }}</span>
+                </a>
+            {{ end }}
+            {{ with $newer }}
+                <a class="article-nav-link article-nav-newer" href="{{ .Permalink }}">
+                    <span class="eyebrow">Newer &rarr;</span>
+                    <span class="article-nav-title">{{ .Title }}</span>
+                </a>
+            {{ end }}
+        </nav>
+    {{ end }}
+</footer>
