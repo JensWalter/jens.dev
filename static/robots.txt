@@ -1,5 +1,4 @@
 User-Agent: *
 Allow: /
-Disallow: /tags/
 
 Sitemap: https://jens.dev/sitemap.xml
