@@ -1,0 +1,2 @@
+{{- /* Feeds get plain headings: a #fragment link has no page to point into inside a feed reader. */ -}}
+<h{{ .Level }} id="{{ .Anchor }}">{{ .Text }}</h{{ .Level }}>

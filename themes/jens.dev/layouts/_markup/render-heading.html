@@ -1,0 +1,9 @@
+{{- /* The heading text links to its own anchor; .heading-anchor in slim.css keeps it looking like a plain heading.
+       A heading that already contains a link is left alone, because anchors cannot nest. */ -}}
+<h{{ .Level }} id="{{ .Anchor }}">
+  {{- if findRE `<a[\s>]` .Text 1 -}}
+    {{- .Text -}}
+  {{- else -}}
+    <a class="heading-anchor" href="#{{ .Anchor }}">{{ .Text }}</a>
+  {{- end -}}
+</h{{ .Level }}>

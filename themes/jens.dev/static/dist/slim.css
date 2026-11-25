@@ -515,6 +515,22 @@ body {
     text-decoration-color: #F03838;
 }
 
+/* Headings link to themselves (render-heading.html) but read as plain headings; a muted # on hover is the only hint */
+.post-content .heading-anchor,
+.post-content .heading-anchor:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-content .heading-anchor:hover:after,
+.post-content .heading-anchor:focus-visible:after {
+    color: #767676;
+    content: "#";
+    font-weight: 400;
+    margin-left: 0.35em;
+    position: absolute;
+}
+
 .post-content blockquote {
     border-left: 3px solid #E3E3E0;
     margin: 32px 0;
